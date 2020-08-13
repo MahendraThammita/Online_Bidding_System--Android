@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title=""
+        android:id="@+id/setting"
+        android:icon="@drawable/setting"
+        app:showAsAction="always" />
+
+    <item
+        android:title=""
+        android:id="@+id/post"
+        android:icon="@drawable/post"
+        app:showAsAction="always" />
+
+    <item
+        android:title=""
+        android:id="@+id/exit"
+        android:icon="@drawable/exit"
+        app:showAsAction="always" />
+
+    <item
+        android:title=""
+        android:id="@+id/info"
+        android:icon="@drawable/info"
+        app:showAsAction="always" />
+
+</menu>
