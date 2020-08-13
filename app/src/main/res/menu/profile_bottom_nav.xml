@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/ProfBottomNavSetting"
+        android:title=""
+        android:icon="@drawable/setting"
+        app:cnb_backgroundColor = "@color/colorPrimary">
+
+    </item>
+
+    <item
+        android:id="@+id/ProfBottomNavPost"
+        android:title=""
+        android:icon="@drawable/post"
+        app:cnb_backgroundColor = "@color/colorPrimary">
+
+    </item>
+    <item
+        android:id="@+id/ProfBottomNavExit"
+        android:title=""
+        android:icon="@drawable/exit"
+        app:cnb_backgroundColor = "@color/colorPrimary">
+
+    </item>
+    <item
+        android:id="@+id/ProfBottomNavInfo"
+        android:title=""
+        android:icon="@drawable/info"
+        app:cnb_backgroundColor = "@color/colorPrimary">
+
+    </item>
+
+</menu>

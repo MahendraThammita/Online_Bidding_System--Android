@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ProfTopActMenu"
+        android:title=""
+        android:icon="@drawable/prof_menu"
+        android:iconTint="@color/design_default_color_on_primary">
+
+    </item>
+
+    <item
+        android:id="@+id/ProfTopActMenuhome"
+        android:title=""
+        android:icon="@drawable/home"
+        android:iconTint="@color/design_default_color_on_primary">
+
+    </item>
+    <item
+        android:id="@+id/ProfTopActMenubid"
+        android:title=""
+        android:icon="@drawable/bids"
+        android:iconTint="@color/design_default_color_on_primary">
+
+    </item>
+    <item
+        android:id="@+id/ProfTopActMenuMessage"
+        android:title=""
+        android:icon="@drawable/message"
+        android:iconTint="@color/design_default_color_on_primary">
+
+    </item>
+
+
+
+</menu>
