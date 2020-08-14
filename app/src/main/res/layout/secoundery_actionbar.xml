@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/secoundryActionBar"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:contentInsetEnd="0dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetRight="0dp"
+    app:contentInsetStart="0dp"
+    android:contentInsetEnd="0dp"
+    android:contentInsetLeft="0dp"
+    android:contentInsetRight="0dp"
+    android:contentInsetStart="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="0dp">
+
+        <Button
+            android:id="@+id/actionBarHome"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/home"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/actionBarProfile"
+            tools:ignore="MissingConstraints">
+
+        </Button>
+
+        <Button
+            android:id="@+id/actionBarProfile"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/profile"
+            app:layout_constraintEnd_toStartOf="@+id/actionBarHome"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/actionBarBid"
+            tools:ignore="MissingConstraints">
+
+        </Button>
+
+        <Button
+            android:id="@+id/actionBarBid"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/bids"
+            app:layout_constraintEnd_toStartOf="@+id/actionBarProfile"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/actionBarMsg"
+            tools:ignore="MissingConstraints">
+
+        </Button>
+
+        <Button
+            android:id="@+id/actionBarMsg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/message"
+            app:layout_constraintEnd_toStartOf="@+id/actionBarBid"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints">
+
+        </Button>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.appcompat.widget.Toolbar>
