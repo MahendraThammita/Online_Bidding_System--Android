@@ -3,14 +3,63 @@
     <androidx.appcompat.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/profile_actionBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/profile_top_nav"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:navigationIcon="@drawable/prof_menu">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/topNavProfHome"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/home"
+            app:layout_constraintEnd_toStartOf="@+id/topNavProfBids"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints">
+
+        </Button>
+
+        <Button
+            android:id="@+id/topNavProfBids"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/topNavProfHome"
+            android:layout_weight="0.33"
+            android:background="@drawable/bids"
+            app:layout_constraintEnd_toStartOf="@+id/topNavProfMsg"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/topNavProfHome"
+            tools:ignore="MissingConstraints">
+
+        </Button>
+
+        <Button
+            android:id="@+id/topNavProfMsg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/topNavProfBids"
+            android:layout_weight="0.33"
+            android:background="@drawable/message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/topNavProfBids"
+            tools:ignore="MissingConstraints">
+
+        </Button>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
