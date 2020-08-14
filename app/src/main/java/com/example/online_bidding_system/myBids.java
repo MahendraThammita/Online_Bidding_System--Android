@@ -1,6 +1,7 @@
 package com.example.online_bidding_system;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 
@@ -11,4 +12,6 @@ public class myBids extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_bids);
     }
+
+
 }

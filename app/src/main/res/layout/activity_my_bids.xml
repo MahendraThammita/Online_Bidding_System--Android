@@ -39,7 +39,6 @@
                     android:padding="0dp"
                     android:src="@drawable/mybidsedi">
 
-                    <corners android:radius="10dp"/>
                 </ImageView>
 
 

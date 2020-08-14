@@ -12,7 +12,6 @@
         <activity android:name=".main_categories"></activity>
         <activity android:name=".ProfilePageBasic" />
         <activity android:name=".myBids"></activity>
-        <activity android:name=".ProfilePageBasic" />
         <activity android:name=".HomePage" />
         <activity android:name=".MainActivity">
             <intent-filter>
