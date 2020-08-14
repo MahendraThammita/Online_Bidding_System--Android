@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".myBids">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/primaryActbar"
+            layout="@layout/primary_actionbar"/>
+
+
+        <include
+            android:id="@+id/profActionbar"
+            layout="@layout/secoundery_actionbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/primaryActbar"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="681dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="249dp"
+                    android:fitsSystemWindows="true"
+                    android:padding="0dp"
+                    android:src="@drawable/mybidsedi">
+
+                    <corners android:radius="10dp"/>
+                </ImageView>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+    //Start of middle part
+
+
+
+
+    //End of Middle part
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:cnb_menuResource="@menu/profile_bottom_nav"
+        app:cnb_unselectedColor="@color/design_default_color_on_primary"
+        android:layout_alignParentBottom="true"
+        tools:ignore="MissingConstraints">
+
+    </com.ismaeldivita.chipnavigation.ChipNavigationBar>
+
+</RelativeLayout>
