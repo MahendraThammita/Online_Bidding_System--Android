@@ -90,7 +90,7 @@
                         android:layout_width="116dp"
                         android:layout_height="87dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/home" />
+                        android:src="@drawable/garden" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -286,6 +286,16 @@
                         android:layout_marginTop="20dp"/>
 
                 </LinearLayout>
+                <com.ismaeldivita.chipnavigation.ChipNavigationBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    app:cnb_menuResource="@menu/profile_bottom_nav"
+                    app:cnb_unselectedColor="@color/design_default_color_on_primary"
+                    android:layout_alignParentBottom="true"
+                    tools:ignore="MissingConstraints">
+
+                </com.ismaeldivita.chipnavigation.ChipNavigationBar>
 
             </androidx.cardview.widget.CardView>
 
