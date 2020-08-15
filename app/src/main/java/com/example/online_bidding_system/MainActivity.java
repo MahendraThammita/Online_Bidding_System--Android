@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
         Toolbar profTop = findViewById(R.id.profActionbar);
         profTop.setTitle("");
         setSupportActionBar(profTop);
