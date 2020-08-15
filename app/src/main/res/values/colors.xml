@@ -7,12 +7,18 @@
     <color name="lowGray">#ECEFF1</color>
     <color name="Black">#000000</color>
     <color name="Monet_coloe">#FFD600</color>
-    <color name="HighlightIconColor">#E91E63</color>
+
+<!--    <color name="HighlightIconColorOld">#f06292  </color>-->
+
+    <color name="HighlightIconColor">#40c4ff</color>
+
     <color name="BootstrapPrimary">#4285F4</color>
     <color name="MDBsecondarycolor">#aa66cc</color>
     <color name="MDBsuccesscolor">#00C851</color>
     <color name="MDBwarningcolor">#ffbb33</color>
     <color name="MDBdefaultcolor">#2BBBAD</color>
     <color name="MDBdangercolor">#ff4444</color>
+    <color name="MDBgreycolor">#9e9e9e </color>
+    <color name="MDBsuccessDark">#8bc34a</color>
 
 </resources>
