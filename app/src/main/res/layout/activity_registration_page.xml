@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-
-
-
-    <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
@@ -53,7 +47,7 @@ tools:context=".RegistrationPage">
         android:id="@+id/text1"
         android:layout_width="145dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/null"
+        android:layout_below="@+id/unknownid"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -62,7 +56,8 @@ tools:context=".RegistrationPage">
         android:layout_marginEnd="120dp"
         android:layout_marginBottom="519dp"
         android:text="@string/signup"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        tools:ignore="UnknownId" />
 
     <TextView
         android:id="@+id/textView2"
