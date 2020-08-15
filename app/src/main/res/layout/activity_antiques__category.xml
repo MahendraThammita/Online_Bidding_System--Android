@@ -48,7 +48,7 @@
         <!-- image select button -->
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="Select Images"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -56,6 +56,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_gravity="center"
+            android:background="@color/BootstrapPrimary"
             android:layout_margin="12dp"/>
 
         <TextView
@@ -64,75 +65,11 @@
             android:text="Title:"
             android:fontFamily="sans-serif-black"
             android:textSize="20sp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="12dp"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="12dp"
-            />
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="jhjfndjgbkdnbfkdgbsbhbfzhdfvbhjd:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="10sp"
-            android:layout_marginLeft="20dp"/>
-
-        <TextView
-            android:id="@+id/Contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contact:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="50dp"
-            />
-
-
-    </LinearLayout>
-
-    <!-- Publish buttons -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="650dp"
-        android:layout_marginRight="60dp">
-
-
-        <Button
-            android:id="@+id/publish_now"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:text="Publish Now" />
-
-        <Button
-            android:id="@+id/publish_later"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="Publish Later" />
-
-    </LinearLayout>
-
-    <!--Price etc-->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="445dp"
-        android:layout_marginLeft="200dp">>
 
         <TextView
             android:layout_width="wrap_content"
@@ -146,15 +83,135 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time:"
+            android:text="Duration:"
+            android:fontFamily="sans-serif-black"
+            android:textSize="20sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="12dp"/>
+
+
+        <TextView
+            android:id="@+id/Contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact:"
             android:fontFamily="sans-serif-black"
             android:textSize="20sp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="12dp"
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description:"
+            android:fontFamily="sans-serif-black"
+            android:textSize="20sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="12dp"
+            />
+    </LinearLayout>
+
+    <!-- Text Fields-->
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="415dp"
+    android:layout_marginLeft="150dp">
+
+
+
+    <EditText
+    android:id="@+id/setTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Japanese Army officer Military Katana"
+    android:fontFamily="sans-serif-black"
+    android:textSize="15sp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginBottom="0dp"
+    />
+
+
+
+    <EditText
+        android:id="@+id/setPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2400 $"
+        android:fontFamily="sans-serif-black"
+        android:textSize="15sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="0dp"
+        />
+
+    <EditText
+        android:id="@+id/setDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="48 hrs"
+        android:fontFamily="sans-serif-black"
+        android:textSize="15sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="0dp"
+        />
+
+    <EditText
+        android:id="@+id/setContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="111 222 333 44"
+        android:fontFamily="sans-serif-black"
+        android:textSize="15sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="0dp"
+        />
+
+    <EditText
+        android:id="@+id/setDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mei signature in Nakago tang.
+                       Sutrdy Blade"
+        android:fontFamily="sans-serif-black"
+        android:textSize="15sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="0dp"
+        />
+
+
+</LinearLayout>
+
+
+    <!-- Publish buttons -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="650dp"
+        android:layout_marginRight="60dp">
+
+
+        <Button
+            android:id="@+id/publish_now"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:background="@color/colorAccent"
+            android:text="Publish Now" />
+
+        <Button
+            android:id="@+id/publish_later"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:layout_marginLeft="20dp"
+            android:text="Publish Later" />
 
     </LinearLayout>
+
 
 
 
