@@ -204,7 +204,8 @@
                     android:text="@string/IncreaseBidCaption"
                     android:layout_margin="10dp"
                     android:elevation="8dp"
-                    android:background="@color/MDBsecondarycolor">
+                    android:background="@color/MDBsecondarycolor"
+                    android:padding="10dp">
 
                 </Button>
 
