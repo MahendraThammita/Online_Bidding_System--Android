@@ -29,7 +29,7 @@ public class Antiques_Category extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_antiques__category);
 
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
