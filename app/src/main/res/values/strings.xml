@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Online_Bidding_System</string>
+
+
+
+    //Start Mahendra Strings(IT19120362)
+    <string name="ItemNameDemo">Sample Item Name</string>
+    <string name="Description_Caption">Description</string>
+    <string name="Demo_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
+    <string name="EndingTime_caption">Ends At : </string>
+    <string name="MaxBid_caption">Max Bid</string>
+    <string name="Your_bid_caption">Your Bid</string>
+    <string name="StartinfBid_caption">Starting Bid</string>
+    <string name="AddBidCaption">Add your bid</string>
+    <string name="IncreaseBidCaption">Increase your bid</string>
+    <string name="DeleteBidCaption">Delete your bid</string>
+    <string name="MybidsTitle">My Bids</string>
 </resources>

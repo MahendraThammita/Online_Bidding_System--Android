@@ -36,6 +36,11 @@ public class EditBid extends AppCompatActivity {
         ArrayList<BidSwiperClass> bidsimgAdapter = new ArrayList<>();
 
         bidsimgAdapter.add(new BidSwiperClass(R.drawable.phone));
+        bidsimgAdapter.add(new BidSwiperClass(R.drawable.rings));
+        bidsimgAdapter.add(new BidSwiperClass(R.drawable.books));
+        bidsimgAdapter.add(new BidSwiperClass(R.drawable.phone));
+        bidsimgAdapter.add(new BidSwiperClass(R.drawable.rings));
+
 
 //        bidsimgAdapter.add(new BidSwiperClass(R.drawable.phone));
         adapter = new BidSwiperAdapter(bidsimgAdapter);
