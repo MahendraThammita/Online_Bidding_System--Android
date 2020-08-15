@@ -15,6 +15,15 @@
     <string name="IncreaseBidCaption">Increase your bid</string>
     <string name="DeleteBidCaption">Delete your bid</string>
     <string name="MybidsTitle">My Bids</string>
+    <string name="PlaceBid_Caption">Place Bid</string>
+    <string name="PlaceBid_Title">Place Your Bid</string>
+    <string name="demo_itemNo">ITEM12458</string>
+    <string name="demo_Item_Price">2500.00 Rs</string>
+    <string name="staarting_bid_caption">Starting Bid</string>
+    <string name="CurrentHighestBid_Caption">Current Highest Bid</string>
+    <string name="Ending_Date_Time_Demo">18:00:00  2020/08/15</string>
+    <string name="placeBid_text_show">Enter Your Bid Here</string>
+    <string name="confirmBid_Title">Confirm Bid</string>
 
     //kaveesha(IT19106502)
 
@@ -58,6 +67,5 @@
     <string name="dvd">DVD and Movies</string>
     <string name="fashion">Fashion</string>
     <string name="sport">Sporting goods</string>
-    <string name="music">Music Instruments</string>
     <string name="anything">Anything else</string>
 </resources>
