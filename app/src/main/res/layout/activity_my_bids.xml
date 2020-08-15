@@ -23,9 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/primaryActbar" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -47,8 +45,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="230dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentBottom="true">
+                    android:layout_height="50dp">
 
                     <TextView
                         android:layout_width="352dp"
@@ -72,21 +69,23 @@
 
             </RelativeLayout>
 
+
             <ListView
+                android:id="@+id/myBidsList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <include
-                    android:id="@+id/myBidsCard1"
-                    layout="@layout/my_bid_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </include>
-
             </ListView>
 
-        </ScrollView>
+<!--                <include-->
+<!--                    android:id="@+id/myBidsCard1"-->
+<!--                    layout="@layout/my_bid_card"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
+
+<!--                </include>-->
+
+
 
     </LinearLayout>
     //Start of middle part
