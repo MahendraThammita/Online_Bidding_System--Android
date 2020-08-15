@@ -58,6 +58,6 @@
     <string name="dvd">DVD and Movies</string>
     <string name="fashion">Fashion</string>
     <string name="sport">Sporting goods</string>
-    <string name="music">Music Instruments</string>
+    <string name="musicequipment">Music Instruments</string>
     <string name="anything">Anything else</string>
 </resources>
