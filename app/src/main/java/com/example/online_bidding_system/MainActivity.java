@@ -12,6 +12,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button profBtn;
+    Button home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         profBtn = findViewById(R.id.actionBarProfile);
+        home  = findViewById(R.id.actionBarHome);
 
         profBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent homeIntent = new Intent(getApplicationContext() , HomePage.class);
+                startActivity(homeIntent);
+            }
+        });
 
 
 

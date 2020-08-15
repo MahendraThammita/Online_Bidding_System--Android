@@ -64,7 +64,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Electronics"
+                        android:text="@string/handmade"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -95,7 +95,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Home and garden"
+                        android:text="@string/antiques"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -126,7 +126,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Music instruments"
+                        android:text="@string/books"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -157,7 +157,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sport equipments"
+                        android:text="@string/dvd"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -188,7 +188,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Antiques"
+                        android:text="@string/fashion"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -219,7 +219,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Handmade Items"
+                        android:text="@string/sport"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -250,7 +250,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Publications"
+                        android:text="@string/music"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -281,7 +281,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Antiques"
+                        android:text="@string/anything"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
