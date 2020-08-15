@@ -52,7 +52,7 @@
                         android:layout_height="50dp"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
-                        android:background="@drawable/rounded_corners"
+                        android:background="@drawable/warmcolor_rounded_corners"
                         android:backgroundTint="@color/colorAccent"
                         android:fontFamily="sans-serif-black"
                         android:text="My Bids"

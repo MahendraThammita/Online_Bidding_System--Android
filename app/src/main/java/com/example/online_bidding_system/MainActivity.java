@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         profBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent profIntent = new Intent(getApplicationContext() , PlaceBid.class);
+                Intent profIntent = new Intent(getApplicationContext() , myBids.class);
                 startActivity(profIntent);
             }
         });
