@@ -28,18 +28,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:background="@color/HighlightIconColor"
             />
         <SearchView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="300dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/HighlightIconColor"
+
             />
+</LinearLayout>
 
         <GridLayout
             android:layout_width="match_parent"
@@ -106,7 +115,7 @@
                         android:layout_width="116dp"
                         android:layout_height="87dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/home" />
+                        android:src="@drawable/electronics" />
 
                     <TextView
                         android:layout_width="wrap_content"
