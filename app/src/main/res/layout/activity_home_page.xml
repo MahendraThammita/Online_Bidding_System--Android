@@ -23,7 +23,301 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/primaryActbar" />
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <SearchView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rowCount="3"
+            android:columnCount="2"
+            android:layout_margin="5dp"
+            android:alignmentMode="alignMargins"
+            android:layout_gravity="center_horizontal"
+            android:columnOrderPreserved="false">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="118dp"
+                        android:layout_height="93dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/electronics" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sony Smart phone"
+                        android:textSize="16sp"
+                        android:layout_marginTop="15dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20 $"
+                        android:textSize="16sp"
+                        android:layout_marginTop="2dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="116dp"
+                        android:layout_height="87dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/home" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Home and garden"
+                        android:textSize="16sp"
+                        android:layout_marginTop="20dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="110dp"
+                        android:layout_height="101dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/musuc" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Music instruments"
+                        android:textSize="16sp"
+                        android:layout_marginTop="20dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="110dp"
+                        android:layout_height="103dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/sport" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sport equipments"
+                        android:textSize="16sp"
+                        android:layout_marginTop="20dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="115dp"
+                        android:layout_height="91dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/antiques" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Antiques"
+                        android:textSize="16sp"
+                        android:layout_marginTop="20dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="97dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/handmade" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Handmade Items"
+                        android:textSize="16sp"
+                        android:layout_marginTop="20dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="99dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/publications" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Publications"
+                        android:textSize="16sp"
+                        android:layout_marginTop="20dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/antiques" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Antiques"
+                        android:textSize="16sp"
+                        android:layout_marginTop="20dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+        </GridLayout>
+
+
+
+
+
     </LinearLayout>
+
+  </LinearLayout>
 
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
@@ -36,5 +330,7 @@
         tools:ignore="MissingConstraints">
 
     </com.ismaeldivita.chipnavigation.ChipNavigationBar>
+
+
 
 </RelativeLayout>

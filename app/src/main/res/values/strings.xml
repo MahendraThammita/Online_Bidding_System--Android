@@ -15,4 +15,27 @@
     <string name="IncreaseBidCaption">Increase your bid</string>
     <string name="DeleteBidCaption">Delete your bid</string>
     <string name="MybidsTitle">My Bids</string>
+
+
+    //UdithaJ Strings
+    <string-array name = "categories">
+        <item>Ending soon</item>
+        <item>Antiques</item>
+        <item>Handmade Items</item>
+        <item>Books</item>
+        <item>DVD and Movies</item>
+        <item>Fashion</item>
+        <item>Sporting goods</item>
+        <item>Music Instruments</item>
+        <item>Anything else</item>
+    </string-array>
+    <string name="antiques">Antiques</string>
+    <string name="handmade">Handmade Items</string>
+    <string name="books">Books</string>
+    <string name="dvd">DVD and Movies</string>
+    <string name="fashion">Fashion</string>
+    <string name="sport">Sporting goods</string>
+    <string name="music">Music Instruments</string>
+    <string name="anything">Anything else</string>
 </resources>
+
