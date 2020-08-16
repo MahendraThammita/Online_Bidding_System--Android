@@ -25,7 +25,8 @@
         <activity android:name=".Antiques_Edit" />
         <activity android:name=".RegistrationPage" />
         <activity android:name=".Antiques_Category" />
-        <activity android:name=".main_categories" >
+        <activity android:name=".main_categories" />
+            <activity android:name=".HomePage" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +38,6 @@
         <activity android:name=".EditBid" />
         <activity android:name=".ProfilePageBasic" />
         <activity android:name=".myBids" />
-        <activity android:name=".HomePage" />
         <activity android:name=".MainActivity">
 
         </activity>
