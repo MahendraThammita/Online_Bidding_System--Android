@@ -32,22 +32,32 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
-        <Spinner
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="3dp"
+        android:src="@drawable/categoryview" />
+
+    <Spinner
             android:id="@+id/spinner1"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
-            android:background="@color/HighlightIconColor"
-            />
+            android:background="#b3e5fc"
+            android:spinnerMode="dropdown" />
+
         <SearchView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="110dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/HighlightIconColor"
+            android:layout_marginTop="8dp" />
 
-            />
 </LinearLayout>
 
         <GridLayout
@@ -75,23 +85,40 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="118dp"
-                        android:layout_height="93dp"
+                        android:layout_width="116dp"
+                        android:layout_height="90dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/bookicon" />
+                        android:src="@drawable/katanasword" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sony Smart phone"
+                        android:text="Japanese Katana"
                         android:textSize="16sp"
-                        android:layout_marginTop="15dp"/>
+                        android:layout_marginTop="15dp" />
+
+                    <!--Item homepage description-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20 $"
-                        android:textSize="16sp"
+                        android:text="2000 $"
+                        android:background="@drawable/rounded_corners"
+                        android:backgroundTint="@color/Monet_coloe"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="20dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2 hrs 1 mn"
+                        android:background="@drawable/rounded_corners"
+                        android:backgroundTint="@color/Monet_coloe"
+                        android:textSize="12sp"
                         android:layout_marginTop="2dp"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -113,16 +140,38 @@
 
                     <ImageView
                         android:layout_width="116dp"
-                        android:layout_height="87dp"
+                        android:layout_height="90dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/bookicon" />
+                        android:src="@drawable/wristwatch" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Home and garden"
+                        android:text="Rolex watch"
                         android:textSize="16sp"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="15dp"/>
+                    <!--Item homepage description-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="720 $"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="20dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2 hrs 1 mn"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -144,16 +193,38 @@
 
                     <ImageView
                         android:layout_width="110dp"
-                        android:layout_height="101dp"
+                        android:layout_height="90dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/musuc" />
+                        android:src="@drawable/logon" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Music instruments"
+                        android:text="Logon Movie collection"
                         android:textSize="16sp"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="15dp"/>
+                    <!--Item homepage description-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="55 $"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="20dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2 hrs 1 mn"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -175,16 +246,38 @@
 
                     <ImageView
                         android:layout_width="110dp"
-                        android:layout_height="103dp"
+                        android:layout_height="90dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/sport" />
+                        android:src="@drawable/resinring" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sport equipments"
+                        android:text="Handmade resin ring"
                         android:textSize="16sp"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="15dp"/>
+                    <!--Item homepage description-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="20 $"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="20dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2 hrs 1 mn"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -206,16 +299,38 @@
 
                     <ImageView
                         android:layout_width="115dp"
-                        android:layout_height="91dp"
+                        android:layout_height="90dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/antiques" />
+                        android:src="@drawable/guitar" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Antiques"
+                        android:text="guitar"
                         android:textSize="16sp"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="15dp"/>
+                    <!--Item homepage description-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="20 $"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="20dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2 hrs 1 mn"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -237,17 +352,38 @@
 
                     <ImageView
                         android:layout_width="120dp"
-                        android:layout_height="97dp"
+                        android:layout_height="90dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/handmade" />
+                        android:src="@drawable/xbox1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Handmade Items"
                         android:textSize="16sp"
-                        android:layout_marginTop="20dp"/>
-
+                        android:layout_marginTop="15dp"/>
+                    <!--Item homepage description-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="20 $"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="20dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2 hrs 1 mn"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"/>
+                    </LinearLayout>
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -268,7 +404,7 @@
 
                     <ImageView
                         android:layout_width="130dp"
-                        android:layout_height="99dp"
+                        android:layout_height="90dp"
                         android:layout_marginTop="18dp"
                         android:src="@drawable/bookicon" />
 
@@ -277,7 +413,29 @@
                         android:layout_height="wrap_content"
                         android:text="Publications"
                         android:textSize="16sp"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="15dp"/>
+                    <!--Item homepage description-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="20 $"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="20dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2 hrs 1 mn"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -299,7 +457,7 @@
 
                     <ImageView
                         android:layout_width="130dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="90dp"
                         android:layout_marginTop="18dp"
                         android:src="@drawable/antiques" />
 
@@ -308,7 +466,29 @@
                         android:layout_height="wrap_content"
                         android:text="Antiques"
                         android:textSize="16sp"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="15dp"/>
+                    <!--Item homepage description-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="20 $"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="20dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2 hrs 1 mn"
+                            android:background="@drawable/rounded_corners"
+                            android:backgroundTint="@color/Monet_coloe"
+                            android:textSize="12sp"
+                            android:layout_marginTop="2dp"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 

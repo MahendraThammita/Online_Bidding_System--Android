@@ -36,7 +36,7 @@
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -118,7 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="430dp"
+        android:layout_marginTop="380dp"
         android:layout_marginLeft="150dp">
 
         <!--EditText -->
@@ -190,8 +190,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="642dp"
-        android:layout_marginRight="60dp">
+        android:layout_marginTop="630dp"
+        android:layout_marginRight="70dp">
 
 
         <Button
@@ -207,7 +207,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:text="Cancel" />
 
     </LinearLayout>
