@@ -27,11 +27,11 @@
             android:layout_height="30dp"
             android:layout_weight="0.33"
             android:background="@drawable/home"
-            android:backgroundTint="@color/Black"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/actionBarProfile"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/actionBarProfile"
-            tools:ignore="MissingConstraints">
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="0dp">
 
         </Button>
 
@@ -41,7 +41,6 @@
             android:layout_height="30dp"
             android:layout_weight="0.33"
             android:background="@drawable/profile"
-            android:backgroundTint="@color/Black"
             app:layout_constraintEnd_toStartOf="@+id/actionBarHome"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/actionBarBid"
@@ -55,7 +54,6 @@
             android:layout_height="30dp"
             android:layout_weight="0.33"
             android:background="@drawable/bids"
-            android:backgroundTint="@color/Black"
             app:layout_constraintEnd_toStartOf="@+id/actionBarProfile"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/actionBarMsg"
@@ -69,7 +67,6 @@
             android:layout_height="30dp"
             android:layout_weight="0.33"
             android:background="@drawable/message"
-            android:backgroundTint="@color/Black"
             app:layout_constraintEnd_toStartOf="@+id/actionBarBid"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
