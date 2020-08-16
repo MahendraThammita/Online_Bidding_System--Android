@@ -25,6 +25,7 @@
     //kaveesha
 
 
+
     //Start Mahendra Strings(IT19120362)
     <string name="ItemNameDemo">Sample Item Name</string>
     <string name="Description_Caption">Description</string>
@@ -46,6 +47,50 @@
     <string name="Ending_Date_Time_Demo">18:00:00  2020/08/15</string>
     <string name="placeBid_text_show">Enter Your Bid Here</string>
     <string name="confirmBid_Title">Confirm Bid</string>
+    <string name="MyAuctionpageTitle">My Auctions</string>
+    <string name="AuctionIdDemo">AUC1245</string>
+    <string name="AuctionCategoryCaption">Category</string>
+    <string name="StatusCaption">Status</string>
+    <string name="viewAuction">View Auction</string>
+    <string name="MyWinsTitle">My Wins</string>
+    <string name="AuctionIdCaption">Auction ID : </string>
+    <string name="YourBidCap">Your Bid : </string>
+    <string name="ProceedToPayCap">Proceed To Pay</string>
+    <string name="SellerNameCap">Seller Name : </string>
+    <string name="SellerIDCap">Seller ID : </string>
+    <string name="SellerIdDemo">SEL2245</string>
+    <string name="DraftAuctionsTitle">My Draft Auctions</string>
+    <string name="DemoCategory">Electronic</string>
+    <string name="NotSetText">Not Set</string>
+    <string name="NotStartedText">Not Started</string>
+    <string name="PostAuctionText">Post Action</string>
+    <string name="EditAuctionText">Edit Action</string>
+    //kaveesha(IT19106502)
+    <string name="NameDemo">Mahendra Thammita</string>
+    <string name="EmailDemo">demoEmail@gmail.com</string>
+    <string name="AddressDemo">No 123B/18 Kaduwela , Malabe</string>
+    <string name="phoneDemo">+94(00) 77 525 4125</string>
+    <string name="SaveChangesTitle">Save Changes</string>
 
 
+    //UdithaJ Strings
+    <string-array name="categories">
+        <item>Ending soon</item>
+        <item>Antiques</item>
+        <item>Handmade Items</item>
+        <item>Books</item>
+        <item>DVD and Movies</item>
+        <item>Fashion</item>
+        <item>Sporting goods</item>
+        <item>Music Instruments</item>
+        <item>Anything else</item>
+    </string-array>
+    <string name="antiques">Antiques</string>
+    <string name="handmade">Handmade Items</string>
+    <string name="books">Books</string>
+    <string name="dvd">DVD and Movies</string>
+    <string name="fashion">Fashion</string>
+    <string name="sport">Sporting goods</string>
+    <string name="musicequiment">Music Instruments</string>
+    <string name="anything">Anything else</string>
 </resources>
