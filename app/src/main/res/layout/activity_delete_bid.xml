@@ -7,9 +7,8 @@
     tools:context=".DeleteBid">
 
 
-
-
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -17,7 +16,7 @@
 
         <include
             android:id="@+id/primaryActbar"
-            layout="@layout/primary_actionbar"/>
+            layout="@layout/primary_actionbar" />
 
 
         <include
@@ -25,7 +24,7 @@
             layout="@layout/secoundery_actionbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/primaryActbar"/>
+            android:layout_alignBottom="@+id/primaryActbar" />
 
     </LinearLayout>
 
@@ -377,20 +376,17 @@
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
     <Button
-        android:id="@+id/placebid"
-        android:layout_width="139dp"
-        android:layout_height="49dp"
+        android:id="@+id/deletebid"
+        android:layout_width="125dp"
+        android:layout_height="55dp"
         android:backgroundTint="#CDDC39"
         android:text="Delete Bid"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.451"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.916" />
-
-
-
+        app:layout_constraintVertical_bias="0.914" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
