@@ -380,7 +380,7 @@
         android:layout_width="125dp"
         android:layout_height="55dp"
         android:backgroundTint="#CDDC39"
-        android:text="Delete Bid"
+        android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.451"
