@@ -27,10 +27,11 @@
             android:layout_height="30dp"
             android:layout_weight="0.33"
             android:background="@drawable/home"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/actionBarProfile"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/actionBarProfile"
-            tools:ignore="MissingConstraints">
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="0dp">
 
         </Button>
 
@@ -40,10 +41,11 @@
             android:layout_height="30dp"
             android:layout_weight="0.33"
             android:background="@drawable/profile"
-            app:layout_constraintEnd_toStartOf="@+id/actionBarHome"
+            app:layout_constraintEnd_toStartOf="@+id/actionBarBid"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/actionBarBid"
-            tools:ignore="MissingConstraints">
+            app:layout_constraintStart_toEndOf="@+id/actionBarHome"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="0dp">
 
         </Button>
 
@@ -53,10 +55,11 @@
             android:layout_height="30dp"
             android:layout_weight="0.33"
             android:background="@drawable/bids"
-            app:layout_constraintEnd_toStartOf="@+id/actionBarProfile"
+            app:layout_constraintEnd_toStartOf="@+id/actionBarMsg"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/actionBarMsg"
-            tools:ignore="MissingConstraints">
+            app:layout_constraintStart_toEndOf="@+id/actionBarProfile"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="1dp">
 
         </Button>
 
@@ -66,10 +69,11 @@
             android:layout_height="30dp"
             android:layout_weight="0.33"
             android:background="@drawable/message"
-            app:layout_constraintEnd_toStartOf="@+id/actionBarBid"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints">
+            app:layout_constraintStart_toEndOf="@+id/actionBarBid"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="0dp">
 
         </Button>
 

@@ -11,9 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Other_category"></activity>
+        <activity android:name=".Fashion_category" />
+        <activity android:name=".DVDnMovies_category" />
+        <activity android:name=".DeleteBid" />
         <activity android:name=".Sports_category"></activity>
         <activity android:name=".Music_category" />
-        <activity android:name=".DeleteBid"></activity>
         <activity android:name=".Edit_User" />
         <activity android:name=".Draft_Auctions" />
         <activity android:name=".MyWins" />
@@ -24,17 +27,21 @@
         <activity android:name=".Antiques_Edit" />
         <activity android:name=".RegistrationPage" />
         <activity android:name=".Antiques_Category" />
-        <activity android:name=".main_categories" />
-        <activity android:name=".EditBid" />
-        <activity android:name=".ProfilePageBasic" />
-        <activity android:name=".myBids" />
-        <activity android:name=".HomePage" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".main_categories" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
+        </activity>
+        <activity android:name=".EditBid" />
+        <activity android:name=".ProfilePageBasic" />
+        <activity android:name=".myBids" />
+        <activity android:name=".HomePage" />
+        <activity android:name=".MainActivity">
+
         </activity>
 
         <meta-data
