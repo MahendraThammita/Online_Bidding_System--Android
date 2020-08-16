@@ -1,7 +1,9 @@
 package com.example.online_bidding_system;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,14 +12,36 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.android.material.navigation.NavigationView;
+
 public class myBids extends AppCompatActivity {
 
     ListView lv;
+    DrawerLayout drawer;
+    NavigationView navi;
+    Toolbar primTool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_bids);
+
+
+        drawer = findViewById(R.id.DrwerLay);
+        navi = findViewById(R.id.nav_view);
+        primTool = findViewById(R.id.primaryActbar);
+
+        setSupportActionBar(primTool);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this , drawer , primTool , R.string.OpenDrawerDes , R.string.CloseDrawerDes);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+
+
+
+
+
 
 
         String items[] = {"Item Name 1" , "Item Name 2" , "Item Name 3" , "Item Name 4" , "Item Name 5" , "Item Name 6" , "Item Name 7"};

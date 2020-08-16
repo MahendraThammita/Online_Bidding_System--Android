@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Online_Bidding_System</string>
+    <string name="app_name_sell">Deal Now</string>
 
 
     //Start Mahendra Strings(IT19120362)
@@ -67,6 +68,8 @@
     <string name="AddressDemo">No 123B/18 Kaduwela , Malabe</string>
     <string name="phoneDemo">+94(00) 77 525 4125</string>
     <string name="SaveChangesTitle">Save Changes</string>
+    <string name="OpenDrawerDes">Open Drawer</string>
+    <string name="CloseDrawerDes">Close Drawer</string>
 
 
     //UdithaJ Strings
