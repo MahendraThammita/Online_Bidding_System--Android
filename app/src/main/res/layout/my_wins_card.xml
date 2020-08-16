@@ -130,7 +130,7 @@
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/dolloe_back"
+                            android:drawableLeft="@drawable/person_id"
                             android:text="@string/SellerIDCap"
                             android:textSize="18sp">
 
