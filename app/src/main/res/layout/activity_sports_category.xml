@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".books_category">
+    tools:context=".Music_category">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/books"
+            android:text="Sports Equipments"
             android:fontFamily="sans-serif-black"
             android:textSize="24sp"
             android:layout_margin="20dp"
@@ -35,14 +35,15 @@
 
         <ImageView
             android:id="@+id/image_view"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintVertical_bias="0.232" />
 
         <!-- image select button -->
         <Button
@@ -56,10 +57,10 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_gravity="center"
             android:background="@color/BootstrapPrimary"
-            android:layout_margin="3dp"/>
+            android:layout_margin="12dp"/>
 
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title:"
             android:fontFamily="sans-serif-black"
@@ -103,16 +104,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Materials:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="12dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Description:"
             android:fontFamily="sans-serif-black"
             android:textSize="20sp"
@@ -127,35 +118,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="417dp"
+        android:layout_marginTop="415dp"
         android:layout_marginLeft="150dp">
 
-        <!--EditText -->
-        <TextView
+
+
+        <EditText
             android:id="@+id/setTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="sans-serif-black"
-            android:text="Handmade epoxy resin ring"
-            android:inputType="text"
-            android:textSize="15sp" />
-
-
-        <!--EditText -->
-        <TextView
-            android:id="@+id/setPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="40 $"
+            android:text="Japanese Army officer Military Katana"
             android:fontFamily="sans-serif-black"
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="0dp"
             />
-        <!--EditText -->
-        <TextView
+
+
+
+        <EditText
+            android:id="@+id/setPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2400 $"
+            android:fontFamily="sans-serif-black"
+            android:textSize="15sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="0dp"
+            />
+
+        <EditText
             android:id="@+id/setDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -163,10 +155,10 @@
             android:fontFamily="sans-serif-black"
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="0dp"
             />
-        <!--EditText -->
-        <TextView
+
+        <EditText
             android:id="@+id/setContact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -174,31 +166,19 @@
             android:fontFamily="sans-serif-black"
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="0dp"
             />
 
-        <!--EditText -->
-        <TextView
-            android:id="@+id/setMaterials"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Epoxy resin"
-            android:fontFamily="sans-serif-black"
-            android:textSize="15sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            />
-
-        <!--EditText -->
-        <TextView
+        <EditText
             android:id="@+id/setDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Crystal clear.Anti yellowing"
+            android:text="Mei signature in Nakago tang.
+                       Sutrdy Blade"
             android:fontFamily="sans-serif-black"
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="0dp"
             />
 
 
@@ -210,16 +190,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="660dp"
+        android:layout_marginTop="650dp"
         android:layout_marginRight="60dp">
 
 
         <Button
             android:id="@+id/publish_now"
             android:layout_width="120dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
             android:background="@color/colorAccent"
             android:text="Publish Now" />
 
@@ -228,10 +207,11 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
-            android:layout_marginLeft="1dp"
+            android:layout_marginLeft="20dp"
             android:text="Publish Later" />
 
     </LinearLayout>
+
 
 
 

@@ -92,4 +92,39 @@
     <string name="sport">Sporting goods</string>
     <string name="musicequiment">Music Instruments</string>
     <string name="anything">Anything else</string>
+
+
+    //Balasooriya B.R.G.R Strings(IT19144054)
+
+    <string name="signin">Sign in</string>
+    <string name="emailorusername">Email or Username</string>
+    <string name="pwdlogin">Password</string>
+    <string name="login">Sign in</string>
+    <string name="cancel">Cancel</string>
+    <string name="forgotpwd">Forgot Password?</string>
+    <string name="dvdmovie">DVD and Movies</string>
+    <string name="selectimg">SELECT IMAGES</string>
+    <string name="title">Title:</string>
+    <string name="startat">Starting At:</string>
+    <string name="duration">Duration:</string>
+    <string name="contact">Contact:</string>
+    <string name="desc">Description:</string>
+    <string name="meterial">Meterial:</string>
+    <string name="other">Other</string>
+    <string name="payment">Payment</string>
+    <string name="amount">Amount:</string>
+    <string name="cardholder">Card Holders Name:</string>
+    <string name="cardno">Card Number:</string>
+    <string name="exdate">Expiry Date:</string>
+    <string name="cvc">CVC:</string>
+    <string name="paynow">PAY NOW</string>
+    <string name="highestbid">Highest Bid:</string>
+    <string name="timeremain">Time Remaining:</string>
+    <string name="placebidbtn">PLACE BID</string>
+    <string name="categoryname">Category Name</string>
+    <string name="deletebidbtn">DELETE BID</string>
+    <string name="publishnowBtn">PUBLISH NOW</string>
+    <string name="publishlaterBtn">PUBLISH LATER</string>
+
+
 </resources>
