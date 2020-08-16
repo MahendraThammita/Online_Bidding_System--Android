@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext() , HomePage.class);
+                Intent homeIntent = new Intent(getApplicationContext() , books_category.class);
                 startActivity(homeIntent);
             }
         });

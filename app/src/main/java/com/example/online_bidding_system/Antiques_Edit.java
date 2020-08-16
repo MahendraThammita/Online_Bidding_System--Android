@@ -32,6 +32,7 @@ public class Antiques_Edit extends AppCompatActivity {
         setContentView(R.layout.activity_antiques__edit);
 
         Button button = findViewById(R.id.button);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,13 +40,13 @@ public class Antiques_Edit extends AppCompatActivity {
                     ActivityCompat.requestPermissions(Antiques_Edit .this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
 //                    return;
                 } else {
-                    launchGalleryIntent();
+                    GetdisplayIntent();
                 }
             }
         });
     }
 
-    public void launchGalleryIntent() {
+    public void  GetdisplayIntent() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setType("image/*");
@@ -53,15 +54,14 @@ public class Antiques_Edit extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case REQUEST_EXTERNAL_STORAGE: {
 
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    launchGalleryIntent();
+                    GetdisplayIntent();
                 } else {
 
                 }
@@ -70,7 +70,6 @@ public class Antiques_Edit extends AppCompatActivity {
 
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
