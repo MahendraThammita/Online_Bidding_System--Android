@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Antiques_Category">
+    tools:context=".handmade_category">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/antiques"
+            android:text="@string/handmade"
             android:fontFamily="sans-serif-black"
             android:textSize="24sp"
             android:layout_margin="20dp"
@@ -104,6 +104,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Materials:"
+            android:fontFamily="sans-serif-black"
+            android:textSize="20sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="12dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Description:"
             android:fontFamily="sans-serif-black"
             android:textSize="20sp"
@@ -114,75 +124,86 @@
 
     <!-- Text Fields-->
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginTop="430dp"
-    android:layout_marginLeft="150dp">
-
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setTitle"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Japanese  Military Katana"
-        android:inputType="text"
-        android:textSize="15sp" />
+        android:orientation="vertical"
+        android:layout_marginTop="430dp"
+        android:layout_marginLeft="150dp">
+
+        <!--EditText -->
+        <TextView
+            android:id="@+id/setTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Handmade epoxy resin ring"
+            android:inputType="text"
+            android:textSize="15sp" />
 
 
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2400 $"
-        android:fontFamily="sans-serif-black"
-        android:textSize="15sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        />
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setDuration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="48 hrs"
-        android:fontFamily="sans-serif-black"
-        android:textSize="15sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        />
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="111 222 333 44"
-        android:fontFamily="sans-serif-black"
-        android:textSize="15sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        />
+        <!--EditText -->
+        <TextView
+            android:id="@+id/setPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="40 $"
+            android:fontFamily="sans-serif-black"
+            android:textSize="15sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            />
+        <!--EditText -->
+        <TextView
+            android:id="@+id/setDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="48 hrs"
+            android:fontFamily="sans-serif-black"
+            android:textSize="15sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            />
+        <!--EditText -->
+        <TextView
+            android:id="@+id/setContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="111 222 333 44"
+            android:fontFamily="sans-serif-black"
+            android:textSize="15sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            />
 
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mei signature in Nakago tang.
-                       Sutrdy Blade"
-        android:fontFamily="sans-serif-black"
-        android:textSize="15sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        />
+        <!--EditText -->
+        <TextView
+            android:id="@+id/setMaterials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Epoxy resin"
+            android:fontFamily="sans-serif-black"
+            android:textSize="15sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            />
+
+        <!--EditText -->
+        <TextView
+            android:id="@+id/setDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crystal clear.Anti yellowing"
+            android:fontFamily="sans-serif-black"
+            android:textSize="15sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            />
 
 
-</LinearLayout>
+    </LinearLayout>
 
 
     <!-- Publish buttons -->
@@ -190,7 +211,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="642dp"
+        android:layout_marginTop="660dp"
         android:layout_marginRight="60dp">
 
 

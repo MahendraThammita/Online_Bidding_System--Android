@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Antiques_Category">
+    tools:context=".Antiques_Edit">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/antiques"
+            android:text="Item Code 0045"
             android:fontFamily="sans-serif-black"
             android:textSize="24sp"
             android:layout_margin="20dp"
@@ -114,75 +114,75 @@
 
     <!-- Text Fields-->
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginTop="430dp"
-    android:layout_marginLeft="150dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="430dp"
+        android:layout_marginLeft="150dp">
 
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Japanese  Military Katana"
-        android:inputType="text"
-        android:textSize="15sp" />
+        <!--EditText -->
+        <TextView
+            android:id="@+id/setTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Japanese Army officer Military Katana"
+            android:inputType="text"
+            android:textSize="15sp" />
 
 
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2400 $"
-        android:fontFamily="sans-serif-black"
-        android:textSize="15sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        />
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setDuration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="48 hrs"
-        android:fontFamily="sans-serif-black"
-        android:textSize="15sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        />
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="111 222 333 44"
-        android:fontFamily="sans-serif-black"
-        android:textSize="15sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        />
+        <!--EditText -->
+        <TextView
+            android:id="@+id/setPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2400 $"
+            android:fontFamily="sans-serif-black"
+            android:textSize="15sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            />
+        <!--EditText -->
+        <TextView
+            android:id="@+id/setDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="48 hrs"
+            android:fontFamily="sans-serif-black"
+            android:textSize="15sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            />
+        <!--EditText -->
+        <TextView
+            android:id="@+id/setContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="111 222 333 44"
+            android:fontFamily="sans-serif-black"
+            android:textSize="15sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            />
 
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mei signature in Nakago tang.
+        <!--EditText -->
+        <TextView
+            android:id="@+id/setDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mei signature in Nakago tang.
                        Sutrdy Blade"
-        android:fontFamily="sans-serif-black"
-        android:textSize="15sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        />
+            android:fontFamily="sans-serif-black"
+            android:textSize="15sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            />
 
 
-</LinearLayout>
+    </LinearLayout>
 
 
     <!-- Publish buttons -->
@@ -200,7 +200,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
             android:background="@color/colorAccent"
-            android:text="Publish Now" />
+            android:text="Update" />
 
         <Button
             android:id="@+id/publish_later"
@@ -208,7 +208,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:layout_marginLeft="20dp"
-            android:text="Publish Later" />
+            android:text="Cancel" />
 
     </LinearLayout>
 

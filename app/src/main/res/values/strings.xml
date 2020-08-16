@@ -2,7 +2,6 @@
     <string name="app_name">Online_Bidding_System</string>
 
 
-
     //Start Mahendra Strings(IT19120362)
     <string name="ItemNameDemo">Sample Item Name</string>
     <string name="Description_Caption">Description</string>
@@ -47,10 +46,8 @@
     <string name="later">Publish Later</string>
 
 
-
-
     //UdithaJ Strings
-    <string-array name = "categories">
+    <string-array name="categories">
         <item>Ending soon</item>
         <item>Antiques</item>
         <item>Handmade Items</item>
