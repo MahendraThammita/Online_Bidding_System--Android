@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyAuctions"></activity>
+        <activity android:name=".MyWins"></activity>
+        <activity android:name=".MyAuctions" />
         <activity android:name=".PlaceBid" />
         <activity android:name=".RegistrationPage" />
         <activity android:name=".Antiques_Category" />
