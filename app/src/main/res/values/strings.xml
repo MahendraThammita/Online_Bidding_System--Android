@@ -120,6 +120,8 @@
     <string name="placebidbtn">PLACE BID</string>
     <string name="categoryname">Category Name</string>
     <string name="deletebidbtn">DELETE BID</string>
+    <string name="publishnowBtn">PUBLISH NOW</string>
+    <string name="publishlaterBtn">PUBLISH LATER</string>
 
 
 </resources>

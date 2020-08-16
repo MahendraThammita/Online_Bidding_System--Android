@@ -28,6 +28,10 @@
         <activity android:name=".RegistrationPage" />
         <activity android:name=".Antiques_Category" />
         <activity android:name=".main_categories" />
+        <activity android:name=".PaymentPage"></activity>
+        <activity android:name=".LogIn_Page"></activity>
+        <activity android:name=".StartBidding"></activity>
+
             <activity android:name=".HomePage" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

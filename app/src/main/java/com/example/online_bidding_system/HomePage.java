@@ -15,6 +15,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
 
     Button home;
     Button bids;
+    Button msg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,8 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
 
         home  = findViewById(R.id.actionBarHome);
         bids = findViewById(R.id.actionBarBid);
+        msg = findViewById(R.id.actionBarMsg);
+
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +43,18 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
                 startActivity(homeIntent);
             }
         });
+
+
+        msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent msgintent = new Intent(getApplicationContext() , Other_category.class);
+                startActivity(msgintent);
+            }
+        });
+
+
+
 
 
         Spinner spinner = findViewById(R.id.spinner1);
