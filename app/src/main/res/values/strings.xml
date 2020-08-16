@@ -62,6 +62,11 @@
     <string name="para">Description:</string>
     <string name="now">Publish Now</string>
     <string name="later">Publish Later</string>
+    <string name="NameDemo">Mahendra Thammita</string>
+    <string name="EmailDemo">demoEmail@gmail.com</string>
+    <string name="AddressDemo">No 123B/18 Kaduwela , Malabe</string>
+    <string name="phoneDemo">+94(00) 77 525 4125</string>
+    <string name="SaveChangesTitle">Save Changes</string>
 
 
     //UdithaJ Strings

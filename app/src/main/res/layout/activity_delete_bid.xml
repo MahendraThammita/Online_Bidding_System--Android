@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StartBidding">
+    tools:context=".DeleteBid">
+
+
 
 
     <LinearLayout
@@ -13,17 +15,17 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
-    <include
-        android:id="@+id/primaryActbar"
-        layout="@layout/primary_actionbar"/>
+        <include
+            android:id="@+id/primaryActbar"
+            layout="@layout/primary_actionbar"/>
 
 
-    <include
-        android:id="@+id/profActionbar"
-        layout="@layout/secoundery_actionbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/primaryActbar"/>
+        <include
+            android:id="@+id/profActionbar"
+            layout="@layout/secoundery_actionbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/primaryActbar"/>
 
     </LinearLayout>
 
@@ -48,7 +50,7 @@
         android:id="@+id/mainTitleT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DVD and Movies"
+        android:text="Category Name"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -163,10 +165,10 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.694"
+        app:layout_constraintHorizontal_bias="0.684"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.832" />
+        app:layout_constraintVertical_bias="0.83" />
 
     <TextView
         android:id="@+id/start_price"
@@ -379,13 +381,16 @@
         android:layout_width="139dp"
         android:layout_height="49dp"
         android:backgroundTint="#CDDC39"
-        android:text="Place Bid"
+        android:text="Delete Bid"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.916" />
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
