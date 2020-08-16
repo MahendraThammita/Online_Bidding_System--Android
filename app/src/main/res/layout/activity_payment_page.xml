@@ -311,16 +311,16 @@
         app:layout_constraintVertical_bias="0.914" />
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="73dp"
-        android:layout_height="48dp"
+        android:id="@+id/mastercard"
+        android:layout_width="136dp"
+        android:layout_height="72dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintHorizontal_bias="0.429"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.554"
-        app:srcCompat="@drawable/disk" />
+        app:layout_constraintVertical_bias="0.549"
+        app:srcCompat="@drawable/mastercard" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
