@@ -25,7 +25,6 @@
     //kaveesha
 
 
-
     //Start Mahendra Strings(IT19120362)
     <string name="ItemNameDemo">Sample Item Name</string>
     <string name="Description_Caption">Description</string>
@@ -47,7 +46,6 @@
     <string name="Ending_Date_Time_Demo">18:00:00  2020/08/15</string>
     <string name="placeBid_text_show">Enter Your Bid Here</string>
     <string name="confirmBid_Title">Confirm Bid</string>
-
 
 
 </resources>
