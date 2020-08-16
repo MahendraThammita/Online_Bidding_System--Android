@@ -46,13 +46,11 @@
     </com.ismaeldivita.chipnavigation.ChipNavigationBar>
 
 
-
-
     <TextView
         android:id="@+id/OtherTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Other"
+        android:text="@string/other"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +64,7 @@
         android:id="@+id/setTitle"
         android:layout_width="130dp"
         android:layout_height="31dp"
-        android:text="Title:"
+        android:text="@string/title"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -150,7 +148,7 @@
         android:id="@+id/setStartingAt"
         android:layout_width="130dp"
         android:layout_height="31dp"
-        android:text="Starting At:"
+        android:text="@string/startat"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -164,7 +162,7 @@
         android:id="@+id/setDuration"
         android:layout_width="130dp"
         android:layout_height="31dp"
-        android:text="Duration:"
+        android:text="@string/duration"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -178,7 +176,7 @@
         android:id="@+id/setContact"
         android:layout_width="130dp"
         android:layout_height="31dp"
-        android:text="Contact:"
+        android:text="@string/contact"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -192,7 +190,7 @@
         android:id="@+id/setDescr"
         android:layout_width="130dp"
         android:layout_height="31dp"
-        android:text="Description:"
+        android:text="@string/desc"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -207,7 +205,7 @@
         android:layout_width="133dp"
         android:layout_height="50dp"
         android:backgroundTint="#4D65EC"
-        android:text="Select Images"
+        android:text="@string/selectimg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.456"
