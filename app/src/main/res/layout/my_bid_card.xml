@@ -44,11 +44,12 @@
                         android:id="@+id/myBidCardTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Item Name"
+                        android:text="@string/ItemNameDemo"
                         android:textSize="24sp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginBottom="10dp"
-                        android:textStyle="bold">
+                        android:textStyle="bold"
+                        android:layout_gravity="center">
 
                     </TextView>
 
@@ -126,7 +127,8 @@
                             android:id="@+id/mybidmyBidCap"
                             android:layout_toRightOf="@+id/myBidCardImg"
                             android:drawableLeft="@drawable/money_mybid"
-                            android:text="Max Bid :  "
+                            android:text="@string/MybidsTitle"
+                            android:layout_marginRight="18dp"
                             android:textSize="18sp">
 
                         </TextView>

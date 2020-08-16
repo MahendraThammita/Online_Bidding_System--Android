@@ -28,6 +28,19 @@
     <string name="AuctionCategoryCaption">Category</string>
     <string name="StatusCaption">Status</string>
     <string name="viewAuction">View Auction</string>
+    <string name="MyWinsTitle">My Wins</string>
+    <string name="AuctionIdCaption">Auction ID : </string>
+    <string name="YourBidCap">Your Bid : </string>
+    <string name="ProceedToPayCap">Proceed To Pay</string>
+    <string name="SellerNameCap">Seller Name : </string>
+    <string name="SellerIDCap">Seller ID : </string>
+    <string name="SellerIdDemo">SEL2245</string>
+    <string name="DraftAuctionsTitle">My Draft Auctions</string>
+    <string name="DemoCategory">Electronic</string>
+    <string name="NotSetText">Not Set</string>
+    <string name="NotStartedText">Not Started</string>
+    <string name="PostAuctionText">Post Action</string>
+    <string name="EditAuctionText">Edit Action</string>
 
     //kaveesha(IT19106502)
 
