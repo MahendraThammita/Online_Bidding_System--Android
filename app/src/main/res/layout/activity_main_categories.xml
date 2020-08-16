@@ -59,11 +59,12 @@
                         android:layout_width="118dp"
                         android:layout_height="93dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/electronics" />
+                        android:src="@drawable/handmade" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/handmade"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
@@ -90,11 +91,12 @@
                         android:layout_width="116dp"
                         android:layout_height="87dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/garden" />
+                        android:src="@drawable/antiques" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/antiques"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
@@ -121,11 +123,12 @@
                         android:layout_width="110dp"
                         android:layout_height="101dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/musuc" />
+                        android:src="@drawable/bookicon" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/books"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
@@ -152,11 +155,12 @@
                         android:layout_width="110dp"
                         android:layout_height="103dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/sport" />
+                        android:src="@drawable/dvd" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/dvd"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
@@ -183,11 +187,12 @@
                         android:layout_width="115dp"
                         android:layout_height="91dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/antiques" />
+                        android:src="@drawable/fashion" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/fashion"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
@@ -214,11 +219,12 @@
                         android:layout_width="120dp"
                         android:layout_height="97dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/handmade" />
+                        android:src="@drawable/sport" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/sport"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
@@ -245,11 +251,12 @@
                         android:layout_width="130dp"
                         android:layout_height="99dp"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/publications" />
+                        android:src="@drawable/musuc" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/musicequiment"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
@@ -276,11 +283,12 @@
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dp"
-                        android:src="@drawable/antiques" />
+                        android:src="@drawable/other" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/anything"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
