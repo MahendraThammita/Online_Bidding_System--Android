@@ -1,5 +1,29 @@
 <resources>
     <string name="app_name">Online_Bidding_System</string>
+    //kaveesha(IT19106502)
+
+    <string name="signup">Sign Up</string>
+    <string name="name">Full Name</string>
+    <string name="NIC">NIC Number</string>
+    <string name="Email">Email Address</string>
+    <string name="pwd">Password </string>
+    <string name="address">Address</string>
+    <string name="register">Sign Up</string>
+    <string name="music">Music Instruments</string>
+    <string name="drum">Drums </string>
+    <string name="string">String Music Instruments</string>
+    <string name="electric">Electric Music Instruments</string>
+    <string name="condition">Add Images (Up to 5)</string>
+    <string name="upload">Upload Images</string>
+    <string name="start">Starting At:</string>
+    <string name="Duration">Duration:</string>
+    <string name="para">Description:</string>
+    <string name="now">Publish Now</string>
+    <string name="later">Publish Later</string>
+
+
+    //kaveesha
+
 
 
     //Start Mahendra Strings(IT19120362)
@@ -41,27 +65,7 @@
     <string name="NotStartedText">Not Started</string>
     <string name="PostAuctionText">Post Action</string>
     <string name="EditAuctionText">Edit Action</string>
-
     //kaveesha(IT19106502)
-
-    <string name="signup">Sign Up</string>
-    <string name="name">Full Name</string>
-    <string name="NIC">NIC Number</string>
-    <string name="Email">Email Address</string>
-    <string name="pwd">Password </string>
-    <string name="address">Address</string>
-    <string name="register">Sign Up</string>
-    <string name="music">Music Instruments</string>
-    <string name="drum">Drums </string>
-    <string name="string">String Music Instruments</string>
-    <string name="electric">Electric Music Instruments</string>
-    <string name="condition">Add Images (Up to 5)</string>
-    <string name="upload">Upload Images</string>
-    <string name="start">Starting At:</string>
-    <string name="Duration">Duration:</string>
-    <string name="para">Description:</string>
-    <string name="now">Publish Now</string>
-    <string name="later">Publish Later</string>
     <string name="NameDemo">Mahendra Thammita</string>
     <string name="EmailDemo">demoEmail@gmail.com</string>
     <string name="AddressDemo">No 123B/18 Kaduwela , Malabe</string>
