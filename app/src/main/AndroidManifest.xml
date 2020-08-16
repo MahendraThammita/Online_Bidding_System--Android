@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Draft_Auctions"></activity>
+        <activity android:name=".Edit_User"></activity>
+        <activity android:name=".Draft_Auctions" />
         <activity android:name=".MyWins" />
         <activity android:name=".MyAuctions" />
         <activity android:name=".PlaceBid" />

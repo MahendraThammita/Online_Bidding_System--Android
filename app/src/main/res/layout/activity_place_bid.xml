@@ -42,10 +42,9 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout3"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="180dp"
-        android:background="@drawable/rounded_corners"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@+id/primaryActbar"
@@ -54,10 +53,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/warmcolor_rounded_corners"
+            android:background="@drawable/rounded_contentarea"
             android:gravity="center"
             android:text="@string/PlaceBid_Title"
             android:textSize="36sp"
+            android:textColor="@color/MDBdangercolor"
             android:textStyle="bold">
 
         </TextView>
