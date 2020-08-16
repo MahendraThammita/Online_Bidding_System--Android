@@ -56,6 +56,7 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:id="@+id/homemadecat"
                         android:layout_width="118dp"
                         android:layout_height="93dp"
                         android:layout_marginTop="18dp"
@@ -88,6 +89,7 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:id="@+id/antiqcat"
                         android:layout_width="116dp"
                         android:layout_height="87dp"
                         android:layout_marginTop="18dp"

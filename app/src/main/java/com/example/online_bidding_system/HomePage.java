@@ -14,6 +14,8 @@ import android.widget.Toast;
 public class HomePage extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Button home;
+    Button bids;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,12 +23,20 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
 
 
         home  = findViewById(R.id.actionBarHome);
-
+        bids = findViewById(R.id.actionBarBid);
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent homeIntent = new Intent(getApplicationContext() , main_categories.class);
+                startActivity(homeIntent);
+            }
+        });
+
+        bids.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent homeIntent = new Intent(getApplicationContext() , RegistrationPage.class);
                 startActivity(homeIntent);
             }
         });

@@ -47,9 +47,9 @@
         <!-- image select button -->
         <Button
             android:id="@+id/button"
-            android:layout_width="120dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Select Images"
+            android:text="Replace Images"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -117,7 +117,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="430dp"
         android:layout_marginLeft="150dp">
 
         <!--EditText -->
@@ -200,7 +200,7 @@
             android:layout_marginLeft="80dp"
             android:layout_marginRight="10dp"
             android:background="@color/colorAccent"
-            android:text="Publish Now" />
+            android:text="Update" />
 
         <Button
             android:id="@+id/publish_later"
@@ -208,7 +208,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:layout_marginLeft="1dp"
-            android:text="Publish Later" />
+            android:text="Cancel" />
 
     </LinearLayout>
 
