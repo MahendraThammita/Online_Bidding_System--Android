@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.online_bidding_system"
-    android:installLocation="auto">
+    package="com.example.online_bidding_system">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -14,6 +13,10 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MyWins"></activity>
         <activity android:name=".MyAuctions" />
+        <activity android:name=".PlaceBid" />
+        <activity android:name=".books_category"></activity>
+        <activity android:name=".handmade_category" />
+        <activity android:name=".Antiques_Edit" />
         <activity android:name=".PlaceBid" />
         <activity android:name=".RegistrationPage" />
         <activity android:name=".Antiques_Category" />
