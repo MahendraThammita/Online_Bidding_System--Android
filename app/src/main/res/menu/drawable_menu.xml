@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/bids"
+            android:title="@string/MybidsTitle">
+
+        </item>
+        <item
+            android:id="@+id/login"
+            android:icon="@drawable/money_mybid"
+            android:title="@string/MyWinsTitle">
+
+        </item>
+        <item
+            android:id="@+id/nav_thrd"
+            android:icon="@drawable/high"
+            android:title="View Auctions">
+
+        </item>
+    </group>
+
+    <group
+        android:checkableBehavior="single"
+        android:icon="@drawable/person_id">
+        <item
+            android:icon="@drawable/action"
+            android:title="Auctions ">
+            <menu>
+                <item
+                    android:id="@+id/nav_in_item"
+                    android:icon="@drawable/home"
+                    android:title="@string/MyAuctionpageTitle">
+
+                </item>
+                <item
+                    android:id="@+id/in_item2"
+                    android:icon="@drawable/save"
+                    android:title="@string/DraftAuctionsTitle">
+
+                </item>
+            </menu>
+        </item>
+        <item android:title="Profile ">
+            <menu>
+                <item
+                    android:id="@+id/nav_in_itema"
+                    android:icon="@drawable/person"
+                    android:title="Edit Profile">
+
+                </item>
+                <item
+                    android:id="@+id/in_item2a"
+                    android:icon="@drawable/exit"
+                    android:title="Logout">
+
+                </item>
+            </menu>
+        </item>
+    </group>
+
+</menu>

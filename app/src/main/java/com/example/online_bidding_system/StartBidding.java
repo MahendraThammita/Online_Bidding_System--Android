@@ -30,7 +30,7 @@ public class StartBidding extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent placeBid = new Intent(StartBidding.this, PlaceBid.class);
-
+                startActivity(placeBid);
             }
         });
 
