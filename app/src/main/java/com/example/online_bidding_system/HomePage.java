@@ -28,7 +28,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext() , main_categories.class);
+                Intent homeIntent = new Intent(getApplicationContext() , DeleteBid.class);
                 startActivity(homeIntent);
             }
         });
@@ -36,7 +36,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         bids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext() , RegistrationPage.class);
+                Intent homeIntent = new Intent(getApplicationContext() , Sports_category.class);
                 startActivity(homeIntent);
             }
         });
