@@ -27,5 +27,12 @@ public class Other_category extends AppCompatActivity {
 
             }
         });
+
+        pubLater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 }
