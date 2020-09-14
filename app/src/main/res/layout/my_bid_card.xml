@@ -15,16 +15,18 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:padding="10dp"
-        android:elevation="5dp">
+        android:elevation="5dp"
+        android:background="@drawable/rounded_corners"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/myBidCardImg"
@@ -155,32 +157,6 @@
 
             </RelativeLayout>
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/Black"
-                android:layout_marginTop="5dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_margin="5dp"
-                    android:text="ACTION"
-                    android:textStyle="bold"
-                    android:textSize="24dp"
-                    android:background="@color/BootstrapPrimary">
-
-                </Button>
-
-
-            </LinearLayout>
-
-        </LinearLayout>
 
 
 
