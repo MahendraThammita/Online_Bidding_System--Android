@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
 
-public class myBids extends AppCompatActivity {
+public class myBids extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     ListView lv;
@@ -39,9 +39,14 @@ public class myBids extends AppCompatActivity {
 
         setSupportActionBar(primTool);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this , drawer , primTool , R.string.OpenDrawerDes , R.string.CloseDrawerDes);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+
+        navi.bringToFront();
+        ActionBarDrawerToggle toggle1 = new ActionBarDrawerToggle(this , drawer , primTool , R.string.OpenDrawerDes , R.string.CloseDrawerDes);
+        drawer.addDrawerListener(toggle1);
+        toggle1.syncState();
+
+
+        navi.setNavigationItemSelectedListener(this);
 
 
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -68,7 +73,7 @@ public class myBids extends AppCompatActivity {
                         Intent in6 = new Intent(getApplicationContext() , MyAuctions.class);
                         startActivity(in6);
                 }
-                return false;
+                return true;
             }
         });
 
@@ -95,6 +100,11 @@ public class myBids extends AppCompatActivity {
             }
        });
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return true;
     }
 
 //    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){

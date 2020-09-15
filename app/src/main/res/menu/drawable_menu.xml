@@ -22,13 +22,14 @@
         </item>
     </group>
 
-    <group
-        android:checkableBehavior="single"
-        android:icon="@drawable/person_id">
+
         <item
             android:icon="@drawable/action"
             android:title="Auctions ">
             <menu>
+                <group
+                    android:checkableBehavior="single"
+                    android:icon="@drawable/person_id">
                 <item
                     android:id="@+id/Drawable_myAuctions"
                     android:icon="@drawable/home"
@@ -41,10 +42,15 @@
                     android:title="@string/DraftAuctionsTitle">
 
                 </item>
+                </group>
             </menu>
         </item>
+
         <item android:title="Profile ">
             <menu>
+                <group
+                    android:checkableBehavior="single"
+                    android:icon="@drawable/person_id">
                 <item
                     android:id="@+id/Drawable_EditProf"
                     android:icon="@drawable/person"
@@ -57,8 +63,9 @@
                     android:title="Logout">
 
                 </item>
+                </group>
             </menu>
         </item>
-    </group>
+
 
 </menu>
