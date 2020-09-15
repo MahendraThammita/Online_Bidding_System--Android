@@ -129,7 +129,7 @@
                             android:id="@+id/mybidmyBidCap"
                             android:layout_toRightOf="@+id/myBidCardImg"
                             android:drawableLeft="@drawable/money_mybid"
-                            android:text="@string/MybidsTitle"
+                            android:text="@string/MybidsCurrentBid"
                             android:layout_marginRight="18dp"
                             android:textSize="18sp">
 

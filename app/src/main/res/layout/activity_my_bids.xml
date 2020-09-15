@@ -45,32 +45,46 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="156dp"
                     android:layout_alignParentBottom="true">
 
 
 
-                    <RelativeLayout
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="50dp">-->
+
+                        <include
+                            android:id="@+id/wavesTopadd"
+                            layout="@layout/waves_top"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/wavetopMybid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/my_bids_icon"
+                        android:tint="@color/white"
+                        android:minWidth="120dp"
+                        android:minHeight="120dp"
+                        android:layout_marginLeft="30dp"/>
+
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="50dp">
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:text="My Bids"
+                        android:textAlignment="center"
+                        android:textColor="@color/Black"
+                        android:textSize="40dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_toRightOf="@+id/wavetopMybid"/>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-black"
-                            android:text="My Bids"
-                            android:textAlignment="center"
-                            android:textAllCaps="true"
-                            android:textColor="@color/Black"
-                            android:textSize="40dp" />
-
-                    </RelativeLayout>
+<!--                    </RelativeLayout>-->
 
 
 
 
                 </RelativeLayout>
-
 
                 <ListView
                     android:id="@+id/myBidsList"
@@ -79,6 +93,7 @@
                     android:divider="@null">
 
                 </ListView>
+
 
             </LinearLayout>
             //Start of middle part
