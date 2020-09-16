@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
 
 
 public class myBids extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +26,7 @@ public class myBids extends AppCompatActivity implements NavigationView.OnNaviga
     DrawerLayout drawer;
     NavigationView navi;
     Toolbar primTool;
+    DatabaseReference DBRef;
 
 
     @Override
