@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "44390509201",
+    "firebase_url": "https://onlinebiddingsystem-364fb.firebaseio.com",
+    "project_id": "onlinebiddingsystem-364fb",
+    "storage_bucket": "onlinebiddingsystem-364fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44390509201:android:529d7372592e2a388a2d30",
+        "android_client_info": {
+          "package_name": "com.example.online_bidding_system"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44390509201-4f91k1lvlbgam6ee2riulojul8l7o845.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.online_bidding_system",
+            "certificate_hash": "dd73e88f1593b294e15cc10221d235a746a4b68a"
+          }
+        },
+        {
+          "client_id": "44390509201-qf7kjffes3fgb27i5fpo1c1n3bv7msgi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSiMvhkp7AJVLexw8CuWFTakXxPq_ue-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "44390509201-qf7kjffes3fgb27i5fpo1c1n3bv7msgi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
