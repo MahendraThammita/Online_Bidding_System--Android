@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Antiques_Category">
+    tools:context=".books_category">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/antiques"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.195" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <include
             android:id="@+id/primaryActbar"
-            layout="@layout/primary_actionbar"/>
+            layout="@layout/primary_actionbar" />
 
 
         <include
@@ -21,212 +42,162 @@
             layout="@layout/secoundery_actionbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/primaryActbar"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/antiques"
-            android:fontFamily="sans-serif-black"
-            android:textSize="24sp"
-            android:layout_margin="20dp"
-            />
-        <!-- Display selected images -->
-
-        <ImageView
-            android:id="@+id/image_view"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center_horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-             />
-
-
-        <!-- image select button -->
-        <Button
-            android:id="@+id/button"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Select Images"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_gravity="center"
-            android:background="@color/BootstrapPrimary"
-            android:layout_margin="6dp"/>
-
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Title:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="12dp"
-            />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Starting at:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="12dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Duration:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="12dp"/>
-
-
-        <TextView
-            android:id="@+id/Contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contact:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="12dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="12dp"
-            />
-    </LinearLayout>
-
-    <!-- Text Fields-->
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginTop="415dp"
-    android:layout_marginLeft="150dp">
-
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Japanese  Military Katana"
-        android:inputType="text"
-        android:textSize="15sp" />
-
-
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2400 $"
-        android:fontFamily="sans-serif-black"
-        android:textSize="15sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        />
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setDuration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="48 hrs"
-        android:fontFamily="sans-serif-black"
-        android:textSize="15sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        />
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="111 222 333 44"
-        android:fontFamily="sans-serif-black"
-        android:textSize="15sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        />
-
-    <!--EditText -->
-    <TextView
-        android:id="@+id/setDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mei signature in Nakago tang.
-                       Sutrdy Blade"
-        android:fontFamily="sans-serif-black"
-        android:textSize="15sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        />
-
-
-</LinearLayout>
-
-
-    <!-- Publish buttons -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="632dp"
-        android:layout_marginRight="60dp">
-
-
-        <Button
-            android:id="@+id/publish_now"
-            android:layout_width="120dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorAccent"
-            android:text="Publish Now" />
-
-        <Button
-            android:id="@+id/publish_later"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:layout_marginLeft="1dp"
-            android:text="Publish Later" />
+            android:layout_alignBottom="@+id/primaryActbar" />
 
     </LinearLayout>
 
+    <!-- Display selected images -->
+
+    <!-- image select button -->
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.332" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="3dp"
+        android:background="@color/BootstrapPrimary"
+        android:text="Select Images"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.512" />
 
 
-
-    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+    <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:layout_editor_absoluteX="34dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="750dp"
+            android:layout_marginLeft="0dp"
+            tools:layout_editor_absoluteX="4dp"
+            tools:layout_editor_absoluteY="434dp">
+
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Title:"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.612" />
+
+            <TextView
+                android:layout_width="118dp"
+                android:layout_height="28dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Starting at:"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.116"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.672" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Description:"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.116"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.852" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Duration:"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.097"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/scrollView3"
+                app:layout_constraintVertical_bias="0.738" />
+
+            <TextView
+                android:id="@+id/Contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Contact:"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.101"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.798" />
+
+
+            <Button
+                android:id="@+id/publish_now"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorAccent"
+                android:text="Publish Now" />
+
+            <Button
+                android:id="@+id/publish_later"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:background="@color/colorAccent"
+                android:text="Publish Later" />
+
+        </LinearLayout>
+        
+    </ScrollView>
+
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/chipNavigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
         app:cnb_menuResource="@menu/profile_bottom_nav"
         app:cnb_unselectedColor="@color/design_default_color_on_primary"
-        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints">
 
     </com.ismaeldivita.chipnavigation.ChipNavigationBar>
 
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

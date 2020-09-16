@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main_categories">
+    tools:context=".main_categories"
+    android:background="@color/colorPrimaryDark">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Post Your Ad"
+            android:textColor="@color/white"
             android:fontFamily="sans-serif-black"
             android:textSize="24sp"
             android:layout_margin="20dp"/>
@@ -46,7 +49,7 @@
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardBackgroundColor="@color/lowGray"
                 android:layout_margin="10dp">
 
                 <LinearLayout
@@ -67,6 +70,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/handmade"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -79,7 +83,7 @@
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardBackgroundColor="@color/lowGray"
                 android:layout_margin="10dp">
 
                 <LinearLayout
@@ -100,6 +104,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/antiques"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -112,7 +117,7 @@
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardBackgroundColor="@color/lowGray"
                 android:layout_margin="10dp">
 
                 <LinearLayout
@@ -132,6 +137,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/books"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -144,7 +150,7 @@
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardBackgroundColor="@color/lowGray"
                 android:layout_margin="10dp">
 
                 <LinearLayout
@@ -164,6 +170,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/dvd"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -176,7 +183,7 @@
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardBackgroundColor="@color/lowGray"
                 android:layout_margin="10dp">
 
                 <LinearLayout
@@ -196,6 +203,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/fashion"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -208,7 +216,7 @@
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardBackgroundColor="@color/lowGray"
                 android:layout_margin="10dp">
 
                 <LinearLayout
@@ -228,6 +236,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/sport"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -240,7 +249,7 @@
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardBackgroundColor="@color/lowGray"
                 android:layout_margin="10dp">
 
                 <LinearLayout
@@ -260,6 +269,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/musicequiment"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 
@@ -272,7 +282,7 @@
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardBackgroundColor="@color/lowGray"
                 android:layout_margin="10dp">
 
                 <LinearLayout
@@ -292,6 +302,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/anything"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         android:layout_marginTop="20dp"/>
 

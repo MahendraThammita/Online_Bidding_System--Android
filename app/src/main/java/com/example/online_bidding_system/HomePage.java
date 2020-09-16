@@ -31,7 +31,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext() , DeleteBid.class);
+                Intent homeIntent = new Intent(getApplicationContext() , books_category.class);
                 startActivity(homeIntent);
             }
         });

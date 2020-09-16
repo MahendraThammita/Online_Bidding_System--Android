@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3700B3</color>
-    <color name="colorPrimaryDark">#311b92</color>3700B3
+    <color name="colorPrimary">#536dfe</color>
+    <color name="colorPrimaryDark">#0043ca</color>
+    <color name="colorPrimaryLight">#8f9bff</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="background">#fafafa</color>
     <color name="white">#FFFFFF</color>
     <color name="lowGray">#ECEFF1</color>
     <color name="Black">#000000</color>
     <color name="Monet_coloe">#FFD600</color>
-
     <color name="HighlightIconColorOld">#f06292  </color>
-
     <color name="HighlightIconColor">#40c4ff</color>
-
     <color name="BootstrapPrimary">#4285F4</color>
     <color name="MDBsecondarycolor">#aa66cc</color>
     <color name="MDBsuccesscolor">#00C851</color>
@@ -22,5 +21,6 @@
     <color name="MDBsuccessDark">#8bc34a</color>
     <color name="transparentColor">#ffffff</color>
     <color name="lightenHintBlue">#90caf9  </color>
+
 
 </resources>

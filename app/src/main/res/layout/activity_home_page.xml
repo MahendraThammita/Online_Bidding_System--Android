@@ -4,81 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <include
-            android:id="@+id/primaryActbar"
-            layout="@layout/primary_actionbar" />
-
 
         <include
             android:id="@+id/profActionbar"
             layout="@layout/secoundery_actionbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/primaryActbar" />
+          />
+
+        <include
+            android:id="@+id/profActionbar"
+            layout="@layout/homepage_top_action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="3dp"
-        android:src="@drawable/categoryviewdropdown" />
+
 
     <Spinner
             android:id="@+id/spinner1"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="2dp"
-            android:background="#b3e5fc"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+        android:backgroundTint="@color/lowGray"
+            android:background="@drawable/rounded_corners"
             android:spinnerMode="dropdown" />
 
-        <SearchView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="110dp"
-            android:background="@drawable/rounded_corners"
-            android:backgroundTint="#b3e5fc"
-            android:layout_marginTop="8dp" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:rowCount="3"
             android:columnCount="2"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:alignmentMode="alignMargins"
             android:layout_gravity="center_horizontal"
-            android:columnOrderPreserved="false">
+            android:columnOrderPreserved="false"
+            >
 
             <androidx.cardview.widget.CardView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
-                android:layout_margin="10dp">
+                android:id="@+id/cardview_id"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="180dp"
+                android:layout_height="220dp"
+                xmlns:cardview="http://schemas.android.com/apk/res-auto"
+                android:layout_margin="5dp"
+                cardview:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -87,22 +80,27 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="116dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="18dp"
-                        android:src="@drawable/katanasword" />
+                        android:layout_width="match_parent"
+                        android:layout_height="175dp"
+                        android:scaleType="centerCrop"
+                        android:background="#2d2d2d"
+                        android:src="@drawable/katana" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Japanese Katana"
+                        android:textColor="@color/Black"
                         android:textSize="16sp"
-                        android:layout_marginTop="15dp" />
+                        android:layout_marginTop="1dp"
+                        android:text="Japanese Katana"
+                        />
 
                     <!--Item homepage description-->
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                       >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -127,12 +125,14 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
-                android:layout_margin="10dp">
+
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="180dp"
+                android:layout_height="220dp"
+                xmlns:cardview="http://schemas.android.com/apk/res-auto"
+                android:layout_margin="5dp"
+                cardview:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -141,17 +141,19 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="116dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="18dp"
-                        android:src="@drawable/wristwatch" />
+                        android:layout_width="match_parent"
+                        android:layout_height="175dp"
+                        android:scaleType="centerCrop"
+                        android:background="#2d2d2d"
+                        android:src="@drawable/compass" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rolex watch"
+                        android:textColor="@color/Black"
                         android:textSize="16sp"
-                        android:layout_marginTop="15dp"/>
+                        android:layout_marginTop="1dp"/>
                     <!--Item homepage description-->
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -180,12 +182,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
-                android:layout_margin="10dp">
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="180dp"
+                android:layout_height="220dp"
+                xmlns:cardview="http://schemas.android.com/apk/res-auto"
+                android:layout_margin="5dp"
+                cardview:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -194,17 +197,19 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="110dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="18dp"
-                        android:src="@drawable/logon" />
+                        android:layout_width="match_parent"
+                        android:layout_height="175dp"
+                        android:scaleType="centerCrop"
+                        android:background="#2d2d2d"
+                        android:src="@drawable/movie" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Logon Movie collection"
+                        android:textColor="@color/Black"
                         android:textSize="16sp"
-                        android:layout_marginTop="15dp"/>
+                        android:layout_marginTop="1dp"/>
                     <!--Item homepage description-->
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -233,12 +238,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
-                android:layout_margin="10dp">
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="180dp"
+                android:layout_height="220dp"
+                xmlns:cardview="http://schemas.android.com/apk/res-auto"
+                android:layout_margin="5dp"
+                cardview:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -247,17 +253,19 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="110dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="18dp"
-                        android:src="@drawable/resinring" />
+                        android:layout_width="match_parent"
+                        android:layout_height="175dp"
+                        android:scaleType="centerCrop"
+                        android:background="#2d2d2d"
+                        android:src="@drawable/ring" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Handmade resin ring"
+                        android:textColor="@color/Black"
                         android:textSize="16sp"
-                        android:layout_marginTop="15dp"/>
+                        android:layout_marginTop="1dp"/>
                     <!--Item homepage description-->
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -286,12 +294,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
-                android:layout_margin="10dp">
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="180dp"
+                android:layout_height="220dp"
+                xmlns:cardview="http://schemas.android.com/apk/res-auto"
+                android:layout_margin="5dp"
+                cardview:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -300,17 +309,19 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="115dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="18dp"
-                        android:src="@drawable/guitar" />
+                        android:layout_width="match_parent"
+                        android:layout_height="175dp"
+                        android:scaleType="centerCrop"
+                        android:background="#2d2d2d"
+                        android:src="@drawable/katanasword" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="guitar"
+                        android:textColor="@color/Black"
                         android:textSize="16sp"
-                        android:layout_marginTop="15dp"/>
+                        android:layout_marginTop="1dp"/>
                     <!--Item homepage description-->
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -339,12 +350,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
-                android:layout_margin="10dp">
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="180dp"
+                android:layout_height="220dp"
+                xmlns:cardview="http://schemas.android.com/apk/res-auto"
+                android:layout_margin="5dp"
+                cardview:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -353,17 +365,19 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="18dp"
-                        android:src="@drawable/xbox1" />
+                        android:layout_width="match_parent"
+                        android:layout_height="175dp"
+                        android:scaleType="centerCrop"
+                        android:background="#2d2d2d"
+                        android:src="@drawable/katanasword" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Handmade Items"
                         android:textSize="16sp"
-                        android:layout_marginTop="15dp"/>
+                        android:textColor="@color/Black"
+                        android:layout_marginTop="1dp"/>
                     <!--Item homepage description-->
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -391,12 +405,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
-                android:layout_margin="10dp">
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="180dp"
+                android:layout_height="220dp"
+                xmlns:cardview="http://schemas.android.com/apk/res-auto"
+                android:layout_margin="5dp"
+                cardview:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -405,17 +420,19 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="130dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="18dp"
-                        android:src="@drawable/bookicon" />
+                        android:layout_width="match_parent"
+                        android:layout_height="175dp"
+                        android:scaleType="centerCrop"
+                        android:background="#2d2d2d"
+                        android:src="@drawable/katanasword" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Publications"
+                        android:textColor="@color/Black"
                         android:textSize="16sp"
-                        android:layout_marginTop="15dp"/>
+                        android:layout_marginTop="1dp"/>
                     <!--Item homepage description-->
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -444,12 +461,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="5dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
-                android:layout_margin="10dp">
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="180dp"
+                android:layout_height="220dp"
+                xmlns:cardview="http://schemas.android.com/apk/res-auto"
+                android:layout_margin="5dp"
+                cardview:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -458,17 +476,19 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="130dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="18dp"
-                        android:src="@drawable/antiques" />
+                        android:layout_width="match_parent"
+                        android:layout_height="175dp"
+                        android:scaleType="centerCrop"
+                        android:background="#2d2d2d"
+                        android:src="@drawable/katanasword" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Antiques"
                         android:textSize="16sp"
-                        android:layout_marginTop="15dp"/>
+                        android:textColor="@color/Black"
+                        android:layout_marginTop="1dp"/>
                     <!--Item homepage description-->
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -495,32 +515,16 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-
-
-
-
-
         </GridLayout>
 
+        </LinearLayout>
 
-
-
+        </ScrollView>
 
     </LinearLayout>
 
   </LinearLayout>
 
-
-    <com.ismaeldivita.chipnavigation.ChipNavigationBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:cnb_menuResource="@menu/profile_bottom_nav"
-        app:cnb_unselectedColor="@color/design_default_color_on_primary"
-        android:layout_alignParentBottom="true"
-        tools:ignore="MissingConstraints">
-
-    </com.ismaeldivita.chipnavigation.ChipNavigationBar>
 
 
 
