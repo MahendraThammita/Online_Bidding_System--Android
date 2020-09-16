@@ -15,22 +15,24 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:padding="10dp"
-        android:elevation="5dp">
+        android:elevation="5dp"
+        android:background="@drawable/rounded_corners"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/myBidCardImg"
                     android:layout_width="110dp"
                     android:layout_height="130dp"
-                    android:src="@drawable/demoicon">
+                    android:src="@drawable/watch">
 
                 </ImageView>
 
@@ -49,7 +51,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginBottom="10dp"
                         android:textStyle="bold"
-                        android:layout_gravity="center">
+                        android:textColor="@color/Black">
 
                     </TextView>
 
@@ -127,7 +129,7 @@
                             android:id="@+id/mybidmyBidCap"
                             android:layout_toRightOf="@+id/myBidCardImg"
                             android:drawableLeft="@drawable/money_mybid"
-                            android:text="@string/MybidsTitle"
+                            android:text="@string/MybidsCurrentBid"
                             android:layout_marginRight="18dp"
                             android:textSize="18sp">
 
@@ -140,7 +142,8 @@
                             android:layout_toRightOf="@+id/myBidCardImg"
                             android:text="2000.00Rs"
                             android:textStyle="bold"
-                            android:textSize="16sp">
+                            android:textSize="16sp"
+                            android:textColor="@color/colorPrimary">
 
                         </TextView>
 
@@ -155,32 +158,6 @@
 
             </RelativeLayout>
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/Black"
-                android:layout_marginTop="5dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_margin="5dp"
-                    android:text="ACTION"
-                    android:textStyle="bold"
-                    android:textSize="24dp"
-                    android:background="@color/BootstrapPrimary">
-
-                </Button>
-
-
-            </LinearLayout>
-
-        </LinearLayout>
 
 
 

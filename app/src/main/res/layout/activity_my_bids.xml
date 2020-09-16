@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="">//start
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -22,9 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <RelativeLayout
             android:id="@+id/rellaymysbids"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,70 +31,69 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/background">
 
                 <include
                     android:id="@+id/primaryActbar"
                     layout="@layout/primary_actionbar" />
 
 
-                <include
-                    android:id="@+id/profActionbar"
-                    layout="@layout/secoundery_actionbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/primaryActbar" />
+
 
 
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="156dp"
                     android:layout_alignParentBottom="true">
 
 
-                    <ImageView
-                        android:id="@+id/mybidTopimg"
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="50dp">-->
+
+                        <include
+                            android:id="@+id/wavesTopadd"
+                            layout="@layout/waves_top"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/wavetopMybid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/my_bids_icon"
+                        android:tint="@color/white"
+                        android:minWidth="120dp"
+                        android:minHeight="120dp"
+                        android:layout_marginLeft="30dp"/>
+
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:fitsSystemWindows="true"
-                        android:padding="0dp"
-                        android:src="@drawable/mybidsedi">
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:text="My Bids"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="40dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_toRightOf="@+id/wavetopMybid"/>
 
-                    </ImageView>
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="200dp"
-                        android:layout_height="50dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:background="@drawable/rounded_contentarea"
-                            android:fontFamily="sans-serif-black"
-                            android:text="My Bids"
-                            android:textAlignment="center"
-                            android:textAllCaps="true"
-                            android:textColor="@color/MDBdangercolor"
-                            android:textColorHighlight="@color/colorPrimaryDark"
-                            android:textSize="40dp" />
-
-                    </RelativeLayout>
+<!--                    </RelativeLayout>-->
 
 
 
 
                 </RelativeLayout>
 
-
                 <ListView
                     android:id="@+id/myBidsList"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:divider="@null">
 
                 </ListView>
+
 
             </LinearLayout>
             //Start of middle part

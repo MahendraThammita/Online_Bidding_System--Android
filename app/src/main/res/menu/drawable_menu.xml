@@ -3,62 +3,69 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/Drawable_myBids"
             android:icon="@drawable/bids"
             android:title="@string/MybidsTitle">
 
         </item>
         <item
-            android:id="@+id/login"
+            android:id="@+id/Drawable_myWins"
             android:icon="@drawable/money_mybid"
             android:title="@string/MyWinsTitle">
 
         </item>
         <item
-            android:id="@+id/nav_thrd"
+            android:id="@+id/Drawable_ViewAuctions"
             android:icon="@drawable/high"
             android:title="View Auctions">
 
         </item>
     </group>
 
-    <group
-        android:checkableBehavior="single"
-        android:icon="@drawable/person_id">
+
         <item
             android:icon="@drawable/action"
             android:title="Auctions ">
             <menu>
+                <group
+                    android:checkableBehavior="single"
+                    android:icon="@drawable/person_id">
                 <item
-                    android:id="@+id/nav_in_item"
+                    android:id="@+id/Drawable_myAuctions"
                     android:icon="@drawable/home"
                     android:title="@string/MyAuctionpageTitle">
 
                 </item>
                 <item
-                    android:id="@+id/in_item2"
+                    android:id="@+id/Drawable_myDrafts"
                     android:icon="@drawable/save"
                     android:title="@string/DraftAuctionsTitle">
 
                 </item>
+                </group>
             </menu>
         </item>
+
         <item android:title="Profile ">
             <menu>
+                <group
+                    android:checkableBehavior="single"
+                    android:icon="@drawable/person_id">
                 <item
-                    android:id="@+id/nav_in_itema"
+                    android:id="@+id/Drawable_EditProf"
                     android:icon="@drawable/person"
                     android:title="Edit Profile">
 
                 </item>
                 <item
-                    android:id="@+id/in_item2a"
+                    android:id="@+id/Drawable_logout"
                     android:icon="@drawable/exit"
                     android:title="Logout">
 
                 </item>
+                </group>
             </menu>
         </item>
-    </group>
+
 
 </menu>

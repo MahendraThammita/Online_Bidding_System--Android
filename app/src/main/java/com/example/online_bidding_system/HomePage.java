@@ -16,6 +16,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
     Button home;
     Button bids;
     Button msg;
+    Button profBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         home  = findViewById(R.id.actionBarHome);
         bids = findViewById(R.id.actionBarBid);
         msg = findViewById(R.id.actionBarMsg);
+        profBtn = findViewById(R.id.actionBarProfile);
 
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +55,14 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
             }
         });
 
+        profBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profIntent = new Intent(getApplicationContext() , myBids.class);
+                startActivity(profIntent);
+            }
+        });
+
 
 
 
@@ -75,4 +85,6 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+
 }
