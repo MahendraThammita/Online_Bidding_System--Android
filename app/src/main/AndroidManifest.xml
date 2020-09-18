@@ -9,15 +9,15 @@
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Other_category"></activity>
+        <activity android:name=".Other_category" />
         <activity android:name=".Fashion_category" />
         <activity android:name=".DVDnMovies_category" />
         <activity android:name=".DeleteBid" />
-        <activity android:name=".Sports_category"></activity>
+        <activity android:name=".Sports_category" />
         <activity android:name=".Music_category" />
         <activity android:name=".Edit_User" />
         <activity android:name=".Draft_Auctions" />
@@ -30,10 +30,9 @@
         <activity android:name=".RegistrationPage" />
         <activity android:name=".Antiques_Category" />
         <activity android:name=".main_categories" />
-        <activity android:name=".PaymentPage"></activity>
-        <activity android:name=".LogIn_Page"></activity>
-        <activity android:name=".StartBidding"></activity>
-
+        <activity android:name=".PaymentPage" />
+        <activity android:name=".LogIn_Page" />
+        <activity android:name=".StartBidding" />
         <activity android:name=".HomePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,9 +43,7 @@
         <activity android:name=".EditBid" />
         <activity android:name=".ProfilePageBasic" />
         <activity android:name=".myBids" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

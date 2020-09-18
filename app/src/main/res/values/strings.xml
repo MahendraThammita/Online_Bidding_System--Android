@@ -126,6 +126,7 @@
     <string name="deletebidbtn">DELETE BID</string>
     <string name="publishnowBtn">PUBLISH NOW</string>
     <string name="publishlaterBtn">PUBLISH LATER</string>
+    <string name="fashiondtitle">Fashion and Design</string>
 
 
 </resources>
