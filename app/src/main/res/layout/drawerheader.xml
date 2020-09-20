@@ -16,13 +16,13 @@
         android:layout_gravity="center_vertical">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            app:cardCornerRadius="64dp">
+            android:layout_width="86dp"
+            android:layout_height="86dp"
+            app:cardCornerRadius="43dp">
 
             <ImageView
-                android:layout_width="85dp"
-                android:layout_height="85dp"
+                android:layout_width="86dp"
+                android:layout_height="86dp"
                 android:src="@drawable/sampleuser">
 
             </ImageView>
