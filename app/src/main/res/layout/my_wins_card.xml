@@ -15,12 +15,17 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:padding="10dp"
-        android:elevation="5dp">
+        android:elevation="5dp"
+        android:background="@drawable/rounded_corners"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@drawable/rounded_corners">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -51,7 +56,8 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginBottom="10dp"
                         android:textStyle="bold"
-                        android:layout_gravity="center">
+                        android:layout_gravity="fill_horizontal"
+                        android:textColor="@color/Black">
 
                     </TextView>
 
@@ -114,10 +120,6 @@
                             android:textSize="16sp">
 
                         </TextView>
-
-
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -147,57 +149,39 @@
                             android:textSize="16sp">
 
                         </TextView>
-
-
-
-
                     </LinearLayout>
 
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="horizontal"-->
-<!--                        android:layout_marginTop="5dp">-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp">
 
-<!--                        <TextView-->
+                        <TextView
 
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:id="@+id/mybidmyBidCap"-->
-<!--                            android:layout_toRightOf="@+id/myBidCardImg"-->
-<!--                            android:drawableLeft="@drawable/money_mybid"-->
-<!--                            android:text="Max Bid :  "-->
-<!--                            android:textSize="18sp">-->
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/timer"
+                            android:text="@string/winDateCap"
+                            android:textSize="18sp">
 
-<!--                        </TextView>-->
+                        </TextView>
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/mybidmyBidVal"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_toRightOf="@+id/myBidCardImg"-->
-<!--                            android:text="2000.00Rs"-->
-<!--                            android:textStyle="bold"-->
-<!--                            android:textSize="16sp">-->
+                        <TextView
+                            android:id="@+id/myWinDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20sp"
+                            android:layout_toRightOf="@+id/myBidCardImg"
+                            android:text="@string/demoDate"
+                            android:textSize="16sp"
+                            android:textStyle="bold">
 
-<!--                        </TextView>-->
-
-
+                        </TextView>
+                    </LinearLayout>
 
 
-<!--                    </LinearLayout>-->
-                    <Button
-                        android:layout_width="250dp"
-                        android:layout_height="40dp"
-                        android:layout_margin="5dp"
-                        android:text="@string/ProceedToPayCap"
-                        android:textStyle="bold"
-                        android:textSize="24dp"
-                        android:background="@color/MDBsuccessDark"
-                        android:layout_toRightOf="@+id/myWinCardImg"
-                        android:layout_toEndOf="@+id/myWinCardImg">
 
-                    </Button>
 
 
                 </LinearLayout>
@@ -206,6 +190,22 @@
 
 
             </RelativeLayout>
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/ProceedToPayCap"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:drawableLeft="@drawable/proceed_to_pay"
+                android:gravity="center"
+                android:paddingStart="50dp"
+                android:paddingEnd="50dp"
+                android:layout_margin="8dp">
+
+            </Button>
 
 <!--            <View-->
 <!--                android:layout_width="fill_parent"-->

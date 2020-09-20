@@ -101,16 +101,6 @@
 
             //End of Middle part
 
-            <com.ismaeldivita.chipnavigation.ChipNavigationBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:background="@color/colorPrimary"
-                app:cnb_menuResource="@menu/profile_bottom_nav"
-                app:cnb_unselectedColor="@color/design_default_color_on_primary"
-                tools:ignore="MissingConstraints">
-
-            </com.ismaeldivita.chipnavigation.ChipNavigationBar>
 
         </RelativeLayout>
 

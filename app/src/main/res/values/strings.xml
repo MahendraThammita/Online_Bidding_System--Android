@@ -129,6 +129,8 @@
     <string name="fashiondtitle">Fashion and Design</string>
     <string name="electrotitle">Electronics</string>
     <string name="homegardentitle">Home and Garden</string>
+    <string name="winDateCap">"Date : "</string>
+    <string name="demoDate">04/10/2020</string>
 
 
 </resources>
