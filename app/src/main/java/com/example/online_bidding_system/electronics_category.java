@@ -22,22 +22,22 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fashion_category extends AppCompatActivity {
+public class electronics_category extends AppCompatActivity {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fashion_category);
+        setContentView(R.layout.activity_electronics_category);
 
         Button button = findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(Fashion_category.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(Fashion_category.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
+                if (ActivityCompat.checkSelfPermission(electronics_category.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(electronics_category.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
 //                    return;
                 } else {
                     GetdisplayIntent();

@@ -141,7 +141,8 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorAccent"
                 android:layout_weight="1"
-                android:text="Publish Now" />
+                android:text="Publish Now"
+                android:layout_margin="10dp"/>
 
             <Button
                 android:id="@+id/publish_later"
@@ -149,7 +150,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 android:layout_weight="1"
-                android:text="Publish Later" />
+                android:text="Publish Later"
+                android:layout_margin="10dp"/>
 
         </LinearLayout>
 
