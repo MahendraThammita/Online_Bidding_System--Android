@@ -12,16 +12,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:elevation="8dp">
+        android:elevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/AuctioCrdImg"
                 android:layout_width="150dp"
-                android:layout_height="268dp"
+                android:layout_height="235dp"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
                 android:src="@drawable/books"
@@ -30,7 +33,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="268dp"
+                android:layout_height="235dp"
                 android:layout_toRightOf="@+id/AuctioCrdImg"
                 android:orientation="vertical">
 
@@ -69,7 +72,6 @@
                         android:id="@+id/auctionCateVal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
                         android:layout_toRightOf="@+id/auctionCateCap"
                         android:layout_alignBaseline="@+id/auctionCateCap"
@@ -96,7 +98,6 @@
                         android:id="@+id/auctionhignbidVal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
                         android:layout_toRightOf="@+id/auctionhignbidCap"
                         android:layout_alignBottom="@+id/auctionhignbidCap"
@@ -124,7 +125,6 @@
                         android:id="@+id/auctionhignbidEndsAtVal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
                         android:layout_toRightOf="@+id/auctionhignbidEndsAtCap"
                         android:layout_alignBaseline="@+id/auctionhignbidEndsAtCap"
@@ -152,7 +152,6 @@
                         android:id="@+id/auctionStatudVal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
                         android:layout_toRightOf="@+id/auctionStatudCap"
                         android:layout_alignBaseline="@+id/auctionStatudCap"
@@ -163,27 +162,18 @@
                 </RelativeLayout>
 
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="@string/viewAuction"
-                    android:background="@color/MDBsuccessDark"/>
+<!--                <Button-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:text="@string/viewAuction"-->
+<!--                    android:background="@color/MDBsuccessDark"/>-->
 
 
             </LinearLayout>
 
 
         </RelativeLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:gravity="end">
-
-        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

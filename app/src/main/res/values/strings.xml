@@ -131,6 +131,7 @@
     <string name="homegardentitle">Home and Garden</string>
     <string name="winDateCap">"Date : "</string>
     <string name="demoDate">04/10/2020</string>
+    <string name="deleteBidWarning">Please note that  you are not allowed to delete your bid in the last five hours of the ending time</string>
 
 
 </resources>
