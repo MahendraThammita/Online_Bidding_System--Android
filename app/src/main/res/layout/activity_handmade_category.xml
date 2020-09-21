@@ -38,30 +38,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/image_view"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:layout_gravity="center_horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+          <ImageSwitcher
+              android:id="@+id/imageIs"
+              android:layout_width="match_parent"
+              android:layout_height="300dp"/>
 
-            <!-- image select button -->
             <Button
-                android:id="@+id/button"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="3dp"
-                android:background="@color/BootstrapPrimary"
-                android:text="Select Images"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/preButton"
+                android:text="Pre"
+                android:layout_below= "@+id/imageIs"
+                android:layout_width="wrap_content"
+                android:layout_alignParentBottom = "true"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/nextButton"
+                android:text="Next"
+                android:layout_below= "@+id/imageIs"
+                android:layout_alignParentEnd = "true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/pickImg"
+                android:text="Select"
+                android:layout_below= "@+id/imageIs"
+                android:layout_alignParentBottom = "true"
+                android:layout_width="200dp"
+                android:layout_marginLeft="95dp"
+                android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
 
 
             <!--EditText -->
