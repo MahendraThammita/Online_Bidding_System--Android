@@ -20,12 +20,13 @@
             android:layout_height="86dp"
             app:cardCornerRadius="43dp">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
+                app:shapeAppearanceOverlay="@style/roundedImages"
                 android:layout_width="86dp"
                 android:layout_height="86dp"
                 android:src="@drawable/sampleuser">
 
-            </ImageView>
+            </com.google.android.material.imageview.ShapeableImageView>
         </androidx.cardview.widget.CardView>
 
 
