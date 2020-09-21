@@ -1,19 +1,20 @@
-package com.example.online_bidding_system;
+package com.example.online_bidding_system.HelperClasser.BiddingAdapters;
 
-public class HomeItem {
+public class auction {
 
     private String Title;
     private String Price;
     private String Duration;
     private String Contact;
-    private String Environment;
+    private String Materials;
     private String Description;
 
-    public HomeItem(){
 
+    public auction() {
 
     }
-       public String getTitle() {
+
+    public String getTitle() {
         return Title;
     }
 
@@ -45,12 +46,12 @@ public class HomeItem {
         Contact = contact;
     }
 
-    public String getEnvironment() {
-        return Environment;
+    public String getMaterials() {
+        return Materials;
     }
 
-    public void setEnvironment(String environment) {
-        Environment = environment;
+    public void setMaterials(String materials) {
+     Materials = materials;
     }
 
     public String getDescription() {
