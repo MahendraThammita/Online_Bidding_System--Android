@@ -134,6 +134,8 @@
     <string name="winDateCap">"Date : "</string>
     <string name="demoDate">04/10/2020</string>
     <string name="deleteBidWarning">Please note that  you are not allowed to delete your bid in the last five hours of the ending time</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
