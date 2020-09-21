@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Sports_category"
+    tools:context=".HomeAndGarden"
     android:orientation="vertical">
-
-
     <include
         android:id="@+id/primaryActbar"
         layout="@layout/primary_actionbar"/>
@@ -23,7 +21,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sports"
+        android:text="@string/home"
         android:fontFamily="sans-serif-black"
         android:textSize="24sp"
         android:layout_margin="20dp"
@@ -111,24 +109,15 @@
 
             <!--EditText -->
             <EditText
-                android:id="@+id/setbrand"
+                android:id="@+id/setEnvironment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
-                android:hint="Product brand"
+                android:hint="Compatible Environment"
                 android:inputType="text" />
 
-            <EditText
-                android:id="@+id/setcondition"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-black"
-                android:hint="Product Condition"
-                android:inputType="text" />
             <!--EditText -->
             <EditText
                 android:id="@+id/setDescription"
@@ -179,6 +168,10 @@
         tools:ignore="MissingConstraints">
 
     </com.ismaeldivita.chipnavigation.ChipNavigationBar>
+
+
+
+
 
 
 

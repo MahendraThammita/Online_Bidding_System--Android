@@ -66,23 +66,23 @@ public class RegistrationPage extends AppCompatActivity {
                 });
                 try {
                     if (TextUtils.isEmpty(txtFullName.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Your Name is Empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Your Name is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtNIC.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Empty NIC", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), " NIC Number Is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtEmail.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Email is Empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Email is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtAddress.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Address is Empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Address is Required!", Toast.LENGTH_SHORT).show();
                     else {
                         user.setFullName(txtFullName.getText().toString().trim());
                         user.setNIC(txtNIC.getText().toString().trim());
                         user.setEmail(txtEmail.getText().toString().trim());
                         user.setPwd(txtPwd.getText().toString().trim());
-                        user.setAddress(txtFullName.getText().toString().trim());
+                        user.setAddress(txtAddress.getText().toString().trim());
                        // DbRef.child("user").setValue(user);
                         String strNumber= idPrefix+String.valueOf(maxid+1);
                         DbRef.child(String.valueOf(strNumber)).setValue(user);
-                        Toast.makeText(getApplicationContext(), "Successfully Inserted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Successfully Registered", Toast.LENGTH_SHORT).show();
                         clearControl();
 
                     }

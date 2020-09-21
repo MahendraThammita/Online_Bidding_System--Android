@@ -47,6 +47,8 @@
     //kaveesha(IT19106502)
 
     <string name="signup">Sign Up</string>
+    <string name="home">Home and Garden</string>
+    <string name="sports">Sports and Hobbies</string>
     <string name="name">Full Name</string>
     <string name="NIC">NIC Number</string>
     <string name="Email">Email Address</string>
