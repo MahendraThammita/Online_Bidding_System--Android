@@ -6,7 +6,7 @@
     //Start Mahendra Strings(IT19120362)
     <string name="ItemNameDemo">Sample Item Name</string>
     <string name="Description_Caption">Description</string>
-    <string name="Demo_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
+    <string name="Demo_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequa.</string>
     <string name="EndingTime_caption">Ends At : </string>
     <string name="MaxBid_caption">Max Bid</string>
     <string name="Your_bid_caption">Your Bid</string>
@@ -128,6 +128,12 @@
     <string name="deletebidbtn">DELETE BID</string>
     <string name="publishnowBtn">PUBLISH NOW</string>
     <string name="publishlaterBtn">PUBLISH LATER</string>
+    <string name="fashiondtitle">Fashion and Design</string>
+    <string name="electrotitle">Electronics</string>
+    <string name="homegardentitle">Home and Garden</string>
+    <string name="winDateCap">"Date : "</string>
+    <string name="demoDate">04/10/2020</string>
+    <string name="deleteBidWarning">Please note that  you are not allowed to delete your bid in the last five hours of the ending time</string>
 
 
 </resources>

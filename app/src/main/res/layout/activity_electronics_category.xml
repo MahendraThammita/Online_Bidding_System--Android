@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fashion_category">
+    tools:context=".electronics_category">
 
 
     <LinearLayout
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:fontFamily="sans-serif-black"
-            android:text="@string/fashiondtitle"
+            android:text="@string/electrotitle"
             android:textSize="24sp" />
         <!-- Display selected images -->
 
@@ -165,10 +165,8 @@
         </ScrollView>
 
 
-
-
-
-
-
     </LinearLayout>
+
+
+
 </RelativeLayout>

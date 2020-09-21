@@ -21,6 +21,7 @@
     <color name="MDBsuccessDark">#8bc34a</color>
     <color name="transparentColor">#ffffff</color>
     <color name="lightenHintBlue">#90caf9  </color>
+    <color name="testBackColor">#f2feff</color>
 
 
 </resources>
