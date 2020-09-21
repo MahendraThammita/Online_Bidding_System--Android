@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,8 +19,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.auction;
 import com.google.firebase.database.DataSnapshot;
@@ -42,6 +45,11 @@ public class handmade_category extends AppCompatActivity {
     auction add;
     long maxid=0;
     String idPrefix="HM";
+    private ImageSwitcher imageIs;
+    private Button preBtn,nxBtn, pickImgbtn;
+    private  ArrayList<Uri> imageUris;
+    private static final int PICK_IMAGES_CODE = 1;
+    int position = 0;
 
 
     @Override
@@ -105,11 +113,13 @@ public class handmade_category extends AppCompatActivity {
 
                 } catch (NumberFormatException e) {
 
-                    Toast.makeText(getApplicationContext(), " wrong Inserted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Something went Wrong", Toast.LENGTH_SHORT).show();
 
 
                 }
             }
+
+
 
 
             public void clearControl() {
@@ -122,7 +132,103 @@ public class handmade_category extends AppCompatActivity {
             }
 
 
-        });}}
+        });
+
+        imageIs = findViewById(R.id.imageIs);
+        preBtn = findViewById(R.id.preButton);
+        nxBtn =  findViewById(R.id.nextButton);
+        pickImgbtn = findViewById(R.id.pickImg);
+        imageUris = new ArrayList<>();
+        imageIs.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                ImageView imageView = new ImageView((getApplicationContext()));
+                return imageView;
+            }
+        });
+
+        pickImgbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                pickImagesIntent();
+
+            }
+        });
+
+
+
+        preBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(position>0){
+                    position--;
+                    imageIs.setImageURI(imageUris.get(position));
+                }
+
+                else{
+                    Toast.makeText(handmade_category.this,"Empty",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        nxBtn.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(position<imageUris.size()-1){
+
+                    position++;
+                    imageIs.setImageURI(imageUris.get(position));
+                }
+
+                else{
+
+                    Toast.makeText(handmade_category.this,"empty",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }));
+    }
+
+    private void pickImagesIntent(){
+
+
+
+        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+        startActivityForResult(intent, PICK_IMAGES_CODE);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_IMAGES_CODE){
+
+            if(resultCode == Activity.RESULT_OK){
+                if(data.getClipData() != null){
+
+                    int cout  = data.getClipData().getItemCount();
+                    for(int i=0; i<cout; i++){
+                        Uri imageUri = data.getClipData().getItemAt(i).getUri();
+                        imageUris.add(imageUri);
+                    }
+
+                    imageIs.setImageURI(imageUris.get(0));
+                    position = 0;
+                }
+
+                else{
+                    Uri imageUri = data.getData();
+                    imageUris.add(imageUri);
+                    imageIs.setImageURI(imageUris.get(0));
+                    position = 0;
+                }
+            }
+        }
+    }
+}
 
 
 
