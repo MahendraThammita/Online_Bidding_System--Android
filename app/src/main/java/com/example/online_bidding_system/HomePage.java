@@ -33,7 +33,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext() , handmade_category.class);
+                Intent homeIntent = new Intent(getApplicationContext() , TestHome.class);
                 startActivity(homeIntent);
             }
         });
