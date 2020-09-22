@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.online_bidding_system">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <uses-feature android:name="android.hardware.type.watch" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -17,28 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestHome"></activity>
-
-        <uses-library
-            android:name="com.google.android.wearable"
-            android:required="true" />
-        <!--
-               Set to true if your app is Standalone, that is, it does not require the handheld
-               app to run.
-        -->
-        <meta-data
-            android:name="com.google.android.wearable.standalone"
-            android:value="true" />
-
-        <activity
-            android:name=".NewhomeActivity"
-            android:label="@string/title_activity_newhome">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".TabedAuctions"></activity>
         <activity android:name=".HomeAndGarden" />
         <activity android:name=".Other_category" />
         <activity android:name=".Fashion_category" />
@@ -70,7 +45,8 @@
         <activity android:name=".EditBid" />
         <activity android:name=".ProfilePageBasic" />
         <activity android:name=".myBids" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"></activity>
+
 
         <meta-data
             android:name="preloaded_fonts"
