@@ -4,8 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#cfd8dc"
     tools:context=".MainActivity"
     >
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,35 +16,49 @@
         android:orientation="vertical">
 
 
-        <include
-            android:id="@+id/profActionbar"
-            layout="@layout/secoundery_actionbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <ViewFlipper
+            <include
+                android:id="@+id/profActionbar"
+                layout="@layout/secoundery_actionbar"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_centerHorizontal="true"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:id="@+id/flipper"></ViewFlipper>
+                android:layout_height="wrap_content"
+                />
 
-        </RelativeLayout>
+            <include
+                android:id="@+id/profActionbar"
+                layout="@layout/homepage_top_action_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
 
 
-        <include
-            android:id="@+id/profActionbar"
-            layout="@layout/homepage_top_action_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ViewFlipper
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_centerHorizontal="true"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:id="@+id/flipper"></ViewFlipper>
+
+                    </RelativeLayout>
 
 
         <include
@@ -60,22 +77,6 @@
 
 
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
 
                     <GridLayout
                         android:layout_width="match_parent"
@@ -106,7 +107,7 @@
 
                                 <ImageView
                                     android:layout_width="match_parent"
-                                    android:layout_height="175dp"
+                                    android:layout_height="180dp"
                                     android:scaleType="centerCrop"
                                     android:background="@color/lowGray"
                                     android:src="@drawable/katana" />
@@ -167,7 +168,7 @@
 
                                 <ImageView
                                     android:layout_width="match_parent"
-                                    android:layout_height="175dp"
+                                    android:layout_height="180dp"
                                     android:scaleType="centerCrop"
                                     android:background="#2d2d2d"
                                     android:src="@drawable/compass" />
@@ -223,7 +224,7 @@
 
                                 <ImageView
                                     android:layout_width="match_parent"
-                                    android:layout_height="175dp"
+                                    android:layout_height="180dp"
                                     android:scaleType="centerCrop"
                                     android:background="#2d2d2d"
                                     android:src="@drawable/movie" />
@@ -279,7 +280,7 @@
 
                                 <ImageView
                                     android:layout_width="match_parent"
-                                    android:layout_height="175dp"
+                                    android:layout_height="180dp"
                                     android:scaleType="centerCrop"
                                     android:background="#2d2d2d"
                                     android:src="@drawable/ring" />
