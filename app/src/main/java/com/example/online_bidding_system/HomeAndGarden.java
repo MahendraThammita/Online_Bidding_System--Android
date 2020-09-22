@@ -45,6 +45,8 @@ public class HomeAndGarden extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 DbRef = FirebaseDatabase.getInstance().getReference().child("Home&Garden");
+                DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -76,7 +78,7 @@ public class HomeAndGarden extends AppCompatActivity {
                         // DbRef.child("user").setValue(user);
                         String strNumber= idPrefix+String.valueOf(maxid+1);
                         DbRef.child(String.valueOf(strNumber)).setValue(homeitem);
-                        Toast.makeText(getApplicationContext(), "Successfully Registered", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Successfully Published", Toast.LENGTH_SHORT).show();
                         clearControl();
 
                     }
