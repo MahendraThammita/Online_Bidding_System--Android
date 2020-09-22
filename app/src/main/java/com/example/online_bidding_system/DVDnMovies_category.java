@@ -24,7 +24,7 @@ public class DVDnMovies_category extends AppCompatActivity {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
 
-    EditText Title,Type,Genre,Condition,Start_Prize,Duration,Contact,Description;
+    EditText Title,Type,Genre,Condition,Start_Price,Duration,ContactNo,Description;
     Button publishNow,publishLater;
     DatabaseReference fAuth;
     FdeHelper fCat;
@@ -52,9 +52,9 @@ public class DVDnMovies_category extends AppCompatActivity {
         Type        =   findViewById(R.id.setType);
         Genre       =   findViewById(R.id.setGenre);
         Condition   =   findViewById(R.id.setCondition);
-        Start_Prize =   findViewById(R.id.setPrize);
+        Start_Price =   findViewById(R.id.setPrize);
         Duration    =   findViewById(R.id.setDuration);
-        Contact     =   findViewById(R.id.setContact);
+        ContactNo     =   findViewById(R.id.setContact);
         Description =   findViewById(R.id.setDescription);
 
         publishNow   =      findViewById(R.id.publish_now);
@@ -97,13 +97,13 @@ public class DVDnMovies_category extends AppCompatActivity {
                     else if(TextUtils.isEmpty(Condition.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Condition Field Is Empty" , Toast.LENGTH_SHORT).show();
                     }
-                    else if(TextUtils.isEmpty(Start_Prize.getText().toString())){
+                    else if(TextUtils.isEmpty(Start_Price.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Starting at Field Is Empty" , Toast.LENGTH_SHORT).show();
                     }
                     else if(TextUtils.isEmpty(Duration.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Duration Field Is Empty" , Toast.LENGTH_SHORT).show();
                     }
-                    else if(TextUtils.isEmpty(Contact.getText().toString())){
+                    else if(TextUtils.isEmpty(ContactNo.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Contact Field Is Empty" , Toast.LENGTH_SHORT).show();
                     }
                     else if(TextUtils.isEmpty(Description.getText().toString())){
@@ -116,9 +116,9 @@ public class DVDnMovies_category extends AppCompatActivity {
                         fCat.setType(Type.getText().toString().trim());
                         fCat.setGenre(Genre.getText().toString().trim());
                         fCat.setCondition(Condition.getText().toString().trim());
-                        fCat.setStart_Price(Start_Prize.getText().toString().trim());
+                        fCat.setStart_Price(Start_Price.getText().toString().trim());
                         fCat.setDuration(Duration.getText().toString().trim());
-                        fCat.setContactNo(Contact.getText().toString().trim());
+                        fCat.setContactNo(ContactNo.getText().toString().trim());
                         fCat.setDescription(Description.getText().toString().trim());
 
                         String strNumber= idPrefix+String.valueOf(maxid+1);
@@ -144,9 +144,9 @@ public class DVDnMovies_category extends AppCompatActivity {
                 Type.setText("");
                 Genre.setText("");
                 Condition.setText("");
-                Start_Prize.setText("");
+                Start_Price.setText("");
                 Duration.setText("");
-                Contact.setText("");
+                ContactNo.setText("");
                 Description.setText("");
 
             }

@@ -50,8 +50,7 @@ public class Fashion_category extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fashion_category);
 
-        Button button = findViewById(R.id.button);
-
+        
         Brand        =      findViewById(R.id.fashionBrand);
         Condition    =      findViewById(R.id.fashionCondition);
         Material     =      findViewById(R.id.fashionMaterial);
