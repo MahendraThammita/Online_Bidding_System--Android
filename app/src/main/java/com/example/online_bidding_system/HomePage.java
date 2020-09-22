@@ -8,20 +8,36 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
-public class HomePage extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class HomePage extends AppCompatActivity {
 
     Button home;
     Button bids;
     Button msg;
     Button profBtn;
+    ViewFlipper flipper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        int images[] = {R.drawable.slide1, R.drawable.slide2,R.drawable.slide3};
+        flipper = findViewById(R.id.flipper);
+
+        for (int i = 0; i<images.length; i++){
+
+            flipImages(images[i]);
+        }
+
+        for (int image:images){
+
+            flipImages(image);
+        }
 
 
         home  = findViewById(R.id.actionBarHome);
@@ -65,26 +81,20 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
 
 
 
-
-
-        Spinner spinner = findViewById(R.id.spinner1);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.categories,android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?>  parent, View view, int position, long l) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(),text,Toast.LENGTH_SHORT).show();
+    public void flipImages(int image){
+
+        ImageView imageView = new ImageView(this);
+        imageView.setBackgroundResource(image);
+
+        flipper.addView(imageView);
+        flipper.setFlipInterval(3000);
+        flipper.setAutoStart(true);
+
+        flipper.setInAnimation(this, android.R.anim.slide_in_left);
+        flipper.setOutAnimation(this, android.R.anim.slide_out_right);
+
     }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
-
 
 }

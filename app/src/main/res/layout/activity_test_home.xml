@@ -12,14 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
-        <include
-            android:id="@+id/profActionbar"
-            layout="@layout/homepage_top_action_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -30,10 +22,33 @@
                 android:layout_centerHorizontal="true"
                 android:id="@+id/flipper"></ViewFlipper>
 
-
-
-
         </RelativeLayout>
+
+
+
+        <include
+            android:id="@+id/profActionbar"
+            layout="@layout/homepage_top_action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+
+        <include
+            android:id="@+id/profActionbar"
+            layout="@layout/homepage_second_action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <include
+            android:id="@+id/profActionbar"
+            layout="@layout/homepage_third_action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+
 
 
         <LinearLayout

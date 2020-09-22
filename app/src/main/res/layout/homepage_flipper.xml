@@ -19,28 +19,27 @@
 
 
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
 
+            <ViewFlipper
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:id="@+id/flipper"></ViewFlipper>
 
-        <androidx.appcompat.widget.SearchView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom = "true"
-            android:iconifiedByDefault = "false"
-            app:iconifiedByDefault="false"
-            android:layout_margin="10dp"
-            app:defaultQueryHint="I'm looking for"
-            app:queryHint="I'm looking for"
-            android:background="@drawable/searchbar_corner"
-            android:backgroundTint="@color/white">
+        </RelativeLayout>
 
-
-        </androidx.appcompat.widget.SearchView>
-
-        </LinearLayout>
+    </LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>
