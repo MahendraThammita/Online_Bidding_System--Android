@@ -1,10 +1,9 @@
 package com.example.online_bidding_system;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,8 +19,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -35,7 +37,9 @@ public class Fashion_category extends AppCompatActivity {
     EditText Brand,Condition,Material,Size,ContactNo,Description,Duration,Title,Type,Start_Price;
     Button publishNow,publishLater;
     DatabaseReference fAuth;
-    Fashion fCat;
+    FdeHelper fCat;
+    long maxid=0;
+    String idPrefix="FASHION";
 
 
 
@@ -64,25 +68,27 @@ public class Fashion_category extends AppCompatActivity {
 
 
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(Fashion_category.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(Fashion_category.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
-//                    return;
-                } else {
-                    GetdisplayIntent();
-                }
-            }
-        });
-
-        fCat = new Fashion();
+        fCat = new FdeHelper();
 
         publishNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                fAuth = FirebaseDatabase.getInstance().getReference().child("Fashion_category");
+                fAuth = FirebaseDatabase.getInstance().getReference().child("FashionDesign");
+                //fAuth = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+
+                fAuth.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists())
+                            maxid=(dataSnapshot.getChildrenCount());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
 
                 try {
@@ -128,25 +134,45 @@ public class Fashion_category extends AppCompatActivity {
                         fCat.setDuration(Duration.getText().toString().trim());
                         fCat.setTitle(Title.getText().toString().trim());
                         fCat.setTitle(Type.getText().toString().trim());
+                        fCat.setStart_Price(Start_Price.getText().toString().trim());
+
+                        //fAuth.child("fashion1").setValue(fCat);
+
+                        String strNumber= idPrefix+String.valueOf(maxid+1);
+                        fAuth.child(String.valueOf(strNumber)).setValue(fCat);
 
 
-                        fAuth.child("fashion1").setValue(fCat);
                         Toast.makeText(getApplicationContext() , "Data Inserted Successfully" , Toast.LENGTH_SHORT).show();
+                        clearControl();
 
                     }
                 }
                 catch (NumberFormatException err){
                     Toast.makeText(getApplicationContext(), "Invalid Contact No" , Toast.LENGTH_SHORT).show();
+
                 }
 
 
 
-
             }
+
+            public void clearControl() {
+                Brand.setText("");
+                Condition.setText("");
+                Material.setText("");
+                Size.setText("");
+                ContactNo.setText("");
+                Description.setText("");
+                Duration.setText("");
+                Title.setText("");
+                Type.setText("");
+                Start_Price.setText("");
+            }
+
+
+
+
         });
-
-
-
 
 
     }
