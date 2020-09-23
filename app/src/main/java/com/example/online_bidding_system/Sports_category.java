@@ -29,7 +29,7 @@ public class Sports_category extends AppCompatActivity {
     EditText txtTitle,txtPrice,txtDuration,txtContact,txtBrand,txtCondition,txtDescription;
     Button PublishNow;
     DatabaseReference DbRef;
-    Sport sport;
+    HomeItem homeitem;
     long maxid=0;
     String idPrefix="SAH";
     private ImageSwitcher imageIs;
@@ -51,7 +51,7 @@ public class Sports_category extends AppCompatActivity {
         txtDescription = findViewById(R.id.setDescription);
         PublishNow = findViewById(R.id.publish_now);
 
-        sport = new Sport();
+        homeitem = new HomeItem();
 
 
         PublishNow.setOnClickListener(new View.OnClickListener() {
@@ -81,16 +81,16 @@ public class Sports_category extends AppCompatActivity {
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
-                        sport.setTitle(txtTitle.getText().toString().trim());
-                        sport.setPrice(txtPrice.getText().toString().trim());
-                        sport.setDuration(txtDuration.getText().toString().trim());
-                        sport.setContact(txtContact.getText().toString().trim());
-                        sport.setCondition(txtCondition.getText().toString().trim());
-                        sport.setDescription(txtDescription.getText().toString().trim());
-                        sport.setBrand(txtBrand.getText().toString().trim());
+                        homeitem.setTitle(txtTitle.getText().toString().trim());
+                        homeitem.setPrice(txtPrice.getText().toString().trim());
+                        homeitem.setDuration(txtDuration.getText().toString().trim());
+                        homeitem.setContact(txtContact.getText().toString().trim());
+                        homeitem.setCondition(txtCondition.getText().toString().trim());
+                        homeitem.setDescription(txtDescription.getText().toString().trim());
+                        homeitem.setBrand(txtBrand.getText().toString().trim());
                         // DbRef.child("user").setValue(user);
                         String strNumber= idPrefix+String.valueOf(maxid+1);
-                        DbRef.child(String.valueOf(strNumber)).setValue(sport);
+                        DbRef.child(String.valueOf(strNumber)).setValue(homeitem);
                         Toast.makeText(getApplicationContext(), "Successfully Published", Toast.LENGTH_SHORT).show();
                         clearControl();
 
