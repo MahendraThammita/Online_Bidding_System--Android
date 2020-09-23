@@ -29,15 +29,22 @@ public class HomeAndGarden extends AppCompatActivity {
     final int REQUEST_EXTERNAL_STORAGE = 100;
     EditText txtTitle,txtPrice,txtDuration,txtContact,txtEnvironment,txtDescription;
     Button PublishNow;
-    DatabaseReference DbRef;
+    DatabaseReference DbRef,DbRef1;
     HomeItem homeitem;
+    Adverticement adverticement;
     long maxid=0;
+    private String userId;
     String idPrefix="HAG";
     private ImageSwitcher imageIs;
     private Button preBtn,nxBtn, pickImgbtn;
     private ArrayList<Uri> imageUris;
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+
+    //Create an object of DatabaseReference to create second table
+    private DatabaseReference mFirebaseDatabase1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +59,34 @@ public class HomeAndGarden extends AppCompatActivity {
         txtDescription = findViewById(R.id.setDescription);
         PublishNow = findViewById(R.id.publish_now);
 
-        homeitem = new HomeItem();
 
+        //object
+        homeitem = new HomeItem();
+        adverticement=new  Adverticement();
+
+
+
+
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+
+        // get reference to 'Adverticement' node
+        mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
+
+        // get reference to 'Home&Garden' node
+        mFirebaseDatabase1 = mFirebaseInstance.getReference("Home&Garden");
 
         PublishNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DbRef = FirebaseDatabase.getInstance().getReference().child("Home&Garden");
+                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+               //use id
+                userId = mFirebaseDatabase1.push().getKey();
+                //insert data in firebase database Adverticement
+                mFirebaseDatabase.child(userId).setValue(adverticement);
 
-
+                //insert data in firebase database Home&Garden
+                mFirebaseDatabase1.child(userId).setValue(homeitem);
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -83,15 +109,29 @@ public class HomeAndGarden extends AppCompatActivity {
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
-                        homeitem.setTitle(txtTitle.getText().toString().trim());
-                        homeitem.setPrice(txtPrice.getText().toString().trim());
-                        homeitem.setDuration(txtDuration.getText().toString().trim());
-                        homeitem.setContact(txtContact.getText().toString().trim());
+                        adverticement.setTitle(txtTitle.getText().toString().trim());
+                        adverticement.setPrice(txtPrice.getText().toString().trim());
+                        adverticement.setDuration(txtDuration.getText().toString().trim());
+                        adverticement.setContact(txtContact.getText().toString().trim());
                         homeitem.setEnvironment(txtEnvironment.getText().toString().trim());
-                        homeitem.setDescription(txtDescription.getText().toString().trim());
+                        adverticement.setDescription(txtDescription.getText().toString().trim());
+
+
+
+
+
+
+
+
+
+
+
+
                         // DbRef.child("user").setValue(user);
                         String strNumber= idPrefix+String.valueOf(maxid+1);
                         DbRef.child(String.valueOf(strNumber)).setValue(homeitem);
+                        DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
+
                         Toast.makeText(getApplicationContext(), "Successfully Published", Toast.LENGTH_SHORT).show();
                         clearControl();
 

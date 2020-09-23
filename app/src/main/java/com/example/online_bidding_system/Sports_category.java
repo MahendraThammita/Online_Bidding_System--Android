@@ -28,8 +28,9 @@ import java.util.ArrayList;
 public class Sports_category extends AppCompatActivity {
     EditText txtTitle,txtPrice,txtDuration,txtContact,txtBrand,txtCondition,txtDescription;
     Button PublishNow;
-    DatabaseReference DbRef;
+    DatabaseReference DbRef,DbRef1;
     HomeItem homeitem;
+    Adverticement adverticement;
     long maxid=0;
     String idPrefix="SAH";
     private ImageSwitcher imageIs;
@@ -37,6 +38,10 @@ public class Sports_category extends AppCompatActivity {
     private ArrayList<Uri> imageUris;
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
+    //data ref
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private DatabaseReference mFirebaseDatabase1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,14 +56,27 @@ public class Sports_category extends AppCompatActivity {
         txtDescription = findViewById(R.id.setDescription);
         PublishNow = findViewById(R.id.publish_now);
 
+
+        //object
         homeitem = new HomeItem();
+        adverticement=new  Adverticement();
+
+
+
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+
+        // get reference to 'RepositoryName' node
+        mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
+
+        // get reference to 'Bookmarks' node
+        mFirebaseDatabase1 = mFirebaseInstance.getReference("Hobbies&Sports");
 
 
         PublishNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DbRef = FirebaseDatabase.getInstance().getReference().child("Hobbies&Sports");
-                DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement");
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -81,16 +99,17 @@ public class Sports_category extends AppCompatActivity {
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
-                        homeitem.setTitle(txtTitle.getText().toString().trim());
-                        homeitem.setPrice(txtPrice.getText().toString().trim());
-                        homeitem.setDuration(txtDuration.getText().toString().trim());
-                        homeitem.setContact(txtContact.getText().toString().trim());
+                        adverticement.setTitle(txtTitle.getText().toString().trim());
+                        adverticement.setPrice(txtPrice.getText().toString().trim());
+                        adverticement.setDuration(txtDuration.getText().toString().trim());
+                        adverticement.setContact(txtContact.getText().toString().trim());
                         homeitem.setCondition(txtCondition.getText().toString().trim());
-                        homeitem.setDescription(txtDescription.getText().toString().trim());
+                        adverticement.setDescription(txtDescription.getText().toString().trim());
                         homeitem.setBrand(txtBrand.getText().toString().trim());
                         // DbRef.child("user").setValue(user);
                         String strNumber= idPrefix+String.valueOf(maxid+1);
                         DbRef.child(String.valueOf(strNumber)).setValue(homeitem);
+                        DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
                         Toast.makeText(getApplicationContext(), "Successfully Published", Toast.LENGTH_SHORT).show();
                         clearControl();
 
