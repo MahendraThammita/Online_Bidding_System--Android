@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ public class HomePage extends AppCompatActivity {
     Button bids;
     Button msg;
     Button profBtn;
+    ImageButton addNew;
     ViewFlipper flipper;
 
     @Override
@@ -44,6 +46,7 @@ public class HomePage extends AppCompatActivity {
         bids = findViewById(R.id.actionBarBid);
         msg = findViewById(R.id.actionBarMsg);
         profBtn = findViewById(R.id.actionBarProfile);
+        addNew = findViewById(R.id.addNew);
 
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +82,15 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
+        addNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent addIntent = new Intent(getApplicationContext() , main_categories.class);
+                startActivity(addIntent);
+
+            }
+        });
 
 
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cfd8dc"
+    android:background="@color/cardview_dark_background"
     tools:context=".MainActivity"
     >
 
@@ -97,6 +97,7 @@
                             android:layout_height="220dp"
                             xmlns:cardview="http://schemas.android.com/apk/res-auto"
                             android:layout_margin="5dp"
+                            android:background="@drawable/searchbar_corner"
                             cardview:cardCornerRadius="10dp">
 
                             <LinearLayout
@@ -109,7 +110,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="180dp"
                                     android:scaleType="centerCrop"
-                                    android:background="@color/lowGray"
                                     android:src="@drawable/katana" />
 
                                 <TextView
@@ -117,6 +117,7 @@
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/Black"
                                     android:textSize="16sp"
+                                    android:textStyle="bold"
                                     android:layout_marginTop="1dp"
                                     android:text="Japanese Katana"
                                     />
@@ -179,6 +180,7 @@
                                     android:text="Rolex watch"
                                     android:textColor="@color/Black"
                                     android:textSize="16sp"
+                                    android:textStyle="bold"
                                     android:layout_marginTop="1dp"/>
                                 <!--Item homepage description-->
                                 <LinearLayout

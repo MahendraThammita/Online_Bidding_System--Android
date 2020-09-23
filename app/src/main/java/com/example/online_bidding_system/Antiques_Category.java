@@ -42,6 +42,7 @@ public class Antiques_Category extends AppCompatActivity {
     EditText txtTitle,txtPrice,txtDuration,txtContact,txtMaterials,txtDescription;
     Button PublishNow;
     DatabaseReference DbRef;
+    DatabaseReference DbRef1;
     auction add;
     long maxid=0;
     String idPrefix="AN";
@@ -72,8 +73,8 @@ public class Antiques_Category extends AppCompatActivity {
         PublishNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbRef = FirebaseDatabase.getInstance().getReference().child("Antiques");
-                DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Antiques");
+                DbRef= FirebaseDatabase.getInstance().getReference().child("Adverticement");
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -34,6 +34,16 @@
             android:fontFamily="sans-serif-black"
             android:textSize="24sp"
             android:layout_margin="20dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -45,6 +55,7 @@
             android:columnOrderPreserved="false">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cat1"
                 android:layout_width="170dp"
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
@@ -79,6 +90,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cat2"
                 android:layout_width="170dp"
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
@@ -113,6 +125,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cat3"
                 android:layout_width="170dp"
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
@@ -146,6 +159,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cat4"
                 android:layout_width="170dp"
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
@@ -179,6 +193,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cat5"
                 android:layout_width="170dp"
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
@@ -212,6 +227,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cat6"
                 android:layout_width="170dp"
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
@@ -245,6 +261,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cat7"
                 android:layout_width="170dp"
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
@@ -278,6 +295,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cat8"
                 android:layout_width="170dp"
                 android:layout_height="170dp"
                 app:cardCornerRadius="12dp"
@@ -307,39 +325,19 @@
                         android:layout_marginTop="20dp"/>
 
                 </LinearLayout>
-                <com.ismaeldivita.chipnavigation.ChipNavigationBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    app:cnb_menuResource="@menu/profile_bottom_nav"
-                    app:cnb_unselectedColor="@color/design_default_color_on_primary"
-                    android:layout_alignParentBottom="true"
-                    tools:ignore="MissingConstraints">
 
-                </com.ismaeldivita.chipnavigation.ChipNavigationBar>
 
             </androidx.cardview.widget.CardView>
 
 
-
-
-
         </GridLayout>
-
 
     </LinearLayout>
 
+    </ScrollView>
 
-    <com.ismaeldivita.chipnavigation.ChipNavigationBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:cnb_menuResource="@menu/profile_bottom_nav"
-        app:cnb_unselectedColor="@color/design_default_color_on_primary"
-        android:layout_alignParentBottom="true"
-        tools:ignore="MissingConstraints">
 
-    </com.ismaeldivita.chipnavigation.ChipNavigationBar>
+    </LinearLayout>
 
 
 
