@@ -52,7 +52,7 @@ public class HomePage extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext() , Antiques_Category.class);
+                Intent homeIntent = new Intent(getApplicationContext() , Antiques_Edit.class);
                 startActivity(homeIntent);
             }
         });
