@@ -5,6 +5,8 @@ public class HomeItem {
     private String Title;
     private String Price;
     private String Duration;
+    private String Condition;
+    private String Brand;
     private String Contact;
     private String Environment;
     private String Description;
@@ -13,7 +15,24 @@ public class HomeItem {
 
 
     }
-       public String getTitle() {
+
+    public String getCondition() {
+        return Condition;
+    }
+
+    public void setCondition(String condition) {
+        Condition = condition;
+    }
+
+    public String getBrand() {
+        return Brand;
+    }
+
+    public void setBrand(String brand) {
+        Brand = brand;
+    }
+
+    public String getTitle() {
         return Title;
     }
 

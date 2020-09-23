@@ -29,7 +29,7 @@ public class Other_category extends AppCompatActivity {
     EditText txtTitle,txtPrice,txtDuration,txtContact,txtDescription;
     Button PublishNow;
     DatabaseReference DbRef;
-    OtherItems other;
+    HomeItem homeitem;
     long maxid=0;
     String idPrefix="OTH";
     private ImageSwitcher imageIs;
@@ -51,13 +51,13 @@ public class Other_category extends AppCompatActivity {
         txtDescription = findViewById(R.id.setDescription);
         PublishNow = findViewById(R.id.publish_now);
 
-        other = new OtherItems();
+        homeitem = new HomeItem();
 
 
         PublishNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbRef = FirebaseDatabase.getInstance().getReference().child("Hobbies&Sports");
+
                 DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement");
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -81,16 +81,16 @@ public class Other_category extends AppCompatActivity {
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
-                        other.setTitle(txtTitle.getText().toString().trim());
-                        other.setPrice(txtPrice.getText().toString().trim());
-                        other.setDuration(txtDuration.getText().toString().trim());
-                        other.setContact(txtContact.getText().toString().trim());
+                        homeitem.setTitle(txtTitle.getText().toString().trim());
+                        homeitem.setPrice(txtPrice.getText().toString().trim());
+                        homeitem.setDuration(txtDuration.getText().toString().trim());
+                        homeitem.setContact(txtContact.getText().toString().trim());
 
-                        other.setDescription(txtDescription.getText().toString().trim());
+                        homeitem.setDescription(txtDescription.getText().toString().trim());
 
 
                         String strNumber= idPrefix+String.valueOf(maxid+1);
-                        DbRef.child(String.valueOf(strNumber)).setValue(other);
+                        DbRef.child(String.valueOf(strNumber)).setValue(homeitem);
                         Toast.makeText(getApplicationContext(), "Successfully Published", Toast.LENGTH_SHORT).show();
                         clearControl();
 
