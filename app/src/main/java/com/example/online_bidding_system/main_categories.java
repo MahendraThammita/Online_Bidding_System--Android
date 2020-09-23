@@ -21,6 +21,7 @@ public class main_categories extends AppCompatActivity implements View.OnClickLi
     CardView cardView6;
     CardView cardView7;
     CardView cardView8;
+    CardView cardView9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class main_categories extends AppCompatActivity implements View.OnClickLi
         cardView6 = (CardView) findViewById(R.id.cat6);
         cardView7 = (CardView) findViewById(R.id.cat7);
         cardView8 = (CardView) findViewById(R.id.cat8);
+        cardView9 = (CardView) findViewById(R.id.cat9);
 
         cardView1.setOnClickListener(this);
         cardView2.setOnClickListener(this);
@@ -45,6 +47,7 @@ public class main_categories extends AppCompatActivity implements View.OnClickLi
         cardView6.setOnClickListener(this);
         cardView7.setOnClickListener(this);
         cardView8.setOnClickListener(this);
+        cardView9.setOnClickListener(this);
 
 
     }
@@ -58,9 +61,10 @@ public class main_categories extends AppCompatActivity implements View.OnClickLi
             case R.id.cat3: i = new Intent(this,books_category.class);startActivity(i); break;
             case R.id.cat4: i = new Intent(this,DVDnMovies_category.class);startActivity(i); break;
             case R.id.cat5: i = new Intent(this,Fashion_category.class);startActivity(i); break;
-            case R.id.cat6: i = new Intent(this,handmade_category.class);startActivity(i); break;
-            case R.id.cat7: i = new Intent(this,handmade_category.class);startActivity(i); break;
-            case R.id.cat8: i = new Intent(this,handmade_category.class);startActivity(i); break;
+            case R.id.cat6: i = new Intent(this,Sports_category.class);startActivity(i); break;
+            case R.id.cat7: i = new Intent(this,HomeAndGarden.class);startActivity(i); break;
+            case R.id.cat8: i = new Intent(this,Other_category.class);startActivity(i); break;
+            case R.id.cat9: i = new Intent(this,electronics_category.class);startActivity(i); break;
             default:break;
 
         }
