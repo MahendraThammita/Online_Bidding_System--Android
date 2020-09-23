@@ -139,6 +139,8 @@ public class handmade_category extends AppCompatActivity {
         nxBtn =  findViewById(R.id.nextButton);
         pickImgbtn = findViewById(R.id.pickImg);
         imageUris = new ArrayList<>();
+
+
         imageIs.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {

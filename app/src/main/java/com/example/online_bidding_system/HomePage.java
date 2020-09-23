@@ -8,15 +8,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
-public class HomePage extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class HomePage extends AppCompatActivity {
 
     Button home;
     Button bids;
     Button msg;
     Button profBtn;
+    ViewFlipper flipper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext() , HomeAndGarden.class);
+                Intent homeIntent = new Intent(getApplicationContext() , handmade_category.class);
                 startActivity(homeIntent);
             }
         });
@@ -41,7 +44,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         bids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext() , handmade_category.class);
+                Intent homeIntent = new Intent(getApplicationContext() , Sports_category.class);
                 startActivity(homeIntent);
             }
         });
