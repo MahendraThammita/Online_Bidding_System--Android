@@ -1,14 +1,21 @@
 package com.example.online_bidding_system;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,14 +23,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class HomeAndGarden extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class HomeAndGarden extends AppCompatActivity {
+    final int REQUEST_EXTERNAL_STORAGE = 100;
     EditText txtTitle,txtPrice,txtDuration,txtContact,txtEnvironment,txtDescription;
     Button PublishNow;
     DatabaseReference DbRef;
     HomeItem homeitem;
     long maxid=0;
     String idPrefix="HAG";
+    private ImageSwitcher imageIs;
+    private Button preBtn,nxBtn, pickImgbtn;
+    private ArrayList<Uri> imageUris;
+    private static final int PICK_IMAGES_CODE = 1;
+    int position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +59,7 @@ public class HomeAndGarden extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 DbRef = FirebaseDatabase.getInstance().getReference().child("Home&Garden");
-                DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+
 
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -103,7 +117,113 @@ public class HomeAndGarden extends AppCompatActivity {
             }
 
 
-        });}}
+        });
+        imageIs = findViewById(R.id.imageIs);
+        preBtn = findViewById(R.id.preButton);
+        nxBtn =  findViewById(R.id.nextButton);
+        pickImgbtn = findViewById(R.id.pickImg);
+        imageUris = new ArrayList<>();
+        imageIs.setFactory(new ViewSwitcher.ViewFactory() {
+            public ImageView makeView() {
+                ImageView imageView = new ImageView((getApplicationContext()));
+                return imageView;
+            }
+        });
+
+        pickImgbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                pickImagesIntent();
+
+            }
+        });
+
+
+
+        preBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(position>0){
+                    position--;
+                    imageIs.setImageURI(imageUris.get(position));
+                }
+
+                else{
+                    Toast.makeText(HomeAndGarden.this,"Empty",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        nxBtn.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(position<imageUris.size()-1){
+
+                    position++;
+                    imageIs.setImageURI(imageUris.get(position));
+                }
+
+                else{
+
+                    Toast.makeText(HomeAndGarden.this,"empty",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }));
+    }
+
+    private void pickImagesIntent(){
+
+
+
+        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+        startActivityForResult(intent, PICK_IMAGES_CODE);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_IMAGES_CODE){
+
+            if(resultCode == Activity.RESULT_OK){
+                if(data.getClipData() != null){
+
+                    int cout  = data.getClipData().getItemCount();
+                    for(int i=0; i<cout; i++){
+                        Uri imageUri = data.getClipData().getItemAt(i).getUri();
+                        imageUris.add(imageUri);
+                    }
+
+                    imageIs.setImageURI(imageUris.get(0));
+                    position = 0;
+                }
+
+                else{
+                    Uri imageUri = data.getData();
+                    imageUris.add(imageUri);
+                    imageIs.setImageURI(imageUris.get(0));
+                    position = 0;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
