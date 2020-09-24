@@ -7,6 +7,7 @@ public class Adverticement  {
     private String Duration;
     private String Description;
     private String Contact;
+    private String Date;
 
     public String getTitle() {
         return Title;
@@ -47,4 +48,14 @@ public class Adverticement  {
     public void setContact(String contact) {
         Contact = contact;
     }
+
+    public String getDate(){
+
+        return Date;
+    }
+
+    public void setDate(String date){
+        Date = date;
+    }
+
 }

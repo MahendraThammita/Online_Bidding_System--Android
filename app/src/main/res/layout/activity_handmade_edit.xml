@@ -23,7 +23,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/antiques"
+        android:text="@string/handmade"
         android:fontFamily="sans-serif-black"
         android:textSize="24sp"
         android:layout_margin="20dp"
@@ -50,28 +50,28 @@
 
                 <Button
                     android:id="@+id/preButton"
+                    android:text="Pre"
+                    android:layout_below= "@+id/imageIs"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageIs"
-                    android:layout_alignParentBottom="true"
-                    android:text="Pre" />
+                    android:layout_alignParentBottom = "true"
+                    android:layout_height="wrap_content"/>
 
                 <Button
                     android:id="@+id/nextButton"
+                    android:text="Next"
+                    android:layout_below= "@+id/imageIs"
+                    android:layout_alignParentEnd = "true"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageIs"
-                    android:layout_alignParentEnd="true"
-                    android:text="Next" />
+                    android:layout_height="wrap_content"/>
 
                 <Button
                     android:id="@+id/pickImg"
+                    android:text="Select"
+                    android:layout_below= "@+id/imageIs"
+                    android:layout_alignParentBottom = "true"
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageIs"
-                    android:layout_alignParentBottom="true"
                     android:layout_marginLeft="95dp"
-                    android:text="Select" />
+                    android:layout_height="wrap_content"/>
 
             </RelativeLayout>
 
@@ -129,7 +129,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
-                android:hint="Category"
+                android:hint="Materials"
                 android:inputType="text" />
 
             <!--EditText -->
@@ -142,7 +142,6 @@
                 android:fontFamily="sans-serif-black"
                 android:hint="Description"
                 android:inputType="text" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".books_category"
+    tools:context=".Books_Category"
     android:orientation="vertical">
 
 
@@ -84,9 +84,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Title"
                 android:inputType="text" />
+
+            <Spinner
+                android:id="@+id/setPeriod"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="12dp"
+                />
 
 
             <!--EditText -->
@@ -100,6 +108,21 @@
                 android:hint="Starting at"
                 android:inputType="text" />
             <!--EditText -->
+
+            <TimePicker
+                android:id="@+id/setTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:timePickerMode="spinner">
+
+            </TimePicker>
+
+            <DatePicker
+                android:id="@+id/setDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"></DatePicker>
 
             <EditText
                 android:id="@+id/setDuration"
@@ -122,16 +145,7 @@
                 android:hint="Contact"
                 android:inputType="text" />
 
-            <!--EditText -->
-            <EditText
-                android:id="@+id/setMaterials"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-black"
-                android:hint="Category"
-                android:inputType="text" />
+
 
             <!--EditText -->
             <EditText

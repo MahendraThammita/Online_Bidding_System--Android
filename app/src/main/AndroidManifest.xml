@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestHome"></activity>
+        <activity android:name=".Handmade_Edit"></activity>
+        <activity android:name=".Books_Edit" />
+        <activity android:name=".TestHome" />
         <activity android:name=".TabedAuctions" />
         <activity android:name=".HomeAndGarden" />
         <activity android:name=".Other_category" />
@@ -26,8 +28,8 @@
         <activity android:name=".MyWins" />
         <activity android:name=".MyAuctions" />
         <activity android:name=".PlaceBid" />
-        <activity android:name=".books_category" />
-        <activity android:name=".handmade_category" />
+        <activity android:name=".Books_Category" />
+        <activity android:name=".Handmade_Category" />
         <activity android:name=".Antiques_Edit" />
         <activity android:name=".RegistrationPage" />
         <activity android:name=".Antiques_Category" />
