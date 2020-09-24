@@ -12,14 +12,12 @@ import android.widget.ListView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MyBidsFragment#newInstance} factory method to
+ * Use the {@link fragmentMyAuctions#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyBidsFragment extends Fragment {
+public class fragmentMyAuctions extends Fragment {
 
-    ListView bidList;
-
-
+    ListView auctList;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +27,7 @@ public class MyBidsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public MyBidsFragment() {
+    public fragmentMyAuctions() {
         // Required empty public constructor
     }
 
@@ -39,11 +37,11 @@ public class MyBidsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MyBidsFragment.
+     * @return A new instance of fragment fragmentMyAuctions.
      */
     // TODO: Rename and change types and number of parameters
-    public static MyBidsFragment newInstance(String param1, String param2) {
-        MyBidsFragment fragment = new MyBidsFragment();
+    public static fragmentMyAuctions newInstance(String param1, String param2) {
+        fragmentMyAuctions fragment = new fragmentMyAuctions();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,16 +62,16 @@ public class MyBidsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_my_bids, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_auctions, container, false);
 
-        String items[] = {"Item Name 1" , "Item Name 2" , "Item Name 3" , "Item Name 4" , "Item Name 5" , "Item Name 6" , "Item Name 7"};
+        String items[] = {"Auction Name 1" , "Auction Name 2" , "Auction Name 3" , "Auction Name 4" , "Auction Name 5" , "Auction Name 6" , "Auction Name 7"};
 
-        ArrayAdapter arradpt = new ArrayAdapter<String>(getActivity(), R.layout.my_bid_card , R.id.myBidCardTitle, items);
+        ArrayAdapter singleAuction = new ArrayAdapter(getActivity() , R.layout.my_auction_card , R.id.AuctionCardAuctionName, items);
 
-        bidList = view.findViewById(R.id.myBidsList);
+        auctList = view.findViewById(R.id.AuctionCardsList);
 
-        bidList.setAdapter(arradpt);
+        auctList.setAdapter(singleAuction);
+
         return view;
-
     }
 }
