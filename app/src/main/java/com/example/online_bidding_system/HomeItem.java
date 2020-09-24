@@ -1,48 +1,28 @@
 package com.example.online_bidding_system;
 
-public class HomeItem {
+public class HomeItem extends Adverticement{
 
-    private String Title;
-    private String Price;
-    private String Duration;
-    private String Contact;
+
+
+    private String Condition;
+    private String Brand;
+
     private String Environment;
-    private String Description;
 
-    public HomeItem(){
-
-
-    }
-       public String getTitle() {
-        return Title;
+    public String getCondition() {
+        return Condition;
     }
 
-    public void setTitle(String title) {
-        Title = title;
+    public void setCondition(String condition) {
+        Condition = condition;
     }
 
-    public String getPrice() {
-        return Price;
+    public String getBrand() {
+        return Brand;
     }
 
-    public void setPrice(String price) {
-        Price = price;
-    }
-
-    public String getDuration() {
-        return Duration;
-    }
-
-    public void setDuration(String duration) {
-        Duration = duration;
-    }
-
-    public String getContact() {
-        return Contact;
-    }
-
-    public void setContact(String contact) {
-        Contact = contact;
+    public void setBrand(String brand) {
+        Brand = brand;
     }
 
     public String getEnvironment() {
@@ -52,14 +32,4 @@ public class HomeItem {
     public void setEnvironment(String environment) {
         Environment = environment;
     }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-
 }

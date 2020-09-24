@@ -1,219 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Antiques_Edit">
+    tools:context=".books_category"
+    android:orientation="vertical">
 
-    <LinearLayout
+
+    <include
+        android:id="@+id/primaryActbar"
+        layout="@layout/primary_actionbar"/>
+
+
+    <include
+        android:id="@+id/profActionbar"
+        layout="@layout/secoundery_actionbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_alignBottom="@+id/primaryActbar"/>
 
-        <include
-            android:id="@+id/primaryActbar"
-            layout="@layout/primary_actionbar"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/antiques"
+        android:fontFamily="sans-serif-black"
+        android:textSize="24sp"
+        android:layout_margin="20dp"
+        />
+    <!-- Display selected images -->
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/profActionbar"
-            layout="@layout/secoundery_actionbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/primaryActbar"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Item Code 0045"
-            android:fontFamily="sans-serif-black"
-            android:textSize="24sp"
-            android:layout_margin="20dp"
-            />
-        <!-- Display selected images -->
-
-        <ImageView
-            android:id="@+id/image_view"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_gravity="center_horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
-        <!-- image select button -->
-        <Button
-            android:id="@+id/button"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:text="Replace Images"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_gravity="center"
-            android:background="@color/BootstrapPrimary"
-            android:layout_margin="6dp"/>
-
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Title:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="12dp"
-            />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Starting at:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="12dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Duration:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="12dp"/>
-
-
-        <TextView
-            android:id="@+id/Contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contact:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="12dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description:"
-            android:fontFamily="sans-serif-black"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="12dp"
-            />
-    </LinearLayout>
-
-    <!-- Text Fields-->
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="430dp"
-        android:layout_marginLeft="150dp">
-
-        <!--EditText -->
-        <TextView
-            android:id="@+id/setTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="sans-serif-black"
-            android:text="Japanese Army officer Military Katana"
-            android:inputType="text"
-            android:textSize="15sp" />
-
-
-        <!--EditText -->
-        <TextView
-            android:id="@+id/setPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2400 $"
-            android:fontFamily="sans-serif-black"
-            android:textSize="15sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            />
-        <!--EditText -->
-        <TextView
-            android:id="@+id/setDuration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="48 hrs"
-            android:fontFamily="sans-serif-black"
-            android:textSize="15sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            />
-        <!--EditText -->
-        <TextView
-            android:id="@+id/setContact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="111 222 333 44"
-            android:fontFamily="sans-serif-black"
-            android:textSize="15sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            />
-
-        <!--EditText -->
-        <TextView
-            android:id="@+id/setDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mei signature in Nakago tang.
-                       Sutrdy Blade"
-            android:fontFamily="sans-serif-black"
-            android:textSize="15sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            />
-
-
-    </LinearLayout>
-
-
-    <!-- Publish buttons -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="632dp"
-        android:layout_marginRight="60dp">
-
-
-        <Button
-            android:id="@+id/publish_now"
-            android:layout_width="120dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorAccent"
-            android:text="Update" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/publish_later"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:layout_marginLeft="1dp"
-            android:text="Cancel" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    </LinearLayout>
+                <ImageSwitcher
+                    android:id="@+id/imageIs"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
+
+                <Button
+                    android:id="@+id/preButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageIs"
+                    android:layout_alignParentBottom="true"
+                    android:text="Pre" />
+
+                <Button
+                    android:id="@+id/nextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageIs"
+                    android:layout_alignParentEnd="true"
+                    android:text="Next" />
+
+                <Button
+                    android:id="@+id/pickImg"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageIs"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="95dp"
+                    android:text="Select" />
+
+            </RelativeLayout>
 
 
+            <!--EditText -->
+            <EditText
+                android:id="@+id/setTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Title"
+                android:inputType="text" />
 
+
+            <!--EditText -->
+            <EditText
+                android:id="@+id/setPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Starting at"
+                android:inputType="text" />
+            <!--EditText -->
+
+            <EditText
+                android:id="@+id/setDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Duration"
+                android:inputType="text" />
+
+            <!--EditText -->
+            <EditText
+                android:id="@+id/setContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Contact"
+                android:inputType="text" />
+
+            <!--EditText -->
+            <EditText
+                android:id="@+id/setMaterials"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Category"
+                android:inputType="text" />
+
+            <!--EditText -->
+            <EditText
+                android:id="@+id/setDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Description"
+                android:inputType="text" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/Update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Update"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/Delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Delete"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/publish_now"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Publish Now"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
         android:layout_width="match_parent"
@@ -228,4 +205,4 @@
 
 
 
-</RelativeLayout>
+</LinearLayout>

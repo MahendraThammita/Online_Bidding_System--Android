@@ -1,5 +1,6 @@
 package com.example.online_bidding_system;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -12,10 +13,19 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -26,106 +36,136 @@ public class electronics_category extends AppCompatActivity {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
 
+    EditText Brand,Condition,ContactNo,Description,Duration,Title,Type,Start_Price;
+    Button publishNow,publishLater;
+    DatabaseReference fAuth;
+    FdeHelper fCat;
+    long maxid=0;
+    String idPrefix="ELEC";
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_electronics_category);
 
-        Button button = findViewById(R.id.button);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        Title       =   findViewById(R.id.setTitle);
+        Brand       =   findViewById(R.id.setBrand);
+        Type        =   findViewById(R.id.setType);
+        Condition   =   findViewById(R.id.setCondition);
+        Start_Price =   findViewById(R.id.setPrize);
+        Duration    =   findViewById(R.id.setDuration);
+        ContactNo     =   findViewById(R.id.setContact);
+        Description =   findViewById(R.id.setDescription);
+
+        publishNow   =      findViewById(R.id.publish_now);
+
+
+        fCat = new FdeHelper();
+
+
+        publishNow.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(electronics_category.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(electronics_category.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
-//                    return;
-                } else {
-                    GetdisplayIntent();
-                }
-            }
-        });
-    }
+            public void onClick(View view) {
 
-    public void  GetdisplayIntent() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        intent.setType("image/*");
-        startActivityForResult(intent, REQUEST_EXTERNAL_STORAGE);
-    }
+                fAuth = FirebaseDatabase.getInstance().getReference().child("DVDandMovies");
+                fAuth = FirebaseDatabase.getInstance().getReference().child("Adverticement");
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_EXTERNAL_STORAGE: {
-
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    GetdisplayIntent();
-                } else {
-
-                }
-                return;
-            }
-
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_EXTERNAL_STORAGE && resultCode == RESULT_OK) {
-
-            final ImageView imageView = findViewById(R.id.image_view);
-            final List<Bitmap> bitmaps = new ArrayList<>();
-            ClipData clipData = data.getClipData();
-
-            if (clipData != null) {
-                for (int i = 0; i < clipData.getItemCount(); i++) {
-                    Uri imageUri = clipData.getItemAt(i).getUri();
-                    Log.d("URI", imageUri.toString());
-                    try {
-                        InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                        bitmaps.add(bitmap);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                fAuth.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists())
+                            maxid=(dataSnapshot.getChildrenCount());
                     }
-                }
-            } else {
 
-                Uri imageUri = data.getData();
-                Log.d("URI", imageUri.toString());
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
                 try {
-                    InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    bitmaps.add(bitmap);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                    if(TextUtils.isEmpty(Title.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "Title Field Is Empty" , Toast.LENGTH_SHORT).show();
+                    }
+                    else if(TextUtils.isEmpty(Type.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "Type Field Is Empty" , Toast.LENGTH_SHORT).show();
+                    }
+
+                    else if(TextUtils.isEmpty(Condition.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "Condition Field Is Empty" , Toast.LENGTH_SHORT).show();
+                    }
+                    else if(TextUtils.isEmpty(Start_Price.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "Starting at Field Is Empty" , Toast.LENGTH_SHORT).show();
+                    }
+                    else if(TextUtils.isEmpty(Duration.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "Duration Field Is Empty" , Toast.LENGTH_SHORT).show();
+                    }
+                    else if(TextUtils.isEmpty(ContactNo.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "Contact Field Is Empty" , Toast.LENGTH_SHORT).show();
+                    }
+                    else if(TextUtils.isEmpty(Description.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "Description Field Is Empty" , Toast.LENGTH_SHORT).show();
+                    }
+
+
+                    else {
+                        fCat.setTitle(Title.getText().toString().trim());
+                        fCat.setType(Type.getText().toString().trim());
+                        fCat.setCondition(Condition.getText().toString().trim());
+                        fCat.setStart_Price(Start_Price.getText().toString().trim());
+                        fCat.setDuration(Duration.getText().toString().trim());
+                        fCat.setContactNo(ContactNo.getText().toString().trim());
+                        fCat.setDescription(Description.getText().toString().trim());
+
+                        String strNumber= idPrefix+String.valueOf(maxid+1);
+                        fAuth.child(String.valueOf(strNumber)).setValue(fCat);
+
+
+                        Toast.makeText(getApplicationContext() , "Data Inserted Successfully" , Toast.LENGTH_SHORT).show();
+                        clearControl();
+
+                    }
                 }
+                catch (NumberFormatException err){
+                    Toast.makeText(getApplicationContext(), "Invalid Contact No" , Toast.LENGTH_SHORT).show();
+
+                }
+
+
 
             }
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    for (final Bitmap b : bitmaps) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                imageView.setImageBitmap(b);
-                            }
-                        });
+            public void clearControl() {
+                Title.setText("");
+                Type.setText("");
+                Condition.setText("");
+                Start_Price.setText("");
+                Duration.setText("");
+                ContactNo.setText("");
+                Description.setText("");
 
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }).start();
-        }
+            }
+
+
+
+        });
+
+
+
     }
+
+
 
 }
+
+
+
+
+
+

@@ -13,12 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TabedAuctions"></activity>
+        <activity android:name=".TestHome"></activity>
+        <activity android:name=".TabedAuctions" />
         <activity android:name=".HomeAndGarden" />
         <activity android:name=".Other_category" />
         <activity android:name=".Fashion_category" />
         <activity android:name=".DVDnMovies_category" />
-        <activity android:name=".DeleteBid" />
         <activity android:name=".Sports_category" />
         <activity android:name=".Music_category" />
         <activity android:name=".Edit_User" />
@@ -45,7 +45,7 @@
         <activity android:name=".EditBid" />
         <activity android:name=".ProfilePageBasic" />
         <activity android:name=".myBids" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="160dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorPrimary"
+    android:background="#000051"
     android:theme="@style/Platform.MaterialComponents.Light"
     app:contentInsetEnd="0dp"
     app:contentInsetLeft="0dp"
@@ -24,11 +24,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+
         <androidx.appcompat.widget.SearchView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom = "true"
+            android:iconifiedByDefault = "false"
+            app:iconifiedByDefault="false"
             android:layout_margin="10dp"
-            android:background="@color/white">
+            app:defaultQueryHint="I'm looking for"
+            app:queryHint="I'm looking for"
+            android:background="@drawable/searchbar_corner"
+            android:backgroundTint="@color/white">
 
 
         </androidx.appcompat.widget.SearchView>
