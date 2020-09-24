@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SportsEditPage"
+    tools:context=".Other_category"
     android:orientation="vertical">
 
 
@@ -23,7 +23,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sports And Hobbies"
+        android:text="Other Items"
         android:fontFamily="sans-serif-black"
         android:textSize="24sp"
         android:layout_margin="20dp"
@@ -122,24 +122,7 @@
                 android:inputType="text" />
 
             <!--EditText -->
-            <EditText
-                android:id="@+id/setCondition"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-black"
-                android:hint="Condition"
-                android:inputType="text" />
-            <EditText
-                android:id="@+id/setBrand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-black"
-                android:hint="Product brand"
-                android:inputType="text" />
+
 
             <!--EditText -->
             <EditText

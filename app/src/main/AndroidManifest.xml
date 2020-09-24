@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SportsEditPage"></activity>
+        <activity android:name=".OtherEditpage"></activity>
+        <activity android:name=".SportsEditPage" />
         <activity android:name=".HomeAndGardenEditpage" />
         <activity android:name=".TestHome" />
         <activity android:name=".TabedAuctions" />
