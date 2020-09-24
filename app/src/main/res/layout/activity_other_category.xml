@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Other_category"
+    tools:context=".Books_Category"
     android:orientation="vertical">
+
+
     <include
         android:id="@+id/primaryActbar"
         layout="@layout/primary_actionbar"/>
@@ -21,7 +23,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Other"
+        android:text="Other items"
         android:fontFamily="sans-serif-black"
         android:textSize="24sp"
         android:layout_margin="20dp"
@@ -41,61 +43,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
-                <!-- image select button -->
                 <ImageSwitcher
                     android:id="@+id/imageIs"
                     android:layout_width="match_parent"
-                    android:layout_height="290dp" />
+                    android:layout_height="300dp"/>
 
                 <Button
                     android:id="@+id/preButton"
+                    android:text="Pre"
+                    android:layout_below= "@+id/imageIs"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageIs"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="7dp"
-
-                    android:layout_marginBottom="2dp"
-                    android:text="Pre" />
+                    android:layout_alignParentBottom = "true"
+                    android:layout_height="wrap_content"/>
 
                 <Button
                     android:id="@+id/nextButton"
+                    android:text="Next"
+                    android:layout_below= "@+id/imageIs"
+                    android:layout_alignParentEnd = "true"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageIs"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="9dp"
-                    android:layout_marginEnd="0dp"
-                    android:text="Next" />
+                    android:layout_height="wrap_content"/>
 
                 <Button
                     android:id="@+id/pickImg"
+                    android:text="Select"
+                    android:layout_below= "@+id/imageIs"
+                    android:layout_alignParentBottom = "true"
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageIs"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="20dp"
                     android:layout_marginLeft="95dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="0dp"
-                    android:layout_toStartOf="@+id/nextButton"
-                    android:layout_toEndOf="@+id/preButton"
-                    android:text="Select" />
+                    android:layout_height="wrap_content"/>
+
             </RelativeLayout>
 
 
+
             <!--EditText -->
+
             <EditText
                 android:id="@+id/setTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Title"
                 android:inputType="text" />
+
+
 
 
             <!--EditText -->
@@ -109,16 +104,30 @@
                 android:hint="Starting at"
                 android:inputType="text" />
             <!--EditText -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="End At"
+                android:textSize="20sp"
+                android:layout_margin="12dp"></TextView>
 
-            <EditText
-                android:id="@+id/setDuration"
+            <DatePicker
+                android:id="@+id/setDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-black"
-                android:hint="Duration"
-                android:inputType="text" />
+                android:layout_margin="12dp"></DatePicker>
+            <TimePicker
+                android:id="@+id/setTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:timePickerMode="spinner">
+
+            </TimePicker>
+
+
+
+
 
             <!--EditText -->
             <EditText
@@ -131,7 +140,6 @@
                 android:hint="Contact"
                 android:inputType="text" />
 
-            <!--EditText -->
 
 
             <!--EditText -->
@@ -153,8 +161,9 @@
                     android:id="@+id/publish_now"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorPrimaryDark"
                     android:layout_weight="1"
+                    android:textColor="@color/white"
                     android:text="Publish Now"
                     android:layout_margin="10dp"/>
 
@@ -162,12 +171,16 @@
                     android:id="@+id/publish_later"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorPrimaryDark"
                     android:layout_weight="1"
+                    android:textColor="@color/white"
                     android:text="Publish Later"
                     android:layout_margin="10dp"/>
 
             </LinearLayout>
+
+
+
 
         </LinearLayout>
 
@@ -183,10 +196,6 @@
         tools:ignore="MissingConstraints">
 
     </com.ismaeldivita.chipnavigation.ChipNavigationBar>
-
-
-
-
 
 
 
