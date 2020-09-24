@@ -14,9 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/primaryActbar"
-            layout="@layout/primary_actionbar" />
+
 
 
         <include

@@ -119,14 +119,6 @@ public class HomeAndGarden extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
                         // DbRef.child("user").setValue(user);
                         String strNumber= idPrefix+String.valueOf(maxid+1);
                         DbRef.child(String.valueOf(strNumber)).setValue(homeitem);

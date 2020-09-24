@@ -1,4 +1,4 @@
-package com.example.online_bidding_system.HelperClasser.BiddingAdapters;
+package com.example.online_bidding_system;
 
 public class auction {
 
@@ -8,6 +8,9 @@ public class auction {
     private String Contact;
     private String Materials;
     private String Description;
+    private String Type;
+    private String Time_period;
+    private String Date;
 
 
     public auction() {
@@ -19,6 +22,7 @@ public class auction {
     }
 
     public void setTitle(String title) {
+
         Title = title;
     }
 
@@ -51,7 +55,7 @@ public class auction {
     }
 
     public void setMaterials(String materials) {
-     Materials = materials;
+        Materials = materials;
     }
 
     public String getDescription() {
@@ -61,6 +65,25 @@ public class auction {
     public void setDescription(String description) {
         Description = description;
     }
+
+    public String getType(){
+
+        return Type;
+    }
+
+    public void setType(String type){
+        Type = type;
+    }
+
+    public String getTime_period(){
+
+        return Time_period;
+    }
+
+    public void setTime_period(String time_period){
+        Time_period = time_period;
+    }
+
 
 
 }

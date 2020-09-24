@@ -3,19 +3,12 @@ package com.example.online_bidding_system;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,30 +17,33 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
-import com.example.online_bidding_system.HelperClasser.BiddingAdapters.auction;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
-public class handmade_category extends AppCompatActivity {
+public class Books_Category extends AppCompatActivity {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
-    EditText txtTitle,txtPrice,txtDuration,txtContact,txtMaterials,txtDescription;
+
+    EditText txtTitle,txtPrice,txtDuration,txtContact,txtType,txtDescription;
     Button PublishNow;
     DatabaseReference DbRef;
-    auction add;
+    DatabaseReference DbRef1;
+    private DatabaseReference mFirebaseDatabase;
+    private DatabaseReference mFirebaseDatabase1;
+    private FirebaseDatabase mFirebaseInstance;
+    Adverticement adverticement;
+    auction book;
     long maxid=0;
-    String idPrefix="HM";
+    String idPrefix="BK";
     private ImageSwitcher imageIs;
     private Button preBtn,nxBtn, pickImgbtn;
     private  ArrayList<Uri> imageUris;
+    private String userId;
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
 
@@ -55,25 +51,34 @@ public class handmade_category extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_handmade_category);
+        setContentView(R.layout.activity_books_category);
 
 
         txtTitle = findViewById(R.id.setTitle);
         txtPrice = findViewById(R.id.setPrice);
         txtDuration = findViewById(R.id.setDuration);
         txtContact = findViewById(R.id.setContact);
-        txtMaterials = findViewById(R.id.setMaterials);
+        txtType = findViewById(R.id.setType);
         txtDescription = findViewById(R.id.setDescription);
         PublishNow = findViewById(R.id.publish_now);
 
-        add = new auction();
+        book = new auction();
+        adverticement=new  Adverticement();
+
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
+        mFirebaseDatabase1 = mFirebaseInstance.getReference("Books");
 
 
         PublishNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbRef = FirebaseDatabase.getInstance().getReference().child("HandMades");
-                DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                DbRef = FirebaseDatabase.getInstance().getReference().child("Books");
+                DbRef1= FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                userId = mFirebaseDatabase1.push().getKey();
+                mFirebaseDatabase.child(userId).setValue(adverticement);
+
+                mFirebaseDatabase1.child(userId).setValue(book);
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -96,15 +101,16 @@ public class handmade_category extends AppCompatActivity {
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
-                        add.setTitle(txtTitle.getText().toString().trim());
-                        add.setPrice(txtPrice.getText().toString().trim());
-                        add.setDuration(txtDuration.getText().toString().trim());
-                        add.setContact(txtContact.getText().toString().trim());
-                        add.setMaterials(txtMaterials.getText().toString().trim());
-                        add.setDescription(txtDescription.getText().toString().trim());
-                        // DbRef.child("user").setValue(user);
+                        adverticement.setTitle(txtTitle.getText().toString().trim());
+                        adverticement.setPrice(txtPrice.getText().toString().trim());
+                        adverticement.setDuration(txtDuration.getText().toString().trim());
+                        adverticement.setContact(txtContact.getText().toString().trim());
+                        adverticement.setDescription(txtDescription.getText().toString().trim());
+                        book.setType(txtType.getText().toString().trim());
+
                         String strNumber= idPrefix+String.valueOf(maxid+1);
-                        DbRef.child(String.valueOf(strNumber)).setValue(add);
+                        DbRef.child(String.valueOf(strNumber)).setValue(book);
+                        DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
                         Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
                         clearControl();
 
@@ -127,7 +133,7 @@ public class handmade_category extends AppCompatActivity {
                 txtPrice.setText("");
                 txtDuration.setText("");
                 txtContact.setText("");
-                txtMaterials.setText("");
+                txtType.setText("");
                 txtDescription.setText("");
             }
 
@@ -169,7 +175,7 @@ public class handmade_category extends AppCompatActivity {
                 }
 
                 else{
-                    Toast.makeText(handmade_category.this,"Empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Books_Category.this,"Empty",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -186,7 +192,7 @@ public class handmade_category extends AppCompatActivity {
 
                 else{
 
-                    Toast.makeText(handmade_category.this,"empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Books_Category.this,"empty",Toast.LENGTH_SHORT).show();
                 }
             }
         }));
@@ -231,10 +237,4 @@ public class handmade_category extends AppCompatActivity {
         }
     }
 }
-
-
-
-
-
-
 
