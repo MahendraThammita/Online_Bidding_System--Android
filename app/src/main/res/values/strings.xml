@@ -76,16 +76,11 @@
 
 
     //UdithaJ Strings
-    <string-array name="categories">
-        <item>Ending soon</item>
-        <item>Antiques</item>
-        <item>Handmade Items</item>
-        <item>Books</item>
-        <item>DVD and Movies</item>
-        <item>Fashion</item>
-        <item>Sporting goods</item>
-        <item>Music Instruments</item>
-        <item>Anything else</item>
+    <string-array name="TimePeriod">
+        <item>Pre-1800</item>
+        <item>1800-1899</item>
+        <item>1900-1950</item>
+        <item>Unknown</item>
     </string-array>
     <string name="antiques">Antiques</string>
     <string name="handmade">Handmade Items</string>

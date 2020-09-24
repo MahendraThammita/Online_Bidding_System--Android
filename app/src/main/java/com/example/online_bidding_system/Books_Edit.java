@@ -10,19 +10,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
-import com.example.online_bidding_system.auction;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,11 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Antiques_Category extends AppCompatActivity{
+public class Books_Edit extends AppCompatActivity {
 
+    final int REQUEST_EXTERNAL_STORAGE = 100;
 
-    EditText txtTitle,txtPrice,txtDuration,txtContact,txtPeriod,txtDescription;
-    Spinner period;
+    EditText txtTitle,txtPrice,txtDuration,txtContact,txtType,txtDescription;
     Button PublishNow;
     DatabaseReference DbRef;
     DatabaseReference DbRef1;
@@ -43,60 +37,48 @@ public class Antiques_Category extends AppCompatActivity{
     private DatabaseReference mFirebaseDatabase1;
     private FirebaseDatabase mFirebaseInstance;
     Adverticement adverticement;
-    auction add;
+    auction book;
     long maxid=0;
-    String idPrefix="AN";
+    String idPrefix="BK";
     private ImageSwitcher imageIs;
     private Button preBtn,nxBtn, pickImgbtn;
     private  ArrayList<Uri> imageUris;
     private String userId;
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
-    //Timepicker object
-     TimePicker tp;
-     //Datapicker object
-     DatePicker dp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_antiques__category);
-
-        Spinner spinner = findViewById(R.id.setPeriod);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.TimePeriod, android.R.layout.simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        setContentView(R.layout.activity_books_edit);
 
 
         txtTitle = findViewById(R.id.setTitle);
         txtPrice = findViewById(R.id.setPrice);
         txtDuration = findViewById(R.id.setDuration);
         txtContact = findViewById(R.id.setContact);
-        //ged datapicker value
-        dp = findViewById(R.id.setDate);
-        //get Timepicker value
-        tp = findViewById(R.id.setTime);
-        period = (Spinner)findViewById(R.id.setPeriod);
+        txtType = findViewById(R.id.setType);
         txtDescription = findViewById(R.id.setDescription);
         PublishNow = findViewById(R.id.publish_now);
 
-        add = new auction();
+        book = new auction();
         adverticement=new  Adverticement();
 
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
-        mFirebaseDatabase1 = mFirebaseInstance.getReference("Antiques");
+        mFirebaseDatabase1 = mFirebaseInstance.getReference("Books");
 
 
         PublishNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbRef = FirebaseDatabase.getInstance().getReference().child("Antiques");
+                DbRef = FirebaseDatabase.getInstance().getReference().child("Books");
                 DbRef1= FirebaseDatabase.getInstance().getReference().child("Adverticement");
                 userId = mFirebaseDatabase1.push().getKey();
                 mFirebaseDatabase.child(userId).setValue(adverticement);
 
-                mFirebaseDatabase1.child(userId).setValue(add);
+                mFirebaseDatabase1.child(userId).setValue(book);
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -121,19 +103,13 @@ public class Antiques_Category extends AppCompatActivity{
                     else {
                         adverticement.setTitle(txtTitle.getText().toString().trim());
                         adverticement.setPrice(txtPrice.getText().toString().trim());
-
-                        //set timepicker value
-                        String strTime = tp.getHour() + ":" + tp.getMinute();
-                        adverticement.setDuration(strTime);
-                        //set datapicker value
-                        String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
-                        adverticement.setDate(strDate);
-
+                        adverticement.setDuration(txtDuration.getText().toString().trim());
                         adverticement.setContact(txtContact.getText().toString().trim());
                         adverticement.setDescription(txtDescription.getText().toString().trim());
-                        add.setTime_period(period.getSelectedItem().toString());
+                        book.setType(txtType.getText().toString().trim());
+
                         String strNumber= idPrefix+String.valueOf(maxid+1);
-                        DbRef.child(String.valueOf(strNumber)).setValue(add);
+                        DbRef.child(String.valueOf(strNumber)).setValue(book);
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
                         Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
                         clearControl();
@@ -157,6 +133,7 @@ public class Antiques_Category extends AppCompatActivity{
                 txtPrice.setText("");
                 txtDuration.setText("");
                 txtContact.setText("");
+                txtType.setText("");
                 txtDescription.setText("");
             }
 
@@ -198,7 +175,7 @@ public class Antiques_Category extends AppCompatActivity{
                 }
 
                 else{
-                    Toast.makeText(Antiques_Category.this,"Empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Books_Edit.this,"Empty",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -215,14 +192,11 @@ public class Antiques_Category extends AppCompatActivity{
 
                 else{
 
-                    Toast.makeText(Antiques_Category.this,"empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Books_Edit.this,"empty",Toast.LENGTH_SHORT).show();
                 }
             }
         }));
     }
-
-
-
 
     private void pickImagesIntent(){
 
@@ -262,8 +236,5 @@ public class Antiques_Category extends AppCompatActivity{
             }
         }
     }
-
-
-
 }
 

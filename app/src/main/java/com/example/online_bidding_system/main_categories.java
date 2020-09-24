@@ -2,13 +2,10 @@ package com.example.online_bidding_system;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 public class main_categories extends AppCompatActivity implements View.OnClickListener {
 
@@ -56,9 +53,9 @@ public class main_categories extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         Intent i;
         switch (view.getId()) {
-            case R.id.cat1: i = new Intent(this,handmade_category.class);startActivity(i); break;
+            case R.id.cat1: i = new Intent(this, Handmade_Category.class);startActivity(i); break;
             case R.id.cat2: i = new Intent(this,Antiques_Category.class);startActivity(i); break;
-            case R.id.cat3: i = new Intent(this,books_category.class);startActivity(i); break;
+            case R.id.cat3: i = new Intent(this, Books_Category.class);startActivity(i); break;
             case R.id.cat4: i = new Intent(this,DVDnMovies_category.class);startActivity(i); break;
             case R.id.cat5: i = new Intent(this,Fashion_category.class);startActivity(i); break;
             case R.id.cat6: i = new Intent(this,Sports_category.class);startActivity(i); break;
