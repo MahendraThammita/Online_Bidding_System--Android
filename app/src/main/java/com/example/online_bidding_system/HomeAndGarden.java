@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
@@ -45,6 +47,10 @@ public class HomeAndGarden extends AppCompatActivity {
 
     //Create an object of DatabaseReference to create second table
     private DatabaseReference mFirebaseDatabase1;
+    //Timepicker object
+    TimePicker tp;
+    //Datapicker object
+    DatePicker dp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,10 @@ public class HomeAndGarden extends AppCompatActivity {
         txtEnvironment = findViewById(R.id.setEnvironment);
         txtDescription = findViewById(R.id.setDescription);
         PublishNow = findViewById(R.id.publish_now);
+        //ged datapicker value
+        dp = findViewById(R.id.setDate);
+        //get Timepicker value
+        tp = findViewById(R.id.setTime);
 
 
         //object
@@ -104,17 +114,22 @@ public class HomeAndGarden extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Your Title is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtPrice.getText().toString()))
                         Toast.makeText(getApplicationContext(), " NIC Price Is Required!", Toast.LENGTH_SHORT).show();
-                    else if (TextUtils.isEmpty(txtDuration.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Duration is Required!", Toast.LENGTH_SHORT).show();
+
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
                         adverticement.setTitle(txtTitle.getText().toString().trim());
                         adverticement.setPrice(txtPrice.getText().toString().trim());
-                        adverticement.setDuration(txtDuration.getText().toString().trim());
+
                         adverticement.setContact(txtContact.getText().toString().trim());
                         homeitem.setEnvironment(txtEnvironment.getText().toString().trim());
                         adverticement.setDescription(txtDescription.getText().toString().trim());
+                        //set timepicker value
+                        String strTime = tp.getHour() + ":" + tp.getMinute();
+                        adverticement.setDuration(strTime);
+                        //set datapicker value
+                        String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                        adverticement.setDate(strDate);
 
 
 
