@@ -132,14 +132,9 @@ public class MyBidsFragment extends Fragment {
             }
         });
 
-//        String items[] = {"Item Name 1" , "Item Name 2" , "Item Name 3" , "Item Name 4" , "Item Name 5" , "Item Name 6" , "Item Name 7"};
-//        String times[] = {"08:00:00 12/05/2020" , "09:00:00 12/05/2020" , "10:00:00 12/05/2020" , "08:00:00 12/05/2020" , "09:00:00 12/05/2020" , "08:00:00 12/05/2020" , "08:00:00 12/05/2020"};
-//        int maxbid[] = {2500 , 5400 , 4852 , 6588 , 254 , 1547 , 1200};
-//        int mybid[] = {4500 , 800 , 2852 , 6500 , 2540 , 157 , 2000};
-//        int img[] = {R.drawable.sampleuser , R.drawable.books , R.drawable.watch , R.drawable.sampleuser , R.drawable.books , R.drawable.watch ,  R.drawable.books};
 
 //        ArrayAdapter arradpt = new ArrayAdapter<String>(getActivity(), R.layout.my_bid_card , R.id.myBidCardTitle, items);
-          Log.i("ShowData" , "data Returned to list" + Arrays.toString(myBidsCards.toArray()));
+//          Log.i("ShowData" , "data Returned to list" + Arrays.toString(myBidsCards.toArray()));
 
 //
 //        bidList.setAdapter(arradpt);
