@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
@@ -26,13 +28,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class Sports_category extends AppCompatActivity {
-    EditText txtTitle,txtPrice,txtDuration,txtContact,txtBrand,txtCondition,txtDescription;
+    EditText txtTitle,txtPrice,txtContact,txtBrand,txtCondition,txtDescription;
     Button PublishNow;
     DatabaseReference DbRef,DbRef1;
     HomeItem homeitem;
     Adverticement adverticement;
     long maxid=0;
-    String idPrefix="SAH";
+    String idPrefix="HAS";
     private ImageSwitcher imageIs;
     private Button preBtn,nxBtn, pickImgbtn;
     private ArrayList<Uri> imageUris;
@@ -42,6 +44,10 @@ public class Sports_category extends AppCompatActivity {
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private DatabaseReference mFirebaseDatabase1;
+    //Timepicker object
+    TimePicker tp;
+    //Datapicker object
+    DatePicker dp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +55,16 @@ public class Sports_category extends AppCompatActivity {
 
         txtTitle = findViewById(R.id.setTitle);
         txtPrice = findViewById(R.id.setPrice);
-        txtDuration = findViewById(R.id.setDuration);
+
         txtContact = findViewById(R.id.setContact);
         txtBrand = findViewById(R.id.setBrand);
         txtCondition = findViewById(R.id.setCondition);
         txtDescription = findViewById(R.id.setDescription);
         PublishNow = findViewById(R.id.publish_now);
+        //ged datapicker value
+        dp = findViewById(R.id.setDate);
+        //get Timepicker value
+        tp = findViewById(R.id.setTime);
 
 
         //object
@@ -94,18 +104,24 @@ public class Sports_category extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Your Title is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtPrice.getText().toString()))
                         Toast.makeText(getApplicationContext(), " NIC Price Is Required!", Toast.LENGTH_SHORT).show();
-                    else if (TextUtils.isEmpty(txtDuration.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Duration is Required!", Toast.LENGTH_SHORT).show();
+
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
                         adverticement.setTitle(txtTitle.getText().toString().trim());
                         adverticement.setPrice(txtPrice.getText().toString().trim());
-                        adverticement.setDuration(txtDuration.getText().toString().trim());
+
                         adverticement.setContact(txtContact.getText().toString().trim());
                         homeitem.setCondition(txtCondition.getText().toString().trim());
                         adverticement.setDescription(txtDescription.getText().toString().trim());
                         homeitem.setBrand(txtBrand.getText().toString().trim());
+
+                        //set timepicker value
+                        String strTime = tp.getHour() + ":" + tp.getMinute();
+                        adverticement.setDuration(strTime);
+                        //set datapicker value
+                        String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                        adverticement.setDate(strDate);
                         // DbRef.child("user").setValue(user);
                         String strNumber= idPrefix+String.valueOf(maxid+1);
                         DbRef.child(String.valueOf(strNumber)).setValue(homeitem);
@@ -128,7 +144,7 @@ public class Sports_category extends AppCompatActivity {
             public void clearControl() {
                 txtTitle.setText("");
                 txtPrice.setText("");
-                txtDuration.setText("");
+
                 txtContact.setText("");
                 txtCondition.setText("");
                 txtBrand.setText("");
