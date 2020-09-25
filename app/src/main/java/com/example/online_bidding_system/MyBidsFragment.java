@@ -90,7 +90,7 @@ public class MyBidsFragment extends Fragment {
 
         bidList = view.findViewById(R.id.myBidsList);
         dbRef = FirebaseDatabase.getInstance().getReference().child("User_Bids").child("CUS1");
-        MyBidsCard my_Bid = new MyBidsCard();
+        //MyBidsCard my_Bid = new MyBidsCard();
         myBidsCards = new ArrayList<>();
 
 

@@ -9,6 +9,7 @@ public class MyBidsCard {
     private String Title;
     private String Type;
     private String endDate;
+    private String seller_id;
     private int MaxBid;
     private int Mybid;
     private int Start_Price;
@@ -29,7 +30,21 @@ public class MyBidsCard {
         Start_Price = start_Price;
     }
 
+    public void setMywinCardValues(String contactNo, String duration, String endDate, int maxBid, int mybid, String seller_id){
+        this.ContactNo = contactNo;
+        this.Duration = duration;
+        this.endDate = endDate;
+        this.MaxBid = maxBid;
+        this.Mybid = mybid;
+        this.seller_id = seller_id;
+    }
+
     //Getters
+
+
+    public String getSeller_id() {
+        return seller_id;
+    }
 
     public String getContactNo() {
         return ContactNo;
@@ -104,5 +119,9 @@ public class MyBidsCard {
 
     public void setStart_Price(int start_Price) {
         Start_Price = start_Price;
+    }
+
+    public void setSeller_id(String seller_id) {
+        this.seller_id = seller_id;
     }
 }
