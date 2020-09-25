@@ -1,14 +1,25 @@
 package com.example.online_bidding_system;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.lang.reflect.Array;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +29,7 @@ import android.widget.ListView;
 public class MyBidsFragment extends Fragment {
 
     ListView bidList;
+    DatabaseReference dbRef;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -66,14 +78,28 @@ public class MyBidsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_bids, container, false);
 
+        dbRef = FirebaseDatabase.getInstance().getReference();
+
         String items[] = {"Item Name 1" , "Item Name 2" , "Item Name 3" , "Item Name 4" , "Item Name 5" , "Item Name 6" , "Item Name 7"};
+        String times[] = {"08:00:00 12/05/2020" , "09:00:00 12/05/2020" , "10:00:00 12/05/2020" , "08:00:00 12/05/2020" , "09:00:00 12/05/2020" , "08:00:00 12/05/2020" , "08:00:00 12/05/2020"};
+        int maxbid[] = {2500 , 5400 , 4852 , 6588 , 254 , 1547 , 1200};
+        int mybid[] = {4500 , 800 , 2852 , 6500 , 2540 , 157 , 2000};
+        int img[] = {R.drawable.sampleuser , R.drawable.books , R.drawable.watch , R.drawable.sampleuser , R.drawable.books , R.drawable.watch ,  R.drawable.books};
 
-        ArrayAdapter arradpt = new ArrayAdapter<String>(getActivity(), R.layout.my_bid_card , R.id.myBidCardTitle, items);
-
+//        ArrayAdapter arradpt = new ArrayAdapter<String>(getActivity(), R.layout.my_bid_card , R.id.myBidCardTitle, items);
+//
         bidList = view.findViewById(R.id.myBidsList);
+//
+//        bidList.setAdapter(arradpt);
+//        return view;
 
-        bidList.setAdapter(arradpt);
+        MyAdapter singleCard = new MyAdapter(getActivity() , items , times , maxbid , mybid , img);
+        bidList.setAdapter(singleCard);
+
         return view;
-
     }
+
+
+
+
 }
