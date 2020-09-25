@@ -34,7 +34,7 @@ public class MyWinAdapter extends ArrayAdapter<MyBidsCard> {
         View winCard = layoutInflater.inflate(R.layout.my_wins_card , parent , false);
 
         TextView itemNane = winCard.findViewById(R.id.myWinCardTitle);
-        TextView myBid = winCard.findViewById(R.id.myWinCardMyBidValue);
+        TextView myBid = winCard.findViewById(R.id.CardMywinmyBid);
         TextView contNo = winCard.findViewById(R.id.myWinContactNo);
         TextView sellerId = winCard.findViewById(R.id.myWinSellerIdVal);
         TextView endingDate = winCard.findViewById(R.id.myWinDate);
@@ -42,7 +42,10 @@ public class MyWinAdapter extends ArrayAdapter<MyBidsCard> {
 
         MyBidsCard winRow = cardList.get(position);
         itemNane.setText(winRow.getTitle());
-        myBid.setText(winRow.getMybid());
+        myBid.setText(winRow.getMybid() + " Rs");
+        //myBid.setText(String.valueOf(winRow.getMybid()));
+        //setting int values to text fields can caused to throw Resources$NotFoundException
+        //Use above syntax in those scenarios
         contNo.setText(winRow.getContactNo());
         sellerId.setText(winRow.getSeller_id());
         endingDate.setText(winRow.getEndDate());

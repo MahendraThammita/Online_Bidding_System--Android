@@ -30,7 +30,8 @@ public class MyBidsCard {
         Start_Price = start_Price;
     }
 
-    public void setMywinCardValues(String contactNo, String duration, String endDate, int maxBid, int mybid, String seller_id){
+    public void setMywinCardValues(String Title , String contactNo, String duration, String endDate, int maxBid, int mybid, String seller_id){
+        this.Title = Title;
         this.ContactNo = contactNo;
         this.Duration = duration;
         this.endDate = endDate;

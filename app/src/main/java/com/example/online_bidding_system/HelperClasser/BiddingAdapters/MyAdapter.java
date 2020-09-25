@@ -52,6 +52,9 @@ public class MyAdapter extends ArrayAdapter<MyBidsCard> {
             bidTitle.setText(bid.getTitle());
             cardMaxBid.setText(bid.getMaxBid() + " Rs");
             cardMyBid.setText(bid.getMybid() + " Rs");
+            //cardMyBid.setText(String.valueOf(bid.getMybid()));
+            //setting int values to text fields can caused to throw Resources$NotFoundException
+            //Use above syntax in those scenarios
 
 //           Log.i("ShowData" , "data Returned to adapter values" + bid.getMybid());
 

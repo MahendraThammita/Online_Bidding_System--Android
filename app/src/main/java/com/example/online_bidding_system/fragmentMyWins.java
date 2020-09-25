@@ -105,6 +105,7 @@ public class fragmentMyWins extends Fragment {
                     String endDate = ds.child("endDate").getValue().toString();
                     String seller_id = ds.child("seller_id").getValue().toString();
                     String ContactNo = ds.child("ContactNo").getValue().toString();
+                    String Title = ds.child("Title").getValue().toString();
                     int MaxBid = Integer.valueOf(ds.child("MaxBid").getValue().toString());
                     int Mybid = Integer.valueOf(ds.child("Mybid").getValue().toString());
 
@@ -117,19 +118,19 @@ public class fragmentMyWins extends Fragment {
                     ZoneId zid = ZoneId.of("Asia/Colombo");
                     LocalDateTime now = LocalDateTime.now(zid);
 
-                    Log.i("datetest" , "Edited Date : " + finalDate);
-                    Log.i("today" , "This Time : " + now);
+//                    Log.i("datetest" , "Edited Date : " + finalDate);
+//                    Log.i("today" , "This Time : " + now);
 
                     if(contactDate.isBefore(now) || contactDate.isEqual(now)){
                         //Change the status of AD
                         String adID = ds.getKey().toString();
-                        Log.i("EndAuction" , "Ended Auctions ID : " + adID);
+                        //Log.i("EndAuction" , "Ended Auctions ID : " + adID);
 
                         if(MaxBid == Mybid){
                             //This is a bid won
-                            Log.i("WonBid" , "Won Auctions ID : " + adID);
+                            //Log.i("WonBid" , "Won Auctions ID : " + adID);
                             MyBidsCard winningBid = new MyBidsCard();
-                            winningBid.setMywinCardValues(ContactNo , Duration , endDate , MaxBid , Mybid , seller_id);
+                            winningBid.setMywinCardValues(Title , ContactNo , Duration , endDate , MaxBid , Mybid , seller_id);
                             myWinCards.add(winningBid);
                         }
                     }
@@ -151,15 +152,6 @@ public class fragmentMyWins extends Fragment {
         });
 
 
-
-
-
-        String items[] = {"Gaucci Watch" , "Item Name 2" , "Item Name 3" , "Item Name 4" , "Item Name 5" , "Item Name 6" , "Item Name 7"};
-
-
-        ArrayAdapter<String> singleWin = new ArrayAdapter<String>(getActivity(), R.layout.my_wins_card , R.id.myWinCardTitle , items);
-
-        list.setAdapter(singleWin);
 
 
         return view;
