@@ -48,6 +48,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/myAuctCardAuctId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/AuctionIdDemo"
@@ -56,7 +57,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right">
 
                     <TextView
                         android:id="@+id/auctionCateCap"
@@ -70,13 +72,15 @@
 
                     <TextView
                         android:id="@+id/auctionCateVal"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_toRightOf="@+id/auctionCateCap"
                         android:layout_alignBaseline="@+id/auctionCateCap"
                         android:text="@string/AuctionIdDemo"
-                        android:textColor="@color/Black" />
+                        android:textColor="@color/Black"
+                        android:gravity="right"
+                        android:foregroundGravity="right"/>
 
                 </RelativeLayout>
 
@@ -96,13 +100,14 @@
 
                     <TextView
                         android:id="@+id/auctionhignbidVal"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_toRightOf="@+id/auctionhignbidCap"
                         android:layout_alignBottom="@+id/auctionhignbidCap"
                         android:text="@string/demo_Item_Price"
-                        android:textColor="@color/Black" />
+                        android:textColor="@color/Black"
+                        android:gravity="right"/>
 
 
                 </RelativeLayout>
@@ -129,7 +134,8 @@
                         android:layout_toRightOf="@+id/auctionhignbidEndsAtCap"
                         android:layout_alignBaseline="@+id/auctionhignbidEndsAtCap"
                         android:text="@string/Ending_Date_Time_Demo"
-                        android:textColor="@color/Black" />
+                        android:textColor="@color/Black"
+                        android:gravity="right"/>
 
 
                 </RelativeLayout>
@@ -150,13 +156,14 @@
 
                     <TextView
                         android:id="@+id/auctionStatudVal"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_toRightOf="@+id/auctionStatudCap"
                         android:layout_alignBaseline="@+id/auctionStatudCap"
                         android:text="Sold"
-                        android:textColor="@color/Black" />
+                        android:textColor="@color/Black"
+                        android:gravity="right"/>
 
 
                 </RelativeLayout>

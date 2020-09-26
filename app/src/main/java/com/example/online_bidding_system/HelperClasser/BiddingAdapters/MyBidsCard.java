@@ -2,7 +2,7 @@ package com.example.online_bidding_system.HelperClasser.BiddingAdapters;
 
 public class MyBidsCard {
 
-
+    private String auctionId;
     private String ContactNo;
     private String Description;
     private String Duration;
@@ -40,8 +40,21 @@ public class MyBidsCard {
         this.seller_id = seller_id;
     }
 
+    public void setMyAuctionCardValues(String Title , String duration, String endDate, int maxBid, String ADid, String Type){
+        this.Title = Title;
+        this.Duration = duration;
+        this.endDate = endDate;
+        this.MaxBid = maxBid;
+        this.auctionId = ADid;
+        this.Type = Type;
+    }
+
     //Getters
 
+
+    public String getAuctionId() {
+        return auctionId;
+    }
 
     public String getSeller_id() {
         return seller_id;
@@ -85,6 +98,10 @@ public class MyBidsCard {
 
     //Setters
 
+
+    public void setAuctionId(String auctionId) {
+        this.auctionId = auctionId;
+    }
 
     public void setContactNo(String contactNo) {
         ContactNo = contactNo;

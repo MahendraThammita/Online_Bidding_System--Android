@@ -26,10 +26,7 @@ public class MyAdapter extends ArrayAdapter<MyBidsCard> {
     public MyAdapter(@NonNull Context context, int resource, List<MyBidsCard> myBidList) {
         super(context, resource , myBidList);
         this.context = context;
-        //this.addImg = addImg;
         this.myBidList = myBidList;
-//        Log.i("ShowData" , "data Returned to adapter");
-//        Log.i("ShowData" , "data Returned to adapter" + Arrays.toString(myBidList.toArray()));
     }
 
 
