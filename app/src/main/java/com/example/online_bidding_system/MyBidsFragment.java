@@ -1,14 +1,33 @@
 package com.example.online_bidding_system;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyAdapter;
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +37,9 @@ import android.widget.ListView;
 public class MyBidsFragment extends Fragment {
 
     ListView bidList;
+    DatabaseReference dbRef;
+    List<MyBidsCard> myBidsCards;
+    MyAdapter singleCard;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -66,14 +88,67 @@ public class MyBidsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_bids, container, false);
 
-        String items[] = {"Item Name 1" , "Item Name 2" , "Item Name 3" , "Item Name 4" , "Item Name 5" , "Item Name 6" , "Item Name 7"};
-
-        ArrayAdapter arradpt = new ArrayAdapter<String>(getActivity(), R.layout.my_bid_card , R.id.myBidCardTitle, items);
-
         bidList = view.findViewById(R.id.myBidsList);
+        dbRef = FirebaseDatabase.getInstance().getReference().child("User_Bids").child("CUS1");
+        //MyBidsCard my_Bid = new MyBidsCard();
+        myBidsCards = new ArrayList<>();
 
-        bidList.setAdapter(arradpt);
+
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                    String ContactNo = ds.child("ContactNo").getValue().toString();
+                    String Description = ds.child("Description").getValue().toString();
+                    String Duration = ds.child("Duration").getValue().toString();
+                    String Title = ds.child("Title").getValue().toString();
+                    String Type = ds.child("Type").getValue().toString();
+                    String endDate = ds.child("endDate").getValue().toString();
+                    int MaxBid = Integer.valueOf(ds.child("MaxBid").getValue().toString());
+                    int Mybid = Integer.valueOf(ds.child("Mybid").getValue().toString());
+                    int Start_Price = Integer.valueOf(ds.child("Start_Price").getValue().toString());
+
+                    Log.i("ShowData" , "data Returned" + ContactNo + " - " + Description  + " - " + MaxBid);
+                    MyBidsCard my_Bid = new MyBidsCard(ContactNo , Description , Duration , Title , Type , endDate , MaxBid , Mybid , Start_Price);
+                    //MyBidsCard my_Bid = ds.getValue(MyBidsCard.class);
+                    myBidsCards.add(my_Bid);
+                }
+                if(myBidsCards != null){
+                    Log.i("ShowData" , "data Returned to list" + Arrays.toString(myBidsCards.toArray()));
+                    singleCard = new MyAdapter(getActivity() , R.layout.my_bid_card , myBidsCards );
+                    bidList.setAdapter(singleCard);
+                    Log.i("ShowData" , "data Returned setAdapter called");
+                    singleCard.notifyDataSetChanged();
+                }
+
+                //singleCard.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+//        ArrayAdapter arradpt = new ArrayAdapter<String>(getActivity(), R.layout.my_bid_card , R.id.myBidCardTitle, items);
+//          Log.i("ShowData" , "data Returned to list" + Arrays.toString(myBidsCards.toArray()));
+
+//
+//        bidList.setAdapter(arradpt);
+//        return view;
+
+        //MyAdapter singleCard = new MyAdapter(getActivity() , items , times , maxbid , mybid , img);
+
+
+
+
         return view;
-
     }
+
+
+
+
 }

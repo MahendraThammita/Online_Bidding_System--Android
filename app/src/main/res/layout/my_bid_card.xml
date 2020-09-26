@@ -72,11 +72,10 @@
                         </TextView>
 
                         <TextView
-                            android:id="@+id/myBidTime"
+                            android:id="@+id/myBidTimeVal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/myBidCardImg"
-                            android:text="08:00:00 2020/08/15"
+                            android:layout_toRightOf="@+id/myBidCardtime"
                             android:textSize="16sp">
 
                         </TextView>
@@ -91,9 +90,9 @@
 
                         <TextView
 
+                            android:id="@+id/mybidmaxBidCap"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/mybidmaxBidCap"
                             android:drawableLeft="@drawable/dolloe_back"
                             android:text="Max Bid :  "
                             android:textSize="18sp">
@@ -127,7 +126,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/mybidmyBidCap"
-                            android:layout_toRightOf="@+id/myBidCardImg"
+                            android:layout_toRightOf="@+id/myBidCardMyBid"
                             android:drawableLeft="@drawable/money_mybid"
                             android:text="@string/MybidsCurrentBid"
                             android:layout_marginRight="18dp"
@@ -136,10 +135,10 @@
                         </TextView>
 
                         <TextView
-                            android:id="@+id/mybidmyBidVal"
+                            android:id="@+id/mybidmyBidValBidVal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/myBidCardImg"
+                            android:layout_toRightOf="@+id/myBidMaxBidVal"
                             android:text="2000.00Rs"
                             android:textStyle="bold"
                             android:textSize="16sp"
