@@ -120,15 +120,7 @@
 
             </TimePicker>
 
-            <EditText
-                android:id="@+id/setDuration"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-black"
-                android:hint="Duration"
-                android:inputType="text" />
+
 
             <!--EditText -->
             <EditText

@@ -90,7 +90,7 @@ public class HomeAndGarden extends AppCompatActivity {
             public void onClick(View view) {
                 DbRef = FirebaseDatabase.getInstance().getReference().child("Home&Garden");
                 DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement");
-               //use id
+                //use id
                 userId = mFirebaseDatabase1.push().getKey();
                 //insert data in firebase database Adverticement
                 mFirebaseDatabase.child(userId).setValue(adverticement);
@@ -102,6 +102,7 @@ public class HomeAndGarden extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists())
                             maxid=(dataSnapshot.getChildrenCount());
+                        savedata();
                     }
 
                     @Override
@@ -109,6 +110,10 @@ public class HomeAndGarden extends AppCompatActivity {
 
                     }
                 });
+
+            }
+            //new
+            public void savedata(){
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Your Title is Required!", Toast.LENGTH_SHORT).show();
@@ -130,6 +135,7 @@ public class HomeAndGarden extends AppCompatActivity {
                         //set datapicker value
                         String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
                         adverticement.setDate(strDate);
+
 
 
 
@@ -259,19 +265,6 @@ public class HomeAndGarden extends AppCompatActivity {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -34,6 +34,7 @@ public class Other_category extends AppCompatActivity {
     DatabaseReference DbRef;
 
     Adverticement adverticement;
+    String MaxBid;
     long maxid=0;
     String idPrefix="OTH";
     private ImageSwitcher imageIs;
@@ -101,7 +102,7 @@ public class Other_category extends AppCompatActivity {
                         //set datapicker value
                         String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
                         adverticement.setDate(strDate);
-
+                        adverticement.setMaxBid("0");
 
                         adverticement.setContact(txtContact.getText().toString().trim());
 

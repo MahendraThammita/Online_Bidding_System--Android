@@ -32,6 +32,7 @@ public class Sports_category extends AppCompatActivity {
     Button PublishNow;
     DatabaseReference DbRef,DbRef1;
     HomeItem homeitem;
+    String MaxBid;
     Adverticement adverticement;
     long maxid=0;
     String idPrefix="HAS";
@@ -110,7 +111,7 @@ public class Sports_category extends AppCompatActivity {
                     else {
                         adverticement.setTitle(txtTitle.getText().toString().trim());
                         adverticement.setPrice(txtPrice.getText().toString().trim());
-
+                        adverticement.setMaxBid("0");
                         adverticement.setContact(txtContact.getText().toString().trim());
                         homeitem.setCondition(txtCondition.getText().toString().trim());
                         adverticement.setDescription(txtDescription.getText().toString().trim());
