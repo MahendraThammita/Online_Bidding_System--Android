@@ -122,13 +122,13 @@
                 android:drawableLeft="@drawable/person">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editUserName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableLeft="@drawable/person"
                     android:drawableTint="@color/colorPrimary"
                     android:foregroundGravity="center"
                     android:gravity="center"
-                    android:hint="@string/NameDemo"
                     android:textSize="24sp"
                     style="@style/Widget.Design.TextInputLayout"/>
 
@@ -150,13 +150,13 @@
                 style="@style/Widget.Design.TextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editUserEmail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableLeft="@drawable/e_mail"
                     android:drawableTint="@color/colorPrimary"
                     android:foregroundGravity="center"
                     android:gravity="center"
-                    android:hint="@string/EmailDemo"
                     android:textAlignment="center"
                     android:textColorHint="@color/MDBgreycolor"
                     android:textSize="24sp" />
@@ -179,13 +179,13 @@
                 style="@style/Widget.Design.TextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editUserAddress"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableLeft="@drawable/mail"
                     android:drawableTint="@color/colorPrimary"
                     android:foregroundGravity="center"
                     android:gravity="center"
-                    android:hint="@string/AddressDemo"
                     android:textAlignment="center"
                     android:textColorHint="@color/MDBgreycolor"
                     android:textSize="24sp" />
@@ -208,25 +208,35 @@
                 style="@style/Widget.Design.TextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editUserPhone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableLeft="@drawable/phone_contact"
                     android:drawableTint="@color/colorPrimary"
                     android:foregroundGravity="center"
                     android:gravity="center"
-                    android:hint="@string/phoneDemo"
                     android:textAlignment="center"
                     android:textColorHint="@color/MDBgreycolor"
                     android:textSize="24sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+
             <Button
+                android:id="@+id/editUserSaveBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="50dp"
                 android:background="@drawable/round_button"
                 android:gravity="center"

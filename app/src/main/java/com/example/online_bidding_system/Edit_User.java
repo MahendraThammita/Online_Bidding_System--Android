@@ -8,30 +8,47 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 
 public class Edit_User extends AppCompatActivity {
 
-    RecyclerView.Adapter adapter;
-    DrawerLayout drawer;
-    NavigationView navi;
-    Toolbar primTool;
+    private RecyclerView.Adapter adapter;
+    private DrawerLayout drawer;
+    private NavigationView navi;
+    private Toolbar primTool;
     private ShapeableImageView roundedProfilePic;
     private Button imageChanger;
+    private Button saveData;
     private static final int PICK_IMAGE = 1;
     private Uri profPicUri;
+    private DatabaseReference retriveDbRef;
+    private User currentUser;
+    private StorageReference storageRef;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -39,6 +56,35 @@ public class Edit_User extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__user);
 
+        retriveDbRef = FirebaseDatabase.getInstance().getReference().child("User").child("CUS1");
+        
+        retriveDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()){
+                    String userId = dataSnapshot.getKey().toString();
+                    String userName =  dataSnapshot.child("fullName").getValue().toString();
+                    String userEmail =  dataSnapshot.child("email").getValue().toString();
+                    //String userContact =  dataSnapshot.child("").getValue().toString();
+                    String userAddress =  dataSnapshot.child("address").getValue().toString();
+                    
+                    currentUser = new User(userId , userName , userEmail , userAddress , "07525815");
+                    setToViewHints(currentUser);
+                    
+                }
+                else
+                    Toast.makeText(getApplicationContext() , "Cannot Find the User" , Toast.LENGTH_SHORT);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+        //getting Image from Galary
         roundedProfilePic = findViewById(R.id.UserEditUserImage);
         imageChanger = findViewById(R.id.profImgeChangeBtn);
 
@@ -50,6 +96,19 @@ public class Edit_User extends AppCompatActivity {
                 srchGallery.setAction(Intent.ACTION_GET_CONTENT);
 
                 startActivityForResult(Intent.createChooser(srchGallery , "Select Your Profile Picture") , PICK_IMAGE);
+            }
+        });
+
+        //Image Uploading
+
+        saveData = findViewById(R.id.editUserSaveBtn);
+        saveData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                roundedProfilePic = findViewById(R.id.UserEditUserImage);
+                Bitmap bitmap = ((BitmapDrawable)roundedProfilePic.getDrawable()).getBitmap();
+
+
             }
         });
 
@@ -103,6 +162,19 @@ public class Edit_User extends AppCompatActivity {
 
     }
 
+    private void setToViewHints(User currentUser) {
+
+        TextInputEditText uName = findViewById(R.id.editUserName);
+        TextInputEditText uEmail = findViewById(R.id.editUserEmail);
+        TextInputEditText uAddress = findViewById(R.id.editUserAddress);
+        TextInputEditText uPhone = findViewById(R.id.editUserPhone);
+
+        uName.setHint(currentUser.getFullName().toString());
+        uEmail.setHint(currentUser.getEmail().toString());
+        uAddress.setHint(currentUser.getAddress().toString());
+        uPhone.setHint(currentUser.getContactNo().toString());
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -118,4 +190,13 @@ public class Edit_User extends AppCompatActivity {
         }
 
     }
+
+    private String getFileExt(Uri uri){
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+
+
 }
