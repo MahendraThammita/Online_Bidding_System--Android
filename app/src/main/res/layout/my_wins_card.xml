@@ -41,7 +41,7 @@
                 </ImageView>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/myWinCardImg"
@@ -60,42 +60,13 @@
 
                     </TextView>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
 
-                        <TextView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/timeCaptionMybid"
-                            android:drawableLeft="@drawable/timer"
-                            android:text="@string/AuctionIdCaption"
-                            android:textSize="18sp">
-
-                        </TextView>
-
-                        <TextView
-                            android:id="@+id/myBidTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/myBidCardImg"
-                            android:text="@string/AuctionIdDemo"
-                            android:layout_marginLeft="5dp"
-                            android:textStyle="bold"
-                            android:textSize="16sp">
-
-                        </TextView>
-
-                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/MywincardTextArea"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="10dp">
+                        android:orientation="horizontal">
 
                         <TextView
 
@@ -109,20 +80,22 @@
                         </TextView>
 
                         <TextView
-                            android:id="@+id/mybidmaxBidVal"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/CardMywinmyBid"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/myBidCardImg"
                             android:text="@string/demo_Item_Price"
                             android:textStyle="bold"
                             android:layout_marginLeft="20sp"
-                            android:textSize="16sp">
+                            android:textSize="16sp"
+                            android:gravity="right">
 
                         </TextView>
+
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="10dp">
@@ -139,19 +112,52 @@
 
                         <TextView
                             android:id="@+id/myWinSellerIdVal"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/myBidCardImg"
                             android:text="@string/SellerIdDemo"
                             android:textStyle="bold"
                             android:layout_marginLeft="20sp"
-                            android:textSize="16sp">
+                            android:textSize="16sp"
+                            android:gravity="right">
 
                         </TextView>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/timeCaptionMybid"
+                            android:drawableLeft="@drawable/phone_contact"
+                            android:text="Contact No"
+                            android:textSize="18sp">
+
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/myWinContactNo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/myBidCardImg"
+                            android:text="@string/AuctionIdDemo"
+                            android:layout_marginLeft="5dp"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:gravity="right">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="10dp">
@@ -168,13 +174,14 @@
 
                         <TextView
                             android:id="@+id/myWinDate"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20sp"
                             android:layout_toRightOf="@+id/myBidCardImg"
                             android:text="@string/demoDate"
                             android:textSize="16sp"
-                            android:textStyle="bold">
+                            android:textStyle="bold"
+                            android:gravity="right">
 
                         </TextView>
                     </LinearLayout>

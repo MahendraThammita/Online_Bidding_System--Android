@@ -1,14 +1,33 @@
 package com.example.online_bidding_system;
 
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyAuctionsAdapter;
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +37,10 @@ import android.widget.ListView;
 public class fragmentMyAuctions extends Fragment {
 
     ListView auctList;
+    DatabaseReference bySellerRef;
+    List<MyBidsCard> myAuctionCards;
+    MyAuctionsAdapter singleAuction;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -63,14 +86,65 @@ public class fragmentMyAuctions extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_auctions, container, false);
+        //bySellerRef = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("seller_id").equalTo("CUS2");
+        Query bySellerQuery = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("seller_id").equalTo("CUS2");
 
-        String items[] = {"Auction Name 1" , "Auction Name 2" , "Auction Name 3" , "Auction Name 4" , "Auction Name 5" , "Auction Name 6" , "Auction Name 7"};
-
-        ArrayAdapter singleAuction = new ArrayAdapter(getActivity() , R.layout.my_auction_card , R.id.AuctionCardAuctionName, items);
-
+        myAuctionCards = new ArrayList<>();
         auctList = view.findViewById(R.id.AuctionCardsList);
 
-        auctList.setAdapter(singleAuction);
+        bySellerQuery.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    String Duration = ds.child("Duration").getValue().toString();
+                    String endDate = ds.child("endDate").getValue().toString();
+                    String Type = ds.child("Type").getValue().toString();
+                    String Title = ds.child("Title").getValue().toString();
+                    String ADid = ds.getKey().toString();
+                    int MaxBid = Integer.valueOf(ds.child("MaxBid").getValue().toString());
+
+                    Log.i("orderByValues" , "ADD No : " + ADid);
+
+                    LocalDate datPart = LocalDate.parse(endDate);
+                    LocalTime timePart = LocalTime.parse(Duration);
+                    LocalDateTime contactDate = LocalDateTime.of(datPart , timePart);
+                    String finalDate = contactDate.toString();
+
+                    MyBidsCard myAuction = new MyBidsCard();
+                    myAuction.setMyAuctionCardValues(Title , Duration , finalDate , MaxBid , ADid , Type);
+                    myAuctionCards.add(myAuction);
+                }
+                if(myAuctionCards != null){
+                    singleAuction = new MyAuctionsAdapter(getActivity() , R.layout.my_auction_card , myAuctionCards);
+                    auctList.setAdapter(singleAuction);
+                    singleAuction.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+       // String items[] = {"Auction Name 1" , "Auction Name 2" , "Auction Name 3" , "Auction Name 4" , "Auction Name 5" , "Auction Name 6" , "Auction Name 7"};
+
+       // ArrayAdapter singleAuction = new ArrayAdapter(getActivity() , R.layout.my_auction_card , R.id.AuctionCardAuctionName, items);
+
+//        auctList = view.findViewById(R.id.AuctionCardsList);
+//
+//        auctList.setAdapter(singleAuction);
 
         return view;
     }
