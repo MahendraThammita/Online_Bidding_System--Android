@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">//start
+    tools:openDrawer="">//start
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -36,8 +36,8 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@color/colorPrimary"
+            android:layout_height="230dp"
+            android:background="@drawable/wave3"
             android:gravity="bottom"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,8 @@
                 android:layout_height="120dp"
                 android:layout_marginLeft="30dp"
                 android:background="@drawable/sampleuser"
-                app:cardCornerRadius="60dp">
+                app:cardCornerRadius="60dp"
+                android:layout_gravity="center">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/UserEditUserImage"
@@ -65,8 +66,9 @@
 
 
             <Button
+                android:id="@+id/profImgeChangeBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/rounded_btn_trans"
                 android:gravity="center"
@@ -74,27 +76,30 @@
                 android:paddingRight="10dp"
                 android:text="Change Image"
                 android:textAlignment="center"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                android:drawableLeft="@drawable/camera"
+                android:layout_marginBottom="35dp"
+                android:layout_marginStart="55dp"/>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout8"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@drawable/wave3"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/linearLayout8"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:background="@drawable/wave3"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="128dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -112,7 +117,9 @@
                 android:foregroundGravity="center"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColorHint="@color/MDBgreycolor">
+                android:textColorHint="@color/MDBgreycolor"
+                style="@style/Widget.Design.TextInputLayout"
+                android:drawableLeft="@drawable/person">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -122,9 +129,8 @@
                     android:foregroundGravity="center"
                     android:gravity="center"
                     android:hint="@string/NameDemo"
-                    android:textAlignment="center"
-                    android:textColorHint="@color/MDBgreycolor"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    style="@style/Widget.Design.TextInputLayout"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,14 +139,15 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:foregroundGravity="center"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColorHint="@color/MDBgreycolor">
+                android:textColorHint="@color/MDBgreycolor"
+                style="@style/Widget.Design.TextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -161,14 +168,15 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:foregroundGravity="center"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColorHint="@color/MDBgreycolor">
+                android:textColorHint="@color/MDBgreycolor"
+                style="@style/Widget.Design.TextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -189,14 +197,15 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:foregroundGravity="center"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColorHint="@color/MDBgreycolor">
+                android:textColorHint="@color/MDBgreycolor"
+                style="@style/Widget.Design.TextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"

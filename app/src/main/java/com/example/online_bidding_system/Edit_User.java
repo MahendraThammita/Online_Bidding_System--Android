@@ -1,6 +1,7 @@
 package com.example.online_bidding_system;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -8,10 +9,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationView;
+
+import java.io.IOException;
 
 public class Edit_User extends AppCompatActivity {
 
@@ -19,12 +28,34 @@ public class Edit_User extends AppCompatActivity {
     DrawerLayout drawer;
     NavigationView navi;
     Toolbar primTool;
+    private ShapeableImageView roundedProfilePic;
+    private Button imageChanger;
+    private static final int PICK_IMAGE = 1;
+    private Uri profPicUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__user);
 
+        roundedProfilePic = findViewById(R.id.UserEditUserImage);
+        imageChanger = findViewById(R.id.profImgeChangeBtn);
+
+        imageChanger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent srchGallery = new Intent();
+                srchGallery.setType("image/*");
+                srchGallery.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(srchGallery , "Select Your Profile Picture") , PICK_IMAGE);
+            }
+        });
+
+
+
+//Drawer Section
         drawer = findViewById(R.id.DrwerLay);
         navi = (NavigationView) findViewById(R.id.nav_view);
         primTool = findViewById(R.id.primaryActbar);
@@ -69,6 +100,22 @@ public class Edit_User extends AppCompatActivity {
                 return true;
             }
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == PICK_IMAGE && resultCode == RESULT_OK){
+            profPicUri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver() , profPicUri);
+                roundedProfilePic.setImageBitmap(bitmap);
+            }catch (IOException ex){
+                ex.printStackTrace();
+            }
+        }
 
     }
 }
