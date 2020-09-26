@@ -8,6 +8,7 @@ public class Adverticement  {
     private String Description;
     private String Contact;
     private String Date;
+    private String MaxBid;
 
     public String getTitle() {
         return Title;
@@ -56,6 +57,14 @@ public class Adverticement  {
 
     public void setDate(String date){
         Date = date;
+    }
+
+    public String getMaxBid() {
+        return MaxBid;
+    }
+
+    public void setMaxBid(String maxBid) {
+        MaxBid = maxBid;
     }
 
 }

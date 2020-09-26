@@ -1,5 +1,6 @@
 package com.example.online_bidding_system;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,8 +12,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class HomePage extends AppCompatActivity {
 
@@ -22,11 +30,35 @@ public class HomePage extends AppCompatActivity {
     Button profBtn;
     ImageButton addNew;
     ViewFlipper flipper;
+    DatabaseReference DBRef;
+    TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        title = findViewById(R.id.showTitle);
+
+        DBRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN1");
+        DBRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()){
+                    title.setText(dataSnapshot.child("title").getValue().toString());
+
+                }
+                else
+                    Toast.makeText(getApplicationContext() , "Empty" , Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        //End of Read
 
         int images[] = {R.drawable.slide1, R.drawable.slide2,R.drawable.slide3};
         flipper = findViewById(R.id.flipper);

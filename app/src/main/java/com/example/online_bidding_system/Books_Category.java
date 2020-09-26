@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
@@ -46,6 +48,10 @@ public class Books_Category extends AppCompatActivity {
     private String userId;
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
+    //Timepicker object
+    TimePicker tp;
+    //Datapicker object
+    DatePicker dp;
 
 
     @Override
@@ -56,7 +62,10 @@ public class Books_Category extends AppCompatActivity {
 
         txtTitle = findViewById(R.id.setTitle);
         txtPrice = findViewById(R.id.setPrice);
-        txtDuration = findViewById(R.id.setDuration);
+        //ged datapicker value
+        dp = findViewById(R.id.setDate);
+        //get Timepicker value
+        tp = findViewById(R.id.setTime);
         txtContact = findViewById(R.id.setContact);
         txtType = findViewById(R.id.setType);
         txtDescription = findViewById(R.id.setDescription);
@@ -96,14 +105,17 @@ public class Books_Category extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtPrice.getText().toString()))
                         Toast.makeText(getApplicationContext(), " Price Is Required!", Toast.LENGTH_SHORT).show();
-                    else if (TextUtils.isEmpty(txtDuration.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Duration is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
                         adverticement.setTitle(txtTitle.getText().toString().trim());
                         adverticement.setPrice(txtPrice.getText().toString().trim());
-                        adverticement.setDuration(txtDuration.getText().toString().trim());
+                        //set timepicker value
+                        String strTime = tp.getHour() + ":" + tp.getMinute();
+                        adverticement.setDuration(strTime);
+                        //set datapicker value
+                        String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                        adverticement.setDate(strDate);
                         adverticement.setContact(txtContact.getText().toString().trim());
                         adverticement.setDescription(txtDescription.getText().toString().trim());
                         book.setType(txtType.getText().toString().trim());
@@ -131,7 +143,6 @@ public class Books_Category extends AppCompatActivity {
             public void clearControl() {
                 txtTitle.setText("");
                 txtPrice.setText("");
-                txtDuration.setText("");
                 txtContact.setText("");
                 txtType.setText("");
                 txtDescription.setText("");

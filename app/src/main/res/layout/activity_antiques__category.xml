@@ -106,9 +106,25 @@
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Starting at"
-                android:inputType="text" />
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="End at:"
+                android:textSize="20sp"
+                android:layout_margin="12dp">
+
+            </TextView>
             <!--EditText -->
 
+
+
+            <DatePicker
+                android:id="@+id/setDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"></DatePicker>
             <TimePicker
                 android:id="@+id/setTime"
                 android:layout_width="match_parent"
@@ -118,21 +134,7 @@
 
             </TimePicker>
 
-            <DatePicker
-                android:id="@+id/setDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"></DatePicker>
 
-            <EditText
-                android:id="@+id/setDuration"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-black"
-                android:hint="Duration"
-                android:inputType="text" />
 
             <!--EditText -->
             <EditText
@@ -143,7 +145,7 @@
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Contact"
-                android:inputType="text" />
+                android:inputType="phone" />
 
 
 

@@ -10,14 +10,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
-import com.example.online_bidding_system.auction;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,45 +29,105 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Antiques_Edit extends AppCompatActivity {
+public class Antiques_Edit extends AppCompatActivity{
 
-    final int REQUEST_EXTERNAL_STORAGE = 100;
-    EditText txtTitle,txtPrice,txtDuration,txtContact,txtMaterials,txtDescription;
-    Button PublishNow;
+
+    EditText txtTitle,txtPrice,txtDuration,txtContact,txtPeriod,txtDescription;
+    Spinner period;
+    Button update, delete,PublishNow;
     DatabaseReference DbRef;
     DatabaseReference DbRef1;
+    private DatabaseReference mFirebaseDatabase;
+    private DatabaseReference mFirebaseDatabase1;
+    private FirebaseDatabase mFirebaseInstance;
+    Adverticement adverticement;
     auction add;
-    long maxid=0;
+    long maxid;
+    String MaxBid;
     String idPrefix="AN";
     private ImageSwitcher imageIs;
     private Button preBtn,nxBtn, pickImgbtn;
     private  ArrayList<Uri> imageUris;
+    private String userId;
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
 
+    TimePicker tp;
+    DatePicker dp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_antiques__edit);
+        setContentView(R.layout.activity_antiques_edit);
+
+        Spinner spinner = findViewById(R.id.setPeriod);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.TimePeriod, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
 
         txtTitle = findViewById(R.id.setTitle);
         txtPrice = findViewById(R.id.setPrice);
-        txtDuration = findViewById(R.id.setDuration);
         txtContact = findViewById(R.id.setContact);
-        txtMaterials = findViewById(R.id.setMaterials);
+        dp = findViewById(R.id.setDate);
+        tp = findViewById(R.id.setTime);
+        period = (Spinner)findViewById(R.id.setPeriod);
         txtDescription = findViewById(R.id.setDescription);
-        PublishNow = findViewById(R.id.publish_now);
+        update = findViewById(R.id.Update);
+        delete =  findViewById(R.id.Delete);
 
         add = new auction();
+        adverticement=new  Adverticement();
+
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
+        mFirebaseDatabase1 = mFirebaseInstance.getReference("Antiques");
+
+        DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN1");
+        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Antiques").child("AN1");
+        DbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()){
+                    txtTitle.setText(dataSnapshot.child("title").getValue().toString());
+                    txtContact.setText(dataSnapshot.child("contact").getValue().toString());
+                    txtPrice.setText(dataSnapshot.child("price").getValue().toString());
+                    txtDescription.setText(dataSnapshot.child("description").getValue().toString());
 
 
-        PublishNow.setOnClickListener(new View.OnClickListener() {
+                }
+                else
+                    Toast.makeText(getApplicationContext() , "Empty" , Toast.LENGTH_SHORT).show();
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Antiques");
-                DbRef= FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN1");
+                DbRef.removeValue();
+                Toast.makeText(getApplicationContext() , "Succesfully Deleated" , Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DbRef = FirebaseDatabase.getInstance().getReference().child("Antiques");
+                DbRef1= FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                userId = mFirebaseDatabase1.push().getKey();
+                mFirebaseDatabase.child(userId).setValue(adverticement);
+
+                mFirebaseDatabase1.child(userId).setValue(add);
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -82,21 +145,28 @@ public class Antiques_Edit extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtPrice.getText().toString()))
                         Toast.makeText(getApplicationContext(), " Price Is Required!", Toast.LENGTH_SHORT).show();
-                    else if (TextUtils.isEmpty(txtDuration.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Duration is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
-                        add.setTitle(txtTitle.getText().toString().trim());
-                        add.setPrice(txtPrice.getText().toString().trim());
-                        add.setDuration(txtDuration.getText().toString().trim());
-                        add.setContact(txtContact.getText().toString().trim());
-                        add.setMaterials(txtMaterials.getText().toString().trim());
-                        add.setDescription(txtDescription.getText().toString().trim());
-                        // DbRef.child("user").setValue(user);
+
+
+                        String strTime = tp.getHour() + ":" + tp.getMinute();
+                        adverticement.setDuration(strTime);
+
+                        String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                        adverticement.setDate(strDate);
+
                         String strNumber= idPrefix+String.valueOf(maxid+1);
+                        adverticement.setTitle(txtTitle.getText().toString().trim());
+                        adverticement.setPrice(txtPrice.getText().toString().trim());
+                        adverticement.setContact(txtContact.getText().toString().trim());
+                        adverticement.setDescription(txtDescription.getText().toString().trim());
+                        adverticement.setMaxBid("0");
+                        add.setTime_period(period.getSelectedItem().toString());
                         DbRef.child(String.valueOf(strNumber)).setValue(add);
+                        DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
                         Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
+                        maxid  = maxid+1;
                         clearControl();
 
                     }
@@ -116,9 +186,7 @@ public class Antiques_Edit extends AppCompatActivity {
             public void clearControl() {
                 txtTitle.setText("");
                 txtPrice.setText("");
-                txtDuration.setText("");
                 txtContact.setText("");
-                txtMaterials.setText("");
                 txtDescription.setText("");
             }
 
@@ -183,6 +251,9 @@ public class Antiques_Edit extends AppCompatActivity {
         }));
     }
 
+
+
+
     private void pickImagesIntent(){
 
 
@@ -221,5 +292,8 @@ public class Antiques_Edit extends AppCompatActivity {
             }
         }
     }
+
+
+
 }
 
