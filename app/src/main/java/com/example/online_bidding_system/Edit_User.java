@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -36,7 +37,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -56,6 +59,7 @@ public class Edit_User extends AppCompatActivity {
     private StorageReference storageRef;
     private ProgressBar progressBar;
     private String userId;
+    private StorageReference downStorageRef;
 
 
     @Override
@@ -64,7 +68,9 @@ public class Edit_User extends AppCompatActivity {
         setContentView(R.layout.activity_edit__user);
 
         retriveDbRef = FirebaseDatabase.getInstance().getReference().child("User").child("CUS1");
-        storageRef = FirebaseStorage.getInstance().getReference("uploads");
+        storageRef = FirebaseStorage.getInstance().getReference("userImages");
+
+        roundedProfilePic = findViewById(R.id.UserEditUserImage);
         
         retriveDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -75,6 +81,16 @@ public class Edit_User extends AppCompatActivity {
                     String userEmail =  dataSnapshot.child("email").getValue().toString();
                     //String userContact =  dataSnapshot.child("").getValue().toString();
                     String userAddress =  dataSnapshot.child("address").getValue().toString();
+                    String userImage = dataSnapshot.child("ProfilePic").getValue().toString();
+
+                    //getUserImage(userImage);
+                    Picasso.get()
+                            .load(userImage)
+                            .placeholder(R.mipmap.ic_launcher)
+                            .fit()
+                            .centerCrop()
+                            .into(roundedProfilePic);
+
                     
                     currentUser = new User(userId , userName , userEmail , userAddress , "07525815");
                     setToViewHints(currentUser);
@@ -91,8 +107,9 @@ public class Edit_User extends AppCompatActivity {
         });
 
 
+
         //getting Image from Galary
-        roundedProfilePic = findViewById(R.id.UserEditUserImage);
+
         imageChanger = findViewById(R.id.profImgeChangeBtn);
 
         imageChanger.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +134,8 @@ public class Edit_User extends AppCompatActivity {
                 progressBar = findViewById(R.id.progressBarEditUser);
 
                 if(profPicUri != null){
-                    StorageReference fileref = storageRef.child("UsetImages/" + userId + "." + getFileExt(profPicUri));
+                    final String imageName = userId + "." + getFileExt(profPicUri);
+                    StorageReference fileref = storageRef.child(imageName);
 
 
 
@@ -130,12 +148,16 @@ public class Edit_User extends AppCompatActivity {
                                         @Override
                                         public void run() {
                                             progressBar.setProgress(0);
+                                            progressBar.setVisibility(View.INVISIBLE);
                                         }
                                     }, 500);
 
                                     Toast.makeText(getApplicationContext() , "Data Saved Successfully" , Toast.LENGTH_SHORT).show();
-                                    retriveDbRef.child("ProfilePic").setValue(userId);
+                                    retriveDbRef.child("ProfilePic").setValue(imageName);
+                                    finish();
+                                    startActivity(getIntent());
                                 }
+
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -210,6 +232,13 @@ public class Edit_User extends AppCompatActivity {
         });
 
     }
+
+//    private void getUserImage(String userImage) {
+//
+//        downStorageRef = FirebaseStorage.getInstance().getReference("userImages");
+//        //roundedProfilePic
+//        Glide.with(this).using(new Fire)
+//    }
 
     private void setToViewHints(User currentUser) {
 
