@@ -99,7 +99,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -107,10 +107,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="30dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -127,6 +127,7 @@
                     android:layout_height="match_parent"
                     android:drawableLeft="@drawable/person"
                     android:drawableTint="@color/colorPrimary"
+                    android:hint="Full Name"
                     android:foregroundGravity="center"
                     android:gravity="center"
                     android:textSize="24sp"
@@ -136,10 +137,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="30dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -159,13 +160,14 @@
                     android:gravity="center"
                     android:textAlignment="center"
                     android:textColorHint="@color/MDBgreycolor"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:hint="Email"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
@@ -188,13 +190,14 @@
                     android:gravity="center"
                     android:textAlignment="center"
                     android:textColorHint="@color/MDBgreycolor"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:hint="Address"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
@@ -217,18 +220,21 @@
                     android:gravity="center"
                     android:textAlignment="center"
                     android:textColorHint="@color/MDBgreycolor"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:hint="Contact No"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <ProgressBar
+                android:id="@+id/progressBarEditUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:visibility="invisible"/>
 
             <Button
                 android:id="@+id/editUserSaveBtn"
@@ -236,7 +242,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="50dp"
                 android:background="@drawable/round_button"
                 android:gravity="center"

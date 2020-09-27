@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
@@ -30,7 +33,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 
@@ -49,6 +55,7 @@ public class Edit_User extends AppCompatActivity {
     private User currentUser;
     private StorageReference storageRef;
     private ProgressBar progressBar;
+    private String userId;
 
 
     @Override
@@ -57,12 +64,13 @@ public class Edit_User extends AppCompatActivity {
         setContentView(R.layout.activity_edit__user);
 
         retriveDbRef = FirebaseDatabase.getInstance().getReference().child("User").child("CUS1");
+        storageRef = FirebaseStorage.getInstance().getReference("uploads");
         
         retriveDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChildren()){
-                    String userId = dataSnapshot.getKey().toString();
+                    userId = dataSnapshot.getKey().toString();
                     String userName =  dataSnapshot.child("fullName").getValue().toString();
                     String userEmail =  dataSnapshot.child("email").getValue().toString();
                     //String userContact =  dataSnapshot.child("").getValue().toString();
@@ -81,7 +89,6 @@ public class Edit_User extends AppCompatActivity {
 
             }
         });
-
 
 
         //getting Image from Galary
@@ -107,7 +114,49 @@ public class Edit_User extends AppCompatActivity {
             public void onClick(View view) {
                 roundedProfilePic = findViewById(R.id.UserEditUserImage);
                 Bitmap bitmap = ((BitmapDrawable)roundedProfilePic.getDrawable()).getBitmap();
+                progressBar = findViewById(R.id.progressBarEditUser);
 
+                if(profPicUri != null){
+                    StorageReference fileref = storageRef.child("UsetImages/" + userId + "." + getFileExt(profPicUri));
+
+
+
+                    fileref.putFile(profPicUri)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            progressBar.setProgress(0);
+                                        }
+                                    }, 500);
+
+                                    Toast.makeText(getApplicationContext() , "Data Saved Successfully" , Toast.LENGTH_SHORT).show();
+                                    retriveDbRef.child("ProfilePic").setValue(userId);
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext() , "Image Failed To Upload" , Toast.LENGTH_SHORT).show();
+                                }
+                            }).
+                            addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                    progressBar.setVisibility(View.VISIBLE);
+                                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                                    progressBar.setProgress((int) progress);
+                                }
+                            });
+
+                }
+                else{
+
+                }
 
             }
         });
@@ -169,10 +218,10 @@ public class Edit_User extends AppCompatActivity {
         TextInputEditText uAddress = findViewById(R.id.editUserAddress);
         TextInputEditText uPhone = findViewById(R.id.editUserPhone);
 
-        uName.setHint(currentUser.getFullName().toString());
-        uEmail.setHint(currentUser.getEmail().toString());
-        uAddress.setHint(currentUser.getAddress().toString());
-        uPhone.setHint(currentUser.getContactNo().toString());
+        uName.setText(currentUser.getFullName().toString());
+        uEmail.setText(currentUser.getEmail().toString());
+        uAddress.setText(currentUser.getAddress().toString());
+        uPhone.setText(currentUser.getContactNo().toString());
     }
 
     @Override
