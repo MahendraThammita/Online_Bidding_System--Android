@@ -94,10 +94,10 @@
 
     //Balasooriya B.R.G.R Strings(IT19144054)
 
-    <string name="signin">Sign in</string>
+
     <string name="emailorusername">Email or Username</string>
     <string name="pwdlogin">Password</string>
-    <string name="login">Sign in</string>
+    <string name="login">Log in</string>
     <string name="cancel">Cancel</string>
     <string name="forgotpwd">Forgot Password?</string>
     <string name="dvdmovie">DVD and Movies</string>
