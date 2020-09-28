@@ -60,7 +60,7 @@ public class HomePage extends AppCompatActivity {
         bids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext() , HomeAndGardenEditpage.class);
+                Intent homeIntent = new Intent(getApplicationContext() , RegistrationPage.class);
                 startActivity(homeIntent);
             }
         });
@@ -69,7 +69,7 @@ public class HomePage extends AppCompatActivity {
         msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent msgintent = new Intent(getApplicationContext() , HomeAndGarden.class);
+                Intent msgintent = new Intent(getApplicationContext() , Sports_category.class);
                 startActivity(msgintent);
             }
         });

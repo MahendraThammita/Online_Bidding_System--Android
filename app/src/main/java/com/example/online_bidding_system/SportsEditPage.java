@@ -19,10 +19,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class SportsEditPage extends AppCompatActivity {
-    EditText txtTitle,txtPrice,txtContact,txtDescription;
+    EditText txtTitle,txtPrice,txtContact,txtDescription,Date,time;
     Button PublishNow,Delete;
     DatabaseReference DbRef1;
 
@@ -46,11 +47,13 @@ public class SportsEditPage extends AppCompatActivity {
         txtTitle = findViewById(R.id.setTitle);
         txtPrice = findViewById(R.id.setPrice);
         Delete = findViewById(R.id.Delete);
+        Date = findViewById(R.id.setDate);
+        time=findViewById(R.id.setTime);
 
         txtContact = findViewById(R.id.setContact);
         txtDescription = findViewById(R.id.setDescription);
         adverticement = new Adverticement();
-        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("HAS1");
+        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("HAS3");
         DbRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -59,6 +62,11 @@ public class SportsEditPage extends AppCompatActivity {
                     txtPrice.setText(dataSnapshot.child("price").getValue().toString());
                     txtContact.setText(dataSnapshot.child("contact").getValue().toString());
                     txtDescription.setText(dataSnapshot.child("description").getValue().toString());
+                    Date.setText(dataSnapshot.child("date").getValue().toString());
+                    //time.setText(dataSnapshot.child("time").getValue().toString());
+
+
+
                 }
                 else
                     Toast.makeText(getApplicationContext() , "Cannot Find Std1" , Toast.LENGTH_SHORT).show();

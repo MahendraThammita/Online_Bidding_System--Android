@@ -93,6 +93,7 @@ public class Sports_category extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists())
                             maxid=(dataSnapshot.getChildrenCount());
+                        savedata();
                     }
 
                     @Override
@@ -100,6 +101,9 @@ public class Sports_category extends AppCompatActivity {
 
                     }
                 });
+
+            }
+            public void savedata(){
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Your Title is Required!", Toast.LENGTH_SHORT).show();
