@@ -1,14 +1,14 @@
 package com.example.online_bidding_system;
 
-public class Adverticement {
+public class Adverticement  {
 
     private String Title;
-    private String MaxBid;
     private String Price;
     private String Duration;
     private String Description;
     private String Contact;
     private String Date;
+    private String MaxBid;
 
     public String getTitle() {
         return Title;
@@ -50,12 +50,12 @@ public class Adverticement {
         Contact = contact;
     }
 
-    public String getDate() {
+    public String getDate(){
 
         return Date;
     }
 
-    public void setDate(String date) {
+    public void setDate(String date){
         Date = date;
     }
 
@@ -66,4 +66,5 @@ public class Adverticement {
     public void setMaxBid(String maxBid) {
         MaxBid = maxBid;
     }
+
 }

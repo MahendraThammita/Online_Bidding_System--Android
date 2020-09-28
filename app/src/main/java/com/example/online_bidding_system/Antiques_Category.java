@@ -44,7 +44,8 @@ public class Antiques_Category extends AppCompatActivity{
     private FirebaseDatabase mFirebaseInstance;
     Adverticement adverticement;
     auction add;
-    long maxid=0;
+    long maxid;
+    String MaxBid;
     String idPrefix="AN";
     private ImageSwitcher imageIs;
     private Button preBtn,nxBtn, pickImgbtn;
@@ -52,9 +53,8 @@ public class Antiques_Category extends AppCompatActivity{
     private String userId;
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
-    //Timepicker object
+
      TimePicker tp;
-     //Datapicker object
      DatePicker dp;
 
     @Override
@@ -70,11 +70,8 @@ public class Antiques_Category extends AppCompatActivity{
 
         txtTitle = findViewById(R.id.setTitle);
         txtPrice = findViewById(R.id.setPrice);
-        txtDuration = findViewById(R.id.setDuration);
         txtContact = findViewById(R.id.setContact);
-        //ged datapicker value
         dp = findViewById(R.id.setDate);
-        //get Timepicker value
         tp = findViewById(R.id.setTime);
         period = (Spinner)findViewById(R.id.setPeriod);
         txtDescription = findViewById(R.id.setDescription);
@@ -114,28 +111,28 @@ public class Antiques_Category extends AppCompatActivity{
                         Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtPrice.getText().toString()))
                         Toast.makeText(getApplicationContext(), " Price Is Required!", Toast.LENGTH_SHORT).show();
-                    else if (TextUtils.isEmpty(txtDuration.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Duration is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
-                        adverticement.setTitle(txtTitle.getText().toString().trim());
-                        adverticement.setPrice(txtPrice.getText().toString().trim());
 
-                        //set timepicker value
+
                         String strTime = tp.getHour() + ":" + tp.getMinute();
                         adverticement.setDuration(strTime);
-                        //set datapicker value
+
                         String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
                         adverticement.setDate(strDate);
 
+                        String strNumber= idPrefix+String.valueOf(maxid+1);
+                        adverticement.setTitle(txtTitle.getText().toString().trim());
+                        adverticement.setPrice(txtPrice.getText().toString().trim());
                         adverticement.setContact(txtContact.getText().toString().trim());
                         adverticement.setDescription(txtDescription.getText().toString().trim());
+                        adverticement.setMaxBid("0");
                         add.setTime_period(period.getSelectedItem().toString());
-                        String strNumber= idPrefix+String.valueOf(maxid+1);
                         DbRef.child(String.valueOf(strNumber)).setValue(add);
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
                         Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
+                        maxid  = maxid+1;
                         clearControl();
 
                     }
@@ -155,7 +152,6 @@ public class Antiques_Category extends AppCompatActivity{
             public void clearControl() {
                 txtTitle.setText("");
                 txtPrice.setText("");
-                txtDuration.setText("");
                 txtContact.setText("");
                 txtDescription.setText("");
             }
