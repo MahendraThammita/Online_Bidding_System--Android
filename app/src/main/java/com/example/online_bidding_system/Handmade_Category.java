@@ -118,6 +118,9 @@ public class Handmade_Category extends AppCompatActivity {
                         add.setContact(txtContact.getText().toString().trim());
                         add.setMaterials(txtMaterials.getText().toString().trim());
                         add.setDescription(txtDescription.getText().toString().trim());
+                        adverticement.setMaxBid("0");
+                        adverticement.setStatus("inactive");
+                        adverticement.setType("Handmade");
                         // DbRef.child("user").setValue(user);
                         String strNumber= idPrefix+String.valueOf(maxid+1);
                         DbRef.child(String.valueOf(strNumber)).setValue(add);

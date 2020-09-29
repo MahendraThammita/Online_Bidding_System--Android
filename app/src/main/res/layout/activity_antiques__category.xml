@@ -124,7 +124,10 @@
                 android:id="@+id/setDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"></DatePicker>
+                android:layout_margin="12dp"
+                android:datePickerMode="calendar">
+            </DatePicker>
+
             <TimePicker
                 android:id="@+id/setTime"
                 android:layout_width="match_parent"
@@ -146,6 +149,7 @@
                 android:fontFamily="sans-serif-black"
                 android:hint="Contact"
                 android:inputType="phone" />
+
 
 
 

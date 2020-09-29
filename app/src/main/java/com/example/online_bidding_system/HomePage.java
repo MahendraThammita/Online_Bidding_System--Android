@@ -5,22 +5,34 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeAdapter;
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeCard;
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyAdapter;
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class HomePage extends AppCompatActivity {
 
@@ -33,48 +45,37 @@ public class HomePage extends AppCompatActivity {
     DatabaseReference DBRef;
     TextView title;
 
+
+    ListView listView;
+    DatabaseReference dbRef;
+    List<HomeCard> HomeCards;
+    HomeAdapter singleCard;
+
+
+    public HomePage() {
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        title = findViewById(R.id.showTitle);
-
-        DBRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN1");
-        DBRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChildren()){
-                    title.setText(dataSnapshot.child("title").getValue().toString());
-
-                }
-                else
-                    Toast.makeText(getApplicationContext() , "Empty" , Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        //End of Read
-
-        int images[] = {R.drawable.slide1, R.drawable.slide2,R.drawable.slide3};
+        int images[] = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3};
         flipper = findViewById(R.id.flipper);
 
-        for (int i = 0; i<images.length; i++){
+        for (int i = 0; i < images.length; i++) {
 
             flipImages(images[i]);
         }
 
-        for (int image:images){
+        for (int image : images) {
 
             flipImages(image);
         }
 
 
-        home  = findViewById(R.id.actionBarHome);
+        home = findViewById(R.id.actionBarHome);
         bids = findViewById(R.id.actionBarBid);
         msg = findViewById(R.id.actionBarMsg);
         profBtn = findViewById(R.id.actionBarProfile);
@@ -84,7 +85,7 @@ public class HomePage extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext() , Antiques_Edit.class);
+                Intent homeIntent = new Intent(getApplicationContext(), Antiques_Edit.class);
                 startActivity(homeIntent);
             }
         });
@@ -92,7 +93,7 @@ public class HomePage extends AppCompatActivity {
         bids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext() , HomeAndGardenEditpage.class);
+                Intent homeIntent = new Intent(getApplicationContext(), Other_category.class);
                 startActivity(homeIntent);
             }
         });
@@ -101,7 +102,7 @@ public class HomePage extends AppCompatActivity {
         msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent msgintent = new Intent(getApplicationContext() , HomeAndGarden.class);
+                Intent msgintent = new Intent(getApplicationContext(), Other_category.class);
                 startActivity(msgintent);
             }
         });
@@ -109,7 +110,7 @@ public class HomePage extends AppCompatActivity {
         profBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent profIntent = new Intent(getApplicationContext() , myBids.class);
+                Intent profIntent = new Intent(getApplicationContext(), myBids.class);
                 startActivity(profIntent);
             }
         });
@@ -118,16 +119,53 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent addIntent = new Intent(getApplicationContext() , main_categories.class);
+                Intent addIntent = new Intent(getApplicationContext(), main_categories.class);
                 startActivity(addIntent);
 
             }
         });
 
 
+        listView = this.findViewById(R.id.HomeCardsList);
+        dbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN9");
+        HomeCards = new ArrayList<>();
+
+
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+
+                    String Title = (dataSnapshot.child("title").getValue().toString());
+                    int MaxBid =  Integer.parseInt(dataSnapshot.child("maxBid").getValue().toString());
+
+
+
+                    HomeCard my_Bid = new HomeCard(Title, MaxBid);
+
+                    HomeCards.add(my_Bid);
+                }
+                if (HomeCards != null) {
+
+                    singleCard = new HomeAdapter(HomePage.this, R.layout.homepage_card, HomeCards);
+                    listView.setAdapter(singleCard);
+                    singleCard.notifyDataSetChanged();
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
-    public void flipImages(int image){
+    public void flipImages(int image) {
 
         ImageView imageView = new ImageView(this);
         imageView.setBackgroundResource(image);
@@ -141,4 +179,9 @@ public class HomePage extends AppCompatActivity {
 
     }
 
-}
+    }
+
+
+
+
+

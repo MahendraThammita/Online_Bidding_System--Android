@@ -36,7 +36,7 @@ public class Antiques_Category extends AppCompatActivity{
 
     EditText txtTitle,txtPrice,txtDuration,txtContact,txtPeriod,txtDescription;
     Spinner period;
-    Button PublishNow;
+    Button PublishLater;
     DatabaseReference DbRef;
     DatabaseReference DbRef1;
     private DatabaseReference mFirebaseDatabase;
@@ -50,7 +50,7 @@ public class Antiques_Category extends AppCompatActivity{
     private ImageSwitcher imageIs;
     private Button preBtn,nxBtn, pickImgbtn;
     private  ArrayList<Uri> imageUris;
-    private String userId;
+    private String AdId;
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
 
@@ -75,7 +75,7 @@ public class Antiques_Category extends AppCompatActivity{
         tp = findViewById(R.id.setTime);
         period = (Spinner)findViewById(R.id.setPeriod);
         txtDescription = findViewById(R.id.setDescription);
-        PublishNow = findViewById(R.id.publish_now);
+        PublishLater = findViewById(R.id.publish_later);
 
         add = new auction();
         adverticement=new  Adverticement();
@@ -85,20 +85,21 @@ public class Antiques_Category extends AppCompatActivity{
         mFirebaseDatabase1 = mFirebaseInstance.getReference("Antiques");
 
 
-        PublishNow.setOnClickListener(new View.OnClickListener() {
+        PublishLater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DbRef = FirebaseDatabase.getInstance().getReference().child("Antiques");
-                DbRef1= FirebaseDatabase.getInstance().getReference().child("Adverticement");
-                userId = mFirebaseDatabase1.push().getKey();
-                mFirebaseDatabase.child(userId).setValue(adverticement);
+                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                AdId = mFirebaseDatabase1.push().getKey();
+                mFirebaseDatabase.child(AdId).setValue(adverticement);
 
-                mFirebaseDatabase1.child(userId).setValue(add);
+                mFirebaseDatabase1.child(AdId).setValue(add);
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists())
-                            maxid=(dataSnapshot.getChildrenCount());
+                        if (dataSnapshot.exists())
+                            maxid = (dataSnapshot.getChildrenCount());
+                        savedata();
                     }
 
                     @Override
@@ -106,6 +107,8 @@ public class Antiques_Category extends AppCompatActivity{
 
                     }
                 });
+            }
+                public void savedata(){
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
@@ -115,24 +118,24 @@ public class Antiques_Category extends AppCompatActivity{
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
 
-
                         String strTime = tp.getHour() + ":" + tp.getMinute();
                         adverticement.setDuration(strTime);
 
                         String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
                         adverticement.setDate(strDate);
 
-                        String strNumber= idPrefix+String.valueOf(maxid+1);
                         adverticement.setTitle(txtTitle.getText().toString().trim());
                         adverticement.setPrice(txtPrice.getText().toString().trim());
                         adverticement.setContact(txtContact.getText().toString().trim());
                         adverticement.setDescription(txtDescription.getText().toString().trim());
                         adverticement.setMaxBid("0");
+                        adverticement.setStatus("inactive");
+                        adverticement.setType("Antiques");
                         add.setTime_period(period.getSelectedItem().toString());
+                        String strNumber= idPrefix+String.valueOf(maxid+1);
                         DbRef.child(String.valueOf(strNumber)).setValue(add);
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
                         Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
-                        maxid  = maxid+1;
                         clearControl();
 
                     }
