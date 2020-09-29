@@ -64,7 +64,7 @@ public class myBids extends AppCompatActivity implements NavigationView.OnNaviga
                         startActivity(in1);
                         break;
                     case R.id.Drawable_ViewAuctions:
-                        Intent in2 = new Intent(myBids.this ,MyAuctions.class);
+                        Intent in2 = new Intent(myBids.this ,Edit_User.class);
                         startActivity(in2);
                         break;
                     case R.id.Drawable_myAuctions:

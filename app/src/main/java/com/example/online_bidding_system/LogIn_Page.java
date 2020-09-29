@@ -18,17 +18,7 @@ public class LogIn_Page extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+   
+    
 
-        uslogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent logintent = new Intent(LogIn_Page.this, HomePage.class);
-                startActivity(logintent);
-            }
-        });
-    }
 }
