@@ -32,7 +32,7 @@ import java.util.ArrayList;
 public class Antiques_Edit extends AppCompatActivity{
 
 
-    EditText txtTitle,txtPrice,txtDuration,txtContact,txtPeriod,txtDescription,test;
+    EditText txtTitle,txtPrice,txtDuration,txtContact,txtTime,txtDate,txtDescription,test;
     Spinner period;
     Button update, delete,PublishNow;
     DatabaseReference DbRef;
@@ -69,13 +69,13 @@ public class Antiques_Edit extends AppCompatActivity{
         txtTitle = findViewById(R.id.setTitle);
         txtPrice = findViewById(R.id.setPrice);
         txtContact = findViewById(R.id.setContact);
-        dp = findViewById(R.id.setDate);
-        tp = findViewById(R.id.setTime);
+        txtDate = findViewById(R.id.setDate);
+        txtTime = findViewById(R.id.setTime);
         period = (Spinner)findViewById(R.id.setPeriod);
         txtDescription = findViewById(R.id.setDescription);
         update = findViewById(R.id.Update);
         delete =  findViewById(R.id.Delete);
-        test = findViewById(R.id.test);
+
 
         add = new auction();
         adverticement=new  Adverticement();
@@ -84,8 +84,8 @@ public class Antiques_Edit extends AppCompatActivity{
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
         mFirebaseDatabase1 = mFirebaseInstance.getReference("Antiques");
 
-        DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN8");
-        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Antiques").child("AN8");
+        DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN9");
+        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Antiques").child("AN9");
         DbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -94,7 +94,8 @@ public class Antiques_Edit extends AppCompatActivity{
                     txtContact.setText(dataSnapshot.child("contact").getValue().toString());
                     txtPrice.setText(dataSnapshot.child("price").getValue().toString());
                     txtDescription.setText(dataSnapshot.child("description").getValue().toString());
-                    test.setText(dataSnapshot.child("duration").getValue().toString());
+                    txtDate.setText(dataSnapshot.child("date").getValue().toString());
+                    txtTime.setText(dataSnapshot.child("duration").getValue().toString());
 
 
                 }

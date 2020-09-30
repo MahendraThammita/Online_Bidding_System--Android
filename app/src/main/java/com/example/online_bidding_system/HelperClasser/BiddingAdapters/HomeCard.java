@@ -1,14 +1,16 @@
 package com.example.online_bidding_system.HelperClasser.BiddingAdapters;
 
 public class HomeCard {
-
+    private String auctId;
     private String Title;
     private String Duration;
     private int MaxBid;
 
 
-    public HomeCard() {
-
+    public HomeCard(String aucID, String title, int maxBid) {
+        this.auctId = aucID;
+        Title = title;
+        MaxBid = MaxBid;
     }
 
     public HomeCard(String title, int MaxBid) {
@@ -40,6 +42,14 @@ public class HomeCard {
 
     public String getTitle() {
         return Title;
+    }
+
+    public String getAuctId() {
+        return auctId;
+    }
+
+    public void setAuctId(String auctId) {
+        this.auctId = auctId;
     }
 
     public void setDuration(String duration) {
