@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
@@ -30,7 +32,7 @@ public class Books_Edit extends AppCompatActivity {
     final int REQUEST_EXTERNAL_STORAGE = 100;
 
     EditText txtTitle,txtPrice,txtDuration,txtContact,txtType,txtDescription;
-    Button PublishNow;
+    Button PublishNow, update, delete;
     DatabaseReference DbRef;
     DatabaseReference DbRef1;
     private DatabaseReference mFirebaseDatabase;
@@ -47,6 +49,9 @@ public class Books_Edit extends AppCompatActivity {
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
 
+    TimePicker tp;
+    DatePicker dp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,8 @@ public class Books_Edit extends AppCompatActivity {
         txtType = findViewById(R.id.setType);
         txtDescription = findViewById(R.id.setDescription);
         PublishNow = findViewById(R.id.publish_now);
+        update = findViewById(R.id.Update);
+        delete =  findViewById(R.id.Delete);
 
         book = new auction();
         adverticement=new  Adverticement();
@@ -70,10 +77,46 @@ public class Books_Edit extends AppCompatActivity {
         mFirebaseDatabase1 = mFirebaseInstance.getReference("Books");
 
 
-        PublishNow.setOnClickListener(new View.OnClickListener() {
+        DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("BK1");
+        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Antiques").child("BK1");
+        DbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()){
+                    txtTitle.setText(dataSnapshot.child("title").getValue().toString());
+                    txtContact.setText(dataSnapshot.child("contact").getValue().toString());
+                    txtPrice.setText(dataSnapshot.child("price").getValue().toString());
+                    txtDescription.setText(dataSnapshot.child("description").getValue().toString());
+
+
+                }
+                else
+                    Toast.makeText(getApplicationContext() , "Empty" , Toast.LENGTH_SHORT).show();
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbRef = FirebaseDatabase.getInstance().getReference().child("Books");
+                DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN1");
+                DbRef.removeValue();
+                Toast.makeText(getApplicationContext() , "Succesfully Deleated" , Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DbRef = FirebaseDatabase.getInstance().getReference().child("Antiques");
                 DbRef1= FirebaseDatabase.getInstance().getReference().child("Adverticement");
                 userId = mFirebaseDatabase1.push().getKey();
                 mFirebaseDatabase.child(userId).setValue(adverticement);
@@ -96,22 +139,27 @@ public class Books_Edit extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtPrice.getText().toString()))
                         Toast.makeText(getApplicationContext(), " Price Is Required!", Toast.LENGTH_SHORT).show();
-                    else if (TextUtils.isEmpty(txtDuration.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Duration is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
-                        adverticement.setTitle(txtTitle.getText().toString().trim());
-                        adverticement.setPrice(txtPrice.getText().toString().trim());
-                        adverticement.setDuration(txtDuration.getText().toString().trim());
-                        adverticement.setContact(txtContact.getText().toString().trim());
-                        adverticement.setDescription(txtDescription.getText().toString().trim());
-                        book.setType(txtType.getText().toString().trim());
+
+
+                        String strTime = tp.getHour() + ":" + tp.getMinute();
+                        adverticement.setDuration(strTime);
+
+                        String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                        adverticement.setDate(strDate);
 
                         String strNumber= idPrefix+String.valueOf(maxid+1);
+                        adverticement.setTitle(txtTitle.getText().toString().trim());
+                        adverticement.setPrice(txtPrice.getText().toString().trim());
+                        adverticement.setContact(txtContact.getText().toString().trim());
+                        adverticement.setDescription(txtDescription.getText().toString().trim());
+                        adverticement.setMaxBid("0");
                         DbRef.child(String.valueOf(strNumber)).setValue(book);
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
                         Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
+                        maxid  = maxid+1;
                         clearControl();
 
                     }
@@ -131,9 +179,7 @@ public class Books_Edit extends AppCompatActivity {
             public void clearControl() {
                 txtTitle.setText("");
                 txtPrice.setText("");
-                txtDuration.setText("");
                 txtContact.setText("");
-                txtType.setText("");
                 txtDescription.setText("");
             }
 
@@ -198,6 +244,9 @@ public class Books_Edit extends AppCompatActivity {
         }));
     }
 
+
+
+
     private void pickImagesIntent(){
 
 
@@ -236,5 +285,8 @@ public class Books_Edit extends AppCompatActivity {
             }
         }
     }
+
+
+
 }
 

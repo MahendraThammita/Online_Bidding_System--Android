@@ -77,6 +77,7 @@ public class Other_category extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists())
                             maxid=(dataSnapshot.getChildrenCount());
+                        savedata();
                     }
 
                     @Override
@@ -84,6 +85,8 @@ public class Other_category extends AppCompatActivity {
 
                     }
                 });
+
+            }public void savedata() {
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Your Title is Required!", Toast.LENGTH_SHORT).show();
@@ -100,16 +103,20 @@ public class Other_category extends AppCompatActivity {
                         String strTime = tp.getHour() + ":" + tp.getMinute();
                         adverticement.setDuration(strTime);
                         //set datapicker value
-                        String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                        String strDate = dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
                         adverticement.setDate(strDate);
                         adverticement.setMaxBid("0");
+                        adverticement.setStatus("inactive");
+                        adverticement.setType("Others");
+
+                        adverticement.setDate(strDate);
 
                         adverticement.setContact(txtContact.getText().toString().trim());
 
                         adverticement.setDescription(txtDescription.getText().toString().trim());
 
 
-                        String strNumber= idPrefix+String.valueOf(maxid+1);
+                        String strNumber = idPrefix + String.valueOf(maxid + 1);
                         DbRef.child(String.valueOf(strNumber)).setValue(adverticement);
                         Toast.makeText(getApplicationContext(), "Successfully Published", Toast.LENGTH_SHORT).show();
                         clearControl();
@@ -124,8 +131,6 @@ public class Other_category extends AppCompatActivity {
 
                 }
             }
-
-
             public void clearControl() {
                 txtTitle.setText("");
                 txtPrice.setText("");

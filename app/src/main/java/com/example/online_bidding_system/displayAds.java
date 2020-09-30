@@ -17,6 +17,7 @@ public class displayAds extends AppCompatActivity {
         setContentView(R.layout.activity_display_ads);
         Intent retriveIntent = getIntent();
         String AuctName = retriveIntent.getStringExtra("BidId").toString();
+        //String AuctName = retriveIntent.getStringExtra("PassAuctId").toString();
 
         nametext = findViewById(R.id.displayAuct_ItemName);
         nametext.setText(AuctName.toString());

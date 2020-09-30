@@ -1,9 +1,11 @@
 package com.example.online_bidding_system;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +30,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -39,6 +42,7 @@ public class HomePage extends AppCompatActivity {
     Button home;
     Button bids;
     Button msg;
+    ImageButton antique;
     Button profBtn;
     ImageButton addNew;
     ViewFlipper flipper;
@@ -80,6 +84,7 @@ public class HomePage extends AppCompatActivity {
         msg = findViewById(R.id.actionBarMsg);
         profBtn = findViewById(R.id.actionBarProfile);
         addNew = findViewById(R.id.addNew);
+        antique = findViewById(R.id.btnAntique);
 
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +98,7 @@ public class HomePage extends AppCompatActivity {
         bids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext(), Other_category.class);
+                Intent homeIntent = new Intent(getApplicationContext(), OtherEditpage.class);
                 startActivity(homeIntent);
             }
         });
@@ -129,21 +134,23 @@ public class HomePage extends AppCompatActivity {
         listView = this.findViewById(R.id.HomeCardsList);
         dbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN9");
         HomeCards = new ArrayList<>();
+        Query FilterHomeAds = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("status").equalTo("inactive");
+        final Query FilterAntiqueAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("Antiques");
 
-
-        dbRef.addValueEventListener(new ValueEventListener() {
-            @Override
+        FilterHomeAds.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+           @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
 
-                    String Title = (dataSnapshot.child("title").getValue().toString());
-                    int MaxBid =  Integer.parseInt(dataSnapshot.child("maxBid").getValue().toString());
+                    String Title = (ds.child("title").getValue().toString());
+                    int MaxBid =  Integer.parseInt(ds.child("maxBid").getValue().toString());
+                    String AucID = ds.getKey().toString();
 
 
-
-                    HomeCard my_Bid = new HomeCard(Title, MaxBid);
+                    HomeCard my_Bid = new HomeCard(AucID , Title, MaxBid);
 
                     HomeCards.add(my_Bid);
                 }
@@ -163,6 +170,62 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
+      antique.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+        FilterAntiqueAds.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+
+                    String Title = (ds.child("title").getValue().toString());
+                    int MaxBid =  Integer.parseInt(ds.child("maxBid").getValue().toString());
+                    String AucID = ds.getKey().toString();
+
+
+                    HomeCard my_Bid = new HomeCard(AucID , Title, MaxBid);
+
+                    HomeCards.add(my_Bid);
+                }
+                if (HomeCards != null) {
+
+                    singleCard = new HomeAdapter(HomePage.this, R.layout.homepage_card, HomeCards);
+                    listView.setAdapter(singleCard);
+                    singleCard.notifyDataSetChanged();
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+            }
+        });
+
+
+
+
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String AuctionId = HomeCards.get(i).getAuctId();
+                Intent showPAgeIntent = new Intent(getApplicationContext() , displayAds.class);
+                showPAgeIntent.putExtra("BidId" , AuctionId);
+                listView.getContext().startActivity(showPAgeIntent);
+            }
+        });
+
     }
 
     public void flipImages(int image) {
@@ -179,9 +242,6 @@ public class HomePage extends AppCompatActivity {
 
     }
 
-    }
-
-
-
+}
 
 
