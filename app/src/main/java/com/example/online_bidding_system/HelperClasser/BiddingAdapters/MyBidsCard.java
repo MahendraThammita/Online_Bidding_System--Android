@@ -18,7 +18,8 @@ public class MyBidsCard {
 
     }
 
-    public MyBidsCard(String contactNo, String description, String duration, String title, String type, String endDate, int maxBid, int mybid, int start_Price) {
+    public MyBidsCard(String auctionId , String contactNo, String description, String duration, String title, String type, String endDate, int maxBid, int mybid, int start_Price) {
+        this.auctionId = auctionId;
         ContactNo = contactNo;
         Description = description;
         Duration = duration;
