@@ -136,7 +136,7 @@
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Brand"
-                android:inputType="phone" />
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/setCondition"
@@ -146,7 +146,7 @@
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Condition"
-                android:inputType="phone" />
+                android:inputType="text" />
 
 
             <!--EditText -->

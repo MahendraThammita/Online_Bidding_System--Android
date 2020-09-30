@@ -99,6 +99,24 @@
                 android:hint="Starting at"
                 android:inputType="text" />
             <!--EditText -->
+            <EditText
+                android:id="@+id/setDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Date"
+                android:inputType="text" />
+            <EditText
+                android:id="@+id/setTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Time"
+                android:inputType="text" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -106,19 +124,8 @@
                 android:textSize="20sp"
                 android:layout_margin="12dp"></TextView>
 
-            <DatePicker
-                android:id="@+id/setDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"></DatePicker>
-            <TimePicker
-                android:id="@+id/setTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:timePickerMode="spinner">
 
-            </TimePicker>
+
 
 
 

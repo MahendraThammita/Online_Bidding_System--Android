@@ -22,12 +22,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class OtherEditpage extends AppCompatActivity {
-    EditText txtTitle,txtPrice,txtContact,txtDescription;
+    EditText txtTitle,txtPrice,txtContact,txtDescription,date;
     Button PublishNow,Delete;
     DatabaseReference DbRef1;
 
     Adverticement adverticement;
     String MaxBid;
+
     long maxid=0;
     String idPrefix="OTH";
     private ImageSwitcher imageIs;
@@ -36,9 +37,9 @@ public class OtherEditpage extends AppCompatActivity {
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
     //Timepicker object
-    TimePicker tp;
+
     //Datapicker object
-    DatePicker dp;
+    //DatePicker dp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class OtherEditpage extends AppCompatActivity {
         txtTitle = findViewById(R.id.setTitle);
         txtPrice = findViewById(R.id.setPrice);
         Delete = findViewById(R.id.Delete);
+        date=findViewById(R.id.setDate);
 
         txtContact = findViewById(R.id.setContact);
         txtDescription = findViewById(R.id.setDescription);
@@ -53,7 +55,7 @@ public class OtherEditpage extends AppCompatActivity {
 
 
 
-            DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("OTH20");
+            DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("OTH1");
             DbRef1.addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -62,6 +64,7 @@ public class OtherEditpage extends AppCompatActivity {
                 txtPrice.setText(dataSnapshot.child("price").getValue().toString());
                 txtContact.setText(dataSnapshot.child("contact").getValue().toString());
                 txtDescription.setText(dataSnapshot.child("description").getValue().toString());
+                date.setText(dataSnapshot.child("date").getValue().toString());
             }
             else
                 Toast.makeText(getApplicationContext() , "Cannot Find Std1" , Toast.LENGTH_SHORT).show();
@@ -74,7 +77,7 @@ public class OtherEditpage extends AppCompatActivity {
         Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("OTH20");
+                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("OTH1");
                 DbRef1.removeValue();
                 Toast.makeText(getApplicationContext() , "Succesfully Deleated" , Toast.LENGTH_SHORT).show();
             }

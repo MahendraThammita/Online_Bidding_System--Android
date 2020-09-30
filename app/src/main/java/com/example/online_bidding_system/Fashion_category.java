@@ -42,9 +42,10 @@ public class Fashion_category extends AppCompatActivity {
     EditText Brand,Condition,Material,Size,ContactNo,Description,Duration,Title,Type,Start_Price;
     Button publishNow,publishLater;
     DatabaseReference fAuth;
+    DatabaseReference fAuth1;
     FdeHelper fCat;
     long maxid=0;
-    String idPrefix="FASHION";
+    String idPrefix="Fa";
     private String userId;
 
     private ImageSwitcher imageIs;
@@ -70,17 +71,16 @@ public class Fashion_category extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fashion_category);
+        setContentView(R.layout.activity_electronics_category);
 
 
-        Brand        =      findViewById(R.id.fashionBrand);
-        Condition    =      findViewById(R.id.fashionCondition);
+        Brand        =      findViewById(R.id.setBrand);
         Material     =      findViewById(R.id.setMaterials);
-        Size         =      findViewById(R.id.fashionSize);
+        Condition    =      findViewById(R.id.setCondition);
+        Size         =      findViewById(R.id.setSize);
         ContactNo    =      findViewById(R.id.setContact);
         Description  =      findViewById(R.id.setDescription);
         Title        =      findViewById(R.id.setTitle);
-        Type         =      findViewById(R.id.fashionType);
         Start_Price  =      findViewById(R.id.setPrice);
 
         //ged datapicker value
@@ -88,17 +88,17 @@ public class Fashion_category extends AppCompatActivity {
         //get Timepicker value
         tp = findViewById(R.id.setTime);
 
-        publishNow   =      findViewById(R.id.publish_now);
-
-
 
 
         fCat = new FdeHelper();
-        adverticement=new  Adverticement();
+        adverticement= new  Adverticement();
 
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
-        mFirebaseDatabase1 = mFirebaseInstance.getReference("FashionAndDesign");
+        mFirebaseDatabase1 = mFirebaseInstance.getReference("Electronics");
+
+
+        publishNow   =      findViewById(R.id.publish_now);
 
 
         publishNow.setOnClickListener(new View.OnClickListener() {
@@ -106,9 +106,10 @@ public class Fashion_category extends AppCompatActivity {
             public void onClick(View view) {
 
                 fAuth = FirebaseDatabase.getInstance().getReference().child("FashionAndDesign");
-                fAuth = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                fAuth1 = FirebaseDatabase.getInstance().getReference().child("Adverticement");
 
                 userId = mFirebaseDatabase1.push().getKey();
+
                 mFirebaseDatabase.child(userId).setValue(adverticement);
 
                 mFirebaseDatabase1.child(userId).setValue(fCat);
@@ -133,30 +134,24 @@ public class Fashion_category extends AppCompatActivity {
                     if(TextUtils.isEmpty(Brand.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Brand Field Is Empty" , Toast.LENGTH_SHORT).show();
                     }
-                    else if(TextUtils.isEmpty(Condition.getText().toString())){
-                        Toast.makeText(getApplicationContext() , "Condition Field Is Empty" , Toast.LENGTH_SHORT).show();
-                    }
                     else if(TextUtils.isEmpty(Material.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Material Field Is Empty" , Toast.LENGTH_SHORT).show();
                     }
-                    else if(TextUtils.isEmpty(Size.getText().toString())){
-                        Toast.makeText(getApplicationContext() , "Size Field Is Empty" , Toast.LENGTH_SHORT).show();
+                    else if(TextUtils.isEmpty(Condition.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "Condition Field Is Empty" , Toast.LENGTH_SHORT).show();
                     }
+
                     else if(TextUtils.isEmpty(ContactNo.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Contact Number Field Is Empty" , Toast.LENGTH_SHORT).show();
                     }
                     else if(TextUtils.isEmpty(Description.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Description Field Is Empty" , Toast.LENGTH_SHORT).show();
                     }
-                    else if(TextUtils.isEmpty(Duration.getText().toString())){
-                        Toast.makeText(getApplicationContext() , "Duration Field Is Empty" , Toast.LENGTH_SHORT).show();
-                    }
+
                     else if(TextUtils.isEmpty(Title.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Title Field Is Empty" , Toast.LENGTH_SHORT).show();
                     }
-                    else if(TextUtils.isEmpty(Type.getText().toString())){
-                        Toast.makeText(getApplicationContext() , "Type Field Is Empty" , Toast.LENGTH_SHORT).show();
-                    }
+
                     else if(TextUtils.isEmpty(Start_Price.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Start Price Field Is Empty" , Toast.LENGTH_SHORT).show();
                     }
@@ -164,13 +159,12 @@ public class Fashion_category extends AppCompatActivity {
 
                     else {
                         fCat.setBrand(Brand.getText().toString().trim());
-                        fCat.setCondition(Condition.getText().toString().trim());
                         fCat.setMaterial(Material.getText().toString().trim());
-                        fCat.setSize(Size.getText().toString().trim());
-                        fCat.setContactNo(ContactNo.getText().toString().trim());
-                        fCat.setDescription(Description.getText().toString().trim());
-                        fCat.setTitle(Title.getText().toString().trim());
-                        fCat.setStart_Price(Start_Price.getText().toString().trim());
+                        fCat.setCondition(Condition.getText().toString().trim());
+                        adverticement.setContact(ContactNo.getText().toString().trim());
+                        adverticement.setDescription(Description.getText().toString().trim());
+                        adverticement.setTitle(Title.getText().toString().trim());
+                        adverticement.setPrice(Start_Price.getText().toString().trim());
 
                         //set timepicker value
                         String strTime = tp.getHour() + ":" + tp.getMinute();
@@ -181,12 +175,12 @@ public class Fashion_category extends AppCompatActivity {
 
                         adverticement.setMaxBid("0");
                         adverticement.setStatus("inactive");
-                        adverticement.setType("FahionAndDesign");
+                        adverticement.setType("Electronics");
 
 
                         String strNumber= idPrefix+String.valueOf(maxid+1);
                         fAuth.child(String.valueOf(strNumber)).setValue(fCat);
-                        fAuth.child(String.valueOf(strNumber)).setValue(adverticement);
+                        fAuth1.child(String.valueOf(strNumber)).setValue(adverticement);
 
                         Toast.makeText(getApplicationContext() , "Data Inserted Successfully" , Toast.LENGTH_SHORT).show();
                         clearControl();
@@ -204,12 +198,10 @@ public class Fashion_category extends AppCompatActivity {
 
             public void clearControl() {
                 Brand.setText("");
-                Condition.setText("");
                 Material.setText("");
-                Size.setText("");
+                Condition.setText("");
                 ContactNo.setText("");
                 Description.setText("");
-                Duration.setText("");
                 Title.setText("");
                 Start_Price.setText("");
             }

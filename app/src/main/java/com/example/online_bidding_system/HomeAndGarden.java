@@ -129,6 +129,9 @@ public class HomeAndGarden extends AppCompatActivity {
                         adverticement.setContact(txtContact.getText().toString().trim());
                         homeitem.setEnvironment(txtEnvironment.getText().toString().trim());
                         adverticement.setDescription(txtDescription.getText().toString().trim());
+                        adverticement.setStatus("inactive");
+                        adverticement.setType("HomeAndGareden");
+                        adverticement.setMaxBid("0");
                         //set timepicker value
                         String strTime = tp.getHour() + ":" + tp.getMinute();
                         adverticement.setDuration(strTime);
