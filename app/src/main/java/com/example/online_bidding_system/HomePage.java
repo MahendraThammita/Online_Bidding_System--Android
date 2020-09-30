@@ -33,6 +33,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -148,10 +152,35 @@ public class HomePage extends AppCompatActivity {
                     String Title = (ds.child("title").getValue().toString());
                     int MaxBid =  Integer.parseInt(ds.child("maxBid").getValue().toString());
                     String AucID = ds.getKey().toString();
+                    String Duration = ds.child("duration").getValue().toString();
+                    String endDate = ds.child("date").getValue().toString();
 
+
+                    LocalDate datPart = LocalDate.parse(endDate);
+                    LocalTime timePart = LocalTime.parse(Duration);
+                    LocalDateTime contactDate = LocalDateTime.of(datPart , timePart);
+                    String finalDate = contactDate.toString();
+
+                    LocalDateTime currenttime = LocalDateTime.now();
+                    String time = currenttime.toString();
+
+                    Log.i("finalDate" , "ADD No : " + finalDate);
+                    Log.i("currentTime" , "ADD No : " + time);
+
+
+                    long minutes = ChronoUnit.MINUTES.between(currenttime , contactDate);
+
+                    String MinDifference = Long.toString(minutes);
+
+                    //LocalDateTime calculatedTime = LocalDateTime.MIN.plusMinutes(minutes);
+                    String strCalculatedStrhOUR = Long.toString(minutes/60);
+                    String strCalculatedStrhMin = Long.toString(minutes%60);
+
+
+                    Log.i("Difference" , "ADD No : " + MinDifference);
+                    Log.i("Difference" , "difference in calculated format : " + strCalculatedStrhOUR + ":" + strCalculatedStrhMin);
 
                     HomeCard my_Bid = new HomeCard(AucID , Title, MaxBid);
-
                     HomeCards.add(my_Bid);
                 }
                 if (HomeCards != null) {
@@ -170,10 +199,9 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-      antique.setOnClickListener(new View.OnClickListener() {
+  /*      antique.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
         FilterAntiqueAds.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -210,7 +238,7 @@ public class HomePage extends AppCompatActivity {
 
             }
         });
-
+*/
 
 
 

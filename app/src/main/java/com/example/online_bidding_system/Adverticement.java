@@ -12,6 +12,16 @@ public class Adverticement  {
     private String Status;
     private String Type;
 
+    public String getSeller_ID() {
+        return seller_ID;
+    }
+
+    public void setSeller_ID(String seller_ID) {
+        this.seller_ID = seller_ID;
+    }
+
+    private String seller_ID;
+
     public String getStatus() {
         return Status;
     }
