@@ -9,6 +9,24 @@ public class Adverticement  {
     private String Contact;
     private String Date;
     private String MaxBid;
+    private String Status;
+    private String Type;
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
+    }
 
     public String getTitle() {
         return Title;

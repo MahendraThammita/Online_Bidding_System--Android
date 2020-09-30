@@ -32,7 +32,7 @@ import java.util.ArrayList;
 public class Antiques_Edit extends AppCompatActivity{
 
 
-    EditText txtTitle,txtPrice,txtDuration,txtContact,txtPeriod,txtDescription;
+    EditText txtTitle,txtPrice,txtDuration,txtContact,txtPeriod,txtDescription,test;
     Spinner period;
     Button update, delete,PublishNow;
     DatabaseReference DbRef;
@@ -75,6 +75,7 @@ public class Antiques_Edit extends AppCompatActivity{
         txtDescription = findViewById(R.id.setDescription);
         update = findViewById(R.id.Update);
         delete =  findViewById(R.id.Delete);
+        test = findViewById(R.id.test);
 
         add = new auction();
         adverticement=new  Adverticement();
@@ -83,8 +84,8 @@ public class Antiques_Edit extends AppCompatActivity{
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
         mFirebaseDatabase1 = mFirebaseInstance.getReference("Antiques");
 
-        DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN1");
-        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Antiques").child("AN1");
+        DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN8");
+        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Antiques").child("AN8");
         DbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -93,6 +94,7 @@ public class Antiques_Edit extends AppCompatActivity{
                     txtContact.setText(dataSnapshot.child("contact").getValue().toString());
                     txtPrice.setText(dataSnapshot.child("price").getValue().toString());
                     txtDescription.setText(dataSnapshot.child("description").getValue().toString());
+                    test.setText(dataSnapshot.child("duration").getValue().toString());
 
 
                 }

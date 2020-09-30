@@ -83,87 +83,14 @@
             android:layout_height="wrap_content"
             />
 
-
-
-
-                    <GridLayout
+                    <ListView
+                        android:id="@+id/HomeCardsList"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:rowCount="3"
-                        android:columnCount="2"
-                        android:layout_margin="10dp"
-                        android:alignmentMode="alignMargins"
-                        android:layout_gravity="center_horizontal"
-                        android:columnOrderPreserved="false"
-                        >
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:divider="@null">
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cardview_id"
-                            android:clickable="true"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            android:layout_width="180dp"
-                            android:layout_height="220dp"
-                            xmlns:cardview="http://schemas.android.com/apk/res-auto"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/searchbar_corner"
-                            cardview:cardCornerRadius="10dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:gravity="center">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="180dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/katana" />
-
-                                <TextView
-                                    android:id="@+id/showTitle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/Black"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold"
-                                    android:layout_marginTop="1dp"
-                                    />
-
-                                <!--Item homepage description-->
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    >
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="2000 $"
-                                        android:background="@drawable/searchbar_corner"
-                                        android:backgroundTint="@color/Monet_coloe"
-                                        android:textSize="12sp"
-                                        android:layout_marginTop="2dp"
-                                        android:layout_marginRight="20dp"/>
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="2 hrs 1 mn"
-                                        android:background="@drawable/rounded_corners"
-                                        android:backgroundTint="@color/Monet_coloe"
-                                        android:textSize="12sp"
-                                        android:layout_marginTop="2dp"/>
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-
-
-
-                    </GridLayout>
+                    </ListView>
 
                 </LinearLayout>
 
