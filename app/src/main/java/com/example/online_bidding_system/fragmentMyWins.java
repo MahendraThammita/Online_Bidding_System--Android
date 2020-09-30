@@ -100,46 +100,41 @@ public class fragmentMyWins extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    String Duration = ds.child("Duration").getValue().toString();
-                    String endDate = ds.child("endDate").getValue().toString();
-                    String seller_id = ds.child("seller_id").getValue().toString();
-                    String ContactNo = ds.child("ContactNo").getValue().toString();
-                    String Title = ds.child("Title").getValue().toString();
-                    int MaxBid = Integer.valueOf(ds.child("MaxBid").getValue().toString());
-                    int Mybid = Integer.valueOf(ds.child("Mybid").getValue().toString());
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String Duration = ds.child("duration").getValue().toString();
+                    String endDate = ds.child("date").getValue().toString();
+                    String seller_id = ds.child("seller_ID").getValue().toString();
+                    String ContactNo = ds.child("contact").getValue().toString();
+                    String Title = ds.child("title").getValue().toString();
+                    int MaxBid = Integer.valueOf(ds.child("maxBid").getValue().toString());
+                    int Mybid = Integer.valueOf(ds.child("mybid").getValue().toString());
 
 //                    LocaleDataTime datePart = LocaleData.parse(endDate);
                     LocalDate datPart = LocalDate.parse(endDate);
                     LocalTime timePart = LocalTime.parse(Duration);
-                    LocalDateTime contactDate = LocalDateTime.of(datPart , timePart);
+                    LocalDateTime contactDate = LocalDateTime.of(datPart, timePart);
                     String finalDate = contactDate.toString();
 
                     ZoneId zid = ZoneId.of("Asia/Colombo");
                     LocalDateTime now = LocalDateTime.now(zid);
 
-//                    Log.i("datetest" , "Edited Date : " + finalDate);
-//                    Log.i("today" , "This Time : " + now);
 
-                    if(contactDate.isBefore(now) || contactDate.isEqual(now)){
+                    if (contactDate.isBefore(now) || contactDate.isEqual(now)) {
                         //Change the status of AD
                         String adID = ds.getKey().toString();
-                        //Log.i("EndAuction" , "Ended Auctions ID : " + adID);
 
-                        if(MaxBid == Mybid){
+                        if (MaxBid == Mybid) {
                             //This is a bid won
-                            //Log.i("WonBid" , "Won Auctions ID : " + adID);
                             MyBidsCard winningBid = new MyBidsCard();
-                            winningBid.setMywinCardValues(Title , ContactNo , Duration , endDate , MaxBid , Mybid , seller_id);
+                            winningBid.setMywinCardValues(Title, ContactNo, Duration, endDate, MaxBid, Mybid, seller_id);
                             myWinCards.add(winningBid);
                         }
                     }
 
 
-
                 }
-                if(myWinCards != null){
-                    singleWinCard = new MyWinAdapter(getActivity() , R.layout.my_wins_card , myWinCards);
+                if (myWinCards != null) {
+                    singleWinCard = new MyWinAdapter(getActivity(), R.layout.my_wins_card, myWinCards);
                     list.setAdapter(singleWinCard);
                     singleWinCard.notifyDataSetChanged();
                 }
@@ -150,8 +145,6 @@ public class fragmentMyWins extends Fragment {
 
             }
         });
-
-
 
 
         return view;

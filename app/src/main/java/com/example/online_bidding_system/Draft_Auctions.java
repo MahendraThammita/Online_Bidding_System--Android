@@ -15,6 +15,7 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.DraftAdapter;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -135,6 +136,10 @@ public class Draft_Auctions extends AppCompatActivity {
 
             }
         });
+
+        oneDraftCard = new DraftAdapter(getApplicationContext() , R.layout.draft_auction_card , oneDraft);
+        draftsList.setAdapter(oneDraftCard);
+
 
         //draftsList.setAdapter(singleDraft);
 
