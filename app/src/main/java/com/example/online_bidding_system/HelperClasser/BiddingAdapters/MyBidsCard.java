@@ -10,6 +10,7 @@ public class MyBidsCard {
     private String Type;
     private String endDate;
     private String seller_id;
+    private  String status;
     private int MaxBid;
     private int Mybid;
     private int Start_Price;
@@ -42,6 +43,15 @@ public class MyBidsCard {
     }
 
     public void setMyAuctionCardValues(String Title , String duration, String endDate, int maxBid, String ADid, String Type){
+        this.Title = Title;
+        this.Duration = duration;
+        this.endDate = endDate;
+        this.MaxBid = maxBid;
+        this.auctionId = ADid;
+        this.Type = Type;
+    }
+
+    public void setDraftAuctionsValues(String Title , String duration, String endDate, int maxBid, String ADid, String Type){
         this.Title = Title;
         this.Duration = duration;
         this.endDate = endDate;
@@ -95,6 +105,14 @@ public class MyBidsCard {
 
     public int getStart_Price() {
         return Start_Price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     //Setters

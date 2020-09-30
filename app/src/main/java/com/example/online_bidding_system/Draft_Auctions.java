@@ -1,18 +1,35 @@
 package com.example.online_bidding_system;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.DraftAdapter;
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Draft_Auctions extends AppCompatActivity {
 
@@ -20,6 +37,10 @@ public class Draft_Auctions extends AppCompatActivity {
     DrawerLayout drawer;
     NavigationView navi;
     Toolbar primTool;
+
+    DatabaseReference dbRef;
+    List<MyBidsCard> oneDraft;
+    DraftAdapter oneDraftCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +95,53 @@ public class Draft_Auctions extends AppCompatActivity {
 
 
 
-        String[] phoneList = {"Apple Iphone-x" , "Samsung A-60" , "Huwavi Phone"};
+        //String[] phoneList = {"Apple Iphone-x" , "Samsung A-60" , "Huwavi Phone"};
 
 
         draftsList = findViewById(R.id.DraftAuctionList);
+        Query inactiveQuery = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("status").equalTo("inactive");
 
-        ArrayAdapter singleDraft = new ArrayAdapter(this , R.layout.draft_auction_card , R.id.DraftAuctionCardAuctionName , phoneList);
+        //ArrayAdapter singleDraft = new ArrayAdapter(this , R.layout.draft_auction_card , R.id.DraftAuctionCardAuctionName , phoneList);
+        oneDraft = new ArrayList<>();
 
-        draftsList.setAdapter(singleDraft);
+        inactiveQuery.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    String Duration = ds.child("Duration").getValue().toString();
+                    String endDate = ds.child("endDate").getValue().toString();
+                    String Type = ds.child("Type").getValue().toString();
+                    String Title = ds.child("Title").getValue().toString();
+                    String ADid = ds.getKey().toString();
+                    String ADStatus = ds.child("inactive").getValue().toString();
+                    int Startingbid = Integer.parseInt(ds.child("price").getValue().toString());
+
+                    LocalDate datPart = LocalDate.parse(endDate);
+                    LocalTime timePart = LocalTime.parse(Duration);
+                    LocalDateTime contactDate = LocalDateTime.of(datPart , timePart);
+                    String finalDate = contactDate.toString();
+
+                    MyBidsCard singleBidVals = new MyBidsCard();
+                    singleBidVals.setDraftAuctionsValues(Title , Duration , endDate , Startingbid , ADid , Type);
+                    oneDraft.add(singleBidVals);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        oneDraftCard = new DraftAdapter(getApplicationContext() , R.layout.draft_auction_card , oneDraft);
+        draftsList.setAdapter(oneDraftCard);
+
+
+        //draftsList.setAdapter(singleDraft);
 
     }
 }

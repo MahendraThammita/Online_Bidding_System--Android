@@ -87,7 +87,7 @@ public class fragmentMyAuctions extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_auctions, container, false);
         //bySellerRef = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("seller_id").equalTo("CUS2");
-        Query bySellerQuery = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("seller_id").equalTo("CUS2");
+        Query bySellerQuery = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("seller_ID").equalTo("CUS2");
 
         myAuctionCards = new ArrayList<>();
         auctList = view.findViewById(R.id.AuctionCardsList);
@@ -97,12 +97,12 @@ public class fragmentMyAuctions extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    String Duration = ds.child("Duration").getValue().toString();
-                    String endDate = ds.child("endDate").getValue().toString();
-                    String Type = ds.child("Type").getValue().toString();
-                    String Title = ds.child("Title").getValue().toString();
+                    String Duration = ds.child("duration").getValue().toString();
+                    String endDate = ds.child("date").getValue().toString();
+                    String Type = ds.child("type").getValue().toString();
+                    String Title = ds.child("title").getValue().toString();
                     String ADid = ds.getKey().toString();
-                    int MaxBid = Integer.valueOf(ds.child("MaxBid").getValue().toString());
+                    int MaxBid = Integer.valueOf(ds.child("maxBid").getValue().toString());
 
                     Log.i("orderByValues" , "ADD No : " + ADid);
 

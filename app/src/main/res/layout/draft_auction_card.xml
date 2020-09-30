@@ -46,6 +46,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/DraftAuctionCardAuctionID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/AuctionIdDemo"
@@ -68,7 +69,7 @@
                         android:gravity="bottom"/>
 
                     <TextView
-                        android:id="@+id/auctionCateVal"
+                        android:id="@+id/DraftAuctionCardAuctionCate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -96,7 +97,7 @@
                         android:gravity="bottom"/>
 
                     <TextView
-                        android:id="@+id/auctionhignbidVal"
+                        android:id="@+id/DraftAuctionCardAuctionStBid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"

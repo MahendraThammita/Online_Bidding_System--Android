@@ -108,15 +108,15 @@ public class MyBidsFragment extends Fragment {
 
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
                     String AuctId = ds.getKey().toString();
-                    String ContactNo = ds.child("ContactNo").getValue().toString();
-                    String Description = ds.child("Description").getValue().toString();
-                    String Duration = ds.child("Duration").getValue().toString();
-                    String Title = ds.child("Title").getValue().toString();
-                    String Type = ds.child("Type").getValue().toString();
-                    String endDate = ds.child("endDate").getValue().toString();
-                    int MaxBid = Integer.valueOf(ds.child("MaxBid").getValue().toString());
-                    int Mybid = Integer.valueOf(ds.child("Mybid").getValue().toString());
-                    int Start_Price = Integer.valueOf(ds.child("Start_Price").getValue().toString());
+                    String ContactNo = ds.child("contact").getValue().toString();
+                    String Description = ds.child("description").getValue().toString();
+                    String Duration = ds.child("duration").getValue().toString();
+                    String Title = ds.child("title").getValue().toString();
+                    String Type = ds.child("type").getValue().toString();
+                    String endDate = ds.child("date").getValue().toString();
+                    int MaxBid = Integer.valueOf(ds.child("maxBid").getValue().toString());
+                    int Mybid = Integer.valueOf(ds.child("mybid").getValue().toString());
+                    int Start_Price = Integer.valueOf(ds.child("price").getValue().toString());
 
                     Log.i("ShowData" , "data Returned" + ContactNo + " - " + Description  + " - " + MaxBid);
                     MyBidsCard my_Bid = new MyBidsCard(AuctId , ContactNo , Description , Duration , Title , Type , endDate , MaxBid , Mybid , Start_Price);
