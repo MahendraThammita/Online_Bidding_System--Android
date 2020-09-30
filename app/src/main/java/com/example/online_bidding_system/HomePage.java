@@ -9,11 +9,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -136,7 +138,7 @@ public class HomePage extends AppCompatActivity {
 
 
         listView = this.findViewById(R.id.HomeCardsList);
-        dbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN9");
+        //dbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN9");
         HomeCards = new ArrayList<>();
         Query FilterHomeAds = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("status").equalTo("inactive");
         final Query FilterAntiqueAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("Antiques");
@@ -176,17 +178,34 @@ public class HomePage extends AppCompatActivity {
                     String strCalculatedStrhOUR = Long.toString(minutes/60);
                     String strCalculatedStrhMin = Long.toString(minutes%60);
 
+                    //Change status if time exceed
+
+                    int EndMin = Integer.parseInt(strCalculatedStrhMin);
+                    //int EndHr = Integer.parseInt(strCalculatedStrhOUR);
+
+
+                    if (EndMin < 0 ){
+
+                        DBRef = FirebaseDatabase.getInstance().getReference();
+                        DBRef.child("Adverticement").child(AucID).child("status").setValue("Ended");
+                        //DBRef.child("Student/std1/add").setValue(txtAdd.getText().toString().trim());
+
+                    }
+
 
                     Log.i("Difference" , "ADD No : " + MinDifference);
                     Log.i("Difference" , "difference in calculated format : " + strCalculatedStrhOUR + ":" + strCalculatedStrhMin);
 
-                    HomeCard my_Bid = new HomeCard(AucID , Title, MaxBid);
+                    String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
+
+                    HomeCard my_Bid = new HomeCard(AucID , Title, MaxBid,duration);
                     HomeCards.add(my_Bid);
                 }
                 if (HomeCards != null) {
 
                     singleCard = new HomeAdapter(HomePage.this, R.layout.homepage_card, HomeCards);
                     listView.setAdapter(singleCard);
+
                     singleCard.notifyDataSetChanged();
                 }
 
@@ -245,15 +264,26 @@ public class HomePage extends AppCompatActivity {
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String AuctionId = HomeCards.get(i).getAuctId();
                 Intent showPAgeIntent = new Intent(getApplicationContext() , displayAds.class);
                 showPAgeIntent.putExtra("BidId" , AuctionId);
                 listView.getContext().startActivity(showPAgeIntent);
+
             }
         });
 
+        /*listView.setOnTouchListener(new View.OnTouchListener() {
+
+
+            public boolean onTouch(View v, MotionEvent event) {
+                return event.getAction() == MotionEvent.ACTION_MOVE;
+            }
+
+        });
+*/
     }
 
     public void flipImages(int image) {

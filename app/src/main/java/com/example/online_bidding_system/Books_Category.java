@@ -15,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
@@ -25,14 +26,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Books_Category extends AppCompatActivity {
 
-    final int REQUEST_EXTERNAL_STORAGE = 100;
 
     EditText txtTitle,txtPrice,txtDuration,txtContact,txtType,txtDescription;
-    Button PublishNow;
+    Button PublishLater;
     DatabaseReference DbRef;
     DatabaseReference DbRef1;
     private DatabaseReference mFirebaseDatabase;
@@ -62,14 +64,12 @@ public class Books_Category extends AppCompatActivity {
 
         txtTitle = findViewById(R.id.setTitle);
         txtPrice = findViewById(R.id.setPrice);
-        //ged datapicker value
-        dp = findViewById(R.id.setDate);
-        //get Timepicker value
-        tp = findViewById(R.id.setTime);
         txtContact = findViewById(R.id.setContact);
+        dp = findViewById(R.id.setDate);
+        tp = findViewById(R.id.setTime);
         txtType = findViewById(R.id.setType);
         txtDescription = findViewById(R.id.setDescription);
-        PublishNow = findViewById(R.id.publish_now);
+        PublishLater = findViewById(R.id.publish_later);
 
         book = new auction();
         adverticement=new  Adverticement();
@@ -79,7 +79,8 @@ public class Books_Category extends AppCompatActivity {
         mFirebaseDatabase1 = mFirebaseInstance.getReference("Books");
 
 
-        PublishNow.setOnClickListener(new View.OnClickListener() {
+
+        PublishLater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DbRef = FirebaseDatabase.getInstance().getReference().child("Books");
@@ -108,13 +109,30 @@ public class Books_Category extends AppCompatActivity {
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
+
+                        String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
+                        adverticement.setDuration(strTime);
+
+                        // String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                        //adverticement.setDate(strDate);
+
+                        int year = dp.getYear();
+                        int month = dp.getMonth();
+                        int day = dp.getDayOfMonth();
+
+                        Calendar myCal = Calendar.getInstance();
+                        myCal.set(year , month , day);
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+                        String strDate = dateFormat.format(myCal.getTime());
+                        adverticement.setDate(strDate);
+
+
                         adverticement.setTitle(txtTitle.getText().toString().trim());
                         adverticement.setPrice(txtPrice.getText().toString().trim());
                         //set timepicker value
-                        String strTime = tp.getHour() + ":" + tp.getMinute();
                         adverticement.setDuration(strTime);
                         //set datapicker value
-                        String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
                         adverticement.setDate(strDate);
                         adverticement.setContact(txtContact.getText().toString().trim());
                         adverticement.setDescription(txtDescription.getText().toString().trim());

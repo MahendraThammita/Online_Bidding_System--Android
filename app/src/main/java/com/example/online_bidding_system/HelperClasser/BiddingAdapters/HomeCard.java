@@ -7,10 +7,11 @@ public class HomeCard {
     private int MaxBid;
 
 
-    public HomeCard(String aucID, String title, int maxBid) {
+    public HomeCard(String aucID, String title, int maxBid, String duration) {
         this.auctId = aucID;
         Title = title;
         MaxBid = MaxBid;
+        Duration = duration;
     }
 
     public HomeCard(String title, int MaxBid) {
