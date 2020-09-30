@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/displayAuct_ItemName_Description"
+                        android:id="@+id/displayAuct__Description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
