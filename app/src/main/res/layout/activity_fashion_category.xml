@@ -1,229 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fashion_category">
+    tools:context=".Books_Category"
+    android:orientation="vertical">
 
 
-    <LinearLayout
+    <include
+        android:id="@+id/primaryActbar"
+        layout="@layout/primary_actionbar"/>
+
+
+    <include
+        android:id="@+id/profActionbar"
+        layout="@layout/secoundery_actionbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_alignBottom="@+id/primaryActbar"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/fashiondtitle"
+        android:textSize="24sp" />
+    <!-- Display selected images -->
 
-        <include
-            android:id="@+id/primaryActbar"
-            layout="@layout/primary_actionbar"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-
-        <include
-            android:id="@+id/profActionbar"
-            layout="@layout/secoundery_actionbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/primaryActbar"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:fontFamily="sans-serif-black"
-            android:text="@string/fashiondtitle"
-            android:textSize="24sp" />
-        <!-- Display selected images -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <ImageSwitcher
+                    android:id="@+id/imageIs"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"/>
+
+                <Button
+                    android:id="@+id/preButton"
+                    android:text="Pre"
+                    android:layout_below= "@+id/imageIs"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentBottom = "true"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/nextButton"
+                    android:text="Next"
+                    android:layout_below= "@+id/imageIs"
+                    android:layout_alignParentEnd = "true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/pickImg"
+                    android:text="Select"
+                    android:layout_below= "@+id/imageIs"
+                    android:layout_alignParentBottom = "true"
+                    android:layout_width="200dp"
+                    android:layout_marginLeft="95dp"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+            <!--EditText -->
+            <EditText
+                android:id="@+id/setTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Title"
+                android:inputType="text" />
+
+
+            <!--EditText -->
+            <EditText
+                android:id="@+id/setPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Starting at"
+                android:inputType="numberDecimal" />
+            <!--EditText -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="End at:"
+                android:textSize="20sp"
+                android:layout_margin="12dp">
+
+            </TextView>
+            <!--EditText -->
+
+
+
+            <DatePicker
+                android:id="@+id/setDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"></DatePicker>
+            <TimePicker
+                android:id="@+id/setTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:timePickerMode="spinner">
+
+            </TimePicker>
+
+
+            <!--EditText -->
+
+            <EditText
+                android:id="@+id/setBrand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Brand"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/setCondition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Condition"
+                android:inputType="phone" />
+
+
+            <!--EditText -->
+            <EditText
+                android:id="@+id/setMaterials"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Materials"
+                android:inputType="text" />
+
+            <!--EditText -->
+            <EditText
+                android:id="@+id/setSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Size"
+                android:inputType="text" />
+
+
+
+            <EditText
+                android:id="@+id/setContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Contact"
+                android:inputType="phone" />
+
+
+
+            <!--EditText -->
+            <EditText
+                android:id="@+id/setDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Description"
+                android:inputType="text" />
+
+
+
+
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/image_view"
-                    android:layout_width="160dp"
-                    android:layout_height="160dp"
-                    android:layout_gravity="center_horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- image select button -->
                 <Button
-                    android:id="@+id/button"
-                    android:layout_width="120dp"
+                    android:id="@+id/publish_now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:text="Publish Now"
+                    android:layout_margin="10dp"/>
+
+                <Button
+                    android:id="@+id/publish_later"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="3dp"
-                    android:background="@color/BootstrapPrimary"
-                    android:text="Select Images"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <!--EditText -->
-                <EditText
-                    android:id="@+id/fashionTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="sans-serif-black"
-                    android:hint="Title"
-                    android:inputType="text" />
-
-
-
-                <EditText
-                    android:id="@+id/fashionType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="sans-serif-black"
-                    android:hint="Type"
-                    android:inputType="text" />
-
-
-                <!--EditText -->
-                <EditText
-                    android:id="@+id/fashionBrand"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="sans-serif-black"
-                    android:hint="Brand"
-                    android:inputType="text" />
-
-
-                <!--EditText -->
-                <EditText
-                    android:id="@+id/fashionCondition"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="sans-serif-black"
-                    android:hint="Condition"
-                    android:inputType="text" />
-
-
-
-
-                <!--EditText -->
-                <EditText
-                    android:id="@+id/fashionMaterial"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="sans-serif-black"
-                    android:hint="Material"
-                    android:inputType="text" />
-
-                <!--EditText -->
-                <EditText
-                    android:id="@+id/fashionSize"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="sans-serif-black"
-                    android:hint="Size"
-                    android:inputType="text" />
-
-
-
-                <!--EditText -->
-                <EditText
-                    android:id="@+id/fashionPrize"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="sans-serif-black"
-                    android:hint="Starting at"
-                    android:inputType="text" />
-                <!--EditText -->
-
-                <EditText
-                    android:id="@+id/fashionDuration"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="sans-serif-black"
-                    android:hint="Duration"
-                    android:inputType="text" />
-
-                <!--EditText -->
-                <EditText
-                    android:id="@+id/fashionContact"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="sans-serif-black"
-                    android:hint="Contact"
-                    android:inputType="text" />
-
-
-
-                <!--EditText -->
-                <EditText
-                    android:id="@+id/fashionDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="sans-serif-black"
-                    android:hint="Description"
-                    android:inputType="text" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/publish_now"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorAccent"
-                        android:layout_weight="1"
-                        android:text="Publish Now"
-                        android:layout_margin="10dp"/>
-
-                    <Button
-                        android:id="@+id/publish_later"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorAccent"
-                        android:layout_weight="1"
-                        android:text="Publish Later"
-                        android:layout_margin="10dp"/>
-
-                </LinearLayout>
-
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:text="Publish Later"
+                    android:layout_margin="10dp"/>
 
             </LinearLayout>
 
-        </ScrollView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:cnb_menuResource="@menu/profile_bottom_nav"
+        app:cnb_unselectedColor="@color/design_default_color_on_primary"
+        android:layout_alignParentBottom="true"
+        tools:ignore="MissingConstraints">
+
+    </com.ismaeldivita.chipnavigation.ChipNavigationBar>
 
 
 
-
-
-
-
-    </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
