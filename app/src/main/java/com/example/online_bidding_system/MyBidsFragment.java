@@ -1,6 +1,7 @@
 package com.example.online_bidding_system;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -82,6 +84,9 @@ public class MyBidsFragment extends Fragment {
         }
 
 
+
+
+
     }
 
     @Override
@@ -96,11 +101,13 @@ public class MyBidsFragment extends Fragment {
         myBidsCards = new ArrayList<>();
 
 
+
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
+                    String AuctId = ds.getKey().toString();
                     String ContactNo = ds.child("ContactNo").getValue().toString();
                     String Description = ds.child("Description").getValue().toString();
                     String Duration = ds.child("Duration").getValue().toString();
@@ -112,7 +119,7 @@ public class MyBidsFragment extends Fragment {
                     int Start_Price = Integer.valueOf(ds.child("Start_Price").getValue().toString());
 
                     Log.i("ShowData" , "data Returned" + ContactNo + " - " + Description  + " - " + MaxBid);
-                    MyBidsCard my_Bid = new MyBidsCard(ContactNo , Description , Duration , Title , Type , endDate , MaxBid , Mybid , Start_Price);
+                    MyBidsCard my_Bid = new MyBidsCard(AuctId , ContactNo , Description , Duration , Title , Type , endDate , MaxBid , Mybid , Start_Price);
                     //MyBidsCard my_Bid = ds.getValue(MyBidsCard.class);
                     myBidsCards.add(my_Bid);
                 }
@@ -133,6 +140,18 @@ public class MyBidsFragment extends Fragment {
 
             }
         });
+
+
+        bidList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String item_ID = myBidsCards.get(i).getAuctionId();
+                Intent toEdit = new Intent(getActivity() , displayAds.class);
+                toEdit.putExtra("BidId" , item_ID);
+                bidList.getContext().startActivity(toEdit);
+            }
+        });
+
 
 
 //        ArrayAdapter arradpt = new ArrayAdapter<String>(getActivity(), R.layout.my_bid_card , R.id.myBidCardTitle, items);
