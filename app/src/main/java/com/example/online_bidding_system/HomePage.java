@@ -92,7 +92,7 @@ public class HomePage extends AppCompatActivity {
         bids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext() , RegistrationPage.class);
+                Intent homeIntent = new Intent(getApplicationContext() , SportsEditPage.class);
                 startActivity(homeIntent);
             }
         });
