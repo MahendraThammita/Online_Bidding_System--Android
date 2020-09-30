@@ -60,7 +60,7 @@ public class myBids extends AppCompatActivity implements NavigationView.OnNaviga
                         Toast.makeText(myBids.this , "You are in My Bids page" , Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.Drawable_myWins:
-                        Intent in1 = new Intent(myBids.this , MyWins.class);
+                        Intent in1 = new Intent(myBids.this , Draft_Auctions.class);
                         startActivity(in1);
                         break;
                     case R.id.Drawable_ViewAuctions:

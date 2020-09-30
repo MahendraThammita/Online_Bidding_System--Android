@@ -110,12 +110,12 @@ public class Draft_Auctions extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    String Duration = ds.child("Duration").getValue().toString();
-                    String endDate = ds.child("endDate").getValue().toString();
-                    String Type = ds.child("Type").getValue().toString();
-                    String Title = ds.child("Title").getValue().toString();
+                    String Duration = ds.child("duration").getValue().toString();
+                    String endDate = ds.child("date").getValue().toString();
+                    String Type = ds.child("type").getValue().toString();
+                    String Title = ds.child("title").getValue().toString();
                     String ADid = ds.getKey().toString();
-                    String ADStatus = ds.child("inactive").getValue().toString();
+                    String ADStatus = ds.child("status").getValue().toString();
                     int Startingbid = Integer.parseInt(ds.child("price").getValue().toString());
 
                     LocalDate datPart = LocalDate.parse(endDate);

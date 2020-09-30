@@ -84,12 +84,31 @@ public class Edit_User extends AppCompatActivity {
                     String userImage = dataSnapshot.child("ProfilePic").getValue().toString();
 
                     //getUserImage(userImage);
-                    Picasso.get()
-                            .load(userImage)
+//                    Picasso.get()
+//                            .load(userImage)
+//                            .placeholder(R.mipmap.ic_launcher)
+//                            .fit()
+//                            .centerCrop()
+//                            .into(roundedProfilePic);
+
+                    storageRef.child(userImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+
+                            Picasso.get()
+                            .load(uri)
                             .placeholder(R.mipmap.ic_launcher)
                             .fit()
                             .centerCrop()
                             .into(roundedProfilePic);
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
 
                     
                     currentUser = new User(userId , userName , userEmail , userAddress , "07525815");
