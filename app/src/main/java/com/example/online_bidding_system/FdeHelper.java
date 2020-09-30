@@ -3,7 +3,7 @@ package com.example.online_bidding_system;
 public class FdeHelper {
 
 
-        private String Brand,Condition,Material,Size,ContactNo,Description,Duration,Title,Type,Start_Price,Genre;
+        private String Brand,Condition,Material,Size,Genre;
 
         public FdeHelper(){
 
@@ -41,54 +41,6 @@ public class FdeHelper {
 
         public void setSize(String size) {
             Size = size;
-        }
-
-        public String getContactNo() {
-            return ContactNo;
-        }
-
-        public void setContactNo(String contactNo) {
-            ContactNo = contactNo;
-        }
-
-        public String getDescription() {
-            return Description;
-        }
-
-        public void setDescription(String description) {
-            Description = description;
-        }
-
-        public String getDuration() {
-            return Duration;
-        }
-
-        public void setDuration(String duration) {
-            Duration = duration;
-        }
-
-        public String getTitle() {
-            return Title;
-        }
-
-        public void setTitle(String title) {
-            Title = title;
-        }
-
-        public String getType() {
-            return Type;
-        }
-
-        public void setType(String type) {
-            Type = type;
-        }
-
-        public String getStart_Price() {
-            return Start_Price;
-        }
-
-        public void setStart_Price(String start_Price) {
-            Start_Price = start_Price;
         }
 
         public String getGenre() {
