@@ -53,7 +53,7 @@ public class SportsEditPage extends AppCompatActivity {
         txtContact = findViewById(R.id.setContact);
         txtDescription = findViewById(R.id.setDescription);
         adverticement = new Adverticement();
-        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("HAS3");
+        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("HAS5");
         DbRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

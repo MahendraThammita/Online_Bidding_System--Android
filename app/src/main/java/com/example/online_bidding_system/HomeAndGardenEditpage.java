@@ -22,8 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class HomeAndGardenEditpage extends AppCompatActivity {
-    EditText txtTitle,txtPrice,txtContact,txtDescription,txtEnvironment;
-    DatePicker date;
+    EditText txtTitle,txtPrice,txtContact,txtDescription,txtEnvironment,date;
+
     Button PublishNow,Delete;
     DatabaseReference DbRef1,homeref;
 
@@ -62,6 +62,7 @@ public class HomeAndGardenEditpage extends AppCompatActivity {
                     txtTitle.setText(dataSnapshot.child("title").getValue().toString());
                     txtPrice.setText(dataSnapshot.child("price").getValue().toString());
                     txtContact.setText(dataSnapshot.child("contact").getValue().toString());
+                    date.setText(dataSnapshot.child("date").getValue().toString());
                     txtDescription.setText(dataSnapshot.child("description").getValue().toString());
                     homeref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
