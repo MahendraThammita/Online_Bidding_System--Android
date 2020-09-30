@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
@@ -29,17 +31,24 @@ public class Handmade_Edit extends AppCompatActivity {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
     EditText txtTitle,txtPrice,txtDuration,txtContact,txtMaterials,txtDescription;
-    Button PublishNow;
+    Button PublishNow, update, delete;
     DatabaseReference DbRef;
-    auction add;
+    DatabaseReference DbRef1;
+    private DatabaseReference mFirebaseDatabase;
+    private DatabaseReference mFirebaseDatabase1;
+    private FirebaseDatabase mFirebaseInstance;
+    Adverticement adverticement;
+    auction handmade;
     long maxid=0;
     String idPrefix="HM";
     private ImageSwitcher imageIs;
     private Button preBtn,nxBtn, pickImgbtn;
     private  ArrayList<Uri> imageUris;
+    private String userId;
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
-
+    TimePicker tp;
+    DatePicker dp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +63,63 @@ public class Handmade_Edit extends AppCompatActivity {
         txtMaterials = findViewById(R.id.setMaterials);
         txtDescription = findViewById(R.id.setDescription);
         PublishNow = findViewById(R.id.publish_now);
+        update = findViewById(R.id.Update);
+        delete =  findViewById(R.id.Delete);
 
-        add = new auction();
+
+        handmade = new auction();
+        adverticement=new  Adverticement();
+
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
+        mFirebaseDatabase1 = mFirebaseInstance.getReference("HandMades");
 
 
-        PublishNow.setOnClickListener(new View.OnClickListener() {
+        DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("BK1");
+        DbRef1 = FirebaseDatabase.getInstance().getReference().child("HandMades").child("HM1");
+        DbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()){
+                    txtTitle.setText(dataSnapshot.child("title").getValue().toString());
+                    txtContact.setText(dataSnapshot.child("contact").getValue().toString());
+                    txtPrice.setText(dataSnapshot.child("price").getValue().toString());
+                    txtDescription.setText(dataSnapshot.child("description").getValue().toString());
+
+
+                }
+                else
+                    Toast.makeText(getApplicationContext() , "Empty" , Toast.LENGTH_SHORT).show();
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbRef = FirebaseDatabase.getInstance().getReference().child("HandMades");
-                DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN1");
+                DbRef.removeValue();
+                Toast.makeText(getApplicationContext() , "Succesfully Deleated" , Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DbRef = FirebaseDatabase.getInstance().getReference().child("Antiques");
+                DbRef1= FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                userId = mFirebaseDatabase1.push().getKey();
+                mFirebaseDatabase.child(userId).setValue(adverticement);
+
+                mFirebaseDatabase1.child(userId).setValue(handmade);
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -80,21 +137,27 @@ public class Handmade_Edit extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtPrice.getText().toString()))
                         Toast.makeText(getApplicationContext(), " Price Is Required!", Toast.LENGTH_SHORT).show();
-                    else if (TextUtils.isEmpty(txtDuration.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Duration is Required!", Toast.LENGTH_SHORT).show();
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
-                        add.setTitle(txtTitle.getText().toString().trim());
-                        add.setPrice(txtPrice.getText().toString().trim());
-                        add.setDuration(txtDuration.getText().toString().trim());
-                        add.setContact(txtContact.getText().toString().trim());
-                        add.setMaterials(txtMaterials.getText().toString().trim());
-                        add.setDescription(txtDescription.getText().toString().trim());
-                        // DbRef.child("user").setValue(user);
+
+
+                        String strTime = tp.getHour() + ":" + tp.getMinute();
+                        adverticement.setDuration(strTime);
+
+                        String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                        adverticement.setDate(strDate);
+
                         String strNumber= idPrefix+String.valueOf(maxid+1);
-                        DbRef.child(String.valueOf(strNumber)).setValue(add);
+                        adverticement.setTitle(txtTitle.getText().toString().trim());
+                        adverticement.setPrice(txtPrice.getText().toString().trim());
+                        adverticement.setContact(txtContact.getText().toString().trim());
+                        adverticement.setDescription(txtDescription.getText().toString().trim());
+                        adverticement.setMaxBid("0");
+                        DbRef.child(String.valueOf(strNumber)).setValue(handmade);
+                        DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
                         Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
+                        maxid  = maxid+1;
                         clearControl();
 
                     }
@@ -114,9 +177,7 @@ public class Handmade_Edit extends AppCompatActivity {
             public void clearControl() {
                 txtTitle.setText("");
                 txtPrice.setText("");
-                txtDuration.setText("");
                 txtContact.setText("");
-                txtMaterials.setText("");
                 txtDescription.setText("");
             }
 
@@ -181,6 +242,9 @@ public class Handmade_Edit extends AppCompatActivity {
         }));
     }
 
+
+
+
     private void pickImagesIntent(){
 
 
@@ -219,8 +283,10 @@ public class Handmade_Edit extends AppCompatActivity {
             }
         }
     }
-}
 
+
+
+}
 
 
 

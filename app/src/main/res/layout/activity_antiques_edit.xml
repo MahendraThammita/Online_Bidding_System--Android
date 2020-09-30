@@ -119,18 +119,18 @@
 
 
 
-            <DatePicker
+            <EditText
                 android:id="@+id/setDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"></DatePicker>
-            <TimePicker
+                android:layout_margin="12dp"></EditText>
+
+            <EditText
                 android:id="@+id/setTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:timePickerMode="spinner">
-            </TimePicker>
+                android:layout_margin="12dp">
+            </EditText>
 
             <EditText
                 android:id="@+id/test"
@@ -142,17 +142,6 @@
                 android:hint="Contact"
                 android:inputType="phone" />
 
-
-            <!--EditText -->
-            <EditText
-                android:id="@+id/setContact"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-black"
-                android:hint="Contact"
-                android:inputType="text" />
 
 
             <!--EditText -->

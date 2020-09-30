@@ -118,7 +118,7 @@ public class Antiques_Category extends AppCompatActivity{
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
 
-                        String strTime = tp.getHour() + ":" + tp.getMinute();
+                        String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
                         adverticement.setDuration(strTime);
 
                         String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
