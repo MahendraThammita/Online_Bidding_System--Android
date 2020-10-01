@@ -26,7 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Other_category extends AppCompatActivity {
     EditText txtTitle,txtPrice,txtContact,txtDescription;
@@ -100,11 +102,23 @@ public class Other_category extends AppCompatActivity {
                         adverticement.setPrice(txtPrice.getText().toString().trim());
 
                         //set timepicker value
-                        String strTime = tp.getHour() + ":" + tp.getMinute();
+                        String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
                         adverticement.setDuration(strTime);
                         //set datapicker value
-                        String strDate = dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                        //String strDate = dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                        //adverticement.setDate(strDate);
+                        int year = dp.getYear();
+                        int month = dp.getMonth();
+                        int day = dp.getDayOfMonth();
+
+                        Calendar myCal = Calendar.getInstance();
+                        myCal.set(year , month , day);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+                        String strDate = dateFormat.format(myCal.getTime());
                         adverticement.setDate(strDate);
+
+                        adverticement.setSeller_ID("CUS1");
+
                         adverticement.setMaxBid("0");
                         adverticement.setStatus("inactive");
                         adverticement.setType("Others");
