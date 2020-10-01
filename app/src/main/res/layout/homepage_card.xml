@@ -33,10 +33,18 @@
 
             </ImageView>
 
+            <ImageView
+                android:layout_width="110dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="280dp"
+                android:src="@drawable/tag" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+
 
                 <TextView
                     android:id="@+id/HomeAdTitle"
@@ -86,14 +94,17 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="10dp">
 
+
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="140dp"
+                        android:layout_marginLeft="100dp"
                         android:textStyle="bold"
+                        android:rotation="310"
                         android:text="Max Bid:"
                         android:textColor="@color/Black"
-                        android:textSize="20sp">
+                        android:textSize="15sp">
 
                     </TextView>
 

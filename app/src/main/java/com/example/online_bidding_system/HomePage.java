@@ -19,6 +19,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +58,7 @@ public class HomePage extends AppCompatActivity {
 
 
     ListView listView;
+    SearchView searchView;
     DatabaseReference dbRef;
     List<HomeCard> HomeCards;
     HomeAdapter singleCard;
@@ -141,15 +143,95 @@ public class HomePage extends AppCompatActivity {
         //dbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN9");
         HomeCards = new ArrayList<>();
         Query FilterHomeAds = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("status").equalTo("inactive");
-        final Query FilterAntiqueAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("Antiques");
+        final Query FilterAntiqueAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("status").equalTo("Ended");
 
         FilterHomeAds.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
            @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
+
+                    String Title = (ds.child("title").getValue().toString());
+                    int MaxBid =  Integer.parseInt(ds.child("maxBid").getValue().toString());
+                    String AucID = ds.getKey().toString();
+                    String Duration = ds.child("duration").getValue().toString();
+                    String endDate = ds.child("date").getValue().toString();
+
+
+                    LocalDate datPart = LocalDate.parse(endDate);
+                    LocalTime timePart = LocalTime.parse(Duration);
+                    LocalDateTime contactDate = LocalDateTime.of(datPart , timePart);
+                    String finalDate = contactDate.toString();
+
+                    LocalDateTime currenttime = LocalDateTime.now();
+                    String time = currenttime.toString();
+
+                    Log.i("finalDate" , "ADD No : " + finalDate);
+                    Log.i("currentTime" , "ADD No : " + time);
+
+
+                    long minutes = ChronoUnit.MINUTES.between(currenttime , contactDate);
+
+                    String MinDifference = Long.toString(minutes);
+
+                    //LocalDateTime calculatedTime = LocalDateTime.MIN.plusMinutes(minutes);
+                    String strCalculatedStrhOUR = Long.toString(minutes/60);
+                    String strCalculatedStrhMin = Long.toString(minutes%60);
+
+                    //Change status if time exceed
+
+                    int EndMin = Integer.parseInt(strCalculatedStrhMin);
+                    //int EndHr = Integer.parseInt(strCalculatedStrhOUR);
+
+
+                    if (EndMin < 0 ){
+
+                        DBRef = FirebaseDatabase.getInstance().getReference();
+                        DBRef.child("Adverticement").child(AucID).child("status").setValue("Ended");
+
+                    }
+
+
+                    Log.i("Difference" , "ADD No : " + MinDifference);
+                    Log.i("Difference" , "difference in calculated format : " + strCalculatedStrhOUR + ":" + strCalculatedStrhMin);
+
+                    String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
+
+                    HomeCard my_Bid = new HomeCard(AucID , Title, MaxBid,duration);
+                    HomeCards.add(my_Bid);
+                }
+                if (HomeCards != null) {
+
+                    singleCard = new HomeAdapter(HomePage.this, R.layout.homepage_card, HomeCards);
+                    listView.setAdapter(singleCard);
+
+                    singleCard.notifyDataSetChanged();
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+       antique.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                HomeCards.clear();
+
+        FilterAntiqueAds.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                     String Title = (ds.child("title").getValue().toString());
                     int MaxBid =  Integer.parseInt(ds.child("maxBid").getValue().toString());
@@ -218,46 +300,9 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-  /*      antique.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-        FilterAntiqueAds.addValueEventListener(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-
-                    String Title = (ds.child("title").getValue().toString());
-                    int MaxBid =  Integer.parseInt(ds.child("maxBid").getValue().toString());
-                    String AucID = ds.getKey().toString();
-
-
-                    HomeCard my_Bid = new HomeCard(AucID , Title, MaxBid);
-
-                    HomeCards.add(my_Bid);
-                }
-                if (HomeCards != null) {
-
-                    singleCard = new HomeAdapter(HomePage.this, R.layout.homepage_card, HomeCards);
-                    listView.setAdapter(singleCard);
-                    singleCard.notifyDataSetChanged();
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-
-            }
-        });
-*/
 
 
 
@@ -275,15 +320,8 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        /*listView.setOnTouchListener(new View.OnTouchListener() {
 
 
-            public boolean onTouch(View v, MotionEvent event) {
-                return event.getAction() == MotionEvent.ACTION_MOVE;
-            }
-
-        });
-*/
     }
 
     public void flipImages(int image) {
