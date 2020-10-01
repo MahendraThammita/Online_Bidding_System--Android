@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background"
+    android:background="@color/white"
     tools:context=".MainActivity"
     >
 
@@ -29,12 +29,7 @@
                 android:layout_height="wrap_content"
                 />
 
-            <include
-                android:id="@+id/profActionbar"
-                layout="@layout/secoundery_actionbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+
 
             <include
                 android:id="@+id/profActionbar"
@@ -83,19 +78,19 @@
             />
 
 
-                    <ListView
-                        android:id="@+id/HomeCardsList"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:divider="@null">
-
-                    </ListView>
 
 
                 </LinearLayout>
 
             </ScrollView>
+
+            <ListView
+                android:id="@+id/HomeCardsList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+            </ListView>
 
         </LinearLayout>
 
