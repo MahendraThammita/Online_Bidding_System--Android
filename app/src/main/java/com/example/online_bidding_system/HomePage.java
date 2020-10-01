@@ -28,6 +28,7 @@ import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeAdapt
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeCard;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyAdapter;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.TimeCalculations;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -163,6 +164,9 @@ public class HomePage extends AppCompatActivity {
                     LocalDateTime contactDate = LocalDateTime.of(datPart , timePart);
                     String finalDate = contactDate.toString();
 
+                    TimeCalculations bidTimes = new TimeCalculations(Duration , endDate);
+                    String TimeHave = bidTimes.calcTimeDifInMIn_Hrs_Str();
+
                     LocalDateTime currenttime = LocalDateTime.now();
                     String time = currenttime.toString();
 
@@ -194,7 +198,7 @@ public class HomePage extends AppCompatActivity {
 
 
                     Log.i("Difference" , "ADD No : " + MinDifference);
-                    Log.i("Difference" , "difference in calculated format : " + strCalculatedStrhOUR + ":" + strCalculatedStrhMin);
+                    Log.i("Difference" , "TimeHave : " + TimeHave);
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 

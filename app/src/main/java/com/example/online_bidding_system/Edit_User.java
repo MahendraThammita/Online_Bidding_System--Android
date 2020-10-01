@@ -83,13 +83,6 @@ public class Edit_User extends AppCompatActivity {
                     String userAddress =  dataSnapshot.child("address").getValue().toString();
                     String userImage = dataSnapshot.child("ProfilePic").getValue().toString();
 
-                    //getUserImage(userImage);
-//                    Picasso.get()
-//                            .load(userImage)
-//                            .placeholder(R.mipmap.ic_launcher)
-//                            .fit()
-//                            .centerCrop()
-//                            .into(roundedProfilePic);
 
                     storageRef.child(userImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
@@ -97,7 +90,7 @@ public class Edit_User extends AppCompatActivity {
 
                             Picasso.get()
                             .load(uri)
-                            .placeholder(R.mipmap.ic_launcher)
+                            .placeholder(R.drawable.dem_profile_pic)
                             .fit()
                             .centerCrop()
                             .into(roundedProfilePic);

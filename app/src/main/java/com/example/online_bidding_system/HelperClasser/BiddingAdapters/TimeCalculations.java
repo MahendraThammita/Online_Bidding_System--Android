@@ -31,21 +31,21 @@ public class TimeCalculations {
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private String calcFinalDateTime(LocalTime Endtime , LocalDate enddate) {
+    public String calcFinalDateTime(LocalTime Endtime , LocalDate enddate) {
         LocalDateTime finalDate = LocalDateTime.of(enddate , Endtime);
 
         return finalDate.toString();
     };
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private LocalDateTime calcFinalDateTimeInLDT(LocalTime Endtime , LocalDate enddate) {
+    public LocalDateTime calcFinalDateTimeInLDT(LocalTime Endtime , LocalDate enddate) {
         LocalDateTime finalDate = LocalDateTime.of(enddate , Endtime);
 
         return finalDate;
     };
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private String calcTimeDifInMIn_Hrs_Str(){
+    public String calcTimeDifInMIn_Hrs_Str(){
 
         LocalDateTime endTime = this.calcFinalDateTimeInLDT(this.endTime , this.endDate);
         long difInMinutes = ChronoUnit.MINUTES.between(currentTime , endTime);
@@ -60,7 +60,7 @@ public class TimeCalculations {
     };
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private LocalTime calcTimeDifInMIn_Hrs_InTime(){
+    public LocalTime calcTimeDifInMIn_Hrs_InTime(){
 
         LocalDateTime endTime = this.calcFinalDateTimeInLDT(this.endTime , this.endDate);
         long difInMinutes = ChronoUnit.MINUTES.between(currentTime , endTime);
