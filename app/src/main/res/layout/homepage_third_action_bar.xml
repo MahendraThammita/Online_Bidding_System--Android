@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/HomeTopAction"
+    android:id="@+id/HomeThirdAction"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="160dp"
@@ -125,7 +125,7 @@
                 android:background="@drawable/circle_button"
                 android:backgroundTint="#ff6f00"
                 android:layout_margin="25dp"
-                android:id="@+id/home_test4">
+                android:id="@+id/btnBook">
 
             </ImageButton>
 

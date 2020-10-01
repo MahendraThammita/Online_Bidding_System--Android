@@ -124,7 +124,7 @@ public class Sports_category extends AppCompatActivity {
                         homeitem.setBrand(txtBrand.getText().toString().trim());
 
                         //set timepicker value
-                        String strTime = tp.getHour() + ":" + tp.getMinute();
+                        String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
                         adverticement.setDuration(strTime);
                         //set datapicker value
                         String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();

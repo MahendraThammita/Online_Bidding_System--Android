@@ -26,7 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Handmade_Category extends AppCompatActivity {
 
@@ -90,8 +92,9 @@ public class Handmade_Category extends AppCompatActivity {
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists())
-                            maxid=(dataSnapshot.getChildrenCount());
+                        if (dataSnapshot.exists())
+                            maxid = (dataSnapshot.getChildrenCount());
+                        savedata();
                     }
 
                     @Override
@@ -99,6 +102,8 @@ public class Handmade_Category extends AppCompatActivity {
 
                     }
                 });
+            }
+                public void savedata(){
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
@@ -110,10 +115,20 @@ public class Handmade_Category extends AppCompatActivity {
                         add.setTitle(txtTitle.getText().toString().trim());
                         add.setPrice(txtPrice.getText().toString().trim());
                         //set timepicker value
-                        String strTime = tp.getHour() + ":" + tp.getMinute();
+                        String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
                         adverticement.setDuration(strTime);
                         //set datapicker value
-                        String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                        int year = dp.getYear();
+                        int month = dp.getMonth();
+                        int day = dp.getDayOfMonth();
+
+                        Calendar myCal = Calendar.getInstance();
+                        myCal.set(year , month , day);
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+                        String strDate = dateFormat.format(myCal.getTime());
+                        adverticement.setDate(strDate);
+
                         adverticement.setDate(strDate);
                         add.setContact(txtContact.getText().toString().trim());
                         add.setMaterials(txtMaterials.getText().toString().trim());
@@ -127,6 +142,8 @@ public class Handmade_Category extends AppCompatActivity {
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
                         Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
                         clearControl();
+                        Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                        startActivity(displayIntent);
 
                     }
 

@@ -71,7 +71,7 @@ public class Fashion_category extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_electronics_category);
+        setContentView(R.layout.activity_fashion_category);
 
 
         Brand        =      findViewById(R.id.setBrand);
@@ -95,7 +95,7 @@ public class Fashion_category extends AppCompatActivity {
 
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
-        mFirebaseDatabase1 = mFirebaseInstance.getReference("Electronics");
+        mFirebaseDatabase1 = mFirebaseInstance.getReference("FashionAndDesign");
 
 
         publishNow   =      findViewById(R.id.publish_now);
@@ -140,6 +140,9 @@ public class Fashion_category extends AppCompatActivity {
                     else if(TextUtils.isEmpty(Condition.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Condition Field Is Empty" , Toast.LENGTH_SHORT).show();
                     }
+                    else if(TextUtils.isEmpty(Size.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "Size Field Is Empty" , Toast.LENGTH_SHORT).show();
+                    }
 
                     else if(TextUtils.isEmpty(ContactNo.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Contact Number Field Is Empty" , Toast.LENGTH_SHORT).show();
@@ -161,6 +164,7 @@ public class Fashion_category extends AppCompatActivity {
                         fCat.setBrand(Brand.getText().toString().trim());
                         fCat.setMaterial(Material.getText().toString().trim());
                         fCat.setCondition(Condition.getText().toString().trim());
+                        fCat.setCondition(Size.getText().toString().trim());
                         adverticement.setContact(ContactNo.getText().toString().trim());
                         adverticement.setDescription(Description.getText().toString().trim());
                         adverticement.setTitle(Title.getText().toString().trim());
@@ -175,7 +179,7 @@ public class Fashion_category extends AppCompatActivity {
 
                         adverticement.setMaxBid("0");
                         adverticement.setStatus("inactive");
-                        adverticement.setType("Electronics");
+                        adverticement.setType("FashionAndDesign");
 
 
                         String strNumber= idPrefix+String.valueOf(maxid+1);
@@ -198,6 +202,7 @@ public class Fashion_category extends AppCompatActivity {
 
             public void clearControl() {
                 Brand.setText("");
+                Size.setText("");
                 Material.setText("");
                 Condition.setText("");
                 ContactNo.setText("");

@@ -110,6 +110,7 @@ public class Antiques_Category extends AppCompatActivity{
                     }
                 });
             }
+
                 public void savedata(){
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
@@ -136,7 +137,6 @@ public class Antiques_Category extends AppCompatActivity{
                         SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
                         String strDate = dateFormat.format(myCal.getTime());
                         adverticement.setDate(strDate);
-
 
 
                         adverticement.setTitle(txtTitle.getText().toString().trim());
