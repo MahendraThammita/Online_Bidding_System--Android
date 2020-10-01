@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class OtherEditpage extends AppCompatActivity {
-    EditText txtTitle,txtPrice,txtContact,txtDescription,date;
+    EditText txtTitle,txtPrice,txtContact,txtDescription,date,time;
     Button PublishNow,Delete;
     DatabaseReference DbRef1;
 
@@ -48,6 +48,7 @@ public class OtherEditpage extends AppCompatActivity {
         txtPrice = findViewById(R.id.setPrice);
         Delete = findViewById(R.id.Delete);
         date=findViewById(R.id.setDate);
+        time=findViewById(R.id.setTime);
 
         txtContact = findViewById(R.id.setContact);
         txtDescription = findViewById(R.id.setDescription);
@@ -55,7 +56,7 @@ public class OtherEditpage extends AppCompatActivity {
 
 
 
-            DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("OTH1");
+            DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("OTH6");
             DbRef1.addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -65,6 +66,7 @@ public class OtherEditpage extends AppCompatActivity {
                 txtContact.setText(dataSnapshot.child("contact").getValue().toString());
                 txtDescription.setText(dataSnapshot.child("description").getValue().toString());
                 date.setText(dataSnapshot.child("date").getValue().toString());
+                time.setText(dataSnapshot.child("Duration").getValue().toString());
             }
             else
                 Toast.makeText(getApplicationContext() , "Cannot Find Std1" , Toast.LENGTH_SHORT).show();
@@ -77,7 +79,7 @@ public class OtherEditpage extends AppCompatActivity {
         Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("OTH1");
+                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("OTH6");
                 DbRef1.removeValue();
                 Toast.makeText(getApplicationContext() , "Succesfully Deleated" , Toast.LENGTH_SHORT).show();
             }

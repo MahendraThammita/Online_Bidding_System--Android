@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class HomeAndGardenEditpage extends AppCompatActivity {
-    EditText txtTitle,txtPrice,txtContact,txtDescription,txtEnvironment,date;
+    EditText txtTitle,txtPrice,txtContact,txtDescription,txtEnvironment,time,date;
 
     Button PublishNow,Delete;
     DatabaseReference DbRef1,homeref;
@@ -48,13 +48,14 @@ public class HomeAndGardenEditpage extends AppCompatActivity {
         txtPrice = findViewById(R.id.setPrice);
         Delete = findViewById(R.id.Delete);
         date=findViewById(R.id.setDate);
+        time=findViewById(R.id.setTime);
         txtContact = findViewById(R.id.setContact);
         txtDescription = findViewById(R.id.setDescription);
         txtEnvironment= findViewById(R.id.setEnvironment);
 
         adverticement = new Adverticement();
-        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("HAG6");
-        homeref= FirebaseDatabase.getInstance().getReference().child("HomeAndGarden").child("HAG6");
+        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("HAG3");
+        homeref= FirebaseDatabase.getInstance().getReference().child("HomeAndGarden").child("HAG3");
         DbRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -63,6 +64,8 @@ public class HomeAndGardenEditpage extends AppCompatActivity {
                     txtPrice.setText(dataSnapshot.child("price").getValue().toString());
                     txtContact.setText(dataSnapshot.child("contact").getValue().toString());
                     date.setText(dataSnapshot.child("date").getValue().toString());
+                    time.setText(dataSnapshot.child("duration").getValue().toString());
+
                     txtDescription.setText(dataSnapshot.child("description").getValue().toString());
                     homeref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -90,7 +93,7 @@ public class HomeAndGardenEditpage extends AppCompatActivity {
         Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("HAG1");
+                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("HAG3");
                 DbRef1.removeValue();
                 Toast.makeText(getApplicationContext() , "Succesfully Deleated" , Toast.LENGTH_SHORT).show();
             }
