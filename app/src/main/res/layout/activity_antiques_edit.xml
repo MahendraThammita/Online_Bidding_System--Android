@@ -132,6 +132,13 @@
                 android:layout_margin="12dp">
             </EditText>
 
+            <EditText
+                android:id="@+id/setContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp">
+            </EditText>
+
 
 
             <!--EditText -->

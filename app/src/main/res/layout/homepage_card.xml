@@ -51,7 +51,7 @@
                     android:layout_marginLeft="150dp"
                     android:layout_marginBottom="10dp"
                     android:textStyle="bold"
-                    android:textColor="@color/Black">
+                    android:textColor="@color/white">
 
                 </TextView>
 

@@ -38,7 +38,7 @@ public class Antiques_Category extends AppCompatActivity{
 
     EditText txtTitle,txtPrice,txtDuration,txtContact,txtPeriod,txtDescription;
     Spinner period;
-    Button PublishLater;
+    Button PublishLater,PublishNow;
     DatabaseReference DbRef;
     DatabaseReference DbRef1;
     private DatabaseReference mFirebaseDatabase;
@@ -78,6 +78,7 @@ public class Antiques_Category extends AppCompatActivity{
         period = (Spinner)findViewById(R.id.setPeriod);
         txtDescription = findViewById(R.id.setDescription);
         PublishLater = findViewById(R.id.publish_later);
+        PublishNow = findViewById(R.id.publish_now);
 
         add = new auction();
         adverticement=new  Adverticement();
@@ -87,7 +88,7 @@ public class Antiques_Category extends AppCompatActivity{
         mFirebaseDatabase1 = mFirebaseInstance.getReference("Antiques");
 
 
-        PublishLater.setOnClickListener(new View.OnClickListener() {
+        PublishNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DbRef = FirebaseDatabase.getInstance().getReference().child("Antiques");
@@ -144,6 +145,97 @@ public class Antiques_Category extends AppCompatActivity{
                         adverticement.setContact(txtContact.getText().toString().trim());
                         adverticement.setDescription(txtDescription.getText().toString().trim());
                         adverticement.setMaxBid("0");
+                        adverticement.setStatus("active");
+                        adverticement.setType("Antiques");
+                        adverticement.setSeller_ID("CUS1");
+                        add.setTime_period(period.getSelectedItem().toString());
+                        String strNumber= idPrefix+String.valueOf(maxid+1);
+                        DbRef.child(String.valueOf(strNumber)).setValue(add);
+                        DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
+                        Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
+                        clearControl();
+                        Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                        startActivity(displayIntent);
+                    }
+
+
+                } catch (NumberFormatException e) {
+
+                    Toast.makeText(getApplicationContext(), "Something went Wrong", Toast.LENGTH_SHORT).show();
+
+
+                }
+            }
+
+
+            public void clearControl() {
+                txtTitle.setText("");
+                txtPrice.setText("");
+                txtContact.setText("");
+                txtDescription.setText("");
+            }
+
+
+        });
+
+
+        PublishLater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DbRef = FirebaseDatabase.getInstance().getReference().child("Antiques");
+                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                AdId = mFirebaseDatabase1.push().getKey();
+                mFirebaseDatabase.child(AdId).setValue(adverticement);
+
+                mFirebaseDatabase1.child(AdId).setValue(add);
+                DbRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists())
+                            maxid = (dataSnapshot.getChildrenCount());
+                        savedata();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            public void savedata(){
+                try {
+                    if (TextUtils.isEmpty(txtTitle.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
+                    else if (TextUtils.isEmpty(txtPrice.getText().toString()))
+                        Toast.makeText(getApplicationContext(), " Price Is Required!", Toast.LENGTH_SHORT).show();
+                    else if (TextUtils.isEmpty(txtContact.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
+                    else {
+
+                        String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
+                        adverticement.setDuration(strTime);
+
+                        // String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                        //adverticement.setDate(strDate);
+
+                        int year = dp.getYear();
+                        int month = dp.getMonth();
+                        int day = dp.getDayOfMonth();
+
+                        Calendar myCal = Calendar.getInstance();
+                        myCal.set(year , month , day);
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+                        String strDate = dateFormat.format(myCal.getTime());
+                        adverticement.setDate(strDate);
+
+
+                        adverticement.setTitle(txtTitle.getText().toString().trim());
+                        adverticement.setPrice(txtPrice.getText().toString().trim());
+                        adverticement.setContact(txtContact.getText().toString().trim());
+                        adverticement.setDescription(txtDescription.getText().toString().trim());
+                        adverticement.setMaxBid("0");
                         adverticement.setStatus("inactive");
                         adverticement.setType("Antiques");
                         adverticement.setSeller_ID("CUS1");
@@ -178,6 +270,9 @@ public class Antiques_Category extends AppCompatActivity{
 
 
         });
+
+
+
 
         imageIs = findViewById(R.id.imageIs);
         preBtn = findViewById(R.id.preButton);

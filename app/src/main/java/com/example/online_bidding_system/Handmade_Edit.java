@@ -71,13 +71,16 @@ public class Handmade_Edit extends AppCompatActivity {
         handmade = new auction();
         adverticement=new  Adverticement();
 
+        Intent retriveIntent = getIntent();
+        String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
+
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
         mFirebaseDatabase1 = mFirebaseInstance.getReference("HandMades");
 
 
-        DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("BK1");
-        DbRef1 = FirebaseDatabase.getInstance().getReference().child("HandMades").child("HM1");
+        DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child(AuctName);
+        DbRef1 = FirebaseDatabase.getInstance().getReference().child("HandMades").child(AuctName);
         DbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -104,9 +107,15 @@ public class Handmade_Edit extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN1");
+
+                Intent retriveIntent = getIntent();
+                String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
+
+                DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child(AuctName);
                 DbRef.removeValue();
                 Toast.makeText(getApplicationContext() , "Succesfully Deleated" , Toast.LENGTH_SHORT).show();
+                Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                startActivity(displayIntent);
             }
         });
 
@@ -115,13 +124,17 @@ public class Handmade_Edit extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent retriveIntent = getIntent();
+                String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
+
                 DbRef = FirebaseDatabase.getInstance().getReference();
-                DbRef.child("Adverticement").child("AN8").child("title").setValue(txtTitle.getText().toString().trim());
-                DbRef.child("Adverticement").child("AN8").child("contact").setValue(txtContact.getText().toString().trim());
-                DbRef.child("Adverticement").child("AN8").child("price").setValue(txtPrice.getText().toString().trim());
-                DbRef.child("Adverticement").child("AN8").child("description").setValue(txtDescription.getText().toString().trim());
-                DbRef.child("Adverticement").child("AN8").child("date").setValue(txtDate.getText().toString().trim());
-                DbRef.child("Adverticement").child("AN8").child("duration").setValue(txtDuration.getText().toString().trim());
+                DbRef.child("Adverticement").child(AuctName).child("title").setValue(txtTitle.getText().toString().trim());
+                DbRef.child("Adverticement").child(AuctName).child("contact").setValue(txtContact.getText().toString().trim());
+                DbRef.child("Adverticement").child(AuctName).child("price").setValue(txtPrice.getText().toString().trim());
+                DbRef.child("Adverticement").child(AuctName).child("description").setValue(txtDescription.getText().toString().trim());
+                DbRef.child("Adverticement").child(AuctName).child("date").setValue(txtDate.getText().toString().trim());
+                DbRef.child("Adverticement").child(AuctName).child("duration").setValue(txtDuration.getText().toString().trim());
                 Toast.makeText(getApplicationContext() , "Successfully Updated" , Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                 startActivity(displayIntent);
