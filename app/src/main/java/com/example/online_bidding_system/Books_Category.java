@@ -139,7 +139,7 @@ public class Books_Category extends AppCompatActivity {
                         book.setType(txtType.getText().toString().trim());
                         adverticement.setMaxBid("0");
                         adverticement.setStatus("inactive");
-                        adverticement.setType("Book");
+                        adverticement.setType("Books");
                         String strNumber= idPrefix+String.valueOf(maxid+1);
                         DbRef.child(String.valueOf(strNumber)).setValue(book);
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);

@@ -123,7 +123,9 @@ public class Antiques_Edit extends AppCompatActivity{
                 String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
 
                 DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child(AuctName);
+                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Antiques").child(AuctName);
                 DbRef.removeValue();
+                DbRef1.removeValue();
                 Toast.makeText(getApplicationContext() , "Succesfully Deleated" , Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                 startActivity(displayIntent);
