@@ -40,7 +40,7 @@
                 android:backgroundTint="#e65100"
                 android:layout_marginBottom="25dp"
                 android:layout_marginRight="25dp"
-                android:id="@+id/home_test">
+                android:id="@+id/btnMovie">
 
             </ImageButton>
 
@@ -69,7 +69,7 @@
                 android:background="@drawable/circle_button"
                 android:backgroundTint="#1faa00"
                 android:layout_margin="25dp"
-                android:id="@+id/home_test2">
+                android:id="@+id/btnGarden">
 
             </ImageButton>
 
@@ -97,7 +97,7 @@
                 android:backgroundTint="#0277bd"
                 android:layout_margin="25dp"
                 android:src="@drawable/testhobby"
-                android:id="@+id/home_test3">
+                android:id="@+id/btnHobby">
 
             </ImageButton>
 

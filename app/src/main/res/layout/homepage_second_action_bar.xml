@@ -68,7 +68,7 @@
                 android:background="@drawable/circle_button"
                 android:backgroundTint="#7b1fa2"
                 android:layout_margin="25dp"
-                android:id="@+id/home_test2">
+                android:id="@+id/btnElec">
 
             </ImageButton>
 
@@ -96,7 +96,7 @@
                 android:backgroundTint="#ffa000"
                 android:layout_margin="25dp"
                 android:src="@drawable/testring"
-                android:id="@+id/home_test3">
+                android:id="@+id/btnHandmade">
 
             </ImageButton>
 
@@ -124,7 +124,7 @@
                 android:background="@drawable/circle_button"
                 android:backgroundTint="#c2185b"
                 android:layout_margin="25dp"
-                android:id="@+id/home_test4">
+                android:id="@+id/btnFashion">
 
             </ImageButton>
 

@@ -49,7 +49,7 @@ public class HomePage extends AppCompatActivity {
     Button home;
     Button bids;
     Button msg;
-    ImageButton antique, book;
+    ImageButton antique, book,fashion,elec,hobby,handmade,garden,dvd;
     Button profBtn;
     ImageButton addNew;
     ViewFlipper flipper;
@@ -166,13 +166,22 @@ public class HomePage extends AppCompatActivity {
         }
 
 
-        home = findViewById(R.id.actionBarHome);
+        /*home = findViewById(R.id.actionBarHome);
         bids = findViewById(R.id.actionBarBid);
         msg = findViewById(R.id.actionBarMsg);
-        profBtn = findViewById(R.id.actionBarProfile);
+        profBtn = findViewById(R.id.actionBarProfile);*/
+
         addNew = findViewById(R.id.addNew);
         antique = findViewById(R.id.btnAntique);
         book = findViewById(R.id.btnBook);
+        elec = findViewById(R.id.btnElec);
+        fashion = findViewById(R.id.btnFashion);
+        hobby = findViewById(R.id.btnHobby);
+        handmade = findViewById(R.id.btnHandmade);
+        garden = findViewById(R.id.btnGarden);
+        dvd = findViewById(R.id.btnMovie);
+
+
 
 
        /* home.setOnClickListener(new View.OnClickListener() {
@@ -224,7 +233,16 @@ public class HomePage extends AppCompatActivity {
         listView = this.findViewById(R.id.HomeCardsList);
         HomeCards = new ArrayList<>();
         Query FilterHomeAds = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("status").equalTo("inactive");
-        final Query FilterAntiqueAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("status").equalTo("Ended");
+        final Query FilterAntiqueAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("Antiques");
+        final Query FilterElectricsAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("Electronics");
+        final Query FilterBookAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("Books");
+        final Query FilterDVDAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("DVDandMovies");
+        final Query FilterFashionAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("FashionAndDesign");
+        final Query FilterHandmadeAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("HandMades");
+        final Query FilterHobbyAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("Hobbies&Sports");
+        final Query FilterGardenAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("Home&Garden");
+
+
 
         FilterHomeAds.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -250,9 +268,6 @@ public class HomePage extends AppCompatActivity {
                     LocalDateTime currenttime = LocalDateTime.now();
                     String time = currenttime.toString();
 
-                    Log.i("finalDate" , "ADD No : " + finalDate);
-                    Log.i("currentTime" , "ADD No : " + time);
-
 
                     long minutes = ChronoUnit.MINUTES.between(currenttime , contactDate);
 
@@ -276,8 +291,6 @@ public class HomePage extends AppCompatActivity {
                     }
 
 
-                    Log.i("Difference" , "ADD No : " + MinDifference);
-                    Log.i("Difference" , "difference in calculated format : " + strCalculatedStrhOUR + ":" + strCalculatedStrhMin);
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
@@ -320,11 +333,71 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View view) {
 
                 HomeCards.clear();
-                FilterOnClick(FilterAntiqueAds);
+                FilterOnClick(FilterBookAds);
 
             }
         });
 
+        handmade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                HomeCards.clear();
+                FilterOnClick(FilterHandmadeAds);
+
+            }
+        });
+
+        elec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                HomeCards.clear();
+                FilterOnClick(FilterElectricsAds);
+
+            }
+        });
+
+        fashion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                HomeCards.clear();
+                FilterOnClick(FilterFashionAds);
+
+            }
+        });
+
+
+        dvd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                HomeCards.clear();
+                FilterOnClick(FilterDVDAds);
+
+            }
+        });
+
+        garden.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                HomeCards.clear();
+                FilterOnClick(FilterGardenAds);
+
+            }
+        });
+
+        hobby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                HomeCards.clear();
+                FilterOnClick(FilterHobbyAds);
+
+            }
+        });
 
 
 
