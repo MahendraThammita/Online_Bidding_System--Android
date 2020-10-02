@@ -29,6 +29,13 @@
                 android:layout_height="wrap_content"
                 />
 
+            <include
+                android:id="@+id/profActionbar"
+                layout="@layout/secoundery_actionbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
 
 
             <include
