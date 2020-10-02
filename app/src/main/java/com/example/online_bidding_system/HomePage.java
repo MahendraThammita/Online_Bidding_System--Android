@@ -291,8 +291,6 @@ public class HomePage extends AppCompatActivity {
 
                     }
 
-
-
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
                     HomeCard my_Bid = new HomeCard(AucID , Title, MaxBid,duration);

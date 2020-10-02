@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -137,9 +138,8 @@ public class Antiques_Category extends AppCompatActivity{
 
                         SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
                         String strDate = dateFormat.format(myCal.getTime());
+
                         adverticement.setDate(strDate);
-
-
                         adverticement.setTitle(txtTitle.getText().toString().trim());
                         adverticement.setPrice(txtPrice.getText().toString().trim());
                         adverticement.setContact(txtContact.getText().toString().trim());
@@ -166,6 +166,8 @@ public class Antiques_Category extends AppCompatActivity{
 
                 }
             }
+
+
 
 
             public void clearControl() {

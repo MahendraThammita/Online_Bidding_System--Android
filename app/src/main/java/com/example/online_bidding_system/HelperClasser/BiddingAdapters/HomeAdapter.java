@@ -44,7 +44,7 @@ public class HomeAdapter extends ArrayAdapter<HomeCard> {
 
         HomeCard Ad = AdList.get(position);
         AdTitle.setText(Ad.getTitle());
-        AdMaxBid.setText(Ad.getMaxBid() + " Rs");
+        AdMaxBid.setText( "Rs " + Ad.getMaxBid());
         AdTime.setText(Ad.getDuration());
 
 
