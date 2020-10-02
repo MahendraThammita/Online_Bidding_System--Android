@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,23 +21,17 @@
 
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="5dp">
 
             <ImageView
                 android:id="@+id/HomeAdImg"
-                android:layout_width="110dp"
+                android:layout_width="140dp"
                 android:layout_height="130dp"
-                android:src="@drawable/movie">
+                android:src="@drawable/katana">
 
             </ImageView>
-
-            <ImageView
-                android:layout_width="110dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="280dp"
-                android:src="@drawable/tag" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -48,11 +42,13 @@
 
                 <TextView
                     android:id="@+id/HomeAdTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="260dp"
                     android:layout_height="wrap_content"
+                    android:padding="10dip"
                     android:text="Harry potter Movie collection"
+                    android:background="@color/colorPrimary"
                     android:textSize="24sp"
-                    android:layout_marginLeft="140dp"
+                    android:layout_marginLeft="150dp"
                     android:layout_marginBottom="10dp"
                     android:textStyle="bold"
                     android:textColor="@color/Black">
@@ -64,25 +60,34 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="150dp"
+                        android:src="@drawable/timer" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="140dp"
+                        android:layout_marginLeft="10dp"
                         android:textStyle="bold"
                         android:text="End By:"
                         android:textColor="@color/Black"
-                        android:textSize="20sp">
+                        android:textSize="18sp">
 
                     </TextView>
+
 
                     <TextView
                         android:id="@+id/HomeAdTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:textColor="@color/MDBdangercolor"
-                        android:textStyle="bold"
-                        android:textSize="20sp">
+                        android:padding="2dip"
+                        android:textColor="@color/Highlight_text"
+                        android:textSize="18sp">
 
                     </TextView>
 
@@ -95,29 +100,34 @@
                     android:layout_marginTop="10dp">
 
 
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="150dp"
+                        android:src="@drawable/maxbid" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
+                        android:layout_marginLeft="10dp"
                         android:textStyle="bold"
-                        android:rotation="310"
                         android:text="Max Bid:"
                         android:textColor="@color/Black"
-                        android:textSize="15sp">
+                        android:textSize="18sp">
 
                     </TextView>
 
 
-
+-->
                     <TextView
                         android:id="@+id/HomeAdBid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/MDBdangercolor"
-                        android:textStyle="bold"
-                        android:textSize="20sp">
+                        android:padding="2dip"
+                        android:textColor="@color/Highlight_text"
+                        android:textSize="18sp">
 
                     </TextView>
 
@@ -132,19 +142,11 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="5dp">
 
-
-
-
                 </LinearLayout>
-
 
             </LinearLayout>
 
-
         </RelativeLayout>
-
-
-
 
 
     </androidx.cardview.widget.CardView>

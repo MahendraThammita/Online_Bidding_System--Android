@@ -18,9 +18,7 @@
 
     </com.google.android.material.navigation.NavigationView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".EditBid"
@@ -42,32 +40,33 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/bidImagerSwiperRecyclar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bidImagerSwiperRecyclar">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bidImagerSwiperRecyclar"
+                    android:layout_width="match_parent"
+                    android:layout_height="450dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
                 <TextView
                     android:id="@+id/displayAuct_ItemName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@color/HighlightIconColor"
                     android:padding="5dp"
                     android:text="@string/ItemNameDemo"
                     android:textAlignment="center"
@@ -76,15 +75,6 @@
 
                 </TextView>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="Description"
-                    android:textSize="32dp"
-                    android:textStyle="bold">
-
-                </TextView>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -94,28 +84,63 @@
                         android:id="@+id/displayAuct__Description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_alignParentStart="false"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginEnd="10dp"
                         android:text="@string/Demo_description"
-                        android:textAlignment="viewEnd">
+                        android:textAlignment="center">
 
                     </TextView>
                 </RelativeLayout>
 
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:id="@+id/UserCaptionMybid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="By"
+                        android:textSize="15sp"
+                        android:layout_marginStart="20dp"
+                        android:textStyle="bold">
+
+                    </TextView>
+                    <TextView
+
+                        android:id="@+id/UseeIdDispBid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sample user Id"
+                        android:textSize="15sp"
+                        android:layout_marginStart="5dp">
+
+                    </TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
 
                     <TextView
 
                         android:id="@+id/timeCaptionMybid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/timer"
-                        android:text="@string/EndingTime_caption"
-                        android:textSize="22sp">
+                        android:text="Ends At"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:textStyle="bold">
 
                     </TextView>
 
@@ -125,7 +150,8 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/myBidCardImg"
                         android:text="08:00:00 2020/08/15"
-                        android:textSize="18sp">
+                        android:textSize="18sp"
+                        android:paddingEnd="10dp">
 
                     </TextView>
 
@@ -134,21 +160,28 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="30dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center">
 
                         <TextView
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:drawableLeft="@drawable/dolloe_back"
+                            android:gravity="center"
                             android:text="@string/MaxBid_caption"
+                            android:textAlignment="center"
                             android:textSize="22sp">
 
                         </TextView>
@@ -157,12 +190,14 @@
                             android:id="@+id/displayAuct_maxBidVal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="40dp"
                             android:layout_toRightOf="@+id/myBidCardImg"
-                            android:text="2000.00Rs"
+                            android:layout_marginLeft="5dp"
+                            android:text="2000.00 Rs"
                             android:textColor="@color/MDBdangercolor"
                             android:textSize="24sp"
-                            android:textStyle="bold">
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textAlignment="center">
 
                         </TextView>
 
@@ -173,7 +208,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:gravity="center">
 
                         <TextView
 
@@ -182,7 +218,8 @@
                             android:layout_toRightOf="@+id/myBidCardImg"
                             android:drawableLeft="@drawable/money_mybid"
                             android:text="@string/Your_bid_caption"
-                            android:textSize="22sp">
+                            android:textSize="22sp"
+                            android:layout_gravity="center">
 
                         </TextView>
 
@@ -190,9 +227,9 @@
                             android:id="@+id/displayAuct_myBidVal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="40dp"
                             android:layout_toRightOf="@+id/myBidCardImg"
-                            android:text="2000.00Rs"
+                            android:layout_marginLeft="5dp"
+                            android:text="2000.00 Rs"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="24sp"
                             android:textStyle="bold">
@@ -203,6 +240,655 @@
 
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/additional_Info_Area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/AdditionalInfocap"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="5dp"
+                        android:text="Additional Info"
+                        android:textAlignment="center"
+                        android:textSize="24sp"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+                    <!--Antiques Category-->
+                    <LinearLayout
+                        android:id="@+id/subCate_Antique"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Category"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Antiques"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Time Period"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:id="@+id/AN_Time"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pre - 1800"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!--Books Category-->
+                    <LinearLayout
+                        android:id="@+id/subCate_Books"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Category"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Books"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Type"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:id="@+id/Book_Type"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pre - 1800"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!--Dvd & movie Category-->
+                    <LinearLayout
+                        android:id="@+id/subCate_Dvd_Movie"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Category"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="DVD And Movie"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Time Period"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pre - 1800"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!--Electronic Category-->
+                    <LinearLayout
+                        android:id="@+id/subCate_Electronic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Category"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Electronics"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Brand"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:id="@+id/E_Brand"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pre - 1800"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Condition"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:id="@+id/E_Condition"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pre - 1800"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!--Fashion Category-->
+                    <LinearLayout
+                        android:id="@+id/subCate_Fashion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Category"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Fashion And Design"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Brand"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:id="@+id/FD_Brand"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pre - 1800"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Condition"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:id="@+id/FD_Condition"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pre - 1800"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Material"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:id="@+id/FD_Material"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pre - 1800"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!--Handmades Category-->
+                    <LinearLayout
+                        android:id="@+id/subCate_HandMades"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Category"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Hand Mades"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Materials"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:id="@+id/handmade_Materials"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pre - 1800"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!--Hobby Category-->
+                    <LinearLayout
+                        android:id="@+id/subCate_Hobbies"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Category"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Hobbies And Sports"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Brand"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:id="@+id/HobbyCateBrand"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pre - 1800"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Condition"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:id="@+id/HobbyCateCondition"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pre - 1800"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!--Home & Garden Category-->
+                    <LinearLayout
+                        android:id="@+id/subCate_Home_garden"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Category"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Home And Garden"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Environment"
+                                android:drawableLeft="@drawable/dot_small"
+                                android:textStyle="bold"
+                                android:drawablePadding="10dp"/>
+
+                            <TextView
+                                android:id="@+id/Home_Garden_environment"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pre - 1800"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginLeft="50dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginRight="70dp"
+                    android:layout_gravity="center"
+                    style="?attr/materialButtonOutlinedStyle"
+                    app:strokeColor = "@color/colorPrimary"
+                    android:text="Contact Seller"
+                    android:textColor="@color/Black"
+                    android:textAlignment="center"
+                    android:textStyle="bold">
+
+                </Button>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginRight="70dp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/colorPrimary"
+                    app:strokeColor = "@color/colorPrimary"
+                    app:backgroundTint = "@color/colorPrimary"
+                    android:text="Continue to Bid"
+                    android:textColor="@color/Black"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="100dp">
+
+                </Button>
+
+
 
 
             </LinearLayout>

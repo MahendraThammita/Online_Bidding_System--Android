@@ -29,6 +29,7 @@ import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeAdapt
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeCard;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyAdapter;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.TimeCalculations;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,7 +50,7 @@ public class HomePage extends AppCompatActivity {
     Button home;
     Button bids;
     Button msg;
-    ImageButton antique;
+    ImageButton antique, book;
     Button profBtn;
     ImageButton addNew;
     ViewFlipper flipper;
@@ -67,6 +68,85 @@ public class HomePage extends AppCompatActivity {
     public HomePage() {
     }
 
+
+    public void FilterOnClick(Query query){
+
+        query.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                    String Title = (ds.child("title").getValue().toString());
+                    int MaxBid =  Integer.parseInt(ds.child("maxBid").getValue().toString());
+                    String AucID = ds.getKey().toString();
+                    String Duration = ds.child("duration").getValue().toString();
+                    String endDate = ds.child("date").getValue().toString();
+
+
+                    LocalDate datPart = LocalDate.parse(endDate);
+                    LocalTime timePart = LocalTime.parse(Duration);
+                    LocalDateTime contactDate = LocalDateTime.of(datPart , timePart);
+                    String finalDate = contactDate.toString();
+
+                    LocalDateTime currenttime = LocalDateTime.now();
+                    String time = currenttime.toString();
+
+                    Log.i("finalDate" , "ADD No : " + finalDate);
+                    Log.i("currentTime" , "ADD No : " + time);
+
+
+                    long minutes = ChronoUnit.MINUTES.between(currenttime , contactDate);
+
+                    String MinDifference = Long.toString(minutes);
+
+                    //LocalDateTime calculatedTime = LocalDateTime.MIN.plusMinutes(minutes);
+                    String strCalculatedStrhOUR = Long.toString(minutes/60);
+                    String strCalculatedStrhMin = Long.toString(minutes%60);
+
+                    //Change status if time exceed
+
+                    int EndMin = Integer.parseInt(strCalculatedStrhMin);
+                    //int EndHr = Integer.parseInt(strCalculatedStrhOUR);
+
+
+                    if (EndMin < 0 ){
+
+                        DBRef = FirebaseDatabase.getInstance().getReference();
+                        DBRef.child("Adverticement").child(AucID).child("status").setValue("Ended");
+                        //DBRef.child("Student/std1/add").setValue(txtAdd.getText().toString().trim());
+
+                    }
+
+
+                    Log.i("Difference" , "ADD No : " + MinDifference);
+                    Log.i("Difference" , "difference in calculated format : " + strCalculatedStrhOUR + ":" + strCalculatedStrhMin);
+
+                    String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
+
+                    HomeCard my_Bid = new HomeCard(AucID , Title, MaxBid,duration);
+                    HomeCards.add(my_Bid);
+                }
+                if (HomeCards != null) {
+
+                    singleCard = new HomeAdapter(HomePage.this, R.layout.homepage_card, HomeCards);
+                    listView.setAdapter(singleCard);
+
+                    singleCard.notifyDataSetChanged();
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,9 +173,10 @@ public class HomePage extends AppCompatActivity {
         profBtn = findViewById(R.id.actionBarProfile);
         addNew = findViewById(R.id.addNew);
         antique = findViewById(R.id.btnAntique);
+        book = findViewById(R.id.btnBook);
 
 
-        home.setOnClickListener(new View.OnClickListener() {
+       /* home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent homeIntent = new Intent(getApplicationContext(), Antiques_Edit.class);
@@ -127,7 +208,7 @@ public class HomePage extends AppCompatActivity {
                 startActivity(profIntent);
             }
         });
-
+*/
         addNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,8 +220,9 @@ public class HomePage extends AppCompatActivity {
         });
 
 
+
+
         listView = this.findViewById(R.id.HomeCardsList);
-        //dbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("AN9");
         HomeCards = new ArrayList<>();
         Query FilterHomeAds = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("status").equalTo("inactive");
         final Query FilterAntiqueAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("status").equalTo("Ended");
@@ -220,91 +302,29 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
+
+
+
        antique.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 HomeCards.clear();
-
-        FilterAntiqueAds.addValueEventListener(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-                    String Title = (ds.child("title").getValue().toString());
-                    int MaxBid =  Integer.parseInt(ds.child("maxBid").getValue().toString());
-                    String AucID = ds.getKey().toString();
-                    String Duration = ds.child("duration").getValue().toString();
-                    String endDate = ds.child("date").getValue().toString();
-
-
-                    LocalDate datPart = LocalDate.parse(endDate);
-                    LocalTime timePart = LocalTime.parse(Duration);
-                    LocalDateTime contactDate = LocalDateTime.of(datPart , timePart);
-                    String finalDate = contactDate.toString();
-
-                    LocalDateTime currenttime = LocalDateTime.now();
-                    String time = currenttime.toString();
-
-                    Log.i("finalDate" , "ADD No : " + finalDate);
-                    Log.i("currentTime" , "ADD No : " + time);
-
-
-                    long minutes = ChronoUnit.MINUTES.between(currenttime , contactDate);
-
-                    String MinDifference = Long.toString(minutes);
-
-                    //LocalDateTime calculatedTime = LocalDateTime.MIN.plusMinutes(minutes);
-                    String strCalculatedStrhOUR = Long.toString(minutes/60);
-                    String strCalculatedStrhMin = Long.toString(minutes%60);
-
-                    //Change status if time exceed
-
-                    int EndMin = Integer.parseInt(strCalculatedStrhMin);
-                    //int EndHr = Integer.parseInt(strCalculatedStrhOUR);
-
-
-                    if (EndMin < 0 ){
-
-                        DBRef = FirebaseDatabase.getInstance().getReference();
-                        DBRef.child("Adverticement").child(AucID).child("status").setValue("Ended");
-                        //DBRef.child("Student/std1/add").setValue(txtAdd.getText().toString().trim());
-
-                    }
-
-
-                    Log.i("Difference" , "ADD No : " + MinDifference);
-                    Log.i("Difference" , "difference in calculated format : " + strCalculatedStrhOUR + ":" + strCalculatedStrhMin);
-
-                    String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
-
-                    HomeCard my_Bid = new HomeCard(AucID , Title, MaxBid,duration);
-                    HomeCards.add(my_Bid);
-                }
-                if (HomeCards != null) {
-
-                    singleCard = new HomeAdapter(HomePage.this, R.layout.homepage_card, HomeCards);
-                    listView.setAdapter(singleCard);
-
-                    singleCard.notifyDataSetChanged();
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                FilterOnClick(FilterAntiqueAds);
 
             }
         });
 
 
+        book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                HomeCards.clear();
+                FilterOnClick(FilterAntiqueAds);
+
             }
         });
-
-
 
 
 

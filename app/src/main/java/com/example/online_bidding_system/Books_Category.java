@@ -145,6 +145,8 @@ public class Books_Category extends AppCompatActivity {
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
                         Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
                         clearControl();
+                        Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                        startActivity(displayIntent);
 
                     }
 

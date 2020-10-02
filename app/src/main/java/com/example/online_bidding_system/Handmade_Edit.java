@@ -30,7 +30,7 @@ import java.util.ArrayList;
 public class Handmade_Edit extends AppCompatActivity {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
-    EditText txtTitle,txtPrice,txtDuration,txtContact,txtMaterials,txtDescription;
+    EditText txtTitle,txtPrice,txtDuration,txtTime,txtDate,txtContact,txtMaterials,txtDescription;
     Button PublishNow, update, delete;
     DatabaseReference DbRef;
     DatabaseReference DbRef1;
@@ -58,7 +58,8 @@ public class Handmade_Edit extends AppCompatActivity {
 
         txtTitle = findViewById(R.id.setTitle);
         txtPrice = findViewById(R.id.setPrice);
-        txtDuration = findViewById(R.id.setDuration);
+        txtDate = findViewById(R.id.setDate);
+        txtTime = findViewById(R.id.setTime);
         txtContact = findViewById(R.id.setContact);
         txtMaterials = findViewById(R.id.setMaterials);
         txtDescription = findViewById(R.id.setDescription);
@@ -114,74 +115,18 @@ public class Handmade_Edit extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbRef = FirebaseDatabase.getInstance().getReference().child("Antiques");
-                DbRef1= FirebaseDatabase.getInstance().getReference().child("Adverticement");
-                userId = mFirebaseDatabase1.push().getKey();
-                mFirebaseDatabase.child(userId).setValue(adverticement);
+                DbRef = FirebaseDatabase.getInstance().getReference();
+                DbRef.child("Adverticement").child("AN8").child("title").setValue(txtTitle.getText().toString().trim());
+                DbRef.child("Adverticement").child("AN8").child("contact").setValue(txtContact.getText().toString().trim());
+                DbRef.child("Adverticement").child("AN8").child("price").setValue(txtPrice.getText().toString().trim());
+                DbRef.child("Adverticement").child("AN8").child("description").setValue(txtDescription.getText().toString().trim());
+                DbRef.child("Adverticement").child("AN8").child("date").setValue(txtDate.getText().toString().trim());
+                DbRef.child("Adverticement").child("AN8").child("duration").setValue(txtDuration.getText().toString().trim());
+                Toast.makeText(getApplicationContext() , "Successfully Updated" , Toast.LENGTH_SHORT).show();
+                Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                startActivity(displayIntent);
 
-                mFirebaseDatabase1.child(userId).setValue(handmade);
-                DbRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists())
-                            maxid=(dataSnapshot.getChildrenCount());
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                try {
-                    if (TextUtils.isEmpty(txtTitle.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
-                    else if (TextUtils.isEmpty(txtPrice.getText().toString()))
-                        Toast.makeText(getApplicationContext(), " Price Is Required!", Toast.LENGTH_SHORT).show();
-                    else if (TextUtils.isEmpty(txtContact.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
-                    else {
-
-
-                        String strTime = tp.getHour() + ":" + tp.getMinute();
-                        adverticement.setDuration(strTime);
-
-                        String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
-                        adverticement.setDate(strDate);
-
-                        String strNumber= idPrefix+String.valueOf(maxid+1);
-                        adverticement.setTitle(txtTitle.getText().toString().trim());
-                        adverticement.setPrice(txtPrice.getText().toString().trim());
-                        adverticement.setContact(txtContact.getText().toString().trim());
-                        adverticement.setDescription(txtDescription.getText().toString().trim());
-                        adverticement.setMaxBid("0");
-                        DbRef.child(String.valueOf(strNumber)).setValue(handmade);
-                        DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
-                        Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
-                        maxid  = maxid+1;
-                        clearControl();
-
-                    }
-
-
-                } catch (NumberFormatException e) {
-
-                    Toast.makeText(getApplicationContext(), "Something went Wrong", Toast.LENGTH_SHORT).show();
-
-
-                }
             }
-
-
-
-
-            public void clearControl() {
-                txtTitle.setText("");
-                txtPrice.setText("");
-                txtContact.setText("");
-                txtDescription.setText("");
-            }
-
-
         });
 
         imageIs = findViewById(R.id.imageIs);
