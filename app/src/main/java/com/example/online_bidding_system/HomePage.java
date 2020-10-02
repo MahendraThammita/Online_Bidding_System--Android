@@ -240,8 +240,8 @@ public class HomePage extends AppCompatActivity {
         final Query FilterDVDAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("DVDandMovies");
         final Query FilterFashionAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("FashionAndDesign");
         final Query FilterHandmadeAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("HandMades");
-        final Query FilterHobbyAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("Hobbies&Sports");
-        final Query FilterGardenAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("Home&Garden");
+        final Query FilterHobbyAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("SportsAndHobbies");
+        final Query FilterGardenAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("HomeAndGarden");
 
 
 
