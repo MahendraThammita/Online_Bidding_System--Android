@@ -72,35 +72,58 @@ public class HomeAndGardenEditpage extends AppCompatActivity {
                     time.setText(dataSnapshot.child("duration").getValue().toString());
 
                     txtDescription.setText(dataSnapshot.child("description").getValue().toString());
-                    homeref.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.hasChildren()){
+                    //System.out.println(homeref.child(dataSnapshot.getKey()));
+                    //txtEnvironment.setText(homeref .child("environment").getValue().toString());
 
-                                txtEnvironment.setText(dataSnapshot.child("Environment").getValue().toString());
-                            }
-                            else
-                                Toast.makeText(getApplicationContext() , "Cannot Find Add" , Toast.LENGTH_SHORT).show();
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }});
+//                    homeref.addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                            if(dataSnapshot.hasChildren()){
+//
+//                                txtEnvironment.setText(dataSnapshot.child("Environment").getValue().toString());
+//                            }
+//                            else
+//                                Toast.makeText(getApplicationContext() , "wait few second" , Toast.LENGTH_SHORT).show();
+//                        }
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                        }});
                 }
                 else
-                    Toast.makeText(getApplicationContext() , "Cannot Find Add" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext() , "wait few second" , Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }});
+        homeref.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.hasChildren()){
+
+                                txtEnvironment.setText(dataSnapshot.child("Environment").getValue().toString());
+                            }
+                            else
+                                Toast.makeText(getApplicationContext() , "wait few second" , Toast.LENGTH_SHORT).show();
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }});
 
         Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent retriveIntent = getIntent();
+                String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
+
                 DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child(AuctName);
                 DbRef1.removeValue();
                 Toast.makeText(getApplicationContext() , "Succesfully Deleated" , Toast.LENGTH_SHORT).show();
+                Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                startActivity(displayIntent);
             }
         });
         update.setOnClickListener(new View.OnClickListener() {
