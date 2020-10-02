@@ -173,12 +173,12 @@ public class Draft_Auctions extends AppCompatActivity {
                         toEditIntent.putExtra("AUCT_ID" , auctId);
                         draftsList.getContext().startActivity(toEditIntent);
                         break;
-                    case "Hobbies&Sports":
+                    case "HomeAndGarden":
                         toEditIntent = new Intent(getApplicationContext() , HomeAndGardenEditpage.class);
                         toEditIntent.putExtra("AUCT_ID" , auctId);
                         draftsList.getContext().startActivity(toEditIntent);
                         break;
-                    case "Home&Garden":
+                    case "HobbiesAndSports":
                         toEditIntent = new Intent(getApplicationContext() , SportsEditPage.class);
                         toEditIntent.putExtra("AUCT_ID" , auctId);
                         draftsList.getContext().startActivity(toEditIntent);

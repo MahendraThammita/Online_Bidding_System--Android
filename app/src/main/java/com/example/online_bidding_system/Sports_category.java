@@ -117,7 +117,7 @@ public class Sports_category extends AppCompatActivity {
                         adverticement.setPrice(txtPrice.getText().toString().trim());
                         adverticement.setMaxBid("0");
                         adverticement.setStatus("inactive");
-                        adverticement.setType("Hobbies&Sports");
+                        adverticement.setType("HobbiesAndSports");
                         adverticement.setContact(txtContact.getText().toString().trim());
                         homeitem.setCondition(txtCondition.getText().toString().trim());
                         adverticement.setDescription(txtDescription.getText().toString().trim());
