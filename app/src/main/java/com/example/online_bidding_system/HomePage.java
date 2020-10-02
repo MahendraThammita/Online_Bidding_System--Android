@@ -248,9 +248,6 @@ public class HomePage extends AppCompatActivity {
                     LocalDateTime contactDate = LocalDateTime.of(datPart , timePart);
                     String finalDate = contactDate.toString();
 
-                    TimeCalculations bidTimes = new TimeCalculations(Duration , endDate);
-                    String TimeHave = bidTimes.calcTimeDifInMIn_Hrs_Str();
-
                     LocalDateTime currenttime = LocalDateTime.now();
                     String time = currenttime.toString();
 
@@ -281,7 +278,7 @@ public class HomePage extends AppCompatActivity {
 
 
                     Log.i("Difference" , "ADD No : " + MinDifference);
-                    Log.i("Difference" , "TimeHave : " + TimeHave);
+                    Log.i("Difference" , "difference in calculated format : " + strCalculatedStrhOUR + ":" + strCalculatedStrhMin);
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
