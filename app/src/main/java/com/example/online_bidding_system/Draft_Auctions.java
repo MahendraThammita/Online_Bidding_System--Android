@@ -10,8 +10,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -140,8 +143,59 @@ public class Draft_Auctions extends AppCompatActivity {
         oneDraftCard = new DraftAdapter(getApplicationContext() , R.layout.draft_auction_card , oneDraft);
         draftsList.setAdapter(oneDraftCard);
 
+        draftsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-        //draftsList.setAdapter(singleDraft);
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.i("Item click" , "Item click captured");
+                String adType =  oneDraft.get(i).getType();
+                String auctId = oneDraft.get(i).getAuctionId();
+                Intent toEditIntent;
+
+                switch (adType){
+                    case "Antiques":
+                        toEditIntent = new Intent(getApplicationContext() , Antiques_Edit.class);
+                        toEditIntent.putExtra("AUCT_ID" , auctId);
+                        draftsList.getContext().startActivity(toEditIntent);
+                        break;
+                    case "Books":
+                        toEditIntent = new Intent(getApplicationContext() , Books_Edit.class);
+                        toEditIntent.putExtra("AUCT_ID" , auctId);
+                        draftsList.getContext().startActivity(toEditIntent);
+                        break;
+//                    case "DVDandMovies":
+//                        toEditIntent = new Intent(getApplicationContext() , Books_Edit.class);
+//                        toEditIntent.putExtra("AUCT_ID" , auctId);
+//                        draftsList.getContext().startActivity(toEditIntent);
+//                        break;
+                    case "FashionAndDesign":
+                        toEditIntent = new Intent(getApplicationContext() , fashion_edit_page.class);
+                        toEditIntent.putExtra("AUCT_ID" , auctId);
+                        draftsList.getContext().startActivity(toEditIntent);
+                        break;
+                    case "Hobbies&Sports":
+                        toEditIntent = new Intent(getApplicationContext() , HomeAndGardenEditpage.class);
+                        toEditIntent.putExtra("AUCT_ID" , auctId);
+                        draftsList.getContext().startActivity(toEditIntent);
+                        break;
+                    case "Home&Garden":
+                        toEditIntent = new Intent(getApplicationContext() , SportsEditPage.class);
+                        toEditIntent.putExtra("AUCT_ID" , auctId);
+                        draftsList.getContext().startActivity(toEditIntent);
+                        break;
+                    case "HandMades":
+                        toEditIntent = new Intent(getApplicationContext() , Handmade_Edit.class);
+                        toEditIntent.putExtra("AUCT_ID" , auctId);
+                        draftsList.getContext().startActivity(toEditIntent);
+                        break;
+                    default:
+                        toEditIntent = new Intent(getApplicationContext() , OtherEditpage.class);
+                        draftsList.getContext().startActivity(toEditIntent);
+
+                }
+
+            }
+        });
 
     }
 }

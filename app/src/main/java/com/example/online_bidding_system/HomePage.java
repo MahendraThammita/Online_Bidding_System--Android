@@ -328,9 +328,6 @@ public class HomePage extends AppCompatActivity {
 
 
 
-
-
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
