@@ -20,6 +20,7 @@
     <color name="MDBgreycolor">#9e9e9e </color>
     <color name="MDBsuccessDark">#8bc34a</color>
     <color name="transparentColor">#ffffff</color>
+    <color name="Highlight_text">#d50000</color>
     <color name="lightenHintBlue">#90caf9  </color>
     <color name="testBackColor">#f2feff</color>
 
