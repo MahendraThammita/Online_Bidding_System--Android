@@ -106,7 +106,7 @@ public class HomePage extends AppCompatActivity {
         bids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext(), Other_category.class);
+                Intent homeIntent = new Intent(getApplicationContext(), HomeAndGardenEditpage.class);
                 startActivity(homeIntent);
             }
         });

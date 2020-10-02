@@ -54,7 +54,7 @@ public class HomeAndGardenEditpage extends AppCompatActivity {
         txtEnvironment= findViewById(R.id.setEnvironment);
 
         adverticement = new Adverticement();
-        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("HAG3");
+        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child("HomeAndGarden").child("HAG3");
         homeref= FirebaseDatabase.getInstance().getReference().child("HomeAndGarden").child("HAG3");
         DbRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

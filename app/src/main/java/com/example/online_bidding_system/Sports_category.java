@@ -135,6 +135,8 @@ public class Sports_category extends AppCompatActivity {
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
                         Toast.makeText(getApplicationContext(), "Successfully Published", Toast.LENGTH_SHORT).show();
                         clearControl();
+                        Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                        startActivity(displayIntent);
 
                     }
 
