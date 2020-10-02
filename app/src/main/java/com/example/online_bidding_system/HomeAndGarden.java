@@ -133,7 +133,7 @@ public class HomeAndGarden extends AppCompatActivity {
                         homeitem.setEnvironment(txtEnvironment.getText().toString().trim());
                         adverticement.setDescription(txtDescription.getText().toString().trim());
                         adverticement.setStatus("inactive");
-                        adverticement.setType("HomeAndGareden");
+                        adverticement.setType("HomeAndGarden");
                         adverticement.setSeller_ID("CUS1");
                         adverticement.setMaxBid("0");
                         //set timepicker value

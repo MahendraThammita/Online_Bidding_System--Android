@@ -206,7 +206,7 @@ public class HomePage extends AppCompatActivity {
         msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent msgintent = new Intent(getApplicationContext(), OtherEditpage.class);
+                Intent msgintent = new Intent(getApplicationContext(), HomeAndGardenEditpage.class);
                 startActivity(msgintent);
             }
         });

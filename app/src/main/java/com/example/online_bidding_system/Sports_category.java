@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class Sports_category extends AppCompatActivity {
     EditText txtTitle,txtPrice,txtContact,txtBrand,txtCondition,txtDescription;
-    Button PublishNow;
+    Button PublishLater;
     DatabaseReference DbRef,DbRef1;
     HomeItem homeitem;
     String MaxBid;
@@ -61,7 +61,7 @@ public class Sports_category extends AppCompatActivity {
         txtBrand = findViewById(R.id.setBrand);
         txtCondition = findViewById(R.id.setCondition);
         txtDescription = findViewById(R.id.setDescription);
-        PublishNow = findViewById(R.id.publish_now);
+        PublishLater = findViewById(R.id.publish_later);
         //ged datapicker value
         dp = findViewById(R.id.setDate);
         //get Timepicker value
@@ -83,7 +83,7 @@ public class Sports_category extends AppCompatActivity {
         mFirebaseDatabase1 = mFirebaseInstance.getReference("Hobbies&Sports");
 
 
-        PublishNow.setOnClickListener(new View.OnClickListener() {
+        PublishLater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DbRef = FirebaseDatabase.getInstance().getReference().child("Hobbies&Sports");
@@ -137,7 +137,6 @@ public class Sports_category extends AppCompatActivity {
                         clearControl();
                         Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                         startActivity(displayIntent);
-
                     }
 
 
