@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:elevation="5dp"
-        android:backgroundTint="@color/cardview_light_background"
+        android:backgroundTint="@color/cardview_dark_background"
         android:layout_marginBottom="20dp"
         app:cardElevation="10dp">
 
@@ -33,11 +33,12 @@
 
             </ImageView>
 
-            <ImageView
-                android:layout_width="110dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="280dp"
-                android:src="@drawable/tag" />
+      <!--      <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="230dp"
+                android:src="@drawable/tag" />-->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -102,6 +103,7 @@
                         android:layout_marginLeft="140dp"
                         android:textStyle="bold"
                         android:text="Max Bid:"
+                        android:backgroundTintMode="src_in"
                         android:textColor="@color/Black"
                         android:textSize="20sp">
 

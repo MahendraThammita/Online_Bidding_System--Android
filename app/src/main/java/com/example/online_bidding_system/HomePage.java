@@ -264,7 +264,7 @@ public class HomePage extends AppCompatActivity {
 
                     //Change status if time exceed
 
-                    int EndMin = Integer.parseInt(strCalculatedStrhMin);
+                    int EndMin = Integer.parseInt(String.valueOf(minutes));
                     //int EndHr = Integer.parseInt(strCalculatedStrhOUR);
 
 
