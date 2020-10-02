@@ -37,6 +37,7 @@
         <activity android:name=".MyAuctions" />
         <activity android:name=".PlaceBid" />
         <activity android:name=".Books_Category" />
+        <activity android:name=".Books_Edit" />
         <activity android:name=".Handmade_Category" />
         <activity android:name=".Antiques_Edit" />
         <activity android:name=".RegistrationPage" />

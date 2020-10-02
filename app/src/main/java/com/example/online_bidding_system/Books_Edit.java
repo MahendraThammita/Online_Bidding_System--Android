@@ -91,6 +91,8 @@ public class Books_Edit extends AppCompatActivity {
                     txtContact.setText(dataSnapshot.child("contact").getValue().toString());
                     txtPrice.setText(dataSnapshot.child("price").getValue().toString());
                     txtDescription.setText(dataSnapshot.child("description").getValue().toString());
+                    txtDate.setText(dataSnapshot.child("date").getValue().toString());
+                    txtTime.setText(dataSnapshot.child("duration").getValue().toString());
 
 
                 }
@@ -117,7 +119,7 @@ public class Books_Edit extends AppCompatActivity {
                 DbRef1 = FirebaseDatabase.getInstance().getReference().child("Books").child(AuctName);
                 DbRef.removeValue();
                 DbRef1.removeValue();
-                Toast.makeText(getApplicationContext() , "Succesfully Deleated" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext() , "Succesfully Deleted" , Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                 startActivity(displayIntent);
             }
