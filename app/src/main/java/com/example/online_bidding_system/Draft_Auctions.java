@@ -178,7 +178,7 @@ public class Draft_Auctions extends AppCompatActivity {
                         toEditIntent.putExtra("AUCT_ID" , auctId);
                         draftsList.getContext().startActivity(toEditIntent);
                         break;
-                    case "HobbiesAndSports":
+                    case "SportsAndHobbies":
                         toEditIntent = new Intent(getApplicationContext() , SportsEditPage.class);
                         toEditIntent.putExtra("AUCT_ID" , auctId);
                         draftsList.getContext().startActivity(toEditIntent);

@@ -82,7 +82,7 @@ public class Books_Edit extends AppCompatActivity {
 
 
         DbRef = FirebaseDatabase.getInstance().getReference().child("Adverticement").child(AuctName);
-        DbRef1 = FirebaseDatabase.getInstance().getReference().child("books").child(AuctName);
+        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Books").child(AuctName);
         DbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -94,6 +94,26 @@ public class Books_Edit extends AppCompatActivity {
                     txtDate.setText(dataSnapshot.child("date").getValue().toString());
                     txtTime.setText(dataSnapshot.child("duration").getValue().toString());
 
+
+                }
+                else
+                    Toast.makeText(getApplicationContext() , "Empty" , Toast.LENGTH_SHORT).show();
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        DbRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()){
+
+                    txtType.setText(dataSnapshot.child("type").getValue().toString());
 
                 }
                 else
@@ -133,12 +153,14 @@ public class Books_Edit extends AppCompatActivity {
                 String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
 
                 DbRef = FirebaseDatabase.getInstance().getReference();
+                DbRef1 = FirebaseDatabase.getInstance().getReference();
                 DbRef.child("Adverticement").child(AuctName).child("title").setValue(txtTitle.getText().toString().trim());
                 DbRef.child("Adverticement").child(AuctName).child("contact").setValue(txtContact.getText().toString().trim());
                 DbRef.child("Adverticement").child(AuctName).child("price").setValue(txtPrice.getText().toString().trim());
                 DbRef.child("Adverticement").child(AuctName).child("description").setValue(txtDescription.getText().toString().trim());
                 DbRef.child("Adverticement").child(AuctName).child("date").setValue(txtDate.getText().toString().trim());
                 DbRef.child("Adverticement").child(AuctName).child("duration").setValue(txtTime.getText().toString().trim());
+                DbRef1.child("Books").child(AuctName).child("type").setValue(txtType.getText().toString().trim());
                 Toast.makeText(getApplicationContext() , "Successfully Updated" , Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                 startActivity(displayIntent);

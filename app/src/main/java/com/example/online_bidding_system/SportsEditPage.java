@@ -1,8 +1,10 @@
 package com.example.online_bidding_system;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,8 +13,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +29,7 @@ import java.util.ArrayList;
 
 public class SportsEditPage extends AppCompatActivity {
     EditText txtTitle,txtPrice,txtContact,txtDescription,Date,time;
-    Button PublishNow,Delete,update;
+    Button PublishLater,Delete,update;
     DatabaseReference DbRef1;
 
     Adverticement adverticement;
@@ -37,9 +41,9 @@ public class SportsEditPage extends AppCompatActivity {
     private ArrayList<Uri> imageUris;
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
-    //Timepicker object
+
     TimePicker tp;
-    //Datapicker object
+
     DatePicker dp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +51,21 @@ public class SportsEditPage extends AppCompatActivity {
         setContentView(R.layout.activity_sports_edit_page);
         txtTitle = findViewById(R.id.setTitle);
         txtPrice = findViewById(R.id.setPrice);
+        PublishLater=findViewById(R.id.publish_later);
         Delete = findViewById(R.id.Delete);
+        update=findViewById(R.id.Update);
         Date = findViewById(R.id.setDate);
         time=findViewById(R.id.setTime);
 
         txtContact = findViewById(R.id.setContact);
         txtDescription = findViewById(R.id.setDescription);
+
         adverticement = new Adverticement();
 
         Intent retriveIntent = getIntent();
-        final  String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
+        String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
+
+
         DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child(AuctName);
         DbRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -67,13 +76,13 @@ public class SportsEditPage extends AppCompatActivity {
                     txtContact.setText(dataSnapshot.child("contact").getValue().toString());
                     txtDescription.setText(dataSnapshot.child("description").getValue().toString());
                     Date.setText(dataSnapshot.child("date").getValue().toString());
-                    //time.setText(dataSnapshot.child("time").getValue().toString());
+                    time.setText(dataSnapshot.child("duration").getValue().toString());
 
 
 
                 }
                 else
-                    Toast.makeText(getApplicationContext() , "Cannot Find Std1" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext() , "wait a few second!" , Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -88,7 +97,7 @@ public class SportsEditPage extends AppCompatActivity {
 
                 DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child(AuctName);
                 DbRef1.removeValue();
-                Toast.makeText(getApplicationContext() , "Succesfully Deleated" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext() , "Succesfully Deleted" , Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                 startActivity(displayIntent);
             }
@@ -113,6 +122,104 @@ public class SportsEditPage extends AppCompatActivity {
 
             }
         });
+        imageIs = findViewById(R.id.imageIs);
+        preBtn = findViewById(R.id.preButton);
+        nxBtn =  findViewById(R.id.nextButton);
+        pickImgbtn = findViewById(R.id.pickImg);
+        imageUris = new ArrayList<>();
+
+
+        imageIs.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                ImageView imageView = new ImageView((getApplicationContext()));
+                return imageView;
+            }
+        });
+
+        pickImgbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                pickImagesIntent();
+
+            }
+        });
+
+
+
+        preBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(position>0){
+                    position--;
+                    imageIs.setImageURI(imageUris.get(position));
+                }
+
+                else{
+                    Toast.makeText(SportsEditPage.this,"Empty",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        nxBtn.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(position<imageUris.size()-1){
+
+                    position++;
+                    imageIs.setImageURI(imageUris.get(position));
+                }
+
+                else{
+
+                    Toast.makeText(SportsEditPage.this,"empty",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }));
     }
 
+
+
+
+    private void pickImagesIntent(){
+
+
+
+        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+        startActivityForResult(intent, PICK_IMAGES_CODE);
+
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGES_CODE) {
+
+            if (resultCode == Activity.RESULT_OK) {
+                if (data.getClipData() != null) {
+
+                    int cout = data.getClipData().getItemCount();
+                    for (int i = 0; i < cout; i++) {
+                        Uri imageUri = data.getClipData().getItemAt(i).getUri();
+                        imageUris.add(imageUri);
+                    }
+
+                    imageIs.setImageURI(imageUris.get(0));
+                    position = 0;
+                } else {
+                    Uri imageUri = data.getData();
+                    imageUris.add(imageUri);
+                    imageIs.setImageURI(imageUris.get(0));
+                    position = 0;
+                }
+            }
+
+        }
+    }}
+
+
+

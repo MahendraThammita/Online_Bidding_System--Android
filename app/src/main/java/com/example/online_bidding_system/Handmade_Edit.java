@@ -104,6 +104,25 @@ public class Handmade_Edit extends AppCompatActivity {
             }
         });
 
+        DbRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()){
+
+                    txtMaterials.setText(dataSnapshot.child("type").getValue().toString());
+
+                }
+                else
+                    Toast.makeText(getApplicationContext() , "Empty" , Toast.LENGTH_SHORT).show();
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,12 +150,14 @@ public class Handmade_Edit extends AppCompatActivity {
                 String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
 
                 DbRef = FirebaseDatabase.getInstance().getReference();
+                DbRef1 = FirebaseDatabase.getInstance().getReference();
                 DbRef.child("Adverticement").child(AuctName).child("title").setValue(txtTitle.getText().toString().trim());
                 DbRef.child("Adverticement").child(AuctName).child("contact").setValue(txtContact.getText().toString().trim());
                 DbRef.child("Adverticement").child(AuctName).child("price").setValue(txtPrice.getText().toString().trim());
                 DbRef.child("Adverticement").child(AuctName).child("description").setValue(txtDescription.getText().toString().trim());
                 DbRef.child("Adverticement").child(AuctName).child("date").setValue(txtDate.getText().toString().trim());
                 DbRef.child("Adverticement").child(AuctName).child("duration").setValue(txtDuration.getText().toString().trim());
+                DbRef1.child("HandMades").child(AuctName).child("type").setValue(txtMaterials.getText().toString());
                 Toast.makeText(getApplicationContext() , "Successfully Updated" , Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                 startActivity(displayIntent);
