@@ -164,6 +164,8 @@ public class HomeAndGarden extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(), "Successfully Published", Toast.LENGTH_SHORT).show();
                         clearControl();
+                        Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                        startActivity(displayIntent);
 
                     }
 
