@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Black"
-    android:orientation="vertical"
-    tools:context=".RegistrationPage">
+    android:background="@drawable/background"
+    tools:context=".Books_Category"
+    android:orientation="vertical">
 
 
-    <include
-        android:id="@+id/primaryActbar"
-        layout="@layout/primary_actionbar"
-        app:layout_constraintBottom_toTopOf="@+id/profActionbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/profActionbar"
@@ -29,185 +22,111 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/primaryActbar" />
 
-    //kaveesha.
-
-    <com.ismaeldivita.chipnavigation.ChipNavigationBar
-        android:id="@+id/chipNavigationBar3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        app:cnb_menuResource="@menu/profile_bottom_nav"
-        app:cnb_unselectedColor="@color/design_default_color_on_primary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints">
 
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="-5dp" />
-    </com.ismaeldivita.chipnavigation.ChipNavigationBar>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="20dp">
 
     <TextView
         android:id="@+id/text1"
-        android:layout_width="105dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="184dp"
-        android:text="@string/signup"
-        android:textColor="@color/transparentColor"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.326"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profActionbar" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="left"
-        app:constraint_referenced_ids="editTextTextPassword,editTextTextPersonName,editTextTextEmailAddress,editTextTextPostalAddress"
-        tools:layout_editor_absoluteX="411dp" />
+        android:layout_marginBottom="20dp"
+        android:text="Buy and Sell with one Account"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Register Now"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        />
+
+
+    <EditText
+        android:id="@+id/FName"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:background="@drawable/textview_border"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/transparentColor" />
+
+    <EditText
+        android:id="@+id/NIC"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_marginBottom="25dp"
+        android:hint="@string/NIC"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:background="@drawable/textview_border"
+        android:textColorHint="@color/transparentColor"
+        />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_marginBottom="25dp"
+        android:hint="@string/Email"
+        android:gravity="center"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/textview_border"
+        android:textColorHint="@color/transparentColor"
+
+ />
+
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_marginBottom="25dp"
+        android:hint="@string/address"
+        android:gravity="center"
+        android:inputType="textPostalAddress"
+        android:background="@drawable/textview_border"
+        android:textColorHint="@color/transparentColor"
+        />
+
+    <EditText
+        android:id="@+id/pwd"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:hint="@string/pwd"
+        android:gravity="center"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/textview_border"
+        android:textColorHint="@color/transparentColor" />
+
+</LinearLayout>
 
     <Button
         android:id="@+id/savebtn"
         android:layout_width="304dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-
-        android:background="@color/transparentColor"
+        android:layout_height="50dp"
+        android:background="@drawable/round_button"
+        android:layout_gravity="center_horizontal"
         android:text="@string/register"
-        android:textColor="#F3ECEC"
-        app:layout_constraintBottom_toTopOf="@+id/chipNavigationBar3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/FName"
-        android:layout_width="322dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/ic_baseline_account_circle_24"
-        android:drawableLeft="@drawable/ic_baseline_account_circle_24"
-        android:drawablePadding="5dp"
-        android:ems="10"
-        android:hint="@string/name"
-        android:inputType="textPersonName"
-        android:textColor="@color/transparentColor"
-        android:textColorHint="@color/transparentColor"
-
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text1"
-        app:layout_constraintVertical_bias="0.084" />
-
-    <EditText
-        android:id="@+id/NIC"
-        android:layout_width="322dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/ic_baseline_perm_identity_24"
-        android:drawableLeft="@drawable/ic_baseline_perm_identity_24"
-        android:drawablePadding="5dp"
-        android:ems="10"
-        android:hint="@string/NIC"
-        android:inputType="textPersonName"
-        android:textColor="@color/transparentColor"
-
-        android:textColorHint="@color/transparentColor"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FName"
-        app:layout_constraintVertical_bias="0.07" />
-
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="322dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/ic_baseline_email_24"
-        android:drawableLeft="@drawable/ic_baseline_email_24"
-        android:drawablePadding="5dp"
-
-        android:ems="10"
-        android:hint="@string/Email"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/transparentColor"
-
-        android:textColorHint="@color/transparentColor"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NIC"
-        app:layout_constraintVertical_bias="0.098" />
-
-    <EditText
-        android:id="@+id/address"
-        android:layout_width="322dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="244dp"
-        android:drawableStart="@drawable/ic_baseline_home_24"
-
-        android:drawableLeft="@drawable/ic_baseline_home_24"
-        android:drawablePadding="5dp"
-        android:ems="10"
-        android:hint="@string/address"
-
-        android:inputType="textPostalAddress"
-        android:textColor="@color/transparentColor"
-        android:textColorHint="@color/transparentColor"
-        app:layout_constraintBottom_toTopOf="@+id/chipNavigationBar3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextFName3" />
-
-    <EditText
-        android:id="@+id/pwd"
-        android:layout_width="322dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="128dp"
-        android:drawableStart="@drawable/ic_baseline_lock_24"
-        android:drawableLeft="@drawable/ic_baseline_lock_24"
-
-        android:drawablePadding="5dp"
-        android:ems="10"
-        android:hint="@string/pwd"
-        android:inputType="textPassword"
-        android:textColor="@color/transparentColor"
-        android:textColorHint="@color/transparentColor"
-        app:layout_constraintBottom_toTopOf="@+id/savebtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextFName4" />
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:textColor="#F3ECEC" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
