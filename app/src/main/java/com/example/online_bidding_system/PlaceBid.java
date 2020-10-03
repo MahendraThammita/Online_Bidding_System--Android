@@ -77,7 +77,7 @@ public class PlaceBid extends AppCompatActivity {
                     bidID.setText(myBidsCard.getAuctionId());
                     bidStartPrice.setText(myBidsCard.getStart_Price()  + ".00 Rs");
                     bidMaxBid.setText(myBidsCard.getMaxBid()  + ".00 Rs");
-                    bidEndsAt.setText(String.valueOf(myBidsCard.getStart_Price()));
+                    bidEndsAt.setText(myBidsCard.getEndDate() + myBidsCard.getDuration());
 
 
                 }
@@ -115,14 +115,17 @@ public class PlaceBid extends AppCompatActivity {
 
                             try{
 
-                                float newBid = Float.parseFloat(bidGetter.getText().toString());
-                                float oldBid = myBidsCard.getMaxBid();
+                                int newBid = Integer.parseInt(bidGetter.getText().toString());
+                                int oldBid = myBidsCard.getMaxBid();
 
                                 if(TextUtils.isEmpty(bidGetter.getText().toString())){
-                                    Toast.makeText(getApplicationContext() , "Please Enter a Bid Before Confirm" , Toast.LENGTH_SHORT);
+                                    Toast.makeText(getApplicationContext() , "Please Enter a Bid Before Confirm" , Toast.LENGTH_SHORT).show();
+                                }
+                                else if(newBid <= StartPrice){
+                                    Toast.makeText(getApplicationContext() , "Please Enter a Bid Larger than Starting Price" , Toast.LENGTH_SHORT).show();
                                 }
                                 else if(newBid <= oldBid){
-                                    Toast.makeText(getApplicationContext() , "Please Enter a Bid Larger than existing" , Toast.LENGTH_SHORT);
+                                    Toast.makeText(getApplicationContext() , "Please Enter a Bid Larger than existing" , Toast.LENGTH_SHORT).show();
                                 }
                                 else {
                                     //setBidDbRef.child("maxBid").setValue(newBid)
@@ -136,6 +139,7 @@ public class PlaceBid extends AppCompatActivity {
                                     editedAd.setStatus(myBidsCard.getStatus().toString());
                                     editedAd.setMaxBid(String.valueOf(newBid));
                                     editedAd.setPrice(String.valueOf(myBidsCard.getStart_Price()));
+                                    editedAd.setSeller_ID(myBidsCard.getSeller_id());
 
                                     setBidDbRef.setValue(editedAd);
                                     setBidDbRef.child("precious_Bid").setValue(myBidsCard.getMaxBid());
@@ -162,13 +166,17 @@ public class PlaceBid extends AppCompatActivity {
 
             }
 
-            private void setUserAuction(Adverticement editedAd, float newBid) {
-                DatabaseReference userBidRef = FirebaseDatabase.getInstance().getReference("User_Bids").child("CUS1");
+            private void setUserAuction(Adverticement editedAd, int newBid) {
+                Log.i("Values recieved" , "Recived tio subChilds change");
+                DatabaseReference userBidRef = FirebaseDatabase.getInstance().getReference("User_Bids").child("CUS1").child(auctionId);
                 userBidRef.setValue(editedAd);
-                userBidRef.child("previous_Bid").setValue(newBid);
-                userBidRef.child("previous_Bid").setValue(newBid);
-                userBidRef.child("mybid").setValue(newBid);
-                Toast.makeText(getApplicationContext() , "Bid Placed Successfully" , Toast.LENGTH_SHORT);
+                userBidRef.child("previous_Bid").setValue(editedAd.getMaxBid());
+                userBidRef.child("mybid").setValue(String.valueOf(newBid));
+                Toast.makeText(getApplicationContext() , "Bid Placed Successfully" , Toast.LENGTH_SHORT).show();
+
+                Intent ConfermToMyBids = new Intent(getApplicationContext() , TabedAuctions.class);
+                startActivity(ConfermToMyBids);
+
             }
         });
 

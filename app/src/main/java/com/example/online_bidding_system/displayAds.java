@@ -457,8 +457,8 @@ public class displayAds extends AppCompatActivity {
         itemSeller.setText(myBidsCard.getSeller_id().toString());
         //EndingTime.setText(Tc.calcFinalDateTime());
         EndingTime.setText(myBidsCard.getEndDate() + " - " + myBidsCard.getDuration());
-        itemMaxBid.setText(String.valueOf(myBidsCard.getMybid()) + " Rs");
-        itemCurrentBid.setText(String.valueOf(myBidsCard.getStart_Price()) + " Rs");
+        itemMaxBid.setText(String.valueOf(myBidsCard.getMaxBid()) + ".00 Rs");
+        itemCurrentBid.setText(String.valueOf(myBidsCard.getStart_Price()) + ".00 Rs");
 
 
     }
