@@ -170,8 +170,8 @@ public class DVDnMovies_Edit extends AppCompatActivity {
                 fAuth1.child("Adverticement").child(AuctName).child("date").setValue(editDate.getText().toString().trim());
                 fAuth1.child("Adverticement").child(AuctName).child("duration").setValue(editDuration.getText().toString().trim());
 
-                fAuth.child("DVDandMovies").child(AuctName).child("type").setValue(editGenre.getText().toString());
-                fAuth.child("DVDandMovies").child(AuctName).child("type").setValue(editCondition.getText().toString());
+                fAuth.child("DVDandMovies").child(AuctName).child("genere").setValue(editGenre.getText().toString());
+                fAuth.child("DVDandMovies").child(AuctName).child("condition").setValue(editCondition.getText().toString());
 
                 Toast.makeText(getApplicationContext() , "Successfully Updated" , Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
