@@ -183,6 +183,11 @@ public class Draft_Auctions extends AppCompatActivity {
                         toEditIntent.putExtra("AUCT_ID" , auctId);
                         draftsList.getContext().startActivity(toEditIntent);
                         break;
+                    case "Others":
+                        toEditIntent = new Intent(getApplicationContext() , OtherEditpage.class);
+                        toEditIntent.putExtra("AUCT_ID" , auctId);
+                        draftsList.getContext().startActivity(toEditIntent);
+                        break;
                     case "HandMades":
                         toEditIntent = new Intent(getApplicationContext() , Handmade_Edit.class);
                         toEditIntent.putExtra("AUCT_ID" , auctId);
