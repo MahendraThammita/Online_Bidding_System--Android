@@ -39,13 +39,13 @@ public class DVDnMovies_category extends AppCompatActivity {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
 
-    EditText Brand,Condition,Material,Size,ContactNo,Description,Duration,Title,Type,Start_Price;
+    EditText Condition,ContactNo,Description,Title,Start_Price,Genre;
     Button publishNow,publishLater;
     DatabaseReference fAuth;
     DatabaseReference fAuth1;
     FdeHelper fCat;
     long maxid=0;
-    String idPrefix="Fa";
+    String idPrefix="DVD";
     private String userId;
 
     private ImageSwitcher imageIs;
@@ -80,6 +80,7 @@ public class DVDnMovies_category extends AppCompatActivity {
         Description  =      findViewById(R.id.setDescription);
         Title        =      findViewById(R.id.setTitle);
         Start_Price  =      findViewById(R.id.setPrice);
+        Genre        =      findViewById(R.id.setGenre);
 
         //ged datapicker value
         dp = findViewById(R.id.setDate);
@@ -144,6 +145,9 @@ public class DVDnMovies_category extends AppCompatActivity {
                     else if(TextUtils.isEmpty(Title.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Title Field Is Empty" , Toast.LENGTH_SHORT).show();
                     }
+                    else if(TextUtils.isEmpty(Genre.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "Genre Field Is Empty" , Toast.LENGTH_SHORT).show();
+                    }
 
                     else if(TextUtils.isEmpty(Start_Price.getText().toString())){
                         Toast.makeText(getApplicationContext() , "Start Price Field Is Empty" , Toast.LENGTH_SHORT).show();
@@ -153,6 +157,7 @@ public class DVDnMovies_category extends AppCompatActivity {
                     else {
 
                         fCat.setCondition(Condition.getText().toString().trim());
+                        fCat.setGenre(Genre.getText().toString().trim());
                         adverticement.setContact(ContactNo.getText().toString().trim());
                         adverticement.setDescription(Description.getText().toString().trim());
                         adverticement.setTitle(Title.getText().toString().trim());
@@ -195,6 +200,7 @@ public class DVDnMovies_category extends AppCompatActivity {
                 Description.setText("");
                 Title.setText("");
                 Start_Price.setText("");
+                Genre.setText("");
             }
 
 
