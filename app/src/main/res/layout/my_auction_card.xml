@@ -12,13 +12,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:elevation="8dp"
+        android:background="@drawable/rounded_corners"
+        android:elevation="10dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/rounded_corners"
             android:padding="10dp">
 
             <ImageView
