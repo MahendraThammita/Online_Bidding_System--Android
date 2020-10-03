@@ -83,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
+                android:gravity="center"
                 android:fontFamily="sans-serif-black"
                 android:hint="Title"
                 android:inputType="text" />
@@ -95,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
+                android:gravity="center"
                 android:fontFamily="sans-serif-black"
                 android:hint="Starting at"
                 android:inputType="numberDecimal" />
@@ -134,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
+                android:gravity="center"
                 android:fontFamily="sans-serif-black"
                 android:hint="Contact"
                 android:inputType="phone" />
@@ -145,6 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
+                android:gravity="center"
                 android:fontFamily="sans-serif-black"
                 android:hint="Materials"
                 android:inputType="text" />
@@ -156,6 +160,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
+                android:gravity="center"
                 android:fontFamily="sans-serif-black"
                 android:hint="Description"
                 android:inputType="text" />
