@@ -71,7 +71,7 @@ public class DVDnMovies_Edit extends AppCompatActivity {
         editContact = findViewById(R.id.setContact);
         editCondition = findViewById(R.id.setCondition);
         editDescription = findViewById(R.id.setDescription);
-        editGenre.findViewById(R.id.setGenre);
+        editGenre.findViewById(R.id.setGenere);
         PublishNow = findViewById(R.id.publish_now);
         update = findViewById(R.id.Update);
         delete =  findViewById(R.id.Delete);
@@ -101,7 +101,7 @@ public class DVDnMovies_Edit extends AppCompatActivity {
                     editContact.setText(dataSnapshot.child("contact").getValue().toString());
                     editPrice.setText(dataSnapshot.child("price").getValue().toString());
                     editDescription.setText(dataSnapshot.child("description").getValue().toString());
-                    editGenre.setText(dataSnapshot.child("genre").getValue().toString());
+                    editGenre.setText(dataSnapshot.child("genere").getValue().toString());
                     editCondition.setText(dataSnapshot.child("condition").getValue().toString());
                 } else
 

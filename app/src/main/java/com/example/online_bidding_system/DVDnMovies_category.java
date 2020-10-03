@@ -80,7 +80,7 @@ public class DVDnMovies_category extends AppCompatActivity {
         Description  =      findViewById(R.id.setDescription);
         Title        =      findViewById(R.id.setTitle);
         Start_Price  =      findViewById(R.id.setPrice);
-        Genre        =      findViewById(R.id.setGenre);
+        Genre        =      findViewById(R.id.setGenere);
 
         //ged datapicker value
         dp = findViewById(R.id.setDate);
