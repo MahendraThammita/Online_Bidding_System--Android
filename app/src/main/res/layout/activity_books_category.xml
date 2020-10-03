@@ -80,10 +80,11 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
                 android:gravity="center"
+                android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Title"
@@ -93,10 +94,11 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
                 android:gravity="center"
+                android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Starting at"
@@ -131,10 +133,11 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setContact"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
                 android:gravity="center"
+                android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Contact"
@@ -143,10 +146,11 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="20dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_margin="10dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Type"
                 android:inputType="text" />
@@ -154,11 +158,11 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginBottom="20dp"
+                android:layout_margin="10dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Description"
                 android:inputType="text" />

@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
 
+
     <include
         android:id="@+id/primaryActbar"
         layout="@layout/primary_actionbar"/>
@@ -32,7 +33,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        >
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,25 +80,33 @@
 
             </RelativeLayout>
 
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             <!--EditText -->
             <EditText
                 android:id="@+id/setTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-black"
+                android:layout_margin="10dp"
+                android:background="@drawable/textview_border"
+                android:textColorHint="@color/white"
+
                 android:hint="Title"
                 android:inputType="text" />
 
             <Spinner
                 android:id="@+id/setPeriod"
-                android:layout_width="match_parent"
+                android:layout_width="360dp"
                 android:layout_height="45dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/textview_border"
+                android:textColorHint="@color/white"
+
                 android:layout_margin="12dp"
                 />
 
@@ -101,10 +114,13 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:background="@drawable/textview_border"
+                android:textColorHint="@color/white"
+                android:layout_gravity="center"
                 android:gravity="center"
+                android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Starting at"
@@ -144,11 +160,13 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setContact"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:background="@drawable/textview_border"
+                android:textColorHint="@color/white"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginBottom="20dp"
+                android:layout_margin="10dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Contact"
                 android:inputType="phone" />
@@ -159,14 +177,18 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:background="@drawable/textview_border"
+                android:textColorHint="@color/white"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginBottom="20dp"
+                android:layout_margin="10dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Description"
                 android:inputType="text" />
+
+                </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
