@@ -19,6 +19,20 @@ public class MyBidsCard {
 
     }
 
+    public MyBidsCard(String auctionId, String contactNo, String description, String duration, String title, String type, String endDate, String seller_id, String status, int maxBid, int start_Price) {
+        this.auctionId = auctionId;
+        ContactNo = contactNo;
+        Description = description;
+        Duration = duration;
+        Title = title;
+        Type = type;
+        this.endDate = endDate;
+        this.seller_id = seller_id;
+        this.status = status;
+        MaxBid = maxBid;
+        Start_Price = start_Price;
+    }
+
     public MyBidsCard(String auctionId , String contactNo, String description, String duration, String title, String type, String endDate, int maxBid, int mybid, int start_Price) {
         this.auctionId = auctionId;
         ContactNo = contactNo;

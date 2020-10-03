@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/swiper_single_img"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="match_parent"
     android:src="@drawable/phone"
-    android:scaleType="center"
-    android:layout_margin="10dp">
+    android:scaleType="centerCrop"
+    android:layout_margin="0dp">
 
 </ImageView>

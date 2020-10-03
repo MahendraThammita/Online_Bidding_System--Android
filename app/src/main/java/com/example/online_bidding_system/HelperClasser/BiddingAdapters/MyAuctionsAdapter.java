@@ -43,7 +43,6 @@ public class MyAuctionsAdapter extends ArrayAdapter<MyBidsCard> {
         auctTitle.setText(auction.getTitle());
         auctdMaxBid.setText(auction.getMaxBid() + " Rs");
         auctId.setText(auction.getAuctionId());
-        //auctTitle.setText(auction.getTitle());
         auctTime.setText(auction.getDuration());
 
 

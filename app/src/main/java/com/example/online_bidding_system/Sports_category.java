@@ -25,7 +25,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Sports_category extends AppCompatActivity {
     EditText txtTitle,txtPrice,txtContact,txtBrand,txtCondition,txtDescription;
@@ -62,9 +64,9 @@ public class Sports_category extends AppCompatActivity {
         txtCondition = findViewById(R.id.setCondition);
         txtDescription = findViewById(R.id.setDescription);
         PublishLater = findViewById(R.id.publish_later);
-        //ged datapicker value
+
         dp = findViewById(R.id.setDate);
-        //get Timepicker value
+
         tp = findViewById(R.id.setTime);
 
 
@@ -76,10 +78,10 @@ public class Sports_category extends AppCompatActivity {
 
         mFirebaseInstance = FirebaseDatabase.getInstance();
 
-        // get reference to 'RepositoryName' node
+
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
 
-        // get reference to 'Bookmarks' node
+
         mFirebaseDatabase1 = mFirebaseInstance.getReference("Hobbies&Sports");
 
 
@@ -117,18 +119,29 @@ public class Sports_category extends AppCompatActivity {
                         adverticement.setPrice(txtPrice.getText().toString().trim());
                         adverticement.setMaxBid("0");
                         adverticement.setStatus("inactive");
-                        adverticement.setType("HobbiesAndSports");
+
+                        adverticement.setType("SportsAndHobbies");
                         adverticement.setContact(txtContact.getText().toString().trim());
                         homeitem.setCondition(txtCondition.getText().toString().trim());
                         adverticement.setDescription(txtDescription.getText().toString().trim());
                         homeitem.setBrand(txtBrand.getText().toString().trim());
 
-                        //set timepicker value
+
                         String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
                         adverticement.setDuration(strTime);
-                        //set datapicker value
-                        String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+
+
+
+                        int year = dp.getYear();
+                        int month = dp.getMonth();
+                        int day = dp.getDayOfMonth();
+
+                        Calendar myCal = Calendar.getInstance();
+                        myCal.set(year, month, day);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+                        String strDate = dateFormat.format(myCal.getTime());
                         adverticement.setDate(strDate);
+
                         // DbRef.child("user").setValue(user);
                         String strNumber= idPrefix+String.valueOf(maxid+1);
                         DbRef.child(String.valueOf(strNumber)).setValue(homeitem);

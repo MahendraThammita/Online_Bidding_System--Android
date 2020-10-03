@@ -31,8 +31,8 @@ public class TimeCalculations {
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public String calcFinalDateTime(LocalTime Endtime , LocalDate enddate) {
-        LocalDateTime finalDate = LocalDateTime.of(enddate , Endtime);
+    public String calcFinalDateTime() {
+        LocalDateTime finalDate = LocalDateTime.of(this.endDate , this.endTime);
 
         return finalDate.toString();
     };
@@ -78,9 +78,11 @@ public class TimeCalculations {
         LocalDateTime endDateTime = calcFinalDateTimeInLDT(this.endTime , endDate);
 
         if (endDateTime.isBefore(this.currentTime) || endDateTime.isEqual(this.currentTime)) {
+            //Expired
             return true;
         }
         else
+            //Not Expired
             return false;
     }
 
