@@ -72,7 +72,8 @@ public class LogIn_Page extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
 
 
-                //Authenticate the users
+
+                //Authenticate The Users
 
 
                 fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
