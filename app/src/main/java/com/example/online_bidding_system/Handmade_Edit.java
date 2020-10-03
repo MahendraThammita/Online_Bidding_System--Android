@@ -165,6 +165,23 @@ public class Handmade_Edit extends AppCompatActivity {
             }
         });
 
+        PublishNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent retriveIntent = getIntent();
+                String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
+
+                DbRef = FirebaseDatabase.getInstance().getReference();
+                DbRef.child("Adverticement").child(AuctName).child("status").setValue("active");
+
+                Toast.makeText(getApplicationContext() , "Your Ad is now on Live" , Toast.LENGTH_SHORT).show();
+                Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                startActivity(displayIntent);
+
+            }
+        });
+
         imageIs = findViewById(R.id.imageIs);
         preBtn = findViewById(R.id.preButton);
         nxBtn =  findViewById(R.id.nextButton);

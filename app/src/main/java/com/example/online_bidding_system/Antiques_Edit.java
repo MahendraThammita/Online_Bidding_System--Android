@@ -76,6 +76,7 @@ public class Antiques_Edit extends AppCompatActivity{
         txtDescription = findViewById(R.id.setDescription);
         update = findViewById(R.id.Update);
         delete =  findViewById(R.id.Delete);
+        PublishNow = findViewById(R.id.publish_now);
 
 
         add = new auction();
@@ -154,6 +155,24 @@ public class Antiques_Edit extends AppCompatActivity{
                 DbRef.child("Adverticement").child(AuctName).child("duration").setValue(txtTime.getText().toString().trim());
                 DbRef1.child("Antiques").child(AuctName).child("type").setValue(period.getSelectedItem().toString());
                 Toast.makeText(getApplicationContext() , "Successfully Updated" , Toast.LENGTH_SHORT).show();
+                Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                startActivity(displayIntent);
+
+            }
+        });
+
+
+        PublishNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent retriveIntent = getIntent();
+                String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
+
+                DbRef = FirebaseDatabase.getInstance().getReference();
+                DbRef.child("Adverticement").child(AuctName).child("status").setValue("active");
+
+                Toast.makeText(getApplicationContext() , "Your Ad is now on Live" , Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                 startActivity(displayIntent);
 
