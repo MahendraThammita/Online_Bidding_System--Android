@@ -31,8 +31,8 @@ public class SportsEditPage extends AppCompatActivity {
     EditText txtTitle,txtPrice,txtContact,txtDescription,Date,time,txtBrand,txtCondition;
     Button PublishLater,Delete,update;
 
-     DatabaseReference DbRef1;
-     DatabaseReference homeref;
+     private DatabaseReference DbRef1;
+    private DatabaseReference homeref;
 
     Adverticement adverticement;
     String MaxBid;
@@ -71,7 +71,7 @@ public class SportsEditPage extends AppCompatActivity {
 
 
         DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child(AuctName);
-        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Hobbies&Sports").child(AuctName);
+        homeref = FirebaseDatabase.getInstance().getReference().child("Hobbies&Sports").child(AuctName);
         DbRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -94,13 +94,15 @@ public class SportsEditPage extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }});
-        homeref.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            homeref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChildren()){
 
                     txtBrand.setText(dataSnapshot.child("brand").getValue().toString());
                     txtCondition.setText(dataSnapshot.child("condition").getValue().toString());
+
 
                 }
                 else
@@ -113,7 +115,7 @@ public class SportsEditPage extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+            });
         Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
