@@ -163,6 +163,16 @@ public class MyBidsFragment extends Fragment {
 
         //MyAdapter singleCard = new MyAdapter(getActivity() , items , times , maxbid , mybid , img);
 
+        bidList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String auctionId = myBidsCards.get(i).getAuctionId();
+                Intent toEditIntent = new Intent(getActivity() , EditBid.class);
+                toEditIntent.putExtra("AUCT_ID" , auctionId);
+                bidList.getContext().startActivity(toEditIntent);
+            }
+        });
+
 
 
 

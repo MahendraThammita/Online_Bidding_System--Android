@@ -13,6 +13,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -55,7 +57,9 @@ public class TabedAuctions extends AppCompatActivity {
         view_pagera_dapter.AddFrag(myAuctFrag , "My Auctions");
         viewPager.setAdapter(view_pagera_dapter);
 
-
+        tabedLay.getTabAt(0).setIcon(R.drawable.trouphy);
+        tabedLay.getTabAt(1).setIcon(R.drawable.my_bids_icon);
+        tabedLay.getTabAt(2).setIcon(R.drawable.my_auctions_icon);
 
         drawer = findViewById(R.id.DrwerLay);
         navi = (NavigationView) findViewById(R.id.nav_view);
@@ -136,5 +140,12 @@ public class TabedAuctions extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return titles.get(position);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.profile_top_nav , menu);
+        return true;
     }
 }

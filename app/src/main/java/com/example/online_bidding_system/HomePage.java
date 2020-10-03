@@ -12,6 +12,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -333,7 +335,7 @@ public class HomePage extends AppCompatActivity {
 
         drawer = findViewById(R.id.DrwerLay);
         navi = (NavigationView) findViewById(R.id.nav_view);
-        primTool = findViewById(R.id.primaryActbar);
+        primTool = findViewById(R.id.profActionbar);
 
         setSupportActionBar(primTool);
 
@@ -493,6 +495,12 @@ public class HomePage extends AppCompatActivity {
         flipper.setInAnimation(this, android.R.anim.slide_in_left);
         flipper.setOutAnimation(this, android.R.anim.slide_out_right);
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.profile_top_nav , menu);
+        return true;
     }
 
 }

@@ -14,27 +14,11 @@
     
 
     <item
-        android:id="@+id/ProfTopActMenuhome"
-        android:title=""
-        android:icon="@drawable/home"
-        app:showAsAction="always"
-        android:iconTint="@color/design_default_color_on_primary">
-
-    </item>
-    <item
-        android:id="@+id/ProfTopActMenubid"
-        android:title=""
-        android:icon="@drawable/bids"
-        app:showAsAction="always"
-        android:iconTint="@color/design_default_color_on_primary">
-
-    </item>
-    <item
         android:id="@+id/ProfTopActMenuMessage"
         android:title=""
         android:icon="@drawable/message"
         app:showAsAction="always"
-        android:iconTint="@color/design_default_color_on_primary">
+        android:iconTint="@color/white">
 
     </item>
 

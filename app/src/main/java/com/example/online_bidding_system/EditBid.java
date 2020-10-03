@@ -10,12 +10,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.BidSwiperAdapter;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.BidSwiperClass;
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -26,11 +39,120 @@ public class EditBid extends AppCompatActivity {
     DrawerLayout drawer;
     NavigationView navi;
     Toolbar primTool;
+    DatabaseReference recieverRef;
+    TextView bidName , bidID , myBidVal , bidMaxBid , bidEndsAt ,bidDes;
+    Button btnConfermBid , btnDeleteBid;
+    EditText bidGetter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_bid);
+
+
+        Intent recieverIntent = getIntent();
+        final String auction_Id = recieverIntent.getStringExtra("AUCT_ID");
+
+        bidName = findViewById(R.id.editBid_ItemName);
+        bidDes = findViewById(R.id.editBid_BidDescription);
+        bidEndsAt = findViewById(R.id.myBidTime);
+        bidMaxBid = findViewById(R.id.editBid_maxBidVal);
+        myBidVal = findViewById(R.id.editBidmyBidVal);
+        btnConfermBid = findViewById(R.id.editBid_IncrementBtn);
+        btnDeleteBid = findViewById(R.id.deleteBidBtn);
+        bidGetter = findViewById(R.id.editBid_IncrementVal);
+
+
+        recieverRef = FirebaseDatabase.getInstance().getReference("Adverticement").child(auction_Id);
+        recieverRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()){
+                    String Duration = dataSnapshot.child("duration").getValue().toString();
+                    String endDate = dataSnapshot.child("date").getValue().toString();
+                    String Type = dataSnapshot.child("type").getValue().toString();
+                    String Title = dataSnapshot.child("title").getValue().toString();
+                    String ADid = dataSnapshot.getKey().toString();
+                    String contact = dataSnapshot.child("contact").getValue().toString();
+                    String des = dataSnapshot.child("description").getValue().toString();
+                    String sellerId =dataSnapshot.child("seller_ID").getValue().toString();
+                    String status =dataSnapshot.child("status").getValue().toString();
+                    int MaxBid = Integer.valueOf(dataSnapshot.child("maxBid").getValue().toString());
+                    int StartPrice = Integer.valueOf(dataSnapshot.child("price").getValue().toString());
+
+                    MyBidsCard myBidsCard = new MyBidsCard(ADid , contact , des , Duration , Title , Type , endDate , sellerId , status , MaxBid , StartPrice);
+
+                    bidName.setText(myBidsCard.getTitle());
+                    bidDes.setText(myBidsCard.getDescription());
+                    bidEndsAt.setText(myBidsCard.getEndDate() + " " + myBidsCard.getDuration());
+                    bidMaxBid.setText(myBidsCard.getMaxBid());
+                    getUserBidValues(myBidsCard);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        btnConfermBid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final DatabaseReference editBidMainRef = FirebaseDatabase.getInstance().getReference("Adverticement").child(auction_Id);
+                editBidMainRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChildren()){
+                            String Duration = dataSnapshot.child("duration").getValue().toString();
+                            String endDate = dataSnapshot.child("date").getValue().toString();
+                            String Type = dataSnapshot.child("type").getValue().toString();
+                            String Title = dataSnapshot.child("title").getValue().toString();
+                            String ADid = dataSnapshot.getKey().toString();
+                            String contact = dataSnapshot.child("contact").getValue().toString();
+                            String des = dataSnapshot.child("description").getValue().toString();
+                            String sellerId =dataSnapshot.child("seller_ID").getValue().toString();
+                            String status =dataSnapshot.child("status").getValue().toString();
+                            int MaxBid = Integer.valueOf(dataSnapshot.child("maxBid").getValue().toString());
+                            int StartPrice = Integer.valueOf(dataSnapshot.child("price").getValue().toString());
+
+                            MyBidsCard myBidsCard = new MyBidsCard(ADid , contact , des , Duration , Title , Type , endDate , sellerId , status , MaxBid , StartPrice);
+
+                            try{
+                                int newBid = Integer.parseInt(bidGetter.getText().toString());
+                                int oldMax = myBidsCard.getMaxBid();
+
+                                if(TextUtils.isEmpty(bidGetter.getText().toString())){
+                                    Toast.makeText(getApplicationContext() , "Please Enter a Value Before increase" , Toast.LENGTH_SHORT).show();
+                                }
+                                else if(newBid <= oldMax){
+                                    Toast.makeText(getApplicationContext() , "Bids Lower Than Current Bids Are Not Allowed" , Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    editBidMainRef.child("maxBid").setValue(newBid);
+                                    editBidMainRef.child("precious_Bid").setValue(oldMax);
+                                }
+
+                            }
+                            catch (NumberFormatException e){
+                                Toast.makeText(getApplicationContext() , "Please Enter a valid input" , Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+
+
+
+
 
         imgeRecycle = findViewById(R.id.bidImagerSwiperRecyclar);
         iamgeRecycler();
@@ -80,6 +202,26 @@ public class EditBid extends AppCompatActivity {
             }
         });
         
+    }
+
+    private void getUserBidValues(MyBidsCard myBidsCard) {
+        DatabaseReference useBidReference = FirebaseDatabase.getInstance().getReference("User_Bids").child("CUS1").child(myBidsCard.getAuctionId());
+
+        useBidReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()){
+                    String userBid = dataSnapshot.child("mybid").getValue().toString();
+
+                    myBidVal.setText(userBid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void iamgeRecycler() {

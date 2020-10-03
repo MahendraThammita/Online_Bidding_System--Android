@@ -17,46 +17,20 @@
         android:layout_height="wrap_content"
         android:gravity="center">
 
-        <Button
-            android:id="@+id/topNavProfHome"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="0.33"
-            android:background="@drawable/home"
-            app:layout_constraintEnd_toStartOf="@+id/topNavProfBids"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints">
-
-        </Button>
-
-        <Button
-            android:id="@+id/topNavProfBids"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_toRightOf="@+id/topNavProfHome"
-            android:layout_weight="0.33"
-            android:background="@drawable/bids"
-            app:layout_constraintEnd_toStartOf="@+id/topNavProfMsg"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/topNavProfHome"
-            tools:ignore="MissingConstraints">
-
-        </Button>
-
-        <Button
-            android:id="@+id/topNavProfMsg"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_toRightOf="@+id/topNavProfBids"
-            android:layout_weight="0.33"
-            android:background="@drawable/message"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Bid Cloud"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/topNavProfBids"
-            tools:ignore="MissingConstraints">
+            app:layout_constraintHorizontal_bias="0.346"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        </Button>
+        </TextView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

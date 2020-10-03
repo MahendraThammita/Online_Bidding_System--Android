@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">//start
+    tools:openDrawer="">//start
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -47,7 +47,7 @@
 
             <include
                 android:id="@+id/profActionbar"
-                layout="@layout/profile_top_actionbar"
+                layout="@layout/primary_actionbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
