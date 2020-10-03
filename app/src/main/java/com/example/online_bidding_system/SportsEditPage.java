@@ -28,9 +28,11 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 public class SportsEditPage extends AppCompatActivity {
-    EditText txtTitle,txtPrice,txtContact,txtDescription,Date,time;
+    EditText txtTitle,txtPrice,txtContact,txtDescription,Date,time,txtBrand,txtCondition;
     Button PublishLater,Delete,update;
-    DatabaseReference DbRef1;
+
+     DatabaseReference DbRef1;
+     DatabaseReference homeref;
 
     Adverticement adverticement;
     String MaxBid;
@@ -53,6 +55,8 @@ public class SportsEditPage extends AppCompatActivity {
         txtPrice = findViewById(R.id.setPrice);
         PublishLater=findViewById(R.id.publish_later);
         Delete = findViewById(R.id.Delete);
+        txtBrand = findViewById(R.id.setBrand);
+        txtCondition = findViewById(R.id.setCondition);
         update=findViewById(R.id.Update);
         Date = findViewById(R.id.setDate);
         time=findViewById(R.id.setTime);
@@ -67,6 +71,7 @@ public class SportsEditPage extends AppCompatActivity {
 
 
         DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child(AuctName);
+        DbRef1 = FirebaseDatabase.getInstance().getReference().child("Hobbies&Sports").child(AuctName);
         DbRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -89,6 +94,26 @@ public class SportsEditPage extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }});
+        homeref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()){
+
+                    txtBrand.setText(dataSnapshot.child("brand").getValue().toString());
+                    txtCondition.setText(dataSnapshot.child("condition").getValue().toString());
+
+                }
+                else
+                    Toast.makeText(getApplicationContext() , "Empty" , Toast.LENGTH_SHORT).show();
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +121,9 @@ public class SportsEditPage extends AppCompatActivity {
                 String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
 
                 DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child(AuctName);
+                homeref = FirebaseDatabase.getInstance().getReference().child("Hobbies&Sports").child(AuctName);
                 DbRef1.removeValue();
+                homeref.removeValue();
                 Toast.makeText(getApplicationContext() , "Succesfully Deleted" , Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                 startActivity(displayIntent);
@@ -110,12 +137,17 @@ public class SportsEditPage extends AppCompatActivity {
                 String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
 
                 DbRef1 = FirebaseDatabase.getInstance().getReference();
+                homeref = FirebaseDatabase.getInstance().getReference();
+
                 DbRef1.child("Adverticement").child(AuctName).child("title").setValue(txtTitle.getText().toString().trim());
                 DbRef1.child("Adverticement").child(AuctName).child("contact").setValue(txtContact.getText().toString().trim());
                 DbRef1.child("Adverticement").child(AuctName).child("price").setValue(txtPrice.getText().toString().trim());
                 DbRef1.child("Adverticement").child(AuctName).child("description").setValue(txtDescription.getText().toString().trim());
                 DbRef1.child("Adverticement").child(AuctName).child("date").setValue(Date.getText().toString().trim());
                 DbRef1.child("Adverticement").child(AuctName).child("duration").setValue(time.getText().toString().trim());
+                homeref.child("Hobbies&Sports").child(AuctName).child("brand").setValue(txtBrand.getText().toString().trim());
+                homeref.child("Hobbies&Sports").child(AuctName).child("condition").setValue(txtCondition.getText().toString().trim());
+
                 Toast.makeText(getApplicationContext() , "Successfully Updated" , Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                 startActivity(displayIntent);

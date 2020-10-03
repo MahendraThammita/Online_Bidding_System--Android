@@ -155,7 +155,7 @@ public class HomeAndGarden extends AppCompatActivity {
                         adverticement.setDate(strDate);
 
 
-                        // DbRef.child("user").setValue(user);
+
                         String strNumber = idPrefix + String.valueOf(maxid + 1);
                         DbRef.child(String.valueOf(strNumber)).setValue(homeitem);
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
