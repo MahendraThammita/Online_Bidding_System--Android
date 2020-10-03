@@ -2,13 +2,17 @@ package com.example.online_bidding_system;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +33,7 @@ import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeAdapt
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeCard;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyAdapter;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,9 +68,15 @@ public class HomePage extends AppCompatActivity {
     List<HomeCard> HomeCards;
     HomeAdapter singleCard;
 
+    private DrawerLayout drawer;
+    private NavigationView navi;
+    private Toolbar primTool;
+
 
     public HomePage() {
     }
+
+
 
 
     public void FilterOnClick(Query query){
@@ -76,6 +87,7 @@ public class HomePage extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
 
                     String Title = (ds.child("title").getValue().toString());
                     int MaxBid =  Integer.parseInt(ds.child("maxBid").getValue().toString());
@@ -118,13 +130,13 @@ public class HomePage extends AppCompatActivity {
                     }
 
 
-                    Log.i("Difference" , "ADD No : " + MinDifference);
-                    Log.i("Difference" , "difference in calculated format : " + strCalculatedStrhOUR + ":" + strCalculatedStrhMin);
-
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
                     HomeCard my_Bid = new HomeCard(AucID , Title, MaxBid,duration);
-                    HomeCards.add(my_Bid);
+
+                    if(EndMin > 0) {
+                        HomeCards.add(my_Bid);
+                    }
                 }
                 if (HomeCards != null) {
 
@@ -150,6 +162,8 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+
 
 
 
@@ -186,7 +200,7 @@ public class HomePage extends AppCompatActivity {
 
 
 
-        home.setOnClickListener(new View.OnClickListener() {
+     /*   home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent homeIntent = new Intent(getApplicationContext(), Antiques_Edit.class);
@@ -217,7 +231,9 @@ public class HomePage extends AppCompatActivity {
                 Intent profIntent = new Intent(getApplicationContext(), myBids.class);
                 startActivity(profIntent);
             }
-        });
+        });*/
+
+
         addNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -233,7 +249,7 @@ public class HomePage extends AppCompatActivity {
 
         listView = this.findViewById(R.id.HomeCardsList);
         HomeCards = new ArrayList<>();
-        Query FilterHomeAds = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("status").equalTo("inactive");
+        Query FilterHomeAds = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("status").equalTo("active");
         final Query FilterAntiqueAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("Antiques");
         final Query FilterElectricsAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("Electronics");
         final Query FilterBookAds =  FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("type").equalTo("Books");
@@ -315,8 +331,55 @@ public class HomePage extends AppCompatActivity {
 
 
 
+        drawer = findViewById(R.id.DrwerLay);
+        navi = (NavigationView) findViewById(R.id.nav_view);
+        primTool = findViewById(R.id.primaryActbar);
 
-       antique.setOnClickListener(new View.OnClickListener() {
+        setSupportActionBar(primTool);
+
+
+        navi.bringToFront();
+        ActionBarDrawerToggle toggle1 = new ActionBarDrawerToggle(this , drawer , primTool , R.string.OpenDrawerDes , R.string.CloseDrawerDes);
+        drawer.addDrawerListener(toggle1);
+        toggle1.syncState();
+
+
+//        navi.setNavigationItemSelectedListener(this);
+
+
+        navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.Drawable_myBids:
+                        Intent in0 = new Intent(HomePage.this , myBids.class);
+                        startActivity(in0);
+                        break;
+                    case R.id.Drawable_myWins:
+                        Intent in1 = new Intent(HomePage.this , MyWins.class);
+                        startActivity(in1);
+                        break;
+                    case R.id.Drawable_ViewAuctions:
+                        Intent in2 = new Intent(HomePage.this ,MyAuctions.class);
+                        startActivity(in2);
+                        break;
+                    case R.id.Drawable_myAuctions:
+                        Intent in3 = new Intent(getApplicationContext() , HomePage.class);
+                        startActivity(in3);
+                        break;
+                    default:
+                        Intent in6 = new Intent(getApplicationContext() , MyAuctions.class);
+                        startActivity(in6);
+                }
+                return true;
+            }
+        });
+
+
+
+
+        antique.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

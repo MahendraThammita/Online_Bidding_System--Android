@@ -78,9 +78,11 @@ public class TimeCalculations {
         LocalDateTime endDateTime = calcFinalDateTimeInLDT(this.endTime , endDate);
 
         if (endDateTime.isBefore(this.currentTime) || endDateTime.isEqual(this.currentTime)) {
+            //Expired
             return true;
         }
         else
+            //Not Expired
             return false;
     }
 

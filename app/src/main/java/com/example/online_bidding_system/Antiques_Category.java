@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,6 +23,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeCard;
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.TimeCalculations;
 import com.example.online_bidding_system.auction;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -139,24 +142,31 @@ public class Antiques_Category extends AppCompatActivity{
                         SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
                         String strDate = dateFormat.format(myCal.getTime());
 
-                        adverticement.setDate(strDate);
-                        adverticement.setTitle(txtTitle.getText().toString().trim());
-                        adverticement.setPrice(txtPrice.getText().toString().trim());
-                        adverticement.setContact(txtContact.getText().toString().trim());
-                        adverticement.setDescription(txtDescription.getText().toString().trim());
-                        adverticement.setMaxBid("0");
-                        adverticement.setStatus("active");
-                        adverticement.setType("Antiques");
-                        adverticement.setSeller_ID("CUS1");
-                        add.setTime_period(period.getSelectedItem().toString());
-                        String strNumber= idPrefix+String.valueOf(maxid+1);
-                        DbRef.child(String.valueOf(strNumber)).setValue(add);
-                        DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
-                        Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
-                        clearControl();
-                        Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
-                        startActivity(displayIntent);
-                    }
+                       /* TimeCalculations timeCalculations = new TimeCalculations(strDate,strTime);
+                        boolean flag = timeCalculations.isExpired();*/
+
+                            adverticement.setDate(strDate);
+                            adverticement.setTitle(txtTitle.getText().toString().trim());
+                            adverticement.setPrice(txtPrice.getText().toString().trim());
+                            adverticement.setContact(txtContact.getText().toString().trim());
+                            adverticement.setDescription(txtDescription.getText().toString().trim());
+                            adverticement.setMaxBid("0");
+                            adverticement.setStatus("active");
+                            adverticement.setType("Antiques");
+                            adverticement.setSeller_ID("CUS1");
+                            add.setTime_period(period.getSelectedItem().toString());
+                            String strNumber = idPrefix + String.valueOf(maxid + 1);
+                            DbRef.child(String.valueOf(strNumber)).setValue(add);
+                            DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
+                            Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
+                            clearControl();
+                            Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                            startActivity(displayIntent);
+                        }
+
+
+
+
 
 
                 } catch (NumberFormatException e) {

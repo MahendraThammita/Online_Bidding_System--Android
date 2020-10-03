@@ -173,15 +173,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginLeft="30dp">
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:layout_gravity="center"
+                        android:layout_gravity="left"
                         android:gravity="center">
 
                         <TextView
@@ -193,7 +193,7 @@
                             android:gravity="center"
                             android:text="Current Highest Bid"
                             android:textAlignment="center"
-                            android:textSize="22sp">
+                            android:textSize="18sp">
 
                         </TextView>
 
@@ -215,22 +215,24 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="170dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:layout_gravity="right"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
                         <TextView
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_toRightOf="@+id/myBidCardImg"
                             android:drawableLeft="@drawable/money_mybid"
                             android:text="Starting Price"
-                            android:textSize="22sp"
-                            android:layout_gravity="center">
+                            android:textAlignment="center"
+                            android:textSize="18sp">
 
                         </TextView>
 
@@ -238,8 +240,8 @@
                             android:id="@+id/displayAuct_myBidVal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/myBidCardImg"
                             android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@+id/myBidCardImg"
                             android:text="2000.00 Rs"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="24sp"
