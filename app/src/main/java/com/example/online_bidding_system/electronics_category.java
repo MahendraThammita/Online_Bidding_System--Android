@@ -45,7 +45,7 @@ public class electronics_category extends AppCompatActivity {
     DatabaseReference fAuth1;
     FdeHelper fCat;
     long maxid=0;
-    String idPrefix="Fa";
+    String idPrefix="ELECT";
     private String userId;
 
     private ImageSwitcher imageIs;

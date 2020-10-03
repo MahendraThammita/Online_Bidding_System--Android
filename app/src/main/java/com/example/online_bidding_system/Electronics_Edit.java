@@ -26,10 +26,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class fashion_edit_page extends AppCompatActivity {
+public class Electronics_Edit extends AppCompatActivity {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
-    EditText editTitle,editPrice,editDuration,editTime,editDate,editContact,editMaterial,editDescription,editCondition,editSize;
+    EditText editBrand,editTitle,editPrice,editDuration,editTime,editDate,editContact,editDescription,editCondition;
     Button PublishNow, update, delete;
     DatabaseReference fAuth;
     DatabaseReference fAuth1;
@@ -38,7 +38,7 @@ public class fashion_edit_page extends AppCompatActivity {
     FdeHelper fCat;
     long maxid=0;
 
-    String idPrefix="DVD";
+    String idPrefix="ELECT";
     private ImageSwitcher imageIs;
     private Button preBtn,nxBtn, pickImgbtn;
     private ArrayList<Uri> imageUris;
@@ -60,19 +60,18 @@ public class fashion_edit_page extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fashion_edit_page);
-
+        setContentView(R.layout.activity_electronics__edit);
 
 
         editTitle = findViewById(R.id.setTitle);
+        editBrand = findViewById(R.id.setBrand);
         editPrice = findViewById(R.id.setPrice);
         editDate = findViewById(R.id.setDate);
         editTime = findViewById(R.id.setTime);
         editContact = findViewById(R.id.setContact);
         editCondition = findViewById(R.id.setCondition);
         editDescription = findViewById(R.id.setDescription);
-        editMaterial.findViewById(R.id.setMaterials);
-        editSize.findViewById(R.id.setSize);
+
         PublishNow = findViewById(R.id.publish_now);
         update = findViewById(R.id.Update);
         delete =  findViewById(R.id.Delete);
@@ -87,10 +86,10 @@ public class fashion_edit_page extends AppCompatActivity {
 
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
-        mFirebaseDatabase1 = mFirebaseInstance.getReference("FashionAndDesign");
+        mFirebaseDatabase1 = mFirebaseInstance.getReference("Electronics");
 
         fAuth = FirebaseDatabase.getInstance().getReference().child("Adverticement").child(AuctName);
-        fAuth1 = FirebaseDatabase.getInstance().getReference().child("FashionAndDesign").child(AuctName);
+        fAuth1 = FirebaseDatabase.getInstance().getReference().child("Electronics").child(AuctName);
 
 
         fAuth.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -102,8 +101,7 @@ public class fashion_edit_page extends AppCompatActivity {
                     editContact.setText(dataSnapshot.child("contact").getValue().toString());
                     editPrice.setText(dataSnapshot.child("price").getValue().toString());
                     editDescription.setText(dataSnapshot.child("description").getValue().toString());
-                    editMaterial.setText(dataSnapshot.child("material").getValue().toString());
-                    editSize.setText(dataSnapshot.child("size").getValue().toString());
+                    editBrand.setText(dataSnapshot.child("description").getValue().toString());
                     editCondition.setText(dataSnapshot.child("condition").getValue().toString());
                 } else
 
@@ -123,7 +121,7 @@ public class fashion_edit_page extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChildren()){
 
-                    editMaterial.setText(dataSnapshot.child("type").getValue().toString());
+                    editBrand.setText(dataSnapshot.child("type").getValue().toString());
 
                 }
                 else
@@ -145,7 +143,7 @@ public class fashion_edit_page extends AppCompatActivity {
                 String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
 
                 fAuth1 = FirebaseDatabase.getInstance().getReference().child("Adverticement").child(AuctName);
-                fAuth = FirebaseDatabase.getInstance().getReference().child("FashionAndDesign").child(AuctName);
+                fAuth = FirebaseDatabase.getInstance().getReference().child("Electronics").child(AuctName);
                 fAuth1.removeValue();
                 fAuth.removeValue();
                 Toast.makeText(getApplicationContext() , "Succesfully Deleated" , Toast.LENGTH_SHORT).show();
@@ -172,9 +170,8 @@ public class fashion_edit_page extends AppCompatActivity {
                 fAuth1.child("Adverticement").child(AuctName).child("date").setValue(editDate.getText().toString().trim());
                 fAuth1.child("Adverticement").child(AuctName).child("duration").setValue(editDuration.getText().toString().trim());
 
-                fAuth.child("FashionAndDesign").child(AuctName).child("type").setValue(editMaterial.getText().toString());
-                fAuth.child("FashionAndDesign").child(AuctName).child("type").setValue(editSize.getText().toString());
-                fAuth.child("FashionAndDesign").child(AuctName).child("type").setValue(editCondition.getText().toString());
+                fAuth.child("Electronics").child(AuctName).child("type").setValue(editBrand.getText().toString());
+                fAuth.child("Electronics").child(AuctName).child("type").setValue(editCondition.getText().toString());
 
                 Toast.makeText(getApplicationContext() , "Successfully Updated" , Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
@@ -218,7 +215,7 @@ public class fashion_edit_page extends AppCompatActivity {
                 }
 
                 else{
-                    Toast.makeText(fashion_edit_page.this,"Empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Electronics_Edit.this,"Empty",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -235,7 +232,7 @@ public class fashion_edit_page extends AppCompatActivity {
 
                 else{
 
-                    Toast.makeText(fashion_edit_page.this,"empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Electronics_Edit.this,"empty",Toast.LENGTH_SHORT).show();
                 }
             }
         }));
@@ -281,6 +278,9 @@ public class fashion_edit_page extends AppCompatActivity {
                 }
             }
         }
+
+
+
 
 
 

@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:fontFamily="sans-serif-black"
-        android:text="@string/fashiondtitle"
+        android:text="@string/dvdmovie"
         android:textSize="24sp" />
     <!-- Display selected images -->
 
@@ -136,39 +136,14 @@
 
             <!--EditText -->
             <EditText
-                android:id="@+id/setBrand"
+                android:id="@+id/setGenere"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
-                android:hint="Brand"
+                android:hint="Genre"
                 android:inputType="text" />
-
-            <!--EditText -->
-            <EditText
-                android:id="@+id/setMaterials"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-black"
-                android:hint="Material"
-                android:inputType="text" />
-
-
-            <!--EditText -->
-            <EditText
-                android:id="@+id/setSize"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-black"
-                android:hint="Size"
-                android:inputType="text" />
-
-
 
             <!--EditText -->
             <EditText
