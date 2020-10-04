@@ -2,11 +2,13 @@ package com.example.online_bidding_system;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,6 +22,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.TimeCalculations;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -91,6 +94,7 @@ public class Handmade_Category extends AppCompatActivity {
 
                 mFirebaseDatabase1.child(userId).setValue(add);
                 DbRef.addValueEventListener(new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists())
@@ -104,14 +108,15 @@ public class Handmade_Category extends AppCompatActivity {
                     }
                 });
             }
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 public void savedata(){
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(txtPrice.getText().toString()))
-                        Toast.makeText(getApplicationContext(), " Price Is Required!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), " Price Is Required!", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_LONG).show();
                     else {
                         adverticement.setTitle(txtTitle.getText().toString().trim());
                         adverticement.setPrice(txtPrice.getText().toString().trim());
@@ -124,32 +129,38 @@ public class Handmade_Category extends AppCompatActivity {
                         int day = dp.getDayOfMonth();
 
                         Calendar myCal = Calendar.getInstance();
-                        myCal.set(year , month , day);
+                        myCal.set(year, month, day);
 
                         SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
                         String strDate = dateFormat.format(myCal.getTime());
-                        adverticement.setDate(strDate);
 
-                        adverticement.setDate(strDate);
-                        adverticement.setContact(txtContact.getText().toString().trim());
-                        add.setMaterials(txtMaterials.getText().toString().trim());
-                        adverticement.setDescription(txtDescription.getText().toString().trim());
-                        adverticement.setMaxBid("0");
-                        adverticement.setStatus("active");
-                        adverticement.setType("HandMades");
-                        adverticement.setSeller_ID("CUS1");
-                        // DbRef.child("user").setValue(user);
-                        String strNumber= idPrefix+String.valueOf(maxid+1);
-                        DbRef.child(String.valueOf(strNumber)).setValue(add);
-                        DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
-                        Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
-                        clearControl();
-                        Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
-                        startActivity(displayIntent);
+                        TimeCalculations timeCalculations = new TimeCalculations(strTime, strDate);
+                        boolean flag = timeCalculations.isExpired();
+                        if (flag == true) {
+                            clearControl();
+                            Toast.makeText(getApplicationContext(), "Please Enter a valid date", Toast.LENGTH_LONG).show();
+                        } else {
+                            adverticement.setDate(strDate);
+                            adverticement.setDate(strDate);
+                            adverticement.setContact(txtContact.getText().toString().trim());
+                            add.setMaterials(txtMaterials.getText().toString().trim());
+                            adverticement.setDescription(txtDescription.getText().toString().trim());
+                            adverticement.setMaxBid("0");
+                            adverticement.setStatus("active");
+                            adverticement.setType("HandMades");
+                            adverticement.setSeller_ID("CUS1");
+                            // DbRef.child("user").setValue(user);
+                            String strNumber = idPrefix + String.valueOf(maxid + 1);
+                            DbRef.child(String.valueOf(strNumber)).setValue(add);
+                            DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
+                            Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
+                            clearControl();
+                            Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                            startActivity(displayIntent);
+
+                        }
 
                     }
-
-
                 } catch (NumberFormatException e) {
 
                     Toast.makeText(getApplicationContext(), "Something went Wrong", Toast.LENGTH_SHORT).show();

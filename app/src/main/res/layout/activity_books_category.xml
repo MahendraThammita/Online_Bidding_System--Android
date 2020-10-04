@@ -21,18 +21,22 @@
         android:layout_alignBottom="@+id/primaryActbar"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/books"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimaryDark"
+        android:padding="10dip"
+        android:gravity="center"
         android:fontFamily="sans-serif-black"
         android:textSize="24sp"
-        android:layout_margin="20dp"
         />
     <!-- Display selected images -->
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/books_back">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,6 +87,9 @@
                 android:layout_width="360dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
+                android:background="@drawable/textview_border"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:gravity="center"
                 android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
@@ -97,6 +104,9 @@
                 android:layout_width="360dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
+                android:background="@drawable/textview_border"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:gravity="center"
                 android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
@@ -136,6 +146,9 @@
                 android:layout_width="360dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
+                android:background="@drawable/textview_border"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:gravity="center"
                 android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
@@ -149,6 +162,9 @@
                 android:layout_width="360dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
+                android:background="@drawable/textview_border"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:gravity="center"
                 android:layout_margin="10dp"
                 android:fontFamily="sans-serif-black"
@@ -161,6 +177,9 @@
                 android:layout_width="360dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
+                android:background="@drawable/textview_border"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:gravity="center"
                 android:layout_margin="10dp"
                 android:fontFamily="sans-serif-black"
