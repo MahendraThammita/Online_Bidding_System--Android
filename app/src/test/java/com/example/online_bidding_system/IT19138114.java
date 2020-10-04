@@ -15,7 +15,6 @@ public class IT19138114 {
         antiques_edit = new Antiques_Edit();
     }
 
-    //IT19106502- using unit testing.
     @Test
     public void testValidateDate(){
         boolean result = antiques_edit.ValidateDate("2020-10-12");
