@@ -82,9 +82,11 @@ public class DVDnMovies_category extends AppCompatActivity {
         Start_Price  =      findViewById(R.id.setPrice);
         Genere        =      findViewById(R.id.setGenere);
 
-        //ged datapicker value
+
+        //DatePicker Value
         dp = findViewById(R.id.setDate);
-        //get Timepicker value
+
+        //TimePicker Value
         tp = findViewById(R.id.setTime);
 
 
