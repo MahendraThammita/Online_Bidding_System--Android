@@ -101,10 +101,10 @@ public class fragmentMyAuctions extends Fragment {
                     String endDate = ds.child("date").getValue().toString();
                     String Type = ds.child("type").getValue().toString();
                     String Title = ds.child("title").getValue().toString();
+                    String status = ds.child("status").getValue().toString();
                     String ADid = ds.getKey().toString();
                     int MaxBid = Integer.valueOf(ds.child("maxBid").getValue().toString());
 
-                    Log.i("orderByValues" , "ADD No : " + ADid);
 
                     LocalDate datPart = LocalDate.parse(endDate);
                     LocalTime timePart = LocalTime.parse(Duration);
@@ -112,7 +112,7 @@ public class fragmentMyAuctions extends Fragment {
                     String finalDate = contactDate.toString();
 
                     MyBidsCard myAuction = new MyBidsCard();
-                    myAuction.setMyAuctionCardValues(Title , Duration , finalDate , MaxBid , ADid , Type);
+                    myAuction.setMyAuctionCardValues(Title , Duration , finalDate , MaxBid , ADid , Type , status);
                     myAuctionCards.add(myAuction);
                 }
                 if(myAuctionCards != null){
