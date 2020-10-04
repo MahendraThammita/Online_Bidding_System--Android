@@ -320,7 +320,7 @@ public class HomePage extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.Drawable_myBids:
-                        Intent in0 = new Intent(HomePage.this , myBids.class);
+                        Intent in0 = new Intent(HomePage.this , TabedAuctions.class);
                         startActivity(in0);
                         break;
                     case R.id.Drawable_myWins:
@@ -332,7 +332,7 @@ public class HomePage extends AppCompatActivity {
                         startActivity(in2);
                         break;
                     case R.id.Drawable_myAuctions:
-                        Intent in3 = new Intent(getApplicationContext() , HomePage.class);
+                        Intent in3 = new Intent(getApplicationContext() , Draft_Auctions.class);
                         startActivity(in3);
                         break;
                     default:

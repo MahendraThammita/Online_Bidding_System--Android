@@ -74,6 +74,17 @@ public class TimeCalculations {
         return durationInFormat;
     };
 
+    public boolean isDeleteable(){
+        LocalDateTime endTime = this.calcFinalDateTimeInLDT(this.endTime , this.endDate);
+        long difInMinutes = ChronoUnit.MINUTES.between(currentTime , endTime);
+        if(difInMinutes >= 300){
+            //Can be deleted
+            return true;
+        }
+        else
+            return false;
+    }
+
     public boolean isExpired(){
         LocalDateTime endDateTime = calcFinalDateTimeInLDT(this.endTime , endDate);
 

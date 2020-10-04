@@ -124,10 +124,8 @@ public class MyBidsFragment extends Fragment {
                     myBidsCards.add(my_Bid);
                 }
                 if(myBidsCards != null){
-                    Log.i("ShowData" , "data Returned to list" + Arrays.toString(myBidsCards.toArray()));
                     singleCard = new MyAdapter(getActivity() , R.layout.my_bid_card , myBidsCards );
                     bidList.setAdapter(singleCard);
-                    Log.i("ShowData" , "data Returned setAdapter called");
                     singleCard.notifyDataSetChanged();
                 }
 
@@ -153,15 +151,6 @@ public class MyBidsFragment extends Fragment {
         });
 
 
-
-//        ArrayAdapter arradpt = new ArrayAdapter<String>(getActivity(), R.layout.my_bid_card , R.id.myBidCardTitle, items);
-//          Log.i("ShowData" , "data Returned to list" + Arrays.toString(myBidsCards.toArray()));
-
-//
-//        bidList.setAdapter(arradpt);
-//        return view;
-
-        //MyAdapter singleCard = new MyAdapter(getActivity() , items , times , maxbid , mybid , img);
 
         bidList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

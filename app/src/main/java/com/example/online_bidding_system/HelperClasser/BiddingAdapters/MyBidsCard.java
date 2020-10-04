@@ -56,13 +56,14 @@ public class MyBidsCard {
         this.seller_id = seller_id;
     }
 
-    public void setMyAuctionCardValues(String Title , String duration, String endDate, int maxBid, String ADid, String Type){
+    public void setMyAuctionCardValues(String Title, String duration, String endDate, int maxBid, String ADid, String Type, String status){
         this.Title = Title;
         this.Duration = duration;
         this.endDate = endDate;
         this.MaxBid = maxBid;
         this.auctionId = ADid;
         this.Type = Type;
+        this.status = status;
     }
 
     public void setDraftAuctionsValues(String Title , String duration, String endDate, int maxBid, String ADid, String Type){

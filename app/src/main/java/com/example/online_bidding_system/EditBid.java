@@ -1,6 +1,7 @@
 package com.example.online_bidding_system;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -9,8 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.BidSwiperAdapter;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.BidSwiperClass;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.TimeCalculations;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
@@ -52,6 +56,7 @@ public class EditBid extends AppCompatActivity {
 
         Intent recieverIntent = getIntent();
         final String auction_Id = recieverIntent.getStringExtra("AUCT_ID");
+        Log.i("Check Delete" , "Entered to editBid Page" + auction_Id);
 
         bidName = findViewById(R.id.editBid_ItemName);
         bidDes = findViewById(R.id.editBid_BidDescription);
@@ -82,10 +87,12 @@ public class EditBid extends AppCompatActivity {
 
                     MyBidsCard myBidsCard = new MyBidsCard(ADid , contact , des , Duration , Title , Type , endDate , sellerId , status , MaxBid , StartPrice);
 
+                    Log.i("Check Delete" , "Entered to first onDataChange");
+
                     bidName.setText(myBidsCard.getTitle());
                     bidDes.setText(myBidsCard.getDescription());
                     bidEndsAt.setText(myBidsCard.getEndDate() + " " + myBidsCard.getDuration());
-                    bidMaxBid.setText(myBidsCard.getMaxBid());
+                    bidMaxBid.setText(String.valueOf(myBidsCard.getMaxBid()) + ".00 Rs");
                     getUserBidValues(myBidsCard);
 
                 }
@@ -132,6 +139,7 @@ public class EditBid extends AppCompatActivity {
                                 else {
                                     editBidMainRef.child("maxBid").setValue(newBid);
                                     editBidMainRef.child("precious_Bid").setValue(oldMax);
+                                    updateUserBidchild(myBidsCard , newBid);
                                 }
 
                             }
@@ -146,6 +154,48 @@ public class EditBid extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+
+        btnDeleteBid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                recieverRef = FirebaseDatabase.getInstance().getReference("User_Bids").child("CUS1").child(auction_Id);
+                recieverRef.addValueEventListener(new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChildren()){
+                            String Duration = dataSnapshot.child("duration").getValue().toString();
+                            String endDate = dataSnapshot.child("date").getValue().toString();
+                            String Type = dataSnapshot.child("type").getValue().toString();
+                            String Title = dataSnapshot.child("title").getValue().toString();
+                            String ADid = dataSnapshot.getKey().toString();
+                            String contact = dataSnapshot.child("contact").getValue().toString();
+                            String des = dataSnapshot.child("description").getValue().toString();
+                            String sellerId =dataSnapshot.child("seller_ID").getValue().toString();
+                            String status =dataSnapshot.child("status").getValue().toString();
+                            int MaxBid = Integer.valueOf(dataSnapshot.child("maxBid").getValue().toString());
+                            int StartPrice = Integer.valueOf(dataSnapshot.child("price").getValue().toString());
+
+                            TimeCalculations timeCalculate = new TimeCalculations(Duration , endDate);
+                            if(timeCalculate.isDeleteable()){
+                                recieverRef.removeValue();
+                                Intent intentTotab = new Intent(getApplicationContext() , TabedAuctions.class);
+                                startActivity(intentTotab);
+                            }
+                            else
+                                Toast.makeText(getApplicationContext() , "You Are not allowed to delete  your bid in lsst five hours" , Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
             }
         });
 
@@ -204,6 +254,28 @@ public class EditBid extends AppCompatActivity {
         
     }
 
+    private void updateUserBidchild(final MyBidsCard myBidsCard, final int newBid) {
+        final DatabaseReference refToUserBids = FirebaseDatabase.getInstance().getReference("User_Bids").child("CUS1").child(myBidsCard.getAuctionId());
+        refToUserBids.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()){
+                    refToUserBids.child("maxBid").setValue(newBid);
+                    refToUserBids.child("mybid").setValue(newBid);
+                    refToUserBids.child("precious_Bid").setValue(myBidsCard.getMaxBid());
+                    Toast.makeText(getApplicationContext() , "Your Bid Is Updated Successfully" , Toast.LENGTH_SHORT).show();
+                    Intent toTabed = new Intent(getApplicationContext() , TabedAuctions.class);
+                    startActivity(toTabed);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void getUserBidValues(MyBidsCard myBidsCard) {
         DatabaseReference useBidReference = FirebaseDatabase.getInstance().getReference("User_Bids").child("CUS1").child(myBidsCard.getAuctionId());
 
@@ -213,7 +285,7 @@ public class EditBid extends AppCompatActivity {
                 if(dataSnapshot.hasChildren()){
                     String userBid = dataSnapshot.child("mybid").getValue().toString();
 
-                    myBidVal.setText(userBid);
+                    myBidVal.setText(userBid + ".00 Rs");
                 }
             }
 
@@ -231,7 +303,7 @@ public class EditBid extends AppCompatActivity {
 
         ArrayList<BidSwiperClass> bidsimgAdapter = new ArrayList<>();
 
-        bidsimgAdapter.add(new BidSwiperClass(R.drawable.phone));
+        bidsimgAdapter.add(new BidSwiperClass(R.drawable.fashion1));
         bidsimgAdapter.add(new BidSwiperClass(R.drawable.rings));
         bidsimgAdapter.add(new BidSwiperClass(R.drawable.books));
         bidsimgAdapter.add(new BidSwiperClass(R.drawable.phone));

@@ -1,6 +1,7 @@
 package com.example.online_bidding_system.HelperClasser.BiddingAdapters;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.example.online_bidding_system.R;
 
@@ -20,7 +22,7 @@ import java.util.List;
 public class MyAdapter extends ArrayAdapter<MyBidsCard> {
         Context context;
         List<MyBidsCard> myBidList;
-
+        int[] imgs = {R.drawable.leadguitar , R.drawable.dreamcatcher , R.drawable.auction1 , R.drawable.auction3 , R.drawable.cat_book , R.drawable.cat_dvd , R.drawable.cat_fashion , R.drawable.cat_garden , R.drawable.cat_handmade , R.drawable.cat_hobby , R.drawable.cat_handmade };
 
 
     public MyAdapter(@NonNull Context context, int resource, List<MyBidsCard> myBidList) {
@@ -30,6 +32,7 @@ public class MyAdapter extends ArrayAdapter<MyBidsCard> {
     }
 
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -46,12 +49,15 @@ public class MyAdapter extends ArrayAdapter<MyBidsCard> {
 
 
             MyBidsCard bid = myBidList.get(position);
+
+            TimeCalculations timeCalculations = new TimeCalculations(bid.getDuration() , bid.getEndDate());
+            String remTime = timeCalculations.calcFinalDateTime();
+
             bidTitle.setText(bid.getTitle());
             cardMaxBid.setText(bid.getMaxBid() + " Rs");
             cardMyBid.setText(bid.getMybid() + " Rs");
-            //cardMyBid.setText(String.valueOf(bid.getMybid()));
-            //setting int values to text fields can caused to throw Resources$NotFoundException
-            //Use above syntax in those scenarios
+            cardImg.setImageResource(imgs[position]);
+            cardTime.setText(remTime);
 
 //           Log.i("ShowData" , "data Returned to adapter values" + bid.getMybid());
 

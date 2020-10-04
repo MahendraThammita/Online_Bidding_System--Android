@@ -1,6 +1,7 @@
 package com.example.online_bidding_system.HelperClasser.BiddingAdapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class DraftAdapter extends ArrayAdapter<MyBidsCard> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         //return super.getView(position, convertView, parent);
+        Log.i("ErrorTAg" , "value came to adpter");
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View Draftcard = layoutInflater.inflate(R.layout.draft_auction_card , parent , false);

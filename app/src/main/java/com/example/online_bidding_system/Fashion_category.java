@@ -39,7 +39,7 @@ public class Fashion_category extends AppCompatActivity {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
 
-    EditText Brand,Condition,Material,Size,ContactNo,Description,Duration,Title,Type,Start_Price;
+    EditText Brand,Condition,Material,Size,ContactNo,Description,Title,Start_Price;
     Button publishNow,publishLater;
     DatabaseReference fAuth;
     DatabaseReference fAuth1;
@@ -83,9 +83,10 @@ public class Fashion_category extends AppCompatActivity {
         Title        =      findViewById(R.id.setTitle);
         Start_Price  =      findViewById(R.id.setPrice);
 
-        //ged datapicker value
+        //DatePicker Value
         dp = findViewById(R.id.setDate);
-        //get Timepicker value
+
+        //TimePicker Value
         tp = findViewById(R.id.setTime);
 
 

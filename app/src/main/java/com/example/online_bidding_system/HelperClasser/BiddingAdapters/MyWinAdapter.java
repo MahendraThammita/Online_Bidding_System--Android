@@ -19,6 +19,7 @@ public class MyWinAdapter extends ArrayAdapter<MyBidsCard> {
 
     Context context;
     List<MyBidsCard> cardList;
+    int[] imgs = {R.drawable.books , R.drawable.dreamcatcher , R.drawable.auction1 , R.drawable.auction3 , R.drawable.cat_book , R.drawable.cat_dvd , R.drawable.cat_fashion , R.drawable.cat_garden , R.drawable.cat_handmade , R.drawable.cat_hobby , R.drawable.cat_handmade };
 
     public MyWinAdapter(@NonNull Context context, int resource, @NonNull List<MyBidsCard> objects) {
         super(context, resource, objects);
@@ -49,6 +50,7 @@ public class MyWinAdapter extends ArrayAdapter<MyBidsCard> {
         contNo.setText(winRow.getContactNo());
         sellerId.setText(winRow.getSeller_id());
         endingDate.setText(winRow.getEndDate());
+        mywinImg.setImageResource(imgs[position]);
 
         return winCard;
     }

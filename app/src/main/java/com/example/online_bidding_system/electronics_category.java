@@ -82,9 +82,10 @@ public class electronics_category extends AppCompatActivity {
         Title        =      findViewById(R.id.setTitle);
         Start_Price  =      findViewById(R.id.setPrice);
 
-        //ged datapicker value
+        //DatePicker Value
         dp = findViewById(R.id.setDate);
-        //get Timepicker value
+
+        //TimePicker Value
         tp = findViewById(R.id.setTime);
 
 
