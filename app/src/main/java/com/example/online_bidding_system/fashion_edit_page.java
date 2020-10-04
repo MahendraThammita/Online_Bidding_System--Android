@@ -172,9 +172,9 @@ public class fashion_edit_page extends AppCompatActivity {
                 fAuth1.child("Adverticement").child(AuctName).child("date").setValue(editDate.getText().toString().trim());
                 fAuth1.child("Adverticement").child(AuctName).child("duration").setValue(editDuration.getText().toString().trim());
 
-                fAuth.child("FashionAndDesign").child(AuctName).child("type").setValue(editMaterial.getText().toString());
-                fAuth.child("FashionAndDesign").child(AuctName).child("type").setValue(editSize.getText().toString());
-                fAuth.child("FashionAndDesign").child(AuctName).child("type").setValue(editCondition.getText().toString());
+                fAuth.child("FashionAndDesign").child(AuctName).child("material").setValue(editMaterial.getText().toString());
+                fAuth.child("FashionAndDesign").child(AuctName).child("size").setValue(editSize.getText().toString());
+                fAuth.child("FashionAndDesign").child(AuctName).child("condition").setValue(editCondition.getText().toString());
 
                 Toast.makeText(getApplicationContext() , "Successfully Updated" , Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);

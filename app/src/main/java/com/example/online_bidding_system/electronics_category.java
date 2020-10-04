@@ -39,7 +39,7 @@ public class electronics_category extends AppCompatActivity {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
 
-    EditText Brand,Condition,Material,Size,ContactNo,Description,Duration,Title,Type,Start_Price;
+    EditText Brand,Condition,Size,ContactNo,Description,Title,Start_Price;
     Button publishNow,publishLater;
     DatabaseReference fAuth;
     DatabaseReference fAuth1;
