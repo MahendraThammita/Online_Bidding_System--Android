@@ -22,12 +22,15 @@
         android:layout_alignBottom="@+id/primaryActbar"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/antiques"
+        android:background="@color/colorPrimaryDark"
+        android:padding="10dip"
+        android:gravity="center"
+        android:textColor="@color/white"
         android:fontFamily="sans-serif-black"
         android:textSize="24sp"
-        android:layout_margin="20dp"
         />
     <!-- Display selected images -->
 
@@ -35,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
+        android:background="@drawable/pattern2"
         >
 
 
@@ -92,10 +96,10 @@
                 android:layout_height="55dp"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:layout_margin="10dp"
                 android:background="@drawable/textview_border"
-                android:textColorHint="@color/white"
-
                 android:hint="Title"
                 android:inputType="text" />
 
@@ -105,8 +109,6 @@
                 android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/textview_border"
-                android:textColorHint="@color/white"
-
                 android:layout_margin="12dp"
                 />
 
@@ -117,12 +119,12 @@
                 android:layout_width="360dp"
                 android:layout_height="55dp"
                 android:background="@drawable/textview_border"
-                android:textColorHint="@color/white"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-black"
                 android:hint="Starting at"
                 android:inputType="numberDecimal" />
 
@@ -163,11 +165,11 @@
                 android:layout_width="360dp"
                 android:layout_height="55dp"
                 android:background="@drawable/textview_border"
-                android:textColorHint="@color/white"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:layout_margin="10dp"
-                android:fontFamily="sans-serif-black"
                 android:hint="Contact"
                 android:inputType="phone" />
 
@@ -180,9 +182,10 @@
                 android:layout_width="360dp"
                 android:layout_height="55dp"
                 android:background="@drawable/textview_border"
-                android:textColorHint="@color/white"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:layout_margin="10dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Description"
