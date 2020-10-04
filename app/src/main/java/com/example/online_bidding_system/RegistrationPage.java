@@ -105,11 +105,7 @@ public class RegistrationPage extends AppCompatActivity {
                     }
                 }
 
-                private boolean ValidateNIC(String nic){
-                    if (!nic.trim().matches("^[0-9]{9}[vVxX]$"))
-                        return false;
-                    return true;
-                }
+
 
 
 
@@ -122,4 +118,11 @@ public class RegistrationPage extends AppCompatActivity {
             }
 
 
-        });}}
+        });}
+
+    public boolean ValidateNIC(String nic){
+        if (!nic.trim().matches("^[0-9]{9}[vVxX]$"))
+            return false;
+        return true;
+    }
+}
