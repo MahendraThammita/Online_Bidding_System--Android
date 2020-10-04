@@ -34,7 +34,7 @@ public class Handmade_Category extends AppCompatActivity {
 
     EditText txtTitle,txtPrice,txtDuration,txtContact,txtMaterials,txtDescription;
     Spinner period;
-    Button PublishNow;
+    Button PublishNow,PublisLater;
     DatabaseReference DbRef;
     DatabaseReference DbRef1;
     private DatabaseReference mFirebaseDatabase;
@@ -43,7 +43,7 @@ public class Handmade_Category extends AppCompatActivity {
     Adverticement adverticement;
     auction add;
     long maxid=0;
-    String idPrefix="AN";
+    String idPrefix="HM";
     private ImageSwitcher imageIs;
     private Button preBtn,nxBtn, pickImgbtn;
     private  ArrayList<Uri> imageUris;
@@ -71,6 +71,7 @@ public class Handmade_Category extends AppCompatActivity {
         txtMaterials = findViewById(R.id.setMaterials);
         txtDescription = findViewById(R.id.setDescription);
         PublishNow = findViewById(R.id.publish_now);
+        PublisLater = findViewById(R.id.publish_later);
 
         add = new auction();
         adverticement=new  Adverticement();
@@ -104,6 +105,98 @@ public class Handmade_Category extends AppCompatActivity {
                 });
             }
                 public void savedata(){
+                try {
+                    if (TextUtils.isEmpty(txtTitle.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
+                    else if (TextUtils.isEmpty(txtPrice.getText().toString()))
+                        Toast.makeText(getApplicationContext(), " Price Is Required!", Toast.LENGTH_SHORT).show();
+                    else if (TextUtils.isEmpty(txtContact.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
+                    else {
+                        adverticement.setTitle(txtTitle.getText().toString().trim());
+                        adverticement.setPrice(txtPrice.getText().toString().trim());
+                        //set timepicker value
+                        String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
+                        adverticement.setDuration(strTime);
+                        //set datapicker value
+                        int year = dp.getYear();
+                        int month = dp.getMonth();
+                        int day = dp.getDayOfMonth();
+
+                        Calendar myCal = Calendar.getInstance();
+                        myCal.set(year , month , day);
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+                        String strDate = dateFormat.format(myCal.getTime());
+                        adverticement.setDate(strDate);
+
+                        adverticement.setDate(strDate);
+                        adverticement.setContact(txtContact.getText().toString().trim());
+                        add.setMaterials(txtMaterials.getText().toString().trim());
+                        adverticement.setDescription(txtDescription.getText().toString().trim());
+                        adverticement.setMaxBid("0");
+                        adverticement.setStatus("active");
+                        adverticement.setType("HandMades");
+                        adverticement.setSeller_ID("CUS1");
+                        // DbRef.child("user").setValue(user);
+                        String strNumber= idPrefix+String.valueOf(maxid+1);
+                        DbRef.child(String.valueOf(strNumber)).setValue(add);
+                        DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
+                        Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
+                        clearControl();
+                        Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                        startActivity(displayIntent);
+
+                    }
+
+
+                } catch (NumberFormatException e) {
+
+                    Toast.makeText(getApplicationContext(), "Something went Wrong", Toast.LENGTH_SHORT).show();
+
+
+                }
+            }
+
+
+
+
+            public void clearControl() {
+                txtTitle.setText("");
+                txtPrice.setText("");
+                txtContact.setText("");
+                txtMaterials.setText("");
+                txtDescription.setText("");
+            }
+
+
+        });
+
+
+        PublisLater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DbRef = FirebaseDatabase.getInstance().getReference().child("HandMades");
+                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                userId = mFirebaseDatabase1.push().getKey();
+                mFirebaseDatabase.child(userId).setValue(adverticement);
+
+                mFirebaseDatabase1.child(userId).setValue(add);
+                DbRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists())
+                            maxid = (dataSnapshot.getChildrenCount());
+                        savedata();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+            public void savedata(){
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
@@ -170,6 +263,8 @@ public class Handmade_Category extends AppCompatActivity {
 
 
         });
+
+
 
         imageIs = findViewById(R.id.imageIs);
         preBtn = findViewById(R.id.preButton);

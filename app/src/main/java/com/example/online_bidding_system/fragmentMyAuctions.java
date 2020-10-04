@@ -87,7 +87,7 @@ public class fragmentMyAuctions extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_auctions, container, false);
         //bySellerRef = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("seller_id").equalTo("CUS2");
-        Query bySellerQuery = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("seller_ID").equalTo("CUS2");
+        Query bySellerQuery = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("seller_ID").equalTo("CUS1");
 
         myAuctionCards = new ArrayList<>();
         auctList = view.findViewById(R.id.AuctionCardsList);
