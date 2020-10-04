@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class DVDnMovies_Edit extends AppCompatActivity {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
-    EditText editTitle,editPrice,editDuration,editTime,editDate,editContact,editGenre,editDescription,editCondition;
+    EditText editTitle,editPrice,editDuration,editTime,editDate,editContact,editGenere,editDescription,editCondition;
     Button PublishNow, update, delete;
     DatabaseReference fAuth;
     DatabaseReference fAuth1;
@@ -71,7 +71,7 @@ public class DVDnMovies_Edit extends AppCompatActivity {
         editContact = findViewById(R.id.setContact);
         editCondition = findViewById(R.id.setCondition);
         editDescription = findViewById(R.id.setDescription);
-        editGenre.findViewById(R.id.setGenere);
+        editGenere.findViewById(R.id.setGenere);
         PublishNow = findViewById(R.id.publish_now);
         update = findViewById(R.id.Update);
         delete =  findViewById(R.id.Delete);
@@ -101,7 +101,7 @@ public class DVDnMovies_Edit extends AppCompatActivity {
                     editContact.setText(dataSnapshot.child("contact").getValue().toString());
                     editPrice.setText(dataSnapshot.child("price").getValue().toString());
                     editDescription.setText(dataSnapshot.child("description").getValue().toString());
-                    editGenre.setText(dataSnapshot.child("genere").getValue().toString());
+                    editGenere.setText(dataSnapshot.child("genere").getValue().toString());
                     editCondition.setText(dataSnapshot.child("condition").getValue().toString());
                 } else
 
@@ -121,7 +121,7 @@ public class DVDnMovies_Edit extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChildren()){
 
-                    editGenre.setText(dataSnapshot.child("type").getValue().toString());
+                    editGenere.setText(dataSnapshot.child("type").getValue().toString());
 
                 }
                 else
@@ -170,7 +170,7 @@ public class DVDnMovies_Edit extends AppCompatActivity {
                 fAuth1.child("Adverticement").child(AuctName).child("date").setValue(editDate.getText().toString().trim());
                 fAuth1.child("Adverticement").child(AuctName).child("duration").setValue(editDuration.getText().toString().trim());
 
-                fAuth.child("DVDandMovies").child(AuctName).child("genere").setValue(editGenre.getText().toString());
+                fAuth.child("DVDandMovies").child(AuctName).child("genere").setValue(editGenere.getText().toString());
                 fAuth.child("DVDandMovies").child(AuctName).child("condition").setValue(editCondition.getText().toString());
 
                 Toast.makeText(getApplicationContext() , "Successfully Updated" , Toast.LENGTH_SHORT).show();
