@@ -1,5 +1,6 @@
 package com.example.online_bidding_system;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,8 +11,12 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
-    @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
-    }
+  private Antiques_Category antiques_category;
+  @Before
+    public void setup(){
+
+      antiques_category = new Antiques_Category();
+  }
+
+
 }

@@ -201,41 +201,6 @@ public class HomePage extends AppCompatActivity {
 
 
 
-
-     /*   home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext(), Antiques_Edit.class);
-                startActivity(homeIntent);
-            }
-        });
-
-        bids.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext(), HomeAndGardenEditpage.class);
-                startActivity(homeIntent);
-            }
-        });
-
-
-        msg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent msgintent = new Intent(getApplicationContext(), HomeAndGardenEditpage.class);
-                startActivity(msgintent);
-            }
-        });
-
-        profBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent profIntent = new Intent(getApplicationContext(), myBids.class);
-                startActivity(profIntent);
-            }
-        });*/
-
-
         addNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -359,7 +324,7 @@ public class HomePage extends AppCompatActivity {
                         startActivity(in0);
                         break;
                     case R.id.Drawable_myWins:
-                        Intent in1 = new Intent(HomePage.this , RegistrationPage.class);
+                        Intent in1 = new Intent(HomePage.this , Antiques_Edit.class);
                         startActivity(in1);
                         break;
                     case R.id.Drawable_ViewAuctions:

@@ -148,6 +148,7 @@ public class Antiques_Category extends AppCompatActivity{
 
                         TimeCalculations timeCalculations = new TimeCalculations(strTime, strDate);
                         boolean flag = timeCalculations.isExpired();
+
                         if (flag == true) {
                             clearControl();
                             Toast.makeText(getApplicationContext(), "Please Enter a valid date", Toast.LENGTH_LONG).show();
