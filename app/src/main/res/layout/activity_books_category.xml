@@ -21,18 +21,22 @@
         android:layout_alignBottom="@+id/primaryActbar"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/books"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimaryDark"
+        android:padding="10dip"
+        android:gravity="center"
         android:fontFamily="sans-serif-black"
         android:textSize="24sp"
-        android:layout_margin="20dp"
         />
     <!-- Display selected images -->
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/books_back">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,10 +84,14 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:background="@drawable/textview_border"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:gravity="center"
+                android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Title"
@@ -93,10 +101,14 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:background="@drawable/textview_border"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:gravity="center"
+                android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Starting at"
@@ -131,10 +143,14 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setContact"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:background="@drawable/textview_border"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:gravity="center"
+                android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Contact"
@@ -143,10 +159,14 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="20dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:background="@drawable/textview_border"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:gravity="center"
+                android:layout_margin="10dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Type"
                 android:inputType="text" />
@@ -154,11 +174,14 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_width="360dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:background="@drawable/textview_border"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:gravity="center"
-                android:layout_marginBottom="20dp"
+                android:layout_margin="10dp"
                 android:fontFamily="sans-serif-black"
                 android:hint="Description"
                 android:inputType="text" />

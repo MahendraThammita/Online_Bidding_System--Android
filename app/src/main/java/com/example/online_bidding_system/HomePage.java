@@ -359,7 +359,7 @@ public class HomePage extends AppCompatActivity {
                         startActivity(in0);
                         break;
                     case R.id.Drawable_myWins:
-                        Intent in1 = new Intent(HomePage.this , MyWins.class);
+                        Intent in1 = new Intent(HomePage.this , RegistrationPage.class);
                         startActivity(in1);
                         break;
                     case R.id.Drawable_ViewAuctions:

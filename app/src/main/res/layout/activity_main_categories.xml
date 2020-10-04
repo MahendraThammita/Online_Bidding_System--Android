@@ -19,7 +19,7 @@
 
         <include
             android:id="@+id/profActionbar"
-            layout="@layout/secoundery_actionbar"
+            layout="@layout/primary_actionbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/primaryActbar" />

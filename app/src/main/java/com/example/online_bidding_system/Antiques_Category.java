@@ -2,12 +2,14 @@ package com.example.online_bidding_system;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -102,6 +104,7 @@ public class Antiques_Category extends AppCompatActivity{
 
                 mFirebaseDatabase1.child(AdId).setValue(add);
                 DbRef.addValueEventListener(new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists())
@@ -116,6 +119,7 @@ public class Antiques_Category extends AppCompatActivity{
                 });
             }
 
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 public void savedata(){
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
@@ -129,7 +133,7 @@ public class Antiques_Category extends AppCompatActivity{
                         String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
                         adverticement.setDuration(strTime);
 
-                       // String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                        // String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
                         //adverticement.setDate(strDate);
 
                         int year = dp.getYear();
@@ -137,14 +141,19 @@ public class Antiques_Category extends AppCompatActivity{
                         int day = dp.getDayOfMonth();
 
                         Calendar myCal = Calendar.getInstance();
-                        myCal.set(year , month , day);
+                        myCal.set(year, month, day);
 
                         SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
                         String strDate = dateFormat.format(myCal.getTime());
 
-                       /* TimeCalculations timeCalculations = new TimeCalculations(strDate,strTime);
-                        boolean flag = timeCalculations.isExpired();*/
+                        TimeCalculations timeCalculations = new TimeCalculations(strTime, strDate);
+                        boolean flag = timeCalculations.isExpired();
+                        if (flag == true) {
+                            clearControl();
+                            Toast.makeText(getApplicationContext(), "Please Enter a valid date", Toast.LENGTH_LONG).show();
+                        }
 
+                        else {
                             adverticement.setDate(strDate);
                             adverticement.setTitle(txtTitle.getText().toString().trim());
                             adverticement.setPrice(txtPrice.getText().toString().trim());
@@ -165,7 +174,7 @@ public class Antiques_Category extends AppCompatActivity{
                         }
 
 
-
+                    }
 
 
 

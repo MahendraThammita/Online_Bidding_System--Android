@@ -29,7 +29,7 @@
                 android:id="@+id/HomeAdImg"
                 android:layout_width="140dp"
                 android:layout_height="130dp"
-                android:src="@drawable/katana">
+                android:src="@drawable/movie">
 
             </ImageView>
 

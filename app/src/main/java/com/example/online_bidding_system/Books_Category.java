@@ -2,11 +2,13 @@ package com.example.online_bidding_system;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,6 +22,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.TimeCalculations;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +37,7 @@ public class Books_Category extends AppCompatActivity {
 
 
     EditText txtTitle,txtPrice,txtDuration,txtContact,txtType,txtDescription;
-    Button PublishLater;
+    Button PublishLater,PublishNow;
     DatabaseReference DbRef;
     DatabaseReference DbRef1;
     private DatabaseReference mFirebaseDatabase;
@@ -70,6 +73,7 @@ public class Books_Category extends AppCompatActivity {
         txtType = findViewById(R.id.setType);
         txtDescription = findViewById(R.id.setDescription);
         PublishLater = findViewById(R.id.publish_later);
+        PublishNow = findViewById(R.id.publish_now);
 
         book = new auction();
         adverticement=new  Adverticement();
@@ -173,6 +177,114 @@ public class Books_Category extends AppCompatActivity {
 
 
         });
+
+        PublishNow.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+                DbRef = FirebaseDatabase.getInstance().getReference().child("Books");
+                DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                userId = mFirebaseDatabase1.push().getKey();
+                mFirebaseDatabase.child(userId).setValue(adverticement);
+
+                mFirebaseDatabase1.child(userId).setValue(book);
+                DbRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists())
+                            maxid = (dataSnapshot.getChildrenCount());
+                        savedata();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                public void savedata() {
+                    try {
+                        if (TextUtils.isEmpty(txtTitle.getText().toString()))
+                            Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
+                        else if (TextUtils.isEmpty(txtPrice.getText().toString()))
+                            Toast.makeText(getApplicationContext(), " Price Is Required!", Toast.LENGTH_SHORT).show();
+                        else if (TextUtils.isEmpty(txtContact.getText().toString()))
+                            Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
+                        else {
+
+                            String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
+                            adverticement.setDuration(strTime);
+
+                            // String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
+                            //adverticement.setDate(strDate);
+
+                            int year = dp.getYear();
+                            int month = dp.getMonth();
+                            int day = dp.getDayOfMonth();
+
+                            Calendar myCal = Calendar.getInstance();
+                            myCal.set(year, month, day);
+
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+                            String strDate = dateFormat.format(myCal.getTime());
+
+                            TimeCalculations timeCalculations = new TimeCalculations(strTime, strDate);
+                            boolean flag = timeCalculations.isExpired();
+                            if (flag == true) {
+                                clearControl();
+                                Toast.makeText(getApplicationContext(), "Please Enter a valid date", Toast.LENGTH_LONG).show();
+                            } else {
+                                adverticement.setDate(strDate);
+                                adverticement.setTitle(txtTitle.getText().toString().trim());
+                                adverticement.setPrice(txtPrice.getText().toString().trim());
+                                //set timepicker value
+                                adverticement.setDuration(strTime);
+                                //set datapicker value
+                                adverticement.setDate(strDate);
+                                adverticement.setContact(txtContact.getText().toString().trim());
+                                adverticement.setDescription(txtDescription.getText().toString().trim());
+                                book.setType(txtType.getText().toString().trim());
+                                adverticement.setMaxBid("0");
+                                adverticement.setStatus("active");
+                                adverticement.setType("Books");
+                                adverticement.setSeller_ID("CUS1");
+                                String strNumber = idPrefix + String.valueOf(maxid + 1);
+                                DbRef.child(String.valueOf(strNumber)).setValue(book);
+                                DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
+                                Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
+                                clearControl();
+                                Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                                startActivity(displayIntent);
+
+                            }
+
+                        }
+
+                    } catch (NumberFormatException e) {
+
+                        Toast.makeText(getApplicationContext(), "Something went Wrong", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                }
+
+
+
+
+            public void clearControl() {
+                txtTitle.setText("");
+                txtPrice.setText("");
+                txtContact.setText("");
+                txtType.setText("");
+                txtDescription.setText("");
+            }
+
+
+        });
+
 
         imageIs = findViewById(R.id.imageIs);
         preBtn = findViewById(R.id.preButton);
