@@ -160,45 +160,6 @@ public class displayAds extends AppCompatActivity {
                     }
 
 
-//                    if(!myBidsCard.getType().equals("Other")){
-//
-//                        DatabaseReference specialAttribute;
-//
-//                        if(myBidsCard.getType().toString().equals("Antiques")){
-//                            //GetAntiques Antique = new GetAntiques(getApplicationContext());
-//                            //Antique.setValuesByAuctId(auctID);
-//                            setBasicDetails(myBidsCard);
-//
-//                            specialAttribute = FirebaseDatabase.getInstance().getReference("Antiques");
-//                            specialAttribute.addValueEventListener(new ValueEventListener() {
-//                                @Override
-//                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                                    if(dataSnapshot.hasChildren()){
-//                                        String period_of_time = dataSnapshot.child("time_period").getValue().toString();
-//                                        //TextView AN_Time = findViewById(R.id.AN_Time);
-//                                        //AN_Time.setText(period_of_time);
-//                                    }
-//
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                                }
-//                            });
-//
-//                            ///AN_Time.setText(Antique.getTime_period());
-//                        }
-//                        else if (myBidsCard.getType().equals("Books")){
-//
-//                        }
-//                        else {
-//                            Log.i("Values recieved" , "inner if skipped");
-//                        }
-//                    }
-//                    else {
-//                        Log.i("Values recieved" , "First if Skipped");
-//                    }
 
 
                 }

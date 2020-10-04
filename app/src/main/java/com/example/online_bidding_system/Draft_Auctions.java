@@ -121,6 +121,8 @@ public class Draft_Auctions extends AppCompatActivity {
                     String ADStatus = ds.child("status").getValue().toString();
                     int Startingbid = Integer.parseInt(ds.child("price").getValue().toString());
 
+
+
                     LocalDate datPart = LocalDate.parse(endDate);
                     LocalTime timePart = LocalTime.parse(Duration);
                     LocalDateTime contactDate = LocalDateTime.of(datPart , timePart);
@@ -139,8 +141,9 @@ public class Draft_Auctions extends AppCompatActivity {
 
             }
         });
-
+        Log.i("ErrorTAg" , "adpter called");
         oneDraftCard = new DraftAdapter(getApplicationContext() , R.layout.draft_auction_card , oneDraft);
+        Log.i("ErrorTAg" , "adpter called2");
         draftsList.setAdapter(oneDraftCard);
 
         draftsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
