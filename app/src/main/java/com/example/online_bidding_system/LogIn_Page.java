@@ -85,7 +85,6 @@ public class LogIn_Page extends AppCompatActivity {
 
                 //Authenticate The Users
 
-
                 fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
