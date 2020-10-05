@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -73,6 +74,7 @@ public class HomePage extends AppCompatActivity {
     private DrawerLayout drawer;
     private NavigationView navi;
     private Toolbar primTool;
+    private String userid;
 
 
     public HomePage() {
@@ -92,7 +94,7 @@ public class HomePage extends AppCompatActivity {
 
 
                     String Title = (ds.child("title").getValue().toString());
-                    int MaxBid =  Integer.parseInt(ds.child("maxBid").getValue().toString());
+                    String MaxBid = (ds.child("maxBid").getValue().toString());
                     String AucID = ds.getKey().toString();
                     String Duration = ds.child("duration").getValue().toString();
                     String endDate = ds.child("date").getValue().toString();
@@ -167,9 +169,6 @@ public class HomePage extends AppCompatActivity {
 
 
 
-
-
-
         int images[] = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3};
         flipper = findViewById(R.id.flipper);
 
@@ -204,9 +203,16 @@ public class HomePage extends AppCompatActivity {
         addNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                
+             /*   userid = null;
+                if (userid == null){
 
-                Intent addIntent = new Intent(getApplicationContext(), main_categories.class);
-                startActivity(addIntent);
+                    Intent redirectIntent = new Intent(getApplicationContext(), RegistrationPage.class);
+                    startActivity(redirectIntent);
+                }
+                else {*/
+                    Intent addIntent = new Intent(getApplicationContext(), main_categories.class);
+                    startActivity(addIntent);
 
             }
         });
@@ -238,7 +244,7 @@ public class HomePage extends AppCompatActivity {
 
 
                     String Title = (ds.child("title").getValue().toString());
-                    int MaxBid =  Integer.parseInt(ds.child("maxBid").getValue().toString());
+                    String MaxBid =  (ds.child("maxBid").getValue().toString());
                     String AucID = ds.getKey().toString();
                     String Duration = ds.child("duration").getValue().toString();
                     String endDate = ds.child("date").getValue().toString();
@@ -324,7 +330,7 @@ public class HomePage extends AppCompatActivity {
                         startActivity(in0);
                         break;
                     case R.id.Drawable_myWins:
-                        Intent in1 = new Intent(HomePage.this , Antiques_Edit.class);
+                        Intent in1 = new Intent(HomePage.this , LogIn_Page.class);
                         startActivity(in1);
                         break;
                     case R.id.Drawable_ViewAuctions:
