@@ -4,32 +4,34 @@ public class HomeCard {
     private String auctId;
     private String Title;
     private String Duration;
-    private int MaxBid;
+    private String MaxBid;
 
 
-    public HomeCard(String aucID, String title, int maxBid, String duration) {
+    public HomeCard(String aucID, String title, String maxBid, String duration) {
         this.auctId = aucID;
         Title = title;
-        MaxBid = MaxBid;
+        MaxBid = maxBid;
         Duration = duration;
     }
 
-    public HomeCard(String title, int MaxBid) {
+    public HomeCard(String title, String maxBid) {
 
         Title = title;
-        MaxBid = MaxBid;
+        MaxBid = maxBid;
 
     }
 
-    public int getMaxBid() {
+
+
+    public String getMaxBid() {
         return MaxBid;
     }
 
-    public void setMaxBid(int maxBid) {
+    public void setMaxBid(String maxBid) {
         MaxBid = maxBid;
     }
 
-    public void setHomeCardValues(String Title , String duration,int maxBid){
+    public void setHomeCardValues(String Title , String duration,String maxBid){
         this.Title = Title;
         this.Duration = duration;
         this.MaxBid = maxBid;

@@ -38,6 +38,8 @@ public class LogIn_Page extends AppCompatActivity {
         setContentView(R.layout.activity_log_in__page);
 
 
+
+
         txtEmail = findViewById(R.id.setUsername);
         txtPwd   = findViewById(R.id.setPassword);
         progressBar =   findViewById(R.id.progressBar);
@@ -82,7 +84,6 @@ public class LogIn_Page extends AppCompatActivity {
 
 
                 //Authenticate The Users
-
 
                 fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

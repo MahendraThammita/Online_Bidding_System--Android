@@ -3,6 +3,7 @@ package com.example.online_bidding_system;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -80,6 +81,10 @@ public class RegistrationPage extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Address is Required!", Toast.LENGTH_SHORT).show();
                         else {
                             user.setFullName(txtFullName.getText().toString().trim());
+                            if (!ValidateNIC(txtNIC.getText().toString().trim())){
+                                Toast.makeText(getApplicationContext(), "NIC is invalid!", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                             user.setNIC(txtNIC.getText().toString().trim());
                             user.setEmail(txtEmail.getText().toString().trim());
                             user.setPwd(txtPwd.getText().toString().trim());
@@ -103,6 +108,8 @@ public class RegistrationPage extends AppCompatActivity {
 
 
 
+
+
             public void clearControl() {
                 txtFullName.setText("");
                 txtNIC.setText("");
@@ -112,4 +119,11 @@ public class RegistrationPage extends AppCompatActivity {
             }
 
 
-        });}}
+        });}
+
+    public boolean ValidateNIC(String nic){
+        if (!nic.trim().matches("^[0-9]{9}[vVxX]$"))
+            return false;
+        return true;
+    }
+}
