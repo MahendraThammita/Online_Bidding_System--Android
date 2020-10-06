@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +37,8 @@ import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeAdapt
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeCard;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyAdapter;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +46,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -63,6 +69,7 @@ public class HomePage extends AppCompatActivity {
     ViewFlipper flipper;
     DatabaseReference DBRef;
     TextView title;
+    ImageView homeAdImg;
 
 
     ListView listView;
@@ -75,6 +82,7 @@ public class HomePage extends AppCompatActivity {
     private NavigationView navi;
     private Toolbar primTool;
     private String userid;
+    private StorageReference AdStorageRef;
 
 
     public HomePage() {
@@ -167,7 +175,7 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-
+       AdStorageRef = FirebaseStorage.getInstance().getReference("AntiqueImages");
 
         int images[] = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3};
         flipper = findViewById(R.id.flipper);
@@ -187,6 +195,7 @@ public class HomePage extends AppCompatActivity {
         bids = findViewById(R.id.actionBarBid);
         msg = findViewById(R.id.actionBarMsg);
         profBtn = findViewById(R.id.actionBarProfile);
+        homeAdImg = findViewById(R.id.HomeAdImg);
 
         addNew = findViewById(R.id.addNew);
         antique = findViewById(R.id.btnAntique);
@@ -248,6 +257,26 @@ public class HomePage extends AppCompatActivity {
                     String AucID = ds.getKey().toString();
                     String Duration = ds.child("duration").getValue().toString();
                     String endDate = ds.child("date").getValue().toString();
+                    String AdImage = ds.child("Img").getValue().toString();
+
+                    AdStorageRef.child(AdImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+
+                            Picasso.get()
+                                    .load(uri)
+                                    .placeholder(R.drawable.movie)
+                                    .fit()
+                                    .centerCrop()
+                                    .into(homeAdImg);
+                        }
+
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
 
 
                     LocalDate datPart = LocalDate.parse(endDate);
