@@ -14,12 +14,7 @@ public class HomeCard {
         Duration = duration;
     }
 
-    public HomeCard(String title, String maxBid) {
 
-        Title = title;
-        MaxBid = maxBid;
-
-    }
 
 
 
