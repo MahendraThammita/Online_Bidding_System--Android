@@ -1,5 +1,7 @@
 package com.example.online_bidding_system;
 
+import java.util.HashMap;
+
 public class Adverticement  {
 
     private String Title;
@@ -11,6 +13,15 @@ public class Adverticement  {
     private String MaxBid;
     private String Status;
     private String Type;
+    private HashMap<String , String> imageMap;
+
+    public HashMap<String, String> getImageMap() {
+        return imageMap;
+    }
+
+    public void setImageMap(HashMap<String, String> imageMap) {
+        this.imageMap = imageMap;
+    }
 
     public String getSeller_ID() {
         return seller_ID;

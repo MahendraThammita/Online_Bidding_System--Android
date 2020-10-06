@@ -9,10 +9,13 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,16 +33,22 @@ import android.widget.ViewSwitcher;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeCard;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.TimeCalculations;
 import com.example.online_bidding_system.auction;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class Antiques_Category extends AppCompatActivity {
 
@@ -60,9 +69,13 @@ public class Antiques_Category extends AppCompatActivity {
     private ImageSwitcher imageIs;
     private Button preBtn, nxBtn, pickImgbtn;
     private ArrayList<Uri> imageUris;
+    private ArrayList<String> filenameList;
+    private HashMap<String , String> hashMap;
     private String AdId;
     private static final int PICK_IMAGES_CODE = 3;
     int position = 0;
+    int noOfImages = 0;
+    StorageReference fbStorageRef;
 
     TimePicker tp;
     DatePicker dp;
@@ -97,9 +110,19 @@ public class Antiques_Category extends AppCompatActivity {
         add = new auction();
         adverticement = new Adverticement();
 
+        imageIs = findViewById(R.id.imageIs);
+        preBtn = findViewById(R.id.preButton);
+        nxBtn = findViewById(R.id.nextButton);
+        pickImgbtn = findViewById(R.id.pickImg);
+        imageUris = new ArrayList<>();
+        filenameList = new ArrayList<>();
+        hashMap = new HashMap<>();
+
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
         mFirebaseDatabase1 = mFirebaseInstance.getReference("Antiques");
+
+        fbStorageRef = FirebaseStorage.getInstance().getReference().child("AntiqueImages");
 
         //Setting image picker intents
         pickImgbtn.setOnClickListener(new View.OnClickListener() {
@@ -183,9 +206,38 @@ public class Antiques_Category extends AppCompatActivity {
                             adverticement.setType("Antiques");
                             adverticement.setSeller_ID("CUS1");
                             add.setTime_period(period.getSelectedItem().toString());
-                            String strNumber = idPrefix + String.valueOf(maxid + 1);
+                            final String strNumber = idPrefix + String.valueOf(maxid + 1);
                             DbRef.child(String.valueOf(strNumber)).setValue(add);
                             DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
+
+
+                            for(int  i = 0 ; i < imageUris.size() ; i ++){
+                                final StorageReference imageSrorageRef = fbStorageRef.child(String.valueOf(strNumber) + "." + String.valueOf(i));
+                                imageSrorageRef.putFile(imageUris.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                        imageSrorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                String url = String.valueOf(uri);
+                                                setDownLink(url , strNumber);
+                                                Log.i("URL" , "Url Id : " + url);
+                                                String num = String.valueOf(noOfImages);
+                                                noOfImages++;
+                                                DbRef1.child(strNumber).child("Img").child(num).setValue(url);
+                                            }
+                                        });
+
+                                    }
+
+                                });
+
+                            }
+                            Toast.makeText(getApplicationContext() , "Images Uploaded" , Toast.LENGTH_SHORT);
+
+                            //adverticement.setImageMap(hashMap);
+                            //DbRef1.child(String.valueOf(strNumber)).push().setValue(hashMap);
                             Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
                             clearControl();
                             Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
@@ -202,6 +254,13 @@ public class Antiques_Category extends AppCompatActivity {
 
 
                 }
+            }
+
+            private void setDownLink(String url, String strNumber) {
+
+                String key = String.valueOf(hashMap.size());
+                hashMap.put(key , url);
+
             }
 
 
@@ -280,6 +339,7 @@ public class Antiques_Category extends AppCompatActivity {
                         String strNumber = idPrefix + String.valueOf(maxid + 1);
                         DbRef.child(String.valueOf(strNumber)).setValue(add);
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
+
                         Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
                         clearControl();
                         Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
@@ -307,11 +367,7 @@ public class Antiques_Category extends AppCompatActivity {
         });
 
 
-        imageIs = findViewById(R.id.imageIs);
-        preBtn = findViewById(R.id.preButton);
-        nxBtn = findViewById(R.id.nextButton);
-        pickImgbtn = findViewById(R.id.pickImg);
-        imageUris = new ArrayList<>();
+
 
 
         imageIs.setFactory(new ViewSwitcher.ViewFactory() {
@@ -338,7 +394,11 @@ public class Antiques_Category extends AppCompatActivity {
                 if (position > 0) {
                     position--;
                     imageIs.setImageURI(imageUris.get(position));
-                } else {
+                } else if(position == 0){
+                    position = imageUris.size() -1 ;
+                    imageIs.setImageURI(imageUris.get(position));
+                }
+                else {
                     Toast.makeText(Antiques_Category.this, "Empty", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -349,10 +409,14 @@ public class Antiques_Category extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (position < imageUris.size() - 1) {
-
                     position++;
                     imageIs.setImageURI(imageUris.get(position));
-                } else {
+                }
+                else if(position == (imageUris.size() - 1)){
+                    position = 0;
+                    imageIs.setImageURI(imageUris.get(position));
+                }
+                else {
 
                     Toast.makeText(Antiques_Category.this, "empty", Toast.LENGTH_SHORT).show();
                 }
@@ -374,6 +438,7 @@ public class Antiques_Category extends AppCompatActivity {
 //
 //    }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -382,7 +447,21 @@ public class Antiques_Category extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
 
                 if (data.getClipData() != null) {
+
+                    int noOfItems = data.getClipData().getItemCount();
+                    for(int i = 0 ; i < noOfItems ; i++){
+                        Uri imageUri = data.getClipData().getItemAt(i).getUri();
+                        imageUris.add(imageUri);
+                        String FileNAme = getFileNameByURI(imageUri);
+                        Log.i("Image Recieved" , "File name is : " + FileNAme);
+                        filenameList.add(FileNAme);
+
+                    }
+
+
+                    imageIs.setImageURI(imageUris.get(1));
                     Toast.makeText(getApplicationContext(), "Multiple Items Selected", Toast.LENGTH_SHORT).show();
+
                 } else if (data.getData() != null) {
                     Toast.makeText(getApplicationContext(), "Single Item Selected", Toast.LENGTH_SHORT).show();
                 }
@@ -408,6 +487,30 @@ public class Antiques_Category extends AppCompatActivity {
 //                }
             }
         }
+    }
+
+    public  String getFileNameByURI(Uri uri){
+        String filename = null;
+
+        if(uri.getScheme().equals("content")){
+            Cursor cursor = getContentResolver().query(uri , null , null , null , null);
+            try{
+                if(cursor != null && cursor.moveToFirst()){
+                    filename = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            }finally {
+                cursor.close();
+            }
+        }
+        if(filename == null){
+            filename = uri.getPath();
+            int rem = filename.lastIndexOf('/');
+            if(rem != -1){
+                filename = filename.substring(rem +1);
+            }
+        }
+
+        return filename;
     }
 
 
