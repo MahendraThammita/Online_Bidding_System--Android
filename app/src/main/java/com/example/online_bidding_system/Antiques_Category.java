@@ -64,7 +64,6 @@ public class Antiques_Category extends AppCompatActivity {
     Adverticement adverticement;
     auction add;
     long maxid;
-    String MaxBid;
     String idPrefix = "AN";
     private ImageSwitcher imageIs;
     private Button preBtn, nxBtn, pickImgbtn;
@@ -285,6 +284,7 @@ public class Antiques_Category extends AppCompatActivity {
 
                 mFirebaseDatabase1.child(AdId).setValue(add);
                 DbRef.addValueEventListener(new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists())
@@ -299,6 +299,7 @@ public class Antiques_Category extends AppCompatActivity {
                 });
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.O)
             public void savedata() {
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
@@ -324,26 +325,63 @@ public class Antiques_Category extends AppCompatActivity {
 
                         SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
                         String strDate = dateFormat.format(myCal.getTime());
-                        adverticement.setDate(strDate);
+
+                        TimeCalculations timeCalculations = new TimeCalculations(strTime, strDate);
+                        boolean flag = timeCalculations.isExpired();
+
+                        if (flag == true) {
+                            clearControl();
+                            Toast.makeText(getApplicationContext(), "Please Enter a valid date", Toast.LENGTH_LONG).show();
+                        } else {
+                            adverticement.setDate(strDate);
+                            adverticement.setTitle(txtTitle.getText().toString().trim());
+                            adverticement.setPrice(txtPrice.getText().toString().trim());
+                            adverticement.setContact(txtContact.getText().toString().trim());
+                            adverticement.setDescription(txtDescription.getText().toString().trim());
+                            adverticement.setMaxBid("0");
+                            adverticement.setStatus("inactive");
+                            adverticement.setType("Antiques");
+                            adverticement.setSeller_ID("CUS1");
+                            add.setTime_period(period.getSelectedItem().toString());
+                            final String strNumber = idPrefix + String.valueOf(maxid + 1);
+                            DbRef.child(String.valueOf(strNumber)).setValue(add);
+                            DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
 
 
-                        adverticement.setTitle(txtTitle.getText().toString().trim());
-                        adverticement.setPrice(txtPrice.getText().toString().trim());
-                        adverticement.setContact(txtContact.getText().toString().trim());
-                        adverticement.setDescription(txtDescription.getText().toString().trim());
-                        adverticement.setMaxBid("0");
-                        adverticement.setStatus("inactive");
-                        adverticement.setType("Antiques");
-                        adverticement.setSeller_ID("CUS1");
-                        add.setTime_period(period.getSelectedItem().toString());
-                        String strNumber = idPrefix + String.valueOf(maxid + 1);
-                        DbRef.child(String.valueOf(strNumber)).setValue(add);
-                        DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
+                            for(int  i = 0 ; i < imageUris.size() ; i ++){
+                                final StorageReference imageSrorageRef = fbStorageRef.child(String.valueOf(strNumber) + "." + String.valueOf(i));
+                                imageSrorageRef.putFile(imageUris.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
-                        clearControl();
-                        Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
-                        startActivity(displayIntent);
+                                        imageSrorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                String url = String.valueOf(uri);
+                                                setDownLink(url , strNumber);
+                                                Log.i("URL" , "Url Id : " + url);
+                                                String num = String.valueOf(noOfImages);
+                                                noOfImages++;
+                                                DbRef1.child(strNumber).child("Img").child(num).setValue(url);
+                                            }
+                                        });
+
+                                    }
+
+                                });
+
+                            }
+                            Toast.makeText(getApplicationContext() , "Images Uploaded" , Toast.LENGTH_SHORT);
+
+                            //adverticement.setImageMap(hashMap);
+                            //DbRef1.child(String.valueOf(strNumber)).push().setValue(hashMap);
+                            Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
+                            clearControl();
+                            Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                            startActivity(displayIntent);
+                        }
+
+
                     }
 
 
@@ -353,6 +391,13 @@ public class Antiques_Category extends AppCompatActivity {
 
 
                 }
+            }
+
+            private void setDownLink(String url, String strNumber) {
+
+                String key = String.valueOf(hashMap.size());
+                hashMap.put(key , url);
+
             }
 
 
