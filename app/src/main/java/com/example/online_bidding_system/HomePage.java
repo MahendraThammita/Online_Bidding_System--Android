@@ -370,6 +370,10 @@ public class HomePage extends AppCompatActivity {
                         Intent in3 = new Intent(getApplicationContext() , Draft_Auctions.class);
                         startActivity(in3);
                         break;
+                    case R.id.Drawable_logout:
+                        Intent in4 = new Intent(getApplicationContext() , Antiques_Category.class);
+                        startActivity(in4);
+                        break;
                     default:
                         Intent in6 = new Intent(getApplicationContext() , MyAuctions.class);
                         startActivity(in6);

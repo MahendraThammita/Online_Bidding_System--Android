@@ -39,12 +39,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Antiques_Category extends AppCompatActivity{
+public class Antiques_Category extends AppCompatActivity {
 
 
-    EditText txtTitle,txtPrice,txtDuration,txtContact,txtPeriod,txtDescription;
+    EditText txtTitle, txtPrice, txtDuration, txtContact, txtPeriod, txtDescription;
     Spinner period;
-    Button PublishLater,PublishNow;
+    Button PublishLater, PublishNow;
     DatabaseReference DbRef;
     DatabaseReference DbRef1;
     private DatabaseReference mFirebaseDatabase;
@@ -54,16 +54,16 @@ public class Antiques_Category extends AppCompatActivity{
     auction add;
     long maxid;
     String MaxBid;
-    String idPrefix="AN";
+    String idPrefix = "AN";
     private ImageSwitcher imageIs;
-    private Button preBtn,nxBtn, pickImgbtn;
-    private  ArrayList<Uri> imageUris;
+    private Button preBtn, nxBtn, pickImgbtn;
+    private ArrayList<Uri> imageUris;
     private String AdId;
-    private static final int PICK_IMAGES_CODE = 1;
+    private static final int PICK_IMAGES_CODE = 3;
     int position = 0;
 
-     TimePicker tp;
-     DatePicker dp;
+    TimePicker tp;
+    DatePicker dp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,17 +81,30 @@ public class Antiques_Category extends AppCompatActivity{
         txtContact = findViewById(R.id.setContact);
         dp = findViewById(R.id.setDate);
         tp = findViewById(R.id.setTime);
-        period = (Spinner)findViewById(R.id.setPeriod);
+        period = (Spinner) findViewById(R.id.setPeriod);
         txtDescription = findViewById(R.id.setDescription);
         PublishLater = findViewById(R.id.publish_later);
         PublishNow = findViewById(R.id.publish_now);
+        pickImgbtn = findViewById(R.id.pickImg);
 
         add = new auction();
-        adverticement=new  Adverticement();
+        adverticement = new Adverticement();
 
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
         mFirebaseDatabase1 = mFirebaseInstance.getReference("Antiques");
+
+        //Setting image picker intents
+        pickImgbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent imgsIntent = new Intent();
+                imgsIntent.setType("image/*");
+                imgsIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                imgsIntent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(imgsIntent, "Select Multiple Images"), PICK_IMAGES_CODE);
+            }
+        });
 
 
         PublishNow.setOnClickListener(new View.OnClickListener() {
@@ -119,8 +132,8 @@ public class Antiques_Category extends AppCompatActivity{
                 });
             }
 
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                public void savedata(){
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            public void savedata() {
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
@@ -151,9 +164,7 @@ public class Antiques_Category extends AppCompatActivity{
                         if (flag == true) {
                             clearControl();
                             Toast.makeText(getApplicationContext(), "Please Enter a valid date", Toast.LENGTH_LONG).show();
-                        }
-
-                        else {
+                        } else {
                             adverticement.setDate(strDate);
                             adverticement.setTitle(txtTitle.getText().toString().trim());
                             adverticement.setPrice(txtPrice.getText().toString().trim());
@@ -177,7 +188,6 @@ public class Antiques_Category extends AppCompatActivity{
                     }
 
 
-
                 } catch (NumberFormatException e) {
 
                     Toast.makeText(getApplicationContext(), "Something went Wrong", Toast.LENGTH_SHORT).show();
@@ -185,8 +195,6 @@ public class Antiques_Category extends AppCompatActivity{
 
                 }
             }
-
-
 
 
             public void clearControl() {
@@ -224,7 +232,7 @@ public class Antiques_Category extends AppCompatActivity{
                 });
             }
 
-            public void savedata(){
+            public void savedata() {
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_SHORT).show();
@@ -245,7 +253,7 @@ public class Antiques_Category extends AppCompatActivity{
                         int day = dp.getDayOfMonth();
 
                         Calendar myCal = Calendar.getInstance();
-                        myCal.set(year , month , day);
+                        myCal.set(year, month, day);
 
                         SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
                         String strDate = dateFormat.format(myCal.getTime());
@@ -261,7 +269,7 @@ public class Antiques_Category extends AppCompatActivity{
                         adverticement.setType("Antiques");
                         adverticement.setSeller_ID("CUS1");
                         add.setTime_period(period.getSelectedItem().toString());
-                        String strNumber= idPrefix+String.valueOf(maxid+1);
+                        String strNumber = idPrefix + String.valueOf(maxid + 1);
                         DbRef.child(String.valueOf(strNumber)).setValue(add);
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
                         Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
@@ -280,8 +288,6 @@ public class Antiques_Category extends AppCompatActivity{
             }
 
 
-
-
             public void clearControl() {
                 txtTitle.setText("");
                 txtPrice.setText("");
@@ -293,11 +299,9 @@ public class Antiques_Category extends AppCompatActivity{
         });
 
 
-
-
         imageIs = findViewById(R.id.imageIs);
         preBtn = findViewById(R.id.preButton);
-        nxBtn =  findViewById(R.id.nextButton);
+        nxBtn = findViewById(R.id.nextButton);
         pickImgbtn = findViewById(R.id.pickImg);
         imageUris = new ArrayList<>();
 
@@ -310,27 +314,24 @@ public class Antiques_Category extends AppCompatActivity{
             }
         });
 
-        pickImgbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                pickImagesIntent();
-
-            }
-        });
-
+//        pickImgbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                pickImagesIntent();
+//
+//            }
+//        });
 
 
         preBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(position>0){
+                if (position > 0) {
                     position--;
                     imageIs.setImageURI(imageUris.get(position));
-                }
-
-                else{
-                    Toast.makeText(Antiques_Category.this,"Empty",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Antiques_Category.this, "Empty", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -339,62 +340,67 @@ public class Antiques_Category extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
-                if(position<imageUris.size()-1){
+                if (position < imageUris.size() - 1) {
 
                     position++;
                     imageIs.setImageURI(imageUris.get(position));
-                }
+                } else {
 
-                else{
-
-                    Toast.makeText(Antiques_Category.this,"empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Antiques_Category.this, "empty", Toast.LENGTH_SHORT).show();
                 }
             }
         }));
     }
 
 
+//Uditha Intents
 
-
-    private void pickImagesIntent(){
-
-
-
-        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
-        startActivityForResult(intent, PICK_IMAGES_CODE);
-
-    }
+//    private void pickImagesIntent(){
+//
+//
+//
+//        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+//        intent.setType("image/*");
+//        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+//        startActivityForResult(intent, PICK_IMAGES_CODE);
+//
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGES_CODE){
+        if (requestCode == PICK_IMAGES_CODE) {
 
-            if(resultCode == Activity.RESULT_OK){
-                if(data.getClipData() != null){
+            if (resultCode == Activity.RESULT_OK) {
 
-                    int cout  = data.getClipData().getItemCount();
-                    for(int i=0; i<cout; i++){
-                        Uri imageUri = data.getClipData().getItemAt(i).getUri();
-                        imageUris.add(imageUri);
-                    }
-
-                    imageIs.setImageURI(imageUris.get(0));
-                    position = 0;
+                if (data.getClipData() != null) {
+                    Toast.makeText(getApplicationContext(), "Multiple Items Selected", Toast.LENGTH_SHORT).show();
+                } else if (data.getData() != null) {
+                    Toast.makeText(getApplicationContext(), "Single Item Selected", Toast.LENGTH_SHORT).show();
                 }
 
-                else{
-                    Uri imageUri = data.getData();
-                    imageUris.add(imageUri);
-                    imageIs.setImageURI(imageUris.get(0));
-                    position = 0;
-                }
+//                Uditha Statements
+//                if(data.getClipData() != null){
+//
+//                    int cout  = data.getClipData().getItemCount();
+//                    for(int i=0; i<cout; i++){
+//                        Uri imageUri = data.getClipData().getItemAt(i).getUri();
+//                        imageUris.add(imageUri);
+//                    }
+//
+//                    imageIs.setImageURI(imageUris.get(0));
+//                    position = 0;
+//                }
+//
+//                else{
+//                    Uri imageUri = data.getData();
+//                    imageUris.add(imageUri);
+//                    imageIs.setImageURI(imageUris.get(0));
+//                    position = 0;
+//                }
             }
         }
     }
-
 
 
 }

@@ -50,6 +50,7 @@ dependencies {
     //Cardview library
 
     implementation 'androidx.cardview:cardview:1.0.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0-rc03'
     compileOnly 'com.google.android.wearable:wearable:2.7.0'
 
 }

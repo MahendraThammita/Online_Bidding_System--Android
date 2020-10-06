@@ -5,6 +5,8 @@ import com.example.online_bidding_system.HelperClasser.BiddingAdapters.TimeCalcu
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.Assert.assertEquals;
 
 public class IT19120362 {
@@ -23,7 +25,7 @@ public class IT19120362 {
     @Test
     public void test_calcTimeDifInMIn_Hrs_Str(){
         String result = timeCalculations.calcTimeDifInMIn_Hrs_Str();
-        assertEquals("06:01" ,result);
+        assertEquals("15:58" ,result);
     }
 
     //IT19120362
@@ -44,5 +46,15 @@ public class IT19120362 {
         Boolean result = timeCalculations.isDeleteable();
         assertEquals(false ,result);
     }
+
+    //IT19120362
+    //this function gets two Local date string and alocal time string and concatinate into one local date time object
+    @Test
+    public void test_calcFinalDateTime(){
+        String  result = timeCalculations.calcFinalDateTime();
+        assertEquals("2020-10-02T14:26" ,result);
+    }
+
+
 
 }
