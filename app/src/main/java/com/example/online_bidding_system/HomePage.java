@@ -136,10 +136,10 @@ public class HomePage extends AppCompatActivity {
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
-                    HomeCard my_Bid = new HomeCard(AucID , Title, MaxBid,duration);
+                    HomeCard ad = new HomeCard(AucID, Title, MaxBid,duration);
 
                     if(EndMin > 0) {
-                        HomeCards.add(my_Bid);
+                        HomeCards.add(ad);
                     }
                 }
                 if (HomeCards != null) {
@@ -282,8 +282,8 @@ public class HomePage extends AppCompatActivity {
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
-                    HomeCard my_Bid = new HomeCard(AucID , Title, MaxBid,duration);
-                    HomeCards.add(my_Bid);
+                    HomeCard ad = new HomeCard(AucID , Title, MaxBid,duration);
+                    HomeCards.add(ad);
                 }
                 if (HomeCards != null) {
 
