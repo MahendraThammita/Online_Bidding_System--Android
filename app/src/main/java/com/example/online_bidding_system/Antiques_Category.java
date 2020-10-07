@@ -117,6 +117,7 @@ public class Antiques_Category extends AppCompatActivity {
         filenameList = new ArrayList<>();
         hashMap = new HashMap<>();
 
+
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
         mFirebaseDatabase1 = mFirebaseInstance.getReference("Antiques");
