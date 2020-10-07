@@ -173,11 +173,17 @@ public class Antiques_Category extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
 
-                        String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
+                        SimpleDateFormat fm = new SimpleDateFormat("HH:mm:ss");
+                        String hour = String.valueOf(tp.getHour());
+                        String min = String.valueOf(tp.getMinute());
+                        if(tp.getHour() < 10){
+                            hour = "0" + hour;
+                        }
+                        if(tp.getMinute() < 10){
+                            min = "0" + min;
+                        }
+                        String strTime = hour + ":" + min + ":" + "00";
                         adverticement.setDuration(strTime);
-
-                        // String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
-                        //adverticement.setDate(strDate);
 
                         int year = dp.getYear();
                         int month = dp.getMonth();
@@ -222,7 +228,6 @@ public class Antiques_Category extends AppCompatActivity {
                                             public void onSuccess(Uri uri) {
                                                 String url = String.valueOf(uri);
                                                 setDownLink(url , strNumber);
-                                                Log.i("URL" , "Url Id : " + url);
                                                 String num = String.valueOf(noOfImages);
                                                 noOfImages++;
                                                 DbRef1.child(strNumber).child("Img").child(num).setValue(url);
@@ -234,7 +239,6 @@ public class Antiques_Category extends AppCompatActivity {
                                 });
 
                             }
-                            noOfImages = 0;
                             Toast.makeText(getApplicationContext() , "Images Uploaded" , Toast.LENGTH_SHORT);
 
                             //adverticement.setImageMap(hashMap);
