@@ -269,11 +269,12 @@ public class HomeAndGarden extends AppCompatActivity {
                 //insert data in firebase database Home&Garden
                 mFirebaseDatabase1.child(userId).setValue(homeitem);
                 DbRef.addValueEventListener(new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists())
                             maxid=(dataSnapshot.getChildrenCount());
-                        savedata();
+                            savedata();
                     }
 
                     @Override
@@ -284,6 +285,7 @@ public class HomeAndGarden extends AppCompatActivity {
 
             }
             //new
+            @RequiresApi(api = Build.VERSION_CODES.O)
             public void savedata(){
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
@@ -388,7 +390,7 @@ public class HomeAndGarden extends AppCompatActivity {
             public void clearControl() {
                 txtTitle.setText("");
                 txtPrice.setText("");
-                txtDuration.setText("");
+                //txtDuration.setText("");
                 txtContact.setText("");
                 txtEnvironment.setText("");
                 txtDescription.setText("");
