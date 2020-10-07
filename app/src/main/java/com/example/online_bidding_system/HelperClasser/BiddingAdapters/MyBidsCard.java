@@ -11,12 +11,29 @@ public class MyBidsCard {
     private String endDate;
     private String seller_id;
     private  String status;
+    private String img;
     private int MaxBid;
     private int Mybid;
     private int Start_Price;
 
+
     public MyBidsCard() {
 
+    }
+
+    public MyBidsCard(String auctionId, String contactNo, String description, String duration, String title, String type, String endDate, String seller_id, String status, int maxBid, int start_Price , String img) {
+        this.auctionId = auctionId;
+        ContactNo = contactNo;
+        Description = description;
+        Duration = duration;
+        Title = title;
+        Type = type;
+        this.endDate = endDate;
+        this.seller_id = seller_id;
+        this.status = status;
+        MaxBid = maxBid;
+        Start_Price = start_Price;
+        this.img = img;
     }
 
     public MyBidsCard(String auctionId, String contactNo, String description, String duration, String title, String type, String endDate, String seller_id, String status, int maxBid, int start_Price) {
@@ -33,7 +50,7 @@ public class MyBidsCard {
         Start_Price = start_Price;
     }
 
-    public MyBidsCard(String auctionId , String contactNo, String description, String duration, String title, String type, String endDate, int maxBid, int mybid, int start_Price) {
+    public MyBidsCard(String auctionId , String contactNo, String description, String duration, String title, String type, String endDate, int maxBid, int mybid, int start_Price , String img) {
         this.auctionId = auctionId;
         ContactNo = contactNo;
         Description = description;
@@ -44,9 +61,11 @@ public class MyBidsCard {
         MaxBid = maxBid;
         Mybid = mybid;
         Start_Price = start_Price;
+        this.img = img;
     }
 
-    public void setMywinCardValues(String Title , String contactNo, String duration, String endDate, int maxBid, int mybid, String seller_id){
+
+    public void setMywinCardValues(String Title , String contactNo, String duration, String endDate, int maxBid, int mybid, String seller_id  , String img){
         this.Title = Title;
         this.ContactNo = contactNo;
         this.Duration = duration;
@@ -54,9 +73,10 @@ public class MyBidsCard {
         this.MaxBid = maxBid;
         this.Mybid = mybid;
         this.seller_id = seller_id;
+        this.img = img;
     }
 
-    public void setMyAuctionCardValues(String Title, String duration, String endDate, int maxBid, String ADid, String Type, String status){
+    public void setMyAuctionCardValues(String Title, String duration, String endDate, int maxBid, String ADid, String Type, String status , String img){
         this.Title = Title;
         this.Duration = duration;
         this.endDate = endDate;
@@ -64,6 +84,7 @@ public class MyBidsCard {
         this.auctionId = ADid;
         this.Type = Type;
         this.status = status;
+        this.img = img;
     }
 
     public void setDraftAuctionsValues(String Title , String duration, String endDate, int maxBid, String ADid, String Type){
@@ -132,6 +153,14 @@ public class MyBidsCard {
 
     //Setters
 
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public void setAuctionId(String auctionId) {
         this.auctionId = auctionId;

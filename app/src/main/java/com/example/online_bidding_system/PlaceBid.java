@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class PlaceBid extends AppCompatActivity {
 
@@ -35,6 +37,7 @@ public class PlaceBid extends AppCompatActivity {
     TextView bidName , bidID , bidStartPrice , bidMaxBid , bidEndsAt;
     Button btnConfermBid;
     TextInputEditText bidGetter;
+    ImageView placeBidImg;
 
 
     @Override
@@ -52,6 +55,8 @@ public class PlaceBid extends AppCompatActivity {
         bidEndsAt = findViewById(R.id.placeBid_date);
         btnConfermBid = findViewById(R.id.placeBid_ConfirmBidBtn);
         bidGetter = findViewById(R.id.placeBid_newBidValue);
+        placeBidImg = findViewById(R.id.placeBidImg);
+
 
         getDetailssDbRef = FirebaseDatabase.getInstance().getReference("Adverticement").child(auctionId);
 
@@ -68,16 +73,18 @@ public class PlaceBid extends AppCompatActivity {
                     String des = dataSnapshot.child("description").getValue().toString();
                     String sellerId =dataSnapshot.child("seller_ID").getValue().toString();
                     String status =dataSnapshot.child("status").getValue().toString();
+                    String img =dataSnapshot.child("Img").child("0").getValue().toString();
                     int MaxBid = Integer.valueOf(dataSnapshot.child("maxBid").getValue().toString());
                     int StartPrice = Integer.valueOf(dataSnapshot.child("price").getValue().toString());
 
-                    MyBidsCard myBidsCard = new MyBidsCard(ADid , contact , des , Duration , Title , Type , endDate , sellerId , status , MaxBid , StartPrice);
+                    MyBidsCard myBidsCard = new MyBidsCard(ADid , contact , des , Duration , Title , Type , endDate , sellerId , status , MaxBid , StartPrice , img);
 
                     bidName.setText(myBidsCard.getTitle());
                     bidID.setText(myBidsCard.getAuctionId());
                     bidStartPrice.setText(myBidsCard.getStart_Price()  + ".00 Rs");
                     bidMaxBid.setText(myBidsCard.getMaxBid()  + ".00 Rs");
                     bidEndsAt.setText(myBidsCard.getEndDate() + myBidsCard.getDuration());
+                    Picasso.get().load(myBidsCard.getImg()).into(placeBidImg);
 
 
                 }
@@ -108,10 +115,11 @@ public class PlaceBid extends AppCompatActivity {
                             String des = dataSnapshot.child("description").getValue().toString();
                             String sellerId = dataSnapshot.child("seller_ID").getValue().toString();
                             String status = dataSnapshot.child("status").getValue().toString();
+                            String img = dataSnapshot.child("Img").child("0").getValue().toString();
                             int MaxBid = Integer.valueOf(dataSnapshot.child("maxBid").getValue().toString());
                             int StartPrice = Integer.valueOf(dataSnapshot.child("price").getValue().toString());
 
-                            MyBidsCard myBidsCard = new MyBidsCard(ADid, contact, des, Duration, Title, Type, endDate, sellerId, status, MaxBid, StartPrice);
+                            MyBidsCard myBidsCard = new MyBidsCard(ADid, contact, des, Duration, Title, Type, endDate, sellerId, status, MaxBid, StartPrice , img);
 
                             try{
 
@@ -137,11 +145,12 @@ public class PlaceBid extends AppCompatActivity {
                                     editedAd.setType(myBidsCard.getType().toString());
                                     editedAd.setDate(myBidsCard.getEndDate().toString());
                                     editedAd.setStatus(myBidsCard.getStatus().toString());
+                                    editedAd.setImg(myBidsCard.getImg().toString());
                                     editedAd.setMaxBid(String.valueOf(newBid));
                                     editedAd.setPrice(String.valueOf(myBidsCard.getStart_Price()));
                                     editedAd.setSeller_ID(myBidsCard.getSeller_id());
 
-                                    setBidDbRef.setValue(editedAd);
+                                    setBidDbRef.child("maxBid").setValue(editedAd.getMaxBid());
                                     setBidDbRef.child("precious_Bid").setValue(myBidsCard.getMaxBid());
 
                                     setUserAuction(editedAd , newBid);
@@ -172,6 +181,7 @@ public class PlaceBid extends AppCompatActivity {
                 userBidRef.setValue(editedAd);
                 userBidRef.child("previous_Bid").setValue(editedAd.getMaxBid());
                 userBidRef.child("mybid").setValue(String.valueOf(newBid));
+                userBidRef.child("Img").child("0").setValue(editedAd.getImg());
                 Toast.makeText(getApplicationContext() , "Bid Placed Successfully" , Toast.LENGTH_SHORT).show();
 
                 Intent ConfermToMyBids = new Intent(getApplicationContext() , TabedAuctions.class);

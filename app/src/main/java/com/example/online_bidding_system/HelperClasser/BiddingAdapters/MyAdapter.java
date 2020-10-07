@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.example.online_bidding_system.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
 public class MyAdapter extends ArrayAdapter<MyBidsCard> {
         Context context;
         List<MyBidsCard> myBidList;
-        int[] imgs = {R.drawable.leadguitar , R.drawable.dreamcatcher , R.drawable.auction1 , R.drawable.auction3 , R.drawable.cat_book , R.drawable.cat_dvd , R.drawable.cat_fashion , R.drawable.cat_garden , R.drawable.cat_handmade , R.drawable.cat_hobby , R.drawable.cat_handmade };
+        //int[] imgs = {R.drawable.leadguitar , R.drawable.dreamcatcher , R.drawable.auction1 , R.drawable.auction3 , R.drawable.cat_book , R.drawable.cat_dvd , R.drawable.cat_fashion , R.drawable.cat_garden , R.drawable.cat_handmade , R.drawable.cat_hobby , R.drawable.cat_handmade };
 
 
     public MyAdapter(@NonNull Context context, int resource, List<MyBidsCard> myBidList) {
@@ -56,7 +57,8 @@ public class MyAdapter extends ArrayAdapter<MyBidsCard> {
             bidTitle.setText(bid.getTitle());
             cardMaxBid.setText(bid.getMaxBid() + " Rs");
             cardMyBid.setText(bid.getMybid() + " Rs");
-            cardImg.setImageResource(imgs[position]);
+            //cardImg.setImageResource(imgs[position]);
+            Picasso.get().load(bid.getImg()).into(cardImg);
             cardTime.setText(remTime);
 
 //           Log.i("ShowData" , "data Returned to adapter values" + bid.getMybid());

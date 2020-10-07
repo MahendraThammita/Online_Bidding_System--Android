@@ -13,7 +13,16 @@ public class Adverticement  {
     private String MaxBid;
     private String Status;
     private String Type;
+    private String Img;
     private HashMap<String , String> imageMap;
+
+    public String getImg() {
+        return Img;
+    }
+
+    public void setImg(String img) {
+        Img = img;
+    }
 
     public HashMap<String, String> getImageMap() {
         return imageMap;

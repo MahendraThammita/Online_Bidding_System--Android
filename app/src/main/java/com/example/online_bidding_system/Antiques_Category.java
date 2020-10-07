@@ -233,6 +233,7 @@ public class Antiques_Category extends AppCompatActivity {
                                 });
 
                             }
+                            noOfImages = 0;
                             Toast.makeText(getApplicationContext() , "Images Uploaded" , Toast.LENGTH_SHORT);
 
                             //adverticement.setImageMap(hashMap);
