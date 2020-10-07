@@ -302,15 +302,14 @@ public class EditBid extends AppCompatActivity {
         imgeRecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
 
         ArrayList<BidSwiperClass> bidsimgAdapter = new ArrayList<>();
-
-        bidsimgAdapter.add(new BidSwiperClass(R.drawable.fashion1));
-        bidsimgAdapter.add(new BidSwiperClass(R.drawable.rings));
-        bidsimgAdapter.add(new BidSwiperClass(R.drawable.books));
-        bidsimgAdapter.add(new BidSwiperClass(R.drawable.phone));
-        bidsimgAdapter.add(new BidSwiperClass(R.drawable.rings));
-
-
+//
+//        bidsimgAdapter.add(new BidSwiperClass(R.drawable.fashion1));
+//        bidsimgAdapter.add(new BidSwiperClass(R.drawable.rings));
+//        bidsimgAdapter.add(new BidSwiperClass(R.drawable.books));
 //        bidsimgAdapter.add(new BidSwiperClass(R.drawable.phone));
+//        bidsimgAdapter.add(new BidSwiperClass(R.drawable.rings));
+//        bidsimgAdapter.add(new BidSwiperClass(R.drawable.phone));
+
         adapter = new BidSwiperAdapter(bidsimgAdapter);
 
         imgeRecycle.setAdapter(adapter);

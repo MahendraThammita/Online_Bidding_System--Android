@@ -30,7 +30,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.net.URL;
 import java.util.ArrayList;
 
 public class displayAds extends AppCompatActivity {
@@ -45,8 +50,9 @@ public class displayAds extends AppCompatActivity {
     private NavigationView navi;
     private Toolbar primTool;
     private DatabaseReference dbRef;
+    private StorageReference storeRef;
 
-    LinearLayout antiqueLayout , booksLayout , dvdLayout , fdLayout , electronicsLayout , hmLayout , hobbyLayout , homeGardenLayout , additionalInfoLayout;
+    LinearLayout antiqueLayout, booksLayout, dvdLayout, fdLayout, electronicsLayout, hmLayout, hobbyLayout, homeGardenLayout, additionalInfoLayout;
 
     TextView itemName;
     TextView itemDes;
@@ -56,6 +62,8 @@ public class displayAds extends AppCompatActivity {
     TextView itemCurrentBid;
     TextView additionalInfoCap;
     Button toBidButton;
+
+    private ArrayList<BidSwiperClass> bidsimgAdapter;
 
 
     @Override
@@ -85,15 +93,18 @@ public class displayAds extends AppCompatActivity {
         homeGardenLayout = findViewById(R.id.subCate_Home_garden);
 
         imgeRecycle = findViewById(R.id.bidImagerSwiperRecyclar);
-        iamgeRecycler();
+        //iamgeRecycler();
 
         dbRef = FirebaseDatabase.getInstance().getReference("Adverticement").child(auctID);
+        bidsimgAdapter = new ArrayList<>();
+
+
         dbRef.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if(dataSnapshot.hasChildren()){
+                if (dataSnapshot.hasChildren()) {
                     String Duration = dataSnapshot.child("duration").getValue().toString();
                     String endDate = dataSnapshot.child("date").getValue().toString();
                     String Type = dataSnapshot.child("type").getValue().toString();
@@ -101,65 +112,60 @@ public class displayAds extends AppCompatActivity {
                     String ADid = dataSnapshot.getKey().toString();
                     String contact = dataSnapshot.child("contact").getValue().toString();
                     String des = dataSnapshot.child("description").getValue().toString();
-                    String sellerId =dataSnapshot.child("seller_ID").getValue().toString();
-                    String status =dataSnapshot.child("status").getValue().toString();
+                    String sellerId = dataSnapshot.child("seller_ID").getValue().toString();
+                    String status = dataSnapshot.child("status").getValue().toString();
+                    Long imgcount = dataSnapshot.child("Img").getChildrenCount();
+                    for (int i = 0; i < imgcount; i++) {
+                        String image = dataSnapshot.child("Img").child(String.valueOf(i)).getValue().toString();
+                        bidsimgAdapter.add(new BidSwiperClass(image));
+                    }
+                    iamgeRecycler();
                     int MaxBid = Integer.valueOf(dataSnapshot.child("maxBid").getValue().toString());
                     int StartPrice = Integer.valueOf(dataSnapshot.child("price").getValue().toString());
 
-                    Log.i("Values recieved" , "ADD No : " + ADid + " " + Title + " " + Type);
+                    Log.i("Values recieved", "ADD No : " + ADid + " " + Title + " " + Type);
 
-                    MyBidsCard myBidsCard = new MyBidsCard(ADid , contact , des , Duration , Title , Type , endDate , sellerId , status , MaxBid , StartPrice);
+                    MyBidsCard myBidsCard = new MyBidsCard(ADid, contact, des, Duration, Title, Type, endDate, sellerId, status, MaxBid, StartPrice);
                     setBasicDetails(myBidsCard);
                     //removeAllChildListviewa();
                     additionalInfoLayout.removeAllViews();
 
-                    //Log.i("Values recieved" , "Object Created" + myBidsCard.getType());
-
-                    if(!myBidsCard.getType().equals("Other")){
-                        if(myBidsCard.getType().toString().equals("Antiques")){
+                    if (!myBidsCard.getType().equals("Other")) {
+                        if (myBidsCard.getType().toString().equals("Antiques")) {
                             additionalInfoLayout.addView(additionalInfoCap);
                             additionalInfoLayout.addView(antiqueLayout);
                             setAdditionalDetailsAntiqur(myBidsCard.getAuctionId());
-                        }
-                        else if(myBidsCard.getType().toString().equals("Books")){
+                        } else if (myBidsCard.getType().toString().equals("Books")) {
                             additionalInfoLayout.addView(additionalInfoCap);
                             additionalInfoLayout.addView(booksLayout);
                             setAdditionalDetailsBooks(myBidsCard.getAuctionId());
-                        }
-                        else if(myBidsCard.getType().toString().equals("HomeAndGarden")){
+                        } else if (myBidsCard.getType().toString().equals("HomeAndGarden")) {
                             additionalInfoLayout.addView(additionalInfoCap);
                             additionalInfoLayout.addView(homeGardenLayout);
                             setAdditionalDetailsHG(myBidsCard.getAuctionId());
-                        }
-                        else if(myBidsCard.getType().toString().equals("SportsAndHobbies")){
+                        } else if (myBidsCard.getType().toString().equals("SportsAndHobbies")) {
                             additionalInfoLayout.addView(additionalInfoCap);
                             additionalInfoLayout.addView(hobbyLayout);
                             setAdditionalDetailsSH(myBidsCard.getAuctionId());
-                        }
-                        else if(myBidsCard.getType().toString().equals("Electronics")){
+                        } else if (myBidsCard.getType().toString().equals("Electronics")) {
                             additionalInfoLayout.addView(additionalInfoCap);
                             additionalInfoLayout.addView(electronicsLayout);
                             setAdditionalDetailsElectronic(myBidsCard.getAuctionId());
-                        }
-                        else if(myBidsCard.getType().toString().equals("FashionAndDesign")){
+                        } else if (myBidsCard.getType().toString().equals("FashionAndDesign")) {
                             additionalInfoLayout.addView(additionalInfoCap);
                             additionalInfoLayout.addView(fdLayout);
                             setAdditionalDetailsFD(myBidsCard.getAuctionId());
-                        }
-                        else if(myBidsCard.getType().toString().equals("DVDandMovies")){
+                        } else if (myBidsCard.getType().toString().equals("DVDandMovies")) {
                             additionalInfoLayout.addView(additionalInfoCap);
                             additionalInfoLayout.addView(dvdLayout);
                             setAdditionalDetailsDVD(myBidsCard.getAuctionId());
-                        }
-                        else if(myBidsCard.getType().toString().equals("HandMades")){
+                        } else if (myBidsCard.getType().toString().equals("HandMades")) {
                             additionalInfoLayout.addView(additionalInfoCap);
                             additionalInfoLayout.addView(hmLayout);
                             setAdditionalDetailsHM(myBidsCard.getAuctionId());
                         }
 
                     }
-
-
 
 
                 }
@@ -171,7 +177,7 @@ public class displayAds extends AppCompatActivity {
                 antiqueDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChildren()){
+                        if (dataSnapshot.hasChildren()) {
                             String Genere = dataSnapshot.child("materials").getValue(String.class);
                             TextView handmade_Materials = findViewById(R.id.handmade_Materials);
                             handmade_Materials.setText(Genere);
@@ -190,7 +196,7 @@ public class displayAds extends AppCompatActivity {
                 antiqueDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChildren()){
+                        if (dataSnapshot.hasChildren()) {
                             String Genere = dataSnapshot.child("Genere").getValue(String.class);
                             TextView dvdGenere = findViewById(R.id.dvdGenere);
                             dvdGenere.setText(Genere);
@@ -209,7 +215,7 @@ public class displayAds extends AppCompatActivity {
                 antiqueDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChildren()){
+                        if (dataSnapshot.hasChildren()) {
                             String brand = dataSnapshot.child("brand").getValue(String.class);
                             String condition = dataSnapshot.child("condition").getValue(String.class);
                             String material = dataSnapshot.child("material").getValue(String.class);
@@ -234,7 +240,7 @@ public class displayAds extends AppCompatActivity {
                 antiqueDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChildren()){
+                        if (dataSnapshot.hasChildren()) {
                             String brand = dataSnapshot.child("Brand").getValue(String.class);
                             String condition = dataSnapshot.child("Condition").getValue(String.class);
                             TextView E_Brand = findViewById(R.id.E_Brand);
@@ -256,7 +262,7 @@ public class displayAds extends AppCompatActivity {
                 antiqueDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChildren()){
+                        if (dataSnapshot.hasChildren()) {
                             String brand = dataSnapshot.child("brand").getValue(String.class);
                             String condition = dataSnapshot.child("condition").getValue(String.class);
                             TextView HobbyCateBrand = findViewById(R.id.HobbyCateBrand);
@@ -278,7 +284,7 @@ public class displayAds extends AppCompatActivity {
                 antiqueDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChildren()){
+                        if (dataSnapshot.hasChildren()) {
                             String environment = dataSnapshot.child("environment").getValue(String.class);
                             TextView Home_Garden_environment = findViewById(R.id.Home_Garden_environment);
                             Home_Garden_environment.setText(environment);
@@ -297,7 +303,7 @@ public class displayAds extends AppCompatActivity {
                 antiqueDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChildren()){
+                        if (dataSnapshot.hasChildren()) {
                             String Books = dataSnapshot.child("time_period").getValue(String.class);
                             TextView Book_Type = findViewById(R.id.Book_Type);
                             Book_Type.setText(Books);
@@ -317,7 +323,7 @@ public class displayAds extends AppCompatActivity {
                 antiqueDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChildren()){
+                        if (dataSnapshot.hasChildren()) {
                             String timrP = dataSnapshot.child("time_period").getValue(String.class);
                             TextView AN_Time = findViewById(R.id.AN_Time);
                             AN_Time.setText(timrP);
@@ -346,11 +352,6 @@ public class displayAds extends AppCompatActivity {
 //        nametext.setText(auctID.toString());
 
 
-
-
-
-
-
         //Drawer Section
         drawer = findViewById(R.id.DrwerLay);
         navi = (NavigationView) findViewById(R.id.nav_view);
@@ -360,37 +361,36 @@ public class displayAds extends AppCompatActivity {
 
 
         navi.bringToFront();
-        ActionBarDrawerToggle toggle1 = new ActionBarDrawerToggle(this , drawer , primTool , R.string.OpenDrawerDes , R.string.CloseDrawerDes);
+        ActionBarDrawerToggle toggle1 = new ActionBarDrawerToggle(this, drawer, primTool, R.string.OpenDrawerDes, R.string.CloseDrawerDes);
         drawer.addDrawerListener(toggle1);
         toggle1.syncState();
 
 
-//        navi.setNavigationItemSelectedListener(this);
 
 
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.Drawable_myBids:
-                        Intent in0 = new Intent(displayAds.this , Draft_Auctions.class);
+                        Intent in0 = new Intent(displayAds.this, Draft_Auctions.class);
                         startActivity(in0);
                         break;
                     case R.id.Drawable_myWins:
-                        Intent in1 = new Intent(displayAds.this , MyWins.class);
+                        Intent in1 = new Intent(displayAds.this, MyWins.class);
                         startActivity(in1);
                         break;
                     case R.id.Drawable_ViewAuctions:
-                        Intent in2 = new Intent(displayAds.this ,TabedAuctions.class);
+                        Intent in2 = new Intent(displayAds.this, TabedAuctions.class);
                         startActivity(in2);
                         break;
                     case R.id.Drawable_myAuctions:
-                        Intent in3 = new Intent(getApplicationContext() , HomePage.class);
+                        Intent in3 = new Intent(getApplicationContext(), HomePage.class);
                         startActivity(in3);
                         break;
                     default:
-                        Intent in6 = new Intent(getApplicationContext() , MyAuctions.class);
+                        Intent in6 = new Intent(getApplicationContext(), MyAuctions.class);
                         startActivity(in6);
                 }
                 return true;
@@ -401,8 +401,8 @@ public class displayAds extends AppCompatActivity {
         toBidButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent toBidIntent = new Intent(getApplicationContext() , PlaceBid.class);
-                toBidIntent.putExtra("AUCTION_ID" , auctID);
+                Intent toBidIntent = new Intent(getApplicationContext(), PlaceBid.class);
+                toBidIntent.putExtra("AUCTION_ID", auctID);
                 startActivity(toBidIntent);
             }
         });
@@ -411,7 +411,7 @@ public class displayAds extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setBasicDetails(MyBidsCard myBidsCard) {
-        TimeCalculations Tc = new TimeCalculations(myBidsCard.getDuration() , myBidsCard.getEndDate());
+        TimeCalculations Tc = new TimeCalculations(myBidsCard.getDuration(), myBidsCard.getEndDate());
 
         itemName.setText(myBidsCard.getTitle().toString());
         itemDes.setText(myBidsCard.getDescription().toString());
@@ -427,18 +427,8 @@ public class displayAds extends AppCompatActivity {
     private void iamgeRecycler() {
 
         imgeRecycle.setHasFixedSize(true);
-        imgeRecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
+        imgeRecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        ArrayList<BidSwiperClass> bidsimgAdapter = new ArrayList<>();
-
-        bidsimgAdapter.add(new BidSwiperClass(R.drawable.fashion1));
-        bidsimgAdapter.add(new BidSwiperClass(R.drawable.phone));
-        bidsimgAdapter.add(new BidSwiperClass(R.drawable.rings));
-        bidsimgAdapter.add(new BidSwiperClass(R.drawable.books));
-        bidsimgAdapter.add(new BidSwiperClass(R.drawable.rings));
-
-
-//        bidsimgAdapter.add(new BidSwiperClass(R.drawable.phone));
         rcAdapter = new BidSwiperAdapter(bidsimgAdapter);
 
         imgeRecycle.setAdapter(rcAdapter);
