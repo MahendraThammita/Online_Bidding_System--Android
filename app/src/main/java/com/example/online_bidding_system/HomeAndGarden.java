@@ -19,6 +19,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.TimeCalculations;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -240,10 +241,12 @@ public class HomeAndGarden extends AppCompatActivity {
                         adverticement.setType("HomeAndGarden");
                         adverticement.setSeller_ID("CUS1");
                         adverticement.setMaxBid("0");
-                        //set timepicker value
+
+
                         String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
                         adverticement.setDuration(strTime);
-                        //set datapicker value
+
+
                         // String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
                         //adverticement.setDate(strDate);
 
@@ -256,6 +259,14 @@ public class HomeAndGarden extends AppCompatActivity {
                         myCal.set(year, month, day);
                         SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
                         String strDate = dateFormat.format(myCal.getTime());
+
+                        //TimeCalculations timeCalculations = new TimeCalculations(strTime, strDate);
+                       // boolean flag = timeCalculations.isExpired();
+
+                        //if (flag == true) {
+                           // clearControl();
+                            //Toast.makeText(getApplicationContext(), "Please Enter a valid date", Toast.LENGTH_LONG).show();
+                        //}
                         adverticement.setDate(strDate);
 
 

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Books_Category"
+    android:background="@drawable/hoby"
     android:orientation="vertical">
 
 
@@ -24,9 +25,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hobbies And Sports"
+        android:textColor="@color/Black"
         android:fontFamily="sans-serif-black"
         android:textSize="24sp"
-        android:layout_margin="20dp"
+        android:layout_margin="30dp"
         />
     <!-- Display selected images -->
 
@@ -79,35 +81,40 @@
 
             <!--EditText -->
 
-            <EditText
-                android:id="@+id/setTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-black"
-                android:hint="Title"
-                android:inputType="text" />
-
-
-
 
             <!--EditText -->
             <EditText
+                android:id="@+id/setTitle"
+                android:layout_width="match_parent"
+
+                android:layout_height="56dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/textview_border"
+                android:fontFamily="sans-serif-black"
+                android:hint="  Title"
+                android:inputType="text"
+                android:textColorHint="@color/Black" />
+
+            <EditText
                 android:id="@+id/setPrice"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
                 android:layout_marginLeft="15dp"
+                android:layout_height="56dp"
+                android:textColorHint="@color/Black"
                 android:layout_marginBottom="20dp"
+                android:background="@drawable/textview_border"
                 android:fontFamily="sans-serif-black"
-                android:hint="Starting at"
+                android:hint="  Starting at"
                 android:inputType="text" />
             <!--EditText -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="End At"
+                android:textColor="@color/Black"
                 android:textSize="20sp"
                 android:layout_margin="12dp"></TextView>
 
@@ -133,11 +140,14 @@
             <EditText
                 android:id="@+id/setContact"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
+                android:layout_height="56dp"
                 android:layout_marginLeft="15dp"
+                android:background="@drawable/textview_border"
                 android:layout_marginBottom="20dp"
+                android:textColorHint="@color/Black"
                 android:fontFamily="sans-serif-black"
-                android:hint="Contact"
+                android:hint="  Contact"
                 android:inputType="text" />
 
 
@@ -146,29 +156,38 @@
             <EditText
                 android:id="@+id/setDescription"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
                 android:layout_marginLeft="15dp"
+                android:layout_height="56dp"
+                android:background="@drawable/textview_border"
                 android:layout_marginBottom="20dp"
+                android:textColorHint="@color/Black"
                 android:fontFamily="sans-serif-black"
-                android:hint="Description"
+                android:hint="  Description"
                 android:inputType="text" />
             <EditText
                 android:id="@+id/setCondition"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
+                android:layout_height="56dp"
                 android:layout_marginLeft="15dp"
+                android:background="@drawable/textview_border"
                 android:layout_marginBottom="20dp"
+                android:textColorHint="@color/Black"
                 android:fontFamily="sans-serif-black"
-                android:hint="Condition"
+                android:hint="  Condition"
                 android:inputType="text" />
             <EditText
                 android:id="@+id/setBrand"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
                 android:layout_marginLeft="15dp"
+                android:layout_height="56dp"
+                android:textColorHint="@color/Black"
+                android:background="@drawable/textview_border"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
-                android:hint=" Product Brand"
+                android:hint="  Product Brand"
                 android:inputType="text" />
             <LinearLayout
                 android:layout_width="match_parent"

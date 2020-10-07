@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Books_Category"
+    android:background="@drawable/oth"
     android:orientation="vertical">
 
 
@@ -24,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Other items"
+        android:textColor="@color/Black"
         android:fontFamily="sans-serif-black"
         android:textSize="24sp"
         android:layout_margin="20dp"
@@ -81,13 +83,16 @@
 
             <EditText
                 android:id="@+id/setTitle"
+                android:layout_height="56dp"
+                android:textColorHint="@color/Black"
+                android:background="@drawable/textview_border"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
-                android:hint="Title"
+                android:hint="  Title"
                 android:inputType="text" />
 
 
@@ -96,12 +101,15 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setPrice"
+                android:layout_height="56dp"
+                android:textColorHint="@color/Black"
+                android:background="@drawable/textview_border"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
-                android:hint="Starting at"
+                android:hint="  Starting at"
                 android:inputType="text" />
             <!--EditText -->
             <TextView
@@ -132,12 +140,15 @@
             <!--EditText -->
             <EditText
                 android:id="@+id/setContact"
+                android:layout_height="56dp"
+                android:textColorHint="@color/Black"
+                android:background="@drawable/textview_border"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
-                android:hint="Contact"
+                android:hint="  Contact"
                 android:inputType="text" />
 
 
@@ -146,11 +157,14 @@
             <EditText
                 android:id="@+id/setDescription"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
+                android:textColorHint="@color/Black"
+                android:background="@drawable/textview_border"
+
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
-                android:hint="Description"
+                android:hint="  Description"
                 android:inputType="text" />
             <LinearLayout
                 android:layout_width="match_parent"
