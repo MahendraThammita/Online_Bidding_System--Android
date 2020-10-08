@@ -197,6 +197,7 @@ public class HomeAndGarden extends AppCompatActivity {
                         final String strNumber = idPrefix + String.valueOf(maxid + 1);
                         DbRef.child(String.valueOf(strNumber)).setValue(homeitem);
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
+
                         for(int  i = 0 ; i < imageUris.size() ; i ++){
                             final StorageReference imageSrorageRef = fbStorageRef.child(String.valueOf(strNumber) + "." + String.valueOf(i));
                             imageSrorageRef.putFile(imageUris.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

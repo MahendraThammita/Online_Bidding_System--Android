@@ -2,12 +2,14 @@ package com.example.online_bidding_system;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
@@ -119,6 +121,7 @@ public class Sports_category extends AppCompatActivity {
         });
 
         PublishNow.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 DbRef = FirebaseDatabase.getInstance().getReference().child("Hobbies&Sports");
@@ -138,7 +141,8 @@ public class Sports_category extends AppCompatActivity {
                 });
 
             }
-            public void savedata(){
+
+            public void savedata() {
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Your Title is Required!", Toast.LENGTH_SHORT).show();
@@ -165,7 +169,6 @@ public class Sports_category extends AppCompatActivity {
                         adverticement.setDuration(strTime);
 
 
-
                         int year = dp.getYear();
                         int month = dp.getMonth();
                         int day = dp.getDayOfMonth();
@@ -177,11 +180,11 @@ public class Sports_category extends AppCompatActivity {
                         adverticement.setDate(strDate);
 
                         // DbRef.child("user").setValue(user);
-                        final String strNumber= idPrefix+String.valueOf(maxid+1);
+                        final String strNumber = idPrefix + String.valueOf(maxid + 1);
                         DbRef.child(String.valueOf(strNumber)).setValue(homeitem);
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
 
-                        for(int  i = 0 ; i < imageUris.size() ; i ++){
+                        for (int i = 0; i < imageUris.size(); i++) {
                             final StorageReference imageSrorageRef = fbStorageRef.child(String.valueOf(strNumber) + "." + String.valueOf(i));
                             imageSrorageRef.putFile(imageUris.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
@@ -191,8 +194,8 @@ public class Sports_category extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             String url = String.valueOf(uri);
-                                            setDownLink(url , strNumber);
-                                            Log.i("URL" , "Url Id : " + url);
+                                            setDownLink(url, strNumber);
+                                            Log.i("URL", "Url Id : " + url);
                                             String num = String.valueOf(noOfImages);
                                             noOfImages++;
                                             DbRef1.child(strNumber).child("Img").child(num).setValue(url);
@@ -201,12 +204,15 @@ public class Sports_category extends AppCompatActivity {
 
                                 }
 
-                            });}
+                            });
+                        }
                         Toast.makeText(getApplicationContext(), "Successfully Published", Toast.LENGTH_SHORT).show();
                         clearControl();
                         Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                         startActivity(displayIntent);
-                    }}
+                    }
+                }
+
 
 
                 catch (NumberFormatException e) {
@@ -328,34 +334,34 @@ public class Sports_category extends AppCompatActivity {
                     }
 
 
-                            } catch (NumberFormatException e) {
+                } catch (NumberFormatException e) {
 
-                                Toast.makeText(getApplicationContext(), "Something went Wrong", Toast.LENGTH_SHORT).show();
-
-
-                            }
-                        }
-
-                                private void setDownLink(String url, String strNumber) {
-
-                                    String key = String.valueOf(hashMap.size());
-                                    hashMap.put(key, url);
-
-                                }
+                    Toast.makeText(getApplicationContext(), "Something went Wrong", Toast.LENGTH_SHORT).show();
 
 
-                                public void clearControl() {
-                                    txtTitle.setText("");
-                                    txtPrice.setText("");
+                }
+            }
 
-                                    txtContact.setText("");
-                                    txtCondition.setText("");
-                                    txtBrand.setText("");
-                                    txtDescription.setText("");
-                                }
+            private void setDownLink(String url, String strNumber) {
+
+                String key = String.valueOf(hashMap.size());
+                hashMap.put(key, url);
+
+            }
 
 
-                            });
+            public void clearControl() {
+                txtTitle.setText("");
+                txtPrice.setText("");
+
+                txtContact.setText("");
+                txtCondition.setText("");
+                txtBrand.setText("");
+                txtDescription.setText("");
+            }
+
+
+        });
                             imageIs = findViewById(R.id.imageIs);
                             preBtn = findViewById(R.id.preButton);
                             nxBtn =  findViewById(R.id.nextButton);
