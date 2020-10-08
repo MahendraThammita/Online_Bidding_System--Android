@@ -47,6 +47,7 @@ public class EditBid extends AppCompatActivity {
     TextView bidName , bidID , myBidVal , bidMaxBid , bidEndsAt ,bidDes;
     Button btnConfermBid , btnDeleteBid;
     EditText bidGetter;
+    private ArrayList<BidSwiperClass> bidsimgAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,6 @@ public class EditBid extends AppCompatActivity {
 
         Intent recieverIntent = getIntent();
         final String auction_Id = recieverIntent.getStringExtra("AUCT_ID");
-        Log.i("Check Delete" , "Entered to editBid Page" + auction_Id);
 
         bidName = findViewById(R.id.editBid_ItemName);
         bidDes = findViewById(R.id.editBid_BidDescription);
@@ -67,8 +67,12 @@ public class EditBid extends AppCompatActivity {
         btnDeleteBid = findViewById(R.id.deleteBidBtn);
         bidGetter = findViewById(R.id.editBid_IncrementVal);
 
+        bidsimgAdapter  = new ArrayList<>();
+        imgeRecycle = findViewById(R.id.bidImagerSwiperRecyclarEditBid);
+        iamgeRecycler();
 
         recieverRef = FirebaseDatabase.getInstance().getReference("Adverticement").child(auction_Id);
+
         recieverRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -82,13 +86,22 @@ public class EditBid extends AppCompatActivity {
                     String des = dataSnapshot.child("description").getValue().toString();
                     String sellerId =dataSnapshot.child("seller_ID").getValue().toString();
                     String status =dataSnapshot.child("status").getValue().toString();
+                    Log.i("Images" , "prior to get image count");
+                    Long imgCount = dataSnapshot.child("Img").getChildrenCount();
+                    Log.i("Images" , "Entered into for loop  " + String.valueOf(imgCount));
+                    for(int j = 0 ; j < imgCount ; j++){
+                        String image = dataSnapshot.child("Img").child(String.valueOf(j)).getValue().toString();
+                        Log.i("Images" , "Image" + String.valueOf(j) + "  " +image);
+                        bidsimgAdapter.add(new BidSwiperClass(image));
+                    }
+                    Log.i("Images" , "Skipped For");
+                    iamgeRecycler();
+                    Log.i("Images" , "Call to recycler");
                     int MaxBid = Integer.valueOf(dataSnapshot.child("maxBid").getValue().toString());
                     int StartPrice = Integer.valueOf(dataSnapshot.child("price").getValue().toString());
 
                     MyBidsCard myBidsCard = new MyBidsCard(ADid , contact , des , Duration , Title , Type , endDate , sellerId , status , MaxBid , StartPrice);
-
-                    Log.i("Check Delete" , "Entered to first onDataChange");
-
+                    Log.i("Images" , "first on data change called");
                     bidName.setText(myBidsCard.getTitle());
                     bidDes.setText(myBidsCard.getDescription());
                     bidEndsAt.setText(myBidsCard.getEndDate() + " " + myBidsCard.getDuration());
@@ -204,8 +217,6 @@ public class EditBid extends AppCompatActivity {
 
 
 
-        imgeRecycle = findViewById(R.id.bidImagerSwiperRecyclar);
-        iamgeRecycler();
 
         drawer = findViewById(R.id.DrwerLay);
         navi = (NavigationView) findViewById(R.id.nav_view);
@@ -300,18 +311,9 @@ public class EditBid extends AppCompatActivity {
 
         imgeRecycle.setHasFixedSize(true);
         imgeRecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
-
-        ArrayList<BidSwiperClass> bidsimgAdapter = new ArrayList<>();
-//
-//        bidsimgAdapter.add(new BidSwiperClass(R.drawable.fashion1));
-//        bidsimgAdapter.add(new BidSwiperClass(R.drawable.rings));
-//        bidsimgAdapter.add(new BidSwiperClass(R.drawable.books));
-//        bidsimgAdapter.add(new BidSwiperClass(R.drawable.phone));
-//        bidsimgAdapter.add(new BidSwiperClass(R.drawable.rings));
-//        bidsimgAdapter.add(new BidSwiperClass(R.drawable.phone));
-
         adapter = new BidSwiperAdapter(bidsimgAdapter);
-
+        Log.i("Adapter" , "Adapter is set");
         imgeRecycle.setAdapter(adapter);
+        Log.i("Adapter" , "Set Adapter called");
     }
 }

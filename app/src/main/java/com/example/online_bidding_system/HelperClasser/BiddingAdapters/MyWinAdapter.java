@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.online_bidding_system.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -19,7 +20,6 @@ public class MyWinAdapter extends ArrayAdapter<MyBidsCard> {
 
     Context context;
     List<MyBidsCard> cardList;
-    int[] imgs = {R.drawable.books , R.drawable.dreamcatcher , R.drawable.auction1 , R.drawable.auction3 , R.drawable.cat_book , R.drawable.cat_dvd , R.drawable.cat_fashion , R.drawable.cat_garden , R.drawable.cat_handmade , R.drawable.cat_hobby , R.drawable.cat_handmade };
 
     public MyWinAdapter(@NonNull Context context, int resource, @NonNull List<MyBidsCard> objects) {
         super(context, resource, objects);
@@ -44,13 +44,10 @@ public class MyWinAdapter extends ArrayAdapter<MyBidsCard> {
         MyBidsCard winRow = cardList.get(position);
         itemNane.setText(winRow.getTitle());
         myBid.setText(winRow.getMybid() + " Rs");
-        //myBid.setText(String.valueOf(winRow.getMybid()));
-        //setting int values to text fields can caused to throw Resources$NotFoundException
-        //Use above syntax in those scenarios
         contNo.setText(winRow.getContactNo());
         sellerId.setText(winRow.getSeller_id());
         endingDate.setText(winRow.getEndDate());
-        mywinImg.setImageResource(imgs[position]);
+        Picasso.get().load(winRow.getImg()).into(mywinImg);
 
         return winCard;
     }
