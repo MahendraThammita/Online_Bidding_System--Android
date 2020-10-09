@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.online_bidding_system.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
 import java.util.List;
@@ -46,6 +47,7 @@ public class HomeAdapter extends ArrayAdapter<HomeCard> {
         AdTitle.setText(Ad.getTitle());
         AdMaxBid.setText( "Rs " + Ad.getMaxBid());
         AdTime.setText(Ad.getDuration());
+        Picasso.get().load(Ad.getImage()).into(cardImg);
 
 
         return HomeCard;

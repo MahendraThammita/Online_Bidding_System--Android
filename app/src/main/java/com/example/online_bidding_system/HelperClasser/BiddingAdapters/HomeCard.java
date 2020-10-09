@@ -5,16 +5,31 @@ public class HomeCard {
     private String Title;
     private String Duration;
     private String MaxBid;
+    private String Image ;
 
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        this.Image = image;
+    }
+
+    public HomeCard(String aucID, String title, String maxBid, String duration,String image) {
+        this.auctId = aucID;
+        Title = title;
+        MaxBid = maxBid;
+        Duration = duration;
+        Image = image;
+    }
 
     public HomeCard(String aucID, String title, String maxBid, String duration) {
         this.auctId = aucID;
         Title = title;
         MaxBid = maxBid;
         Duration = duration;
+
     }
-
-
 
 
 

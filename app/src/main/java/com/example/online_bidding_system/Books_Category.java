@@ -276,6 +276,16 @@ public class Books_Category extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_SHORT).show();
                     else {
 
+                        SimpleDateFormat fm = new SimpleDateFormat("HH:mm:ss");
+                        String hour = String.valueOf(tp.getHour());
+                        String min = String.valueOf(tp.getMinute());
+                        if(tp.getHour() < 10){
+                            hour = "0" + hour;
+                        }
+                        if(tp.getMinute() < 10){
+                            min = "0" + min;
+                        }
+
                         String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
                         adverticement.setDuration(strTime);
 

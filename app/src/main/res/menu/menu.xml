@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Search"
+        android:layout_width="match_parent"
+        android:id="@+id/search_items"
+        android:layout_height="40dp"
+        android:icon="@mipmap/electronics_icon"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView"
+        />
+
+
+
+
+
+
+
+</menu>

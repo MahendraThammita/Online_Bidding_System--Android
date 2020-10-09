@@ -274,10 +274,19 @@ public class Handmade_Category extends AppCompatActivity {
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_LONG).show();
                     else {
-                        adverticement.setTitle(txtTitle.getText().toString().trim());
-                        adverticement.setPrice(txtPrice.getText().toString().trim());
+
+                        SimpleDateFormat fm = new SimpleDateFormat("HH:mm:ss");
+                        String hour = String.valueOf(tp.getHour());
+                        String min = String.valueOf(tp.getMinute());
+
+                        if(tp.getHour() < 10){
+                            hour = "0" + hour;
+                        }
+                        if(tp.getMinute() < 10){
+                            min = "0" + min;
+                        }
+
                         String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
-                        adverticement.setDuration(strTime);
                         int year = dp.getYear();
                         int month = dp.getMonth();
                         int day = dp.getDayOfMonth();
@@ -294,7 +303,9 @@ public class Handmade_Category extends AppCompatActivity {
                             clearControl();
                             Toast.makeText(getApplicationContext(), "Please Enter a valid date", Toast.LENGTH_LONG).show();
                         } else {
-                            adverticement.setDate(strDate);
+                            adverticement.setTitle(txtTitle.getText().toString().trim());
+                            adverticement.setPrice(txtPrice.getText().toString().trim());
+                            adverticement.setDuration(strTime);
                             adverticement.setDate(strDate);
                             adverticement.setContact(txtContact.getText().toString().trim());
                             add.setMaterials(txtMaterials.getText().toString().trim());

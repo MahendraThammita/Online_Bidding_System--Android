@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -27,7 +28,6 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,7 +73,7 @@ public class HomePage extends AppCompatActivity {
 
 
     ListView listView;
-    SearchView searchView;
+    androidx.appcompat.widget.SearchView searchView;
     DatabaseReference dbRef;
     List<HomeCard> HomeCards;
     HomeAdapter singleCard;
@@ -177,6 +177,8 @@ public class HomePage extends AppCompatActivity {
 
        AdStorageRef = FirebaseStorage.getInstance().getReference("AntiqueImages");
 
+
+
         int images[] = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3};
         flipper = findViewById(R.id.flipper);
 
@@ -259,7 +261,8 @@ public class HomePage extends AppCompatActivity {
                     String endDate = ds.child("date").getValue().toString();
                     String AdImage = ds.child("Img").getValue().toString();
 
-                    AdStorageRef.child(AdImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+           /*         AdStorageRef.child(AdImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
 
@@ -276,8 +279,7 @@ public class HomePage extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
 
                         }
-                    });
-
+                    });*/
 
                     LocalDate datPart = LocalDate.parse(endDate);
                     LocalTime timePart = LocalTime.parse(Duration);
@@ -311,7 +313,7 @@ public class HomePage extends AppCompatActivity {
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
-                    HomeCard ad = new HomeCard(AucID , Title, MaxBid,duration);
+                    HomeCard ad = new HomeCard(AucID , Title, MaxBid,duration,AdImage);
                     HomeCards.add(ad);
                 }
                 if (HomeCards != null) {
