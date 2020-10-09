@@ -56,7 +56,8 @@
             android:id="@+id/myBidsList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:divider="@null">
+            android:divider="@null"
+            android:paddingBottom="150dp">
 
         </ListView>
 

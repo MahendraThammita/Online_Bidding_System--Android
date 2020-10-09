@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Books_Category"
+    android:background="@drawable/homegarden"
     android:orientation="vertical">
 
 
@@ -20,15 +21,16 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/primaryActbar"/>
 
+    <!-- Display selected images -->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home And Garden"
+        android:layout_margin="30dp"
         android:fontFamily="sans-serif-black"
-        android:textSize="24sp"
-        android:layout_margin="20dp"
-        />
-    <!-- Display selected images -->
+        android:text="Home And Garden"
+        android:textColor="@color/Black"
+        android:textSize="24sp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -82,12 +84,14 @@
             <EditText
                 android:id="@+id/setTitle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
+                android:background="@drawable/textview_border"
                 android:fontFamily="sans-serif-black"
-                android:hint="Title"
+                android:hint="  Title"
+                android:textColorHint="@color/Black"
                 android:inputType="text" />
 
 
@@ -97,17 +101,23 @@
             <EditText
                 android:id="@+id/setPrice"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+
+                android:layout_height="56dp"
+                android:textColorHint="@color/Black"
+                android:background="@drawable/textview_border"
+                android:layout_marginLeft="14dp"
+
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
-                android:hint="Starting at"
+                android:hint="  Starting at"
+
                 android:inputType="text" />
             <!--EditText -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="End At"
+                android:textColor="@color/Black"
                 android:textSize="20sp"
                 android:layout_margin="12dp"></TextView>
 
@@ -133,20 +143,27 @@
             <EditText
                 android:id="@+id/setContact"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
+                android:layout_height="56dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
+                android:background="@drawable/textview_border"
                 android:fontFamily="sans-serif-black"
-                android:hint="Contact"
+                android:textColorHint="@color/Black"
+                android:hint="  Contact"
                 android:inputType="phone" />
             <EditText
                 android:id="@+id/setEnvironment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
+                android:layout_height="56dp"
                 android:layout_marginLeft="15dp"
+
                 android:layout_marginBottom="20dp"
+                android:textColorHint="@color/Black"
                 android:fontFamily="sans-serif-black"
-                android:hint="Compatible Environment"
+                android:hint="  Compatible Environment"
+                android:background="@drawable/textview_border"
                 android:inputType="text" />
 
 
@@ -155,11 +172,14 @@
             <EditText
                 android:id="@+id/setDescription"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
                 android:layout_marginLeft="15dp"
+                android:textColorHint="@color/Black"
+                android:layout_height="56dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="sans-serif-black"
-                android:hint="Description"
+                android:background="@drawable/textview_border"
+                android:hint="  Description"
                 android:inputType="text" />
             <LinearLayout
                 android:layout_width="match_parent"

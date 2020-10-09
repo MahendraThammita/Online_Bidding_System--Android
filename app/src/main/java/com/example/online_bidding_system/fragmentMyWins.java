@@ -106,6 +106,7 @@ public class fragmentMyWins extends Fragment {
                     String seller_id = ds.child("seller_ID").getValue().toString();
                     String ContactNo = ds.child("contact").getValue().toString();
                     String Title = ds.child("title").getValue().toString();
+                    String img = ds.child("img").getValue().toString();
                     int MaxBid = Integer.valueOf(ds.child("maxBid").getValue().toString());
                     int Mybid = Integer.valueOf(ds.child("mybid").getValue().toString());
 
@@ -126,7 +127,7 @@ public class fragmentMyWins extends Fragment {
                         if (MaxBid == Mybid) {
                             //This is a bid won
                             MyBidsCard winningBid = new MyBidsCard();
-                            winningBid.setMywinCardValues(Title, ContactNo, Duration, endDate, MaxBid, Mybid, seller_id);
+                            winningBid.setMywinCardValues(Title, ContactNo, Duration, endDate, MaxBid, Mybid, seller_id , img);
                             myWinCards.add(winningBid);
                         }
                     }

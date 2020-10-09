@@ -1,14 +1,21 @@
 package com.example.online_bidding_system.HelperClasser.BiddingAdapters;
 
+import com.squareup.picasso.Picasso;
+
+import java.net.URL;
+
 public class BidSwiperClass {
 
-    int image;
+    //int image;
+    String image;
 
-    public BidSwiperClass(int image) {
+
+    public BidSwiperClass(String image) {
         this.image = image;
+
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 }

@@ -114,12 +114,13 @@ public class MyBidsFragment extends Fragment {
                     String Title = ds.child("title").getValue().toString();
                     String Type = ds.child("type").getValue().toString();
                     String endDate = ds.child("date").getValue().toString();
+                    String img = ds.child("img").getValue().toString();
                     int MaxBid = Integer.valueOf(ds.child("maxBid").getValue().toString());
                     int Mybid = Integer.valueOf(ds.child("mybid").getValue().toString());
                     int Start_Price = Integer.valueOf(ds.child("price").getValue().toString());
 
                     Log.i("ShowData" , "data Returned" + ContactNo + " - " + Description  + " - " + MaxBid);
-                    MyBidsCard my_Bid = new MyBidsCard(AuctId , ContactNo , Description , Duration , Title , Type , endDate , MaxBid , Mybid , Start_Price);
+                    MyBidsCard my_Bid = new MyBidsCard(AuctId , ContactNo , Description , Duration , Title , Type , endDate , MaxBid , Mybid , Start_Price , img);
                     //MyBidsCard my_Bid = ds.getValue(MyBidsCard.class);
                     myBidsCards.add(my_Bid);
                 }

@@ -1,5 +1,6 @@
 package com.example.online_bidding_system.HelperClasser.BiddingAdapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.online_bidding_system.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -33,7 +35,8 @@ public class BidSwiperAdapter extends RecyclerView.Adapter<BidSwiperAdapter.BidS
     public void onBindViewHolder(@NonNull BidSwiperViewHoldes holder, int position) {
 
         BidSwiperClass bidSwiperClass = bidSwiperLocation.get(position);
-        holder.image.setImageResource(bidSwiperClass.getImage());
+        Log.i("Image Check" , "Image Recieved to binder" + holder.image);
+        Picasso.get().load(bidSwiperClass.getImage()).into(holder.image);
 
     }
 

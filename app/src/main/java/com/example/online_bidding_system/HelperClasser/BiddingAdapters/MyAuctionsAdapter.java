@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.online_bidding_system.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -19,7 +20,6 @@ public class MyAuctionsAdapter extends ArrayAdapter<MyBidsCard> {
 
     Context context;
     List<MyBidsCard> myAuctList;
-    int[] imgs = {R.drawable.compass , R.drawable.dreamcatcher , R.drawable.auction1 , R.drawable.auction3 , R.drawable.cat_book , R.drawable.cat_dvd , R.drawable.cat_fashion , R.drawable.cat_garden , R.drawable.cat_handmade , R.drawable.cat_hobby , R.drawable.cat_handmade };
 
     public MyAuctionsAdapter(@NonNull Context context, int resource, @NonNull List<MyBidsCard> objects) {
         super(context, resource, objects);
@@ -48,7 +48,7 @@ public class MyAuctionsAdapter extends ArrayAdapter<MyBidsCard> {
         auctTime.setText(auction.getDuration());
         auctStatus.setText(auction.getStatus());
         auctionCateVal.setText(auction.getType());
-        auctcardImg.setImageResource(imgs[position]);
+        Picasso.get().load(auction.getImg()).into(auctcardImg);
 
 
         return auctCard;

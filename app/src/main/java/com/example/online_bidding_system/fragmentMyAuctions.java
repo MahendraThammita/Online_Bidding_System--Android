@@ -102,6 +102,7 @@ public class fragmentMyAuctions extends Fragment {
                     String Type = ds.child("type").getValue().toString();
                     String Title = ds.child("title").getValue().toString();
                     String status = ds.child("status").getValue().toString();
+                    String img = ds.child("Img").child("0").getValue().toString();
                     String ADid = ds.getKey().toString();
                     int MaxBid = Integer.valueOf(ds.child("maxBid").getValue().toString());
 
@@ -112,7 +113,7 @@ public class fragmentMyAuctions extends Fragment {
                     String finalDate = contactDate.toString();
 
                     MyBidsCard myAuction = new MyBidsCard();
-                    myAuction.setMyAuctionCardValues(Title , Duration , finalDate , MaxBid , ADid , Type , status);
+                    myAuction.setMyAuctionCardValues(Title , Duration , finalDate , MaxBid , ADid , Type , status , img);
                     myAuctionCards.add(myAuction);
                 }
                 if(myAuctionCards != null){

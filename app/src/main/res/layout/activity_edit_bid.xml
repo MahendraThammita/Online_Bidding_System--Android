@@ -42,8 +42,8 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView 
-            android:id="@+id/bidImagerSwiperRecyclar"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bidImagerSwiperRecyclarEditBid"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bidImagerSwiperRecyclar">
+            app:layout_constraintTop_toBottomOf="@+id/bidImagerSwiperRecyclarEditBid">
 
             <LinearLayout
                 android:layout_width="match_parent"

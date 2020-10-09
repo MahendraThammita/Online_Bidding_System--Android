@@ -2,13 +2,18 @@ package com.example.online_bidding_system;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,15 +24,20 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class Sports_category extends AppCompatActivity {
     EditText txtTitle,txtPrice,txtContact,txtBrand,txtCondition,txtDescription;
@@ -41,8 +51,13 @@ public class Sports_category extends AppCompatActivity {
     private ImageSwitcher imageIs;
     private Button preBtn,nxBtn, pickImgbtn;
     private ArrayList<Uri> imageUris;
+    private ArrayList<String> filenameList;
+    private HashMap<String , String> hashMap;
+
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
+    int noOfImages = 0;
+    StorageReference fbStorageRef;
     //data ref
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
@@ -65,6 +80,14 @@ public class Sports_category extends AppCompatActivity {
         txtDescription = findViewById(R.id.setDescription);
         PublishLater = findViewById(R.id.publish_later);
         PublishNow = findViewById(R.id.publish_now);
+        imageIs = findViewById(R.id.imageIs);
+        preBtn = findViewById(R.id.preButton);
+        nxBtn = findViewById(R.id.nextButton);
+        pickImgbtn = findViewById(R.id.pickImg);
+        imageUris = new ArrayList<>();
+        filenameList = new ArrayList<>();
+        hashMap = new HashMap<>();
+
 
         dp = findViewById(R.id.setDate);
 
@@ -84,9 +107,21 @@ public class Sports_category extends AppCompatActivity {
 
 
         mFirebaseDatabase1 = mFirebaseInstance.getReference("Hobbies&Sports");
-
+        fbStorageRef = FirebaseStorage.getInstance().getReference().child("AntiqueImages");
+        //Setting image picker intents
+        pickImgbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent imgsIntent = new Intent();
+                imgsIntent.setType("image/*");
+                imgsIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                imgsIntent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(imgsIntent, "Select Multiple Images"), PICK_IMAGES_CODE);
+            }
+        });
 
         PublishNow.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 DbRef = FirebaseDatabase.getInstance().getReference().child("Hobbies&Sports");
@@ -106,7 +141,8 @@ public class Sports_category extends AppCompatActivity {
                 });
 
             }
-            public void savedata(){
+
+            public void savedata() {
                 try {
                     if (TextUtils.isEmpty(txtTitle.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Your Title is Required!", Toast.LENGTH_SHORT).show();
@@ -133,7 +169,6 @@ public class Sports_category extends AppCompatActivity {
                         adverticement.setDuration(strTime);
 
 
-
                         int year = dp.getYear();
                         int month = dp.getMonth();
                         int day = dp.getDayOfMonth();
@@ -145,24 +180,54 @@ public class Sports_category extends AppCompatActivity {
                         adverticement.setDate(strDate);
 
                         // DbRef.child("user").setValue(user);
-                        String strNumber= idPrefix+String.valueOf(maxid+1);
+                        final String strNumber = idPrefix + String.valueOf(maxid + 1);
                         DbRef.child(String.valueOf(strNumber)).setValue(homeitem);
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
+
+                        for (int i = 0; i < imageUris.size(); i++) {
+                            final StorageReference imageSrorageRef = fbStorageRef.child(String.valueOf(strNumber) + "." + String.valueOf(i));
+                            imageSrorageRef.putFile(imageUris.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                    imageSrorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            String url = String.valueOf(uri);
+                                            setDownLink(url, strNumber);
+                                            Log.i("URL", "Url Id : " + url);
+                                            String num = String.valueOf(noOfImages);
+                                            noOfImages++;
+                                            DbRef1.child(strNumber).child("Img").child(num).setValue(url);
+                                        }
+                                    });
+
+                                }
+
+                            });
+                        }
                         Toast.makeText(getApplicationContext(), "Successfully Published", Toast.LENGTH_SHORT).show();
                         clearControl();
                         Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                         startActivity(displayIntent);
                     }
+                }
 
 
-                } catch (NumberFormatException e) {
+
+                catch (NumberFormatException e) {
 
                     Toast.makeText(getApplicationContext(), " wrong Inserted", Toast.LENGTH_SHORT).show();
 
 
                 }
-            }
+                    }
+                private void setDownLink(String url, String strNumber) {
 
+                    String key = String.valueOf(hashMap.size());
+                    hashMap.put(key , url);
+
+                }
 
             public void clearControl() {
                 txtTitle.setText("");
@@ -224,7 +289,6 @@ public class Sports_category extends AppCompatActivity {
                         adverticement.setDuration(strTime);
 
 
-
                         int year = dp.getYear();
                         int month = dp.getMonth();
                         int day = dp.getDayOfMonth();
@@ -236,22 +300,53 @@ public class Sports_category extends AppCompatActivity {
                         adverticement.setDate(strDate);
 
                         // DbRef.child("user").setValue(user);
-                        String strNumber= idPrefix+String.valueOf(maxid+1);
+                        final String strNumber = idPrefix + String.valueOf(maxid + 1);
                         DbRef.child(String.valueOf(strNumber)).setValue(homeitem);
                         DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
-                        Toast.makeText(getApplicationContext(), "Successfully Published", Toast.LENGTH_SHORT).show();
+                        for (int i = 0; i < imageUris.size(); i++) {
+                            final StorageReference imageSrorageRef = fbStorageRef.child(String.valueOf(strNumber) + "." + String.valueOf(i));
+                            imageSrorageRef.putFile(imageUris.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                    imageSrorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            String url = String.valueOf(uri);
+                                            setDownLink(url, strNumber);
+                                            Log.i("URL", "Url Id : " + url);
+                                            String num = String.valueOf(noOfImages);
+                                            noOfImages++;
+                                            DbRef1.child(strNumber).child("Img").child(num).setValue(url);
+                                        }
+                                    });
+
+                                }
+
+                            });
+
+                        }
+                        Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
                         clearControl();
                         Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                         startActivity(displayIntent);
+
                     }
 
 
                 } catch (NumberFormatException e) {
 
-                    Toast.makeText(getApplicationContext(), " wrong Inserted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Something went Wrong", Toast.LENGTH_SHORT).show();
 
 
                 }
+            }
+
+            private void setDownLink(String url, String strNumber) {
+
+                String key = String.valueOf(hashMap.size());
+                hashMap.put(key, url);
+
             }
 
 
@@ -267,101 +362,147 @@ public class Sports_category extends AppCompatActivity {
 
 
         });
-        imageIs = findViewById(R.id.imageIs);
-         preBtn = findViewById(R.id.preButton);
-         nxBtn =  findViewById(R.id.nextButton);
-         pickImgbtn = findViewById(R.id.pickImg);
-         imageUris = new ArrayList<>();
-        imageIs.setFactory(new ViewSwitcher.ViewFactory() {
-public ImageView makeView() {
-        ImageView imageView = new ImageView((getApplicationContext()));
-        return imageView;
-        }
-        });
-
-        pickImgbtn.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View view) {
-
-        pickImagesIntent();
-
-        }
-        });
+                            imageIs = findViewById(R.id.imageIs);
+                            preBtn = findViewById(R.id.preButton);
+                            nxBtn =  findViewById(R.id.nextButton);
+                            pickImgbtn = findViewById(R.id.pickImg);
+                            imageUris = new ArrayList<>();
 
 
+                            imageIs.setFactory(new ViewSwitcher.ViewFactory() {
+                                @Override
+                                public View makeView() {
+                                    ImageView imageView = new ImageView((getApplicationContext()));
+                                    return imageView;
+                                }
+                            });
 
-        preBtn.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View view) {
-        if(position>0){
-        position--;
-        imageIs.setImageURI(imageUris.get(position));
-        }
+                            pickImgbtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
 
-        else{
-        Toast.makeText(Sports_category.this,"Empty",Toast.LENGTH_SHORT).show();
-        }
-        }
-        });
+                                    pickImagesIntent();
 
-        nxBtn.setOnClickListener((new View.OnClickListener() {
-@Override
-public void onClick(View view) {
-
-        if(position<imageUris.size()-1){
-
-        position++;
-        imageIs.setImageURI(imageUris.get(position));
-        }
-
-        else{
-
-        Toast.makeText(Sports_category.this,"empty",Toast.LENGTH_SHORT).show();
-        }
-        }
-        }));
-        }
-
-private void pickImagesIntent(){
+                                }
+                            });
 
 
 
-        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
-        startActivityForResult(intent, PICK_IMAGES_CODE);
+                            preBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    if(position>0){
+                                        position--;
+                                        imageIs.setImageURI(imageUris.get(position));
+                                    }
 
-        }
+                                    else{
+                                        Toast.makeText(Sports_category.this,"Empty",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
 
-@Override
-protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGES_CODE){
+                            nxBtn.setOnClickListener((new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
 
-        if(resultCode == Activity.RESULT_OK){
-        if(data.getClipData() != null){
+                                    if(position<imageUris.size()-1){
 
-        int cout  = data.getClipData().getItemCount();
-        for(int i=0; i<cout; i++){
-        Uri imageUri = data.getClipData().getItemAt(i).getUri();
-        imageUris.add(imageUri);
-        }
+                                        position++;
+                                        imageIs.setImageURI(imageUris.get(position));
+                                    }
 
-        imageIs.setImageURI(imageUris.get(0));
-        position = 0;
-        }
+                                    else{
 
-        else{
-        Uri imageUri = data.getData();
-        imageUris.add(imageUri);
-        imageIs.setImageURI(imageUris.get(0));
-        position = 0;
-        }
-        }
-        }
-        }
-        }
+                                        Toast.makeText(Sports_category.this,"empty",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }));
+                        }
+
+                        private void pickImagesIntent(){
 
 
 
+                            Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+                            intent.setType("image/*");
+                            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+                            startActivityForResult(intent, PICK_IMAGES_CODE);
 
+                        }
+
+
+                        @Override
+                        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+                            super.onActivityResult(requestCode, resultCode, data);
+                            if (requestCode == PICK_IMAGES_CODE) {
+
+                                if (resultCode == Activity.RESULT_OK) {
+
+                                    if (data.getClipData() != null) {
+
+                                        int noOfItems = data.getClipData().getItemCount();
+                                        for(int i = 0 ; i < noOfItems ; i++){
+                                            Uri imageUri = data.getClipData().getItemAt(i).getUri();
+                                            imageUris.add(imageUri);
+                                            String FileNAme = getFileNameByURI(imageUri);
+                                            filenameList.add(FileNAme);
+
+                                        }
+
+
+                                        imageIs.setImageURI(imageUris.get(1));
+                                        Toast.makeText(getApplicationContext(), "Multiple Items Selected", Toast.LENGTH_SHORT).show();
+
+                                    } else if (data.getData() != null) {
+                                        Toast.makeText(getApplicationContext(), "Single Item Selected", Toast.LENGTH_SHORT).show();
+                                    }
+
+//                Uditha Statements
+//                if(data.getClipData() != null){
+//
+//                    int cout  = data.getClipData().getItemCount();
+//                    for(int i=0; i<cout; i++){
+//                        Uri imageUri = data.getClipData().getItemAt(i).getUri();
+//                        imageUris.add(imageUri);
+//                    }
+//
+//                    imageIs.setImageURI(imageUris.get(0));
+//                    position = 0;
+//                }
+//
+//                else{
+//                    Uri imageUri = data.getData();
+//                    imageUris.add(imageUri);
+//                    imageIs.setImageURI(imageUris.get(0));
+//                    position = 0;
+//                }
+                                }
+                            }
+                        }
+
+
+                        public  String getFileNameByURI(Uri uri){
+                            String filename = null;
+
+                            if(uri.getScheme().equals("content")){
+                                Cursor cursor = getContentResolver().query(uri , null , null , null , null);
+                                try{
+                                    if(cursor != null && cursor.moveToFirst()){
+                                        filename = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                                    }
+                                }finally {
+                                    cursor.close();
+                                }
+                            }
+                            if(filename == null){
+                                filename = uri.getPath();
+                                int rem = filename.lastIndexOf('/');
+                                if(rem != -1){
+                                    filename = filename.substring(rem +1);
+                                }
+                            }
+
+                            return filename;
+                        }
+                    }
