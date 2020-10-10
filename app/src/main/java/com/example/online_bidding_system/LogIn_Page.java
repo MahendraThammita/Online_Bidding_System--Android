@@ -98,9 +98,9 @@ public class LogIn_Page extends AppCompatActivity {
                             editor.apply();
 
 
-                            //Temporarily this has been set to Fashion category page
+                            //Temporarily this has been set to Home page page
 
-                            Intent intent = new Intent(LogIn_Page.this,Fashion_category.class);
+                            Intent intent = new Intent(LogIn_Page.this,HomePage.class);
                             startActivity(intent);
 
 
