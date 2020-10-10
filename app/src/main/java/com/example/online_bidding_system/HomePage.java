@@ -376,7 +376,7 @@ public class HomePage extends AppCompatActivity {
                         startActivity(in1);
                         break;
                     case R.id.Drawable_ViewAuctions:
-                        Intent in2 = new Intent(HomePage.this ,MyAuctions.class);
+                        Intent in2 = new Intent(HomePage.this ,Edit_User.class);
                         startActivity(in2);
                         break;
                     case R.id.Drawable_myAuctions:
