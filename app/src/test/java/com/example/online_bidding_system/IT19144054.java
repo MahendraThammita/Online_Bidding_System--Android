@@ -13,17 +13,21 @@ public class IT19144054 {
 
 
     @Before
-    public void setup(){Fashion_edit = new fashion_edit_page();}
-
-
-    @Test
-     public void testValidateTime(){
-
-
-        boolean result = Fashion_edit.ValidateTime("21:06:00");
-        assertEquals(true,result);
-
+    public void setup() {
+        Fashion_edit = new fashion_edit_page();
     }
 
 
+    @Test
+    public void testValidateTime() {
+
+
+        boolean result = Fashion_edit.ValidateTime("21:06:00");
+        assertEquals(true, result);
+
+    }
+
 }
+
+
+
