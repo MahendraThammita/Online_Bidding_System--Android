@@ -84,6 +84,11 @@ public class HomePage extends AppCompatActivity {
     private String userid;
     private StorageReference AdStorageRef;
 
+    SharedPreferences sp;
+    private static final String spn = "mypref";
+    private static final String kn = "name";
+    private static final String ke = "name";
+
 
     public HomePage() {
     }
@@ -106,6 +111,7 @@ public class HomePage extends AppCompatActivity {
                     String AucID = ds.getKey().toString();
                     String Duration = ds.child("duration").getValue().toString();
                     String endDate = ds.child("date").getValue().toString();
+                    String AdImage = ds.child("Img").getValue().toString();
 
 
                     LocalDate datPart = LocalDate.parse(endDate);
@@ -144,7 +150,7 @@ public class HomePage extends AppCompatActivity {
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
-                    HomeCard ad = new HomeCard(AucID, Title, MaxBid,duration);
+                    HomeCard ad = new HomeCard(AucID, Title, MaxBid,duration,AdImage);
 
                     if(EndMin > 0) {
                         HomeCards.add(ad);
@@ -174,6 +180,10 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        sp  =   getSharedPreferences(spn,MODE_PRIVATE);
+        final String name = sp.getString(kn,null);
+
 
        AdStorageRef = FirebaseStorage.getInstance().getReference("AntiqueImages");
 
@@ -215,16 +225,16 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 
-             /*   userid = null;
+              userid = name;
                 if (userid == null){
 
                     Intent redirectIntent = new Intent(getApplicationContext(), RegistrationPage.class);
                     startActivity(redirectIntent);
                 }
-                else {*/
+                else {
                     Intent addIntent = new Intent(getApplicationContext(), main_categories.class);
                     startActivity(addIntent);
-
+                }
             }
         });
 
@@ -313,7 +323,7 @@ public class HomePage extends AppCompatActivity {
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
-                    HomeCard ad = new HomeCard(AucID , Title, MaxBid,duration,AdImage);
+                    HomeCard ad = new HomeCard(AucID, Title, MaxBid, duration, AdImage);
                     HomeCards.add(ad);
                 }
                 if (HomeCards != null) {
