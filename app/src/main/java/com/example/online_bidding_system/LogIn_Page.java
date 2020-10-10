@@ -100,6 +100,8 @@ public class LogIn_Page extends AppCompatActivity {
 
                             //Temporarily this has been set to Home page page
 
+
+
                             Intent intent = new Intent(LogIn_Page.this,HomePage.class);
                             startActivity(intent);
 
