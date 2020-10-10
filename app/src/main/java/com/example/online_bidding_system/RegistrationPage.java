@@ -3,6 +3,7 @@ package com.example.online_bidding_system;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +29,7 @@ public class RegistrationPage extends AppCompatActivity {
     EditText txtFullName,txtNIC,txtEmail,txtAddress,txtPwd;
     Button butSave;
     DatabaseReference DbRef;
+    FirebaseAuth firebaseAuth;
     User user;
     long maxid=0;
     String idPrefix="CUS";
@@ -42,7 +48,8 @@ public class RegistrationPage extends AppCompatActivity {
 
         user = new User();
 
-
+        //NEW
+        firebaseAuth    = FirebaseAuth.getInstance();
 
 
 
@@ -52,7 +59,39 @@ public class RegistrationPage extends AppCompatActivity {
         butSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 DbRef = FirebaseDatabase.getInstance().getReference().child("User");
+
+
+
+                //Sending info to Firebase Authentication
+                String email = txtEmail.getText().toString().trim();
+                String password = txtPwd.getText().toString().trim();
+
+
+                firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if(task.isSuccessful()){
+
+                            Toast.makeText(RegistrationPage.this, "User Account Created", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
+                        }else{
+
+
+                            Toast.makeText(RegistrationPage.this, "Error Occurred !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+
+
+                        }
+
+                    }
+                });
+
+
+
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -60,6 +99,12 @@ public class RegistrationPage extends AppCompatActivity {
                             maxid = (dataSnapshot.getChildrenCount());
                         savedata();
                     }
+
+
+
+
+
+
 
 
                     @Override
@@ -86,14 +131,16 @@ public class RegistrationPage extends AppCompatActivity {
                                 return;
                             }
                             user.setNIC(txtNIC.getText().toString().trim());
-                            user.setEmail(txtEmail.getText().toString().trim());
-                            user.setPwd(txtPwd.getText().toString().trim());
+                            //user.setEmail(txtEmail.getText().toString().trim());
+                            //user.setPwd(txtPwd.getText().toString().trim());
                             user.setAddress(txtAddress.getText().toString().trim());
                             // DbRef.child("user").setValue(user);
                             String strNumber= idPrefix+String.valueOf(maxid+1);
                             DbRef.child(String.valueOf(strNumber)).setValue(user);
                             Toast.makeText(getApplicationContext(), "Successfully Registered", Toast.LENGTH_SHORT).show();
                             clearControl();
+
+
 
                         }
 
@@ -104,8 +151,10 @@ public class RegistrationPage extends AppCompatActivity {
 
 
                     }
-                }
 
+
+
+                }
 
 
 
@@ -119,7 +168,15 @@ public class RegistrationPage extends AppCompatActivity {
             }
 
 
+
+
+
         });}
+
+
+
+
+
 
     public boolean ValidateNIC(String nic){
         if (!nic.trim().matches("^[0-9]{9}[vVxX]$"))

@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,7 +28,6 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,8 @@ import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeAdapt
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeCard;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyAdapter;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +46,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -63,10 +69,11 @@ public class HomePage extends AppCompatActivity {
     ViewFlipper flipper;
     DatabaseReference DBRef;
     TextView title;
+    ImageView homeAdImg;
 
 
     ListView listView;
-    SearchView searchView;
+    androidx.appcompat.widget.SearchView searchView;
     DatabaseReference dbRef;
     List<HomeCard> HomeCards;
     HomeAdapter singleCard;
@@ -75,6 +82,12 @@ public class HomePage extends AppCompatActivity {
     private NavigationView navi;
     private Toolbar primTool;
     private String userid;
+    private StorageReference AdStorageRef;
+
+    SharedPreferences sp;
+    private static final String spn = "mypref";
+    private static final String kn = "name";
+    private static final String ke = "name";
 
 
     public HomePage() {
@@ -98,6 +111,7 @@ public class HomePage extends AppCompatActivity {
                     String AucID = ds.getKey().toString();
                     String Duration = ds.child("duration").getValue().toString();
                     String endDate = ds.child("date").getValue().toString();
+                    String AdImage = ds.child("Img").getValue().toString();
 
 
                     LocalDate datPart = LocalDate.parse(endDate);
@@ -136,7 +150,7 @@ public class HomePage extends AppCompatActivity {
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
-                    HomeCard ad = new HomeCard(AucID, Title, MaxBid,duration);
+                    HomeCard ad = new HomeCard(AucID, Title, MaxBid,duration,AdImage);
 
                     if(EndMin > 0) {
                         HomeCards.add(ad);
@@ -167,6 +181,12 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        sp  =   getSharedPreferences(spn,MODE_PRIVATE);
+        final String name = sp.getString(kn,null);
+
+
+       AdStorageRef = FirebaseStorage.getInstance().getReference("AntiqueImages");
+
 
 
 
@@ -188,6 +208,7 @@ public class HomePage extends AppCompatActivity {
         bids = findViewById(R.id.actionBarBid);
         msg = findViewById(R.id.actionBarMsg);
         profBtn = findViewById(R.id.actionBarProfile);
+        homeAdImg = findViewById(R.id.HomeAdImg);
 
         addNew = findViewById(R.id.addNew);
         antique = findViewById(R.id.btnAntique);
@@ -205,16 +226,16 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 
-             /*   userid = null;
+              userid = name;
                 if (userid == null){
 
                     Intent redirectIntent = new Intent(getApplicationContext(), RegistrationPage.class);
                     startActivity(redirectIntent);
                 }
-                else {*/
+                else {
                     Intent addIntent = new Intent(getApplicationContext(), main_categories.class);
                     startActivity(addIntent);
-
+                }
             }
         });
 
@@ -249,7 +270,27 @@ public class HomePage extends AppCompatActivity {
                     String AucID = ds.getKey().toString();
                     String Duration = ds.child("duration").getValue().toString();
                     String endDate = ds.child("date").getValue().toString();
+                    String AdImage = ds.child("Img").getValue().toString();
 
+
+           /*         AdStorageRef.child(AdImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+
+                            Picasso.get()
+                                    .load(uri)
+                                    .placeholder(R.drawable.movie)
+                                    .fit()
+                                    .centerCrop()
+                                    .into(homeAdImg);
+                        }
+
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });*/
 
                     LocalDate datPart = LocalDate.parse(endDate);
                     LocalTime timePart = LocalTime.parse(Duration);
@@ -283,7 +324,7 @@ public class HomePage extends AppCompatActivity {
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
-                    HomeCard ad = new HomeCard(AucID , Title, MaxBid,duration);
+                    HomeCard ad = new HomeCard(AucID, Title, MaxBid, duration, AdImage);
                     HomeCards.add(ad);
                 }
                 if (HomeCards != null) {

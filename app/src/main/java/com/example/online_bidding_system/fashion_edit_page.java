@@ -29,10 +29,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class fashion_edit_page extends AppCompatActivity{
+public class fashion_edit_page extends AppCompatActivity {
 
 
-    EditText editTitle,editPrice,editDuration,editTime,editDate,editContact,editMaterial,editDescription,editCondition,editSize;
+    EditText editTitle, editPrice, editDuration, editTime, editDate, editContact, editMaterial, editDescription, editCondition, editSize;
     Spinner period;
     Button PublishNow, update, delete;
 
@@ -46,10 +46,10 @@ public class fashion_edit_page extends AppCompatActivity{
     FdeHelper fCat;
     long maxid;
     String MaxBid;
-    String idPrefix="AN";
+    String idPrefix = "AN";
     private ImageSwitcher imageIs;
-    private Button preBtn,nxBtn, pickImgbtn;
-    private  ArrayList<Uri> imageUris;
+    private Button preBtn, nxBtn, pickImgbtn;
+    private ArrayList<Uri> imageUris;
     private String userId;
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
@@ -79,11 +79,11 @@ public class fashion_edit_page extends AppCompatActivity{
         editSize.findViewById(R.id.setSize);
         PublishNow = findViewById(R.id.publish_now);
         update = findViewById(R.id.Update);
-        delete =  findViewById(R.id.Delete);
+        delete = findViewById(R.id.Delete);
 
 
         fCat = new FdeHelper();
-        adverticement=new  Adverticement();
+        adverticement = new Adverticement();
 
         Intent retriveIntent = getIntent();
         String AuctName = retriveIntent.getStringExtra("AUCT_ID").toString();
@@ -97,7 +97,7 @@ public class fashion_edit_page extends AppCompatActivity{
         fAuth.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChildren()){
+                if (dataSnapshot.hasChildren()) {
 
 
                     editTitle.setText(dataSnapshot.child("title").getValue().toString());
@@ -109,11 +109,9 @@ public class fashion_edit_page extends AppCompatActivity{
                     editCondition.setText(dataSnapshot.child("condition").getValue().toString());
 
 
-                }
-                else
-                    Toast.makeText(getApplicationContext() , "Empty" , Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getApplicationContext(), "Empty", Toast.LENGTH_SHORT).show();
             }
-
 
 
             @Override
@@ -121,8 +119,6 @@ public class fashion_edit_page extends AppCompatActivity{
 
             }
         });
-
-
 
 
         delete.setOnClickListener(new View.OnClickListener() {
@@ -136,12 +132,11 @@ public class fashion_edit_page extends AppCompatActivity{
                 fAuth1 = FirebaseDatabase.getInstance().getReference().child("FashionAndDesign").child(AuctName);
                 fAuth.removeValue();
                 fAuth1.removeValue();
-                Toast.makeText(getApplicationContext() , "Succesfully Deleated" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Succesfully Deleated", Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                 startActivity(displayIntent);
             }
         });
-
 
 
         update.setOnClickListener(new View.OnClickListener() {
@@ -166,9 +161,7 @@ public class fashion_edit_page extends AppCompatActivity{
                 fAuth.child("FashionAndDesign").child(AuctName).child("condition").setValue(editCondition.getText().toString());
 
 
-
-
-                Toast.makeText(getApplicationContext() , "Successfully Updated" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Successfully Updated", Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                 startActivity(displayIntent);
 
@@ -186,7 +179,7 @@ public class fashion_edit_page extends AppCompatActivity{
                 fAuth = FirebaseDatabase.getInstance().getReference();
                 fAuth.child("Adverticement").child(AuctName).child("status").setValue("active");
 
-                Toast.makeText(getApplicationContext() , "Your Ad is now on Live" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Your Ad is now on Live", Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                 startActivity(displayIntent);
 
@@ -195,7 +188,7 @@ public class fashion_edit_page extends AppCompatActivity{
 
         imageIs = findViewById(R.id.imageIs);
         preBtn = findViewById(R.id.preButton);
-        nxBtn =  findViewById(R.id.nextButton);
+        nxBtn = findViewById(R.id.nextButton);
         pickImgbtn = findViewById(R.id.pickImg);
         imageUris = new ArrayList<>();
 
@@ -218,17 +211,14 @@ public class fashion_edit_page extends AppCompatActivity{
         });
 
 
-
         preBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(position>0){
+                if (position > 0) {
                     position--;
                     imageIs.setImageURI(imageUris.get(position));
-                }
-
-                else{
-                    Toast.makeText(fashion_edit_page.this,"Empty",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(fashion_edit_page.this, "Empty", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -237,30 +227,25 @@ public class fashion_edit_page extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
-                if(position<imageUris.size()-1){
+                if (position < imageUris.size() - 1) {
 
                     position++;
                     imageIs.setImageURI(imageUris.get(position));
-                }
+                } else {
 
-                else{
-
-                    Toast.makeText(fashion_edit_page.this,"empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(fashion_edit_page.this, "empty", Toast.LENGTH_SHORT).show();
                 }
             }
         }));
     }
 
 
+    private void pickImagesIntent() {
 
 
-    private void pickImagesIntent(){
-
-
-
-        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(intent, PICK_IMAGES_CODE);
 
     }
@@ -268,22 +253,20 @@ public class fashion_edit_page extends AppCompatActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGES_CODE){
+        if (requestCode == PICK_IMAGES_CODE) {
 
-            if(resultCode == Activity.RESULT_OK){
-                if(data.getClipData() != null){
+            if (resultCode == Activity.RESULT_OK) {
+                if (data.getClipData() != null) {
 
-                    int cout  = data.getClipData().getItemCount();
-                    for(int i=0; i<cout; i++){
+                    int cout = data.getClipData().getItemCount();
+                    for (int i = 0; i < cout; i++) {
                         Uri imageUri = data.getClipData().getItemAt(i).getUri();
                         imageUris.add(imageUri);
                     }
 
                     imageIs.setImageURI(imageUris.get(0));
                     position = 0;
-                }
-
-                else{
+                } else {
                     Uri imageUri = data.getData();
                     imageUris.add(imageUri);
                     imageIs.setImageURI(imageUris.get(0));
@@ -294,20 +277,16 @@ public class fashion_edit_page extends AppCompatActivity{
     }
 
 
-
     //Testing time for validation
-    public boolean ValidateTime(String time){
+    public boolean ValidateTime(String time) {
         if (!time.trim().matches("(([0-1][0-9])|([2][0-3])):([0-5][0-9]):([0-5][0-9])"))
             return false;
         return true;
 
 
-
-
-
-
     }
-
-
 }
+
+
+
 
