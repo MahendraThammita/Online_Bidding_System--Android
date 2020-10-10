@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -88,6 +89,8 @@ public class HomePage extends AppCompatActivity {
     private static final String spn = "mypref";
     private static final String kn = "name";
     private static final String ke = "name";
+
+    SharedPreferences shareP;
 
 
     public HomePage() {
@@ -180,6 +183,14 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+
+        shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , "Not Recieved");
+        Log.i("Loged" , "Loged By : " + logEmail);
+        Toast.makeText(getApplicationContext() , "Logged as" + logEmail , Toast.LENGTH_SHORT).show();
+
+
 
         sp  =   getSharedPreferences(spn,MODE_PRIVATE);
         final String name = sp.getString(kn,null);
