@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
@@ -102,6 +104,9 @@ public class PlaceBid extends AppCompatActivity {
 
                 final DatabaseReference setBidDbRef = FirebaseDatabase.getInstance().getReference("Adverticement").child(auctionId);
                 setBidDbRef.addValueEventListener(new ValueEventListener() {
+
+
+
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -180,12 +185,29 @@ public class PlaceBid extends AppCompatActivity {
                 DatabaseReference userBidRef = FirebaseDatabase.getInstance().getReference("User_Bids").child("CUS1").child(auctionId);
                 userBidRef.setValue(editedAd);
                 userBidRef.child("previous_Bid").setValue(editedAd.getMaxBid());
-                userBidRef.child("mybid").setValue(String.valueOf(newBid));
-                userBidRef.child("Img").child("0").setValue(editedAd.getImg());
-                Toast.makeText(getApplicationContext() , "Bid Placed Successfully" , Toast.LENGTH_SHORT).show();
+                userBidRef.child("mybid").setValue(String.valueOf(newBid)).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext() , "new bid dident updated" , Toast.LENGTH_SHORT).show();
+                        Log.i("My BID" , "My Bid Updated Error");
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.i("My BID" , "My Bid Updated Successfully");
+                    }
+                });
+                userBidRef.child("Img").child("0").setValue(editedAd.getImg()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getApplicationContext() , "Bid Placed Successfully" , Toast.LENGTH_SHORT).show();
 
-                Intent ConfermToMyBids = new Intent(getApplicationContext() , TabedAuctions.class);
-                startActivity(ConfermToMyBids);
+                        Intent ConfermToMyBids = new Intent(getApplicationContext() , TabedAuctions.class);
+                        startActivity(ConfermToMyBids);
+                    }
+                });
+                Toast.makeText(getApplicationContext() , "Error in updating value" , Toast.LENGTH_SHORT).show();
+
 
             }
         });

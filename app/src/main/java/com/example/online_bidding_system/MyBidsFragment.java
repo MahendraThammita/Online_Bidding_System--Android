@@ -2,10 +2,12 @@ package com.example.online_bidding_system;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyAdapter;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.TimeCalculations;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +33,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -103,6 +107,7 @@ public class MyBidsFragment extends Fragment {
 
 
         dbRef.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -116,18 +121,25 @@ public class MyBidsFragment extends Fragment {
                     String endDate = ds.child("date").getValue().toString();
                     String img = ds.child("img").getValue().toString();
                     int MaxBid = Integer.valueOf(ds.child("maxBid").getValue().toString());
-                    int Mybid = Integer.valueOf(ds.child("mybid").getValue().toString());
+                    int Mybid = 0;
+                    if(ds.child("mybid").getValue() != null){
+                        Mybid = Integer.parseInt(Objects.requireNonNull(ds.child("mybid").getValue()).toString());
+                    }
                     int Start_Price = Integer.valueOf(ds.child("price").getValue().toString());
 
                     Log.i("ShowData" , "data Returned" + ContactNo + " - " + Description  + " - " + MaxBid);
-                    MyBidsCard my_Bid = new MyBidsCard(AuctId , ContactNo , Description , Duration , Title , Type , endDate , MaxBid , Mybid , Start_Price , img);
-                    //MyBidsCard my_Bid = ds.getValue(MyBidsCard.class);
-                    myBidsCards.add(my_Bid);
+                    TimeCalculations tc = new TimeCalculations(Duration , endDate);
+                    if(! tc.isExpired()){
+                        MyBidsCard my_Bid = new MyBidsCard(AuctId , ContactNo , Description , Duration , Title , Type , endDate , MaxBid , Mybid , Start_Price , img);
+                        //MyBidsCard my_Bid = ds.getValue(MyBidsCard.class);
+                        myBidsCards.add(my_Bid);
+                    }
+
                 }
                 if(myBidsCards != null){
                     singleCard = new MyAdapter(getActivity() , R.layout.my_bid_card , myBidsCards );
                     bidList.setAdapter(singleCard);
-                    singleCard.notifyDataSetChanged();
+                    //singleCard.notifyDataSetChanged();
                 }
 
                 //singleCard.notifyDataSetChanged();

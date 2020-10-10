@@ -59,6 +59,14 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="40dp" />
+    <TextView
+        android:id="@+id/paymentAuctId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="sample"
+        android:textAlignment="center">
+
+    </TextView>
 
     <ScrollView
         android:layout_width="match_parent"

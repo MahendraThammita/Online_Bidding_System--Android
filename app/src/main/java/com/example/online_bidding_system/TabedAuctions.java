@@ -80,10 +80,12 @@ public class TabedAuctions extends AppCompatActivity {
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+                Intent in3 = new Intent(getApplicationContext() , TabedAuctions.class);
                 switch (item.getItemId()){
                     case R.id.Drawable_myBids:
-                        Toast.makeText(getApplicationContext() , "You are in My Bids page" , Toast.LENGTH_SHORT).show();
+                        Intent in10 = new Intent(getApplicationContext() , HomePage.class);
+                        stopService(in3);
+                        startActivity(in10);
                         break;
                     case R.id.Drawable_myWins:
                         Intent in1 = new Intent(getApplicationContext() , MyWins.class);
@@ -94,7 +96,7 @@ public class TabedAuctions extends AppCompatActivity {
                         startActivity(in2);
                         break;
                     case R.id.Drawable_myAuctions:
-                        Intent in3 = new Intent(getApplicationContext() , TabedAuctions.class);
+
                         startActivity(in3);
                         break;
                     default:

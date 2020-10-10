@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
@@ -21,6 +22,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
@@ -29,6 +32,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -96,19 +100,24 @@ public class fragmentMyWins extends Fragment {
         list = view.findViewById(R.id.myWinsList);
 
 
-        DbRefWins.addValueEventListener(new ValueEventListener() {
+        DbRefWins.addListenerForSingleValueEvent(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String Duration = ds.child("duration").getValue().toString();
-                    String endDate = ds.child("date").getValue().toString();
-                    String seller_id = ds.child("seller_ID").getValue().toString();
-                    String ContactNo = ds.child("contact").getValue().toString();
-                    String Title = ds.child("title").getValue().toString();
-                    String img = ds.child("img").getValue().toString();
-                    int MaxBid = Integer.valueOf(ds.child("maxBid").getValue().toString());
-                    int Mybid = Integer.valueOf(ds.child("mybid").getValue().toString());
+                    String Duration = Objects.requireNonNull(ds.child("duration").getValue()).toString();
+                    String endDate = Objects.requireNonNull(ds.child("date").getValue()).toString();
+                    String seller_id = Objects.requireNonNull(ds.child("seller_ID").getValue()).toString();
+                    String ContactNo = Objects.requireNonNull(ds.child("contact").getValue()).toString();
+                    String Title = Objects.requireNonNull(ds.child("title").getValue()).toString();
+                    String img = Objects.requireNonNull(ds.child("img").getValue()).toString();
+                    int MaxBid = Integer.parseInt(Objects.requireNonNull(ds.child("maxBid").getValue()).toString());
+                    int Mybid = 0;
+                    if(ds.child("mybid").getValue() != null){
+                        Mybid = Integer.parseInt(Objects.requireNonNull(ds.child("mybid").getValue()).toString());
+                    }
+
+                    Log.i("Fragment My wins" , "Auction ID : " + Title);
 
 //                    LocaleDataTime datePart = LocaleData.parse(endDate);
                     LocalDate datPart = LocalDate.parse(endDate);
@@ -137,7 +146,7 @@ public class fragmentMyWins extends Fragment {
                 if (myWinCards != null) {
                     singleWinCard = new MyWinAdapter(getActivity(), R.layout.my_wins_card, myWinCards);
                     list.setAdapter(singleWinCard);
-                    singleWinCard.notifyDataSetChanged();
+                    //singleWinCard.notifyDataSetChanged();
                 }
             }
 
@@ -146,6 +155,7 @@ public class fragmentMyWins extends Fragment {
 
             }
         });
+
 
 
         return view;

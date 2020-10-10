@@ -28,6 +28,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,14 +98,16 @@ public class fragmentMyAuctions extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    String Duration = ds.child("duration").getValue().toString();
-                    String endDate = ds.child("date").getValue().toString();
-                    String Type = ds.child("type").getValue().toString();
-                    String Title = ds.child("title").getValue().toString();
-                    String status = ds.child("status").getValue().toString();
-                    String img = ds.child("Img").child("0").getValue().toString();
-                    String ADid = ds.getKey().toString();
-                    int MaxBid = Integer.valueOf(ds.child("maxBid").getValue().toString());
+                    int MaxBid = 0;
+                    String Duration = Objects.requireNonNull(ds.child("duration").getValue()).toString();
+                    String endDate = Objects.requireNonNull(ds.child("date").getValue()).toString();
+                    String Type = Objects.requireNonNull(ds.child("type").getValue()).toString();
+                    String Title = Objects.requireNonNull(ds.child("title").getValue()).toString();
+                    Log.i("My Auction Fragment" , "Auction ID : " + Title );
+                    String status = Objects.requireNonNull(ds.child("status").getValue()).toString();
+                    String img = Objects.requireNonNull(ds.child("Img").child("0").getValue()).toString();
+                    String ADid = ds.getKey();
+                    MaxBid = Integer.valueOf(Objects.requireNonNull(ds.child("maxBid").getValue()).toString());
 
 
                     LocalDate datPart = LocalDate.parse(endDate);
@@ -119,7 +122,7 @@ public class fragmentMyAuctions extends Fragment {
                 if(myAuctionCards != null){
                     singleAuction = new MyAuctionsAdapter(getActivity() , R.layout.my_auction_card , myAuctionCards);
                     auctList.setAdapter(singleAuction);
-                    singleAuction.notifyDataSetChanged();
+                    //singleAuction.notifyDataSetChanged();
                 }
 
             }

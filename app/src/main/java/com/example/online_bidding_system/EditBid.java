@@ -35,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class EditBid extends AppCompatActivity {
 
@@ -199,7 +200,7 @@ public class EditBid extends AppCompatActivity {
                                 startActivity(intentTotab);
                             }
                             else
-                                Toast.makeText(getApplicationContext() , "You Are not allowed to delete  your bid in lsst five hours" , Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext() , "You Are not allowed to delete  your bid in last five hours" , Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -294,8 +295,11 @@ public class EditBid extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChildren()){
-                    String userBid = dataSnapshot.child("mybid").getValue().toString();
-
+                    String userBid = "";
+                    if(dataSnapshot.child("mybid").getValue() != null){
+                        userBid = Objects.requireNonNull(dataSnapshot.child("mybid").getValue()).toString();
+                    }
+                    //String userBid = dataSnapshot.child("mybid").getValue().toString();
                     myBidVal.setText(userBid + ".00 Rs");
                 }
             }
