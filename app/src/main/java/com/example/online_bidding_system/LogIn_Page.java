@@ -98,9 +98,11 @@ public class LogIn_Page extends AppCompatActivity {
                             editor.apply();
 
 
-                            //Temporarily this has been set to Main activity
+                            //Temporarily this has been set to Home page page
 
-                            Intent intent = new Intent(LogIn_Page.this,MainActivity.class);
+
+
+                            Intent intent = new Intent(LogIn_Page.this,HomePage.class);
                             startActivity(intent);
 
 
