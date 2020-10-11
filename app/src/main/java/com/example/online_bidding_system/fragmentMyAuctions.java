@@ -1,5 +1,8 @@
 package com.example.online_bidding_system;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -41,6 +44,8 @@ public class fragmentMyAuctions extends Fragment {
     DatabaseReference bySellerRef;
     List<MyBidsCard> myAuctionCards;
     MyAuctionsAdapter singleAuction;
+    private SharedPreferences shareP;
+    private String loged_UID;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,10 +90,19 @@ public class fragmentMyAuctions extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        shareP = this.getActivity().getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        loged_UID = shareP.getString("USER_ID" , null);
+        if(loged_UID == null){
+            Intent toLogin = new Intent(getActivity() , LogIn_Page.class);
+            startActivity(toLogin);
+        }
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_auctions, container, false);
         //bySellerRef = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("seller_id").equalTo("CUS2");
-        Query bySellerQuery = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("seller_ID").equalTo("CUS1");
+        Query bySellerQuery = FirebaseDatabase.getInstance().getReference("Adverticement").orderByChild("seller_ID").equalTo(loged_UID);
 
         myAuctionCards = new ArrayList<>();
         auctList = view.findViewById(R.id.AuctionCardsList);
@@ -132,23 +146,6 @@ public class fragmentMyAuctions extends Fragment {
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-       // String items[] = {"Auction Name 1" , "Auction Name 2" , "Auction Name 3" , "Auction Name 4" , "Auction Name 5" , "Auction Name 6" , "Auction Name 7"};
-
-       // ArrayAdapter singleAuction = new ArrayAdapter(getActivity() , R.layout.my_auction_card , R.id.AuctionCardAuctionName, items);
-
-//        auctList = view.findViewById(R.id.AuctionCardsList);
-//
-//        auctList.setAdapter(singleAuction);
 
         return view;
     }
