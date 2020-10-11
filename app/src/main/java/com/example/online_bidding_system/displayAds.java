@@ -9,11 +9,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,6 +42,7 @@ import com.squareup.picasso.Target;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class displayAds extends AppCompatActivity {
 //BidId
@@ -63,12 +66,15 @@ public class displayAds extends AppCompatActivity {
     private TextView EndingTime;
     private TextView itemMaxBid;
     private TextView itemCurrentBid;
-    private TextView additionalInfoCap;
+    private TextView additionalInfoCap , bidDetailscount;
     private Button toBidButton;
+    private CountDownTimer countDownTimer;
 
     private ArrayList<BidSwiperClass> bidsimgAdapter;
     private SharedPreferences shareP;
     private String loged_UID;
+
+    private static long startTimeInMillies;
 
 
     @Override
@@ -96,6 +102,8 @@ public class displayAds extends AppCompatActivity {
         itemMaxBid = findViewById(R.id.displayAuct_maxBidVal);
         itemCurrentBid = findViewById(R.id.displayAuct_myBidVal);
         additionalInfoCap = findViewById(R.id.AdditionalInfocap);
+        bidDetailscount = findViewById(R.id.bidDetailscount);
+
 
         additionalInfoLayout = findViewById(R.id.additional_Info_Area);
         antiqueLayout = findViewById(R.id.subCate_Antique);
@@ -142,6 +150,7 @@ public class displayAds extends AppCompatActivity {
 
                     MyBidsCard myBidsCard = new MyBidsCard(ADid, contact, des, Duration, Title, Type, endDate, sellerId, status, MaxBid, StartPrice);
                     setBasicDetails(myBidsCard);
+                    startTimer(Duration , endDate);
                     //removeAllChildListviewa();
                     additionalInfoLayout.removeAllViews();
 
@@ -421,6 +430,44 @@ public class displayAds extends AppCompatActivity {
                 startActivity(toBidIntent);
             }
         });
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void startTimer(String duration, String endDate) {
+
+        TimeCalculations tc = new TimeCalculations(duration , endDate);
+        startTimeInMillies = tc.getRemTimeinMills();
+
+        countDownTimer = new CountDownTimer(startTimeInMillies , 1000) {
+            @Override
+            public void onTick(long l) {
+                startTimeInMillies = l;
+                updateCountDownTimer();
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private void updateCountDownTimer() {
+        int hrs = (int) startTimeInMillies / 3600000;
+        long min_sec = (startTimeInMillies % 3600000);
+        int mins = (int) (min_sec / 1000) / 60 ;
+        int sec = (int) (min_sec / 1000) % 60 ;
+
+        String formatedLeftTime = String.format(Locale.getDefault(),"%02d : %02d : %02d" , hrs , mins , sec);
+
+        if(hrs < 5){
+
+        }
+
+        bidDetailscount.setTextColor(R.color.MDBdangercolor);
+        bidDetailscount.setText(formatedLeftTime);
 
     }
 

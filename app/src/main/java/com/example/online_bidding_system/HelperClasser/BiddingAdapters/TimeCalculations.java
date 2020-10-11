@@ -59,6 +59,12 @@ public class TimeCalculations {
         return durationInFormat.toString();
     };
 
+    public long getRemTimeinMills(){
+        LocalDateTime endTime = this.calcFinalDateTimeInLDT(this.endTime , this.endDate);
+        long difInMills = ChronoUnit.MILLIS.between(currentTime , endTime);
+        return difInMills;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public LocalTime calcTimeDifInMIn_Hrs_InTime(){
 
