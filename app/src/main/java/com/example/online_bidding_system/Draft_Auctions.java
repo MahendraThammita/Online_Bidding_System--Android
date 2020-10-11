@@ -120,6 +120,7 @@ public class Draft_Auctions extends AppCompatActivity {
                     String ADid = ds.getKey().toString();
                     String ADStatus = ds.child("status").getValue().toString();
                     int Startingbid = Integer.parseInt(ds.child("price").getValue().toString());
+                    String img = ds.child("Img").child("0").getValue().toString();
 
 
 
@@ -129,9 +130,14 @@ public class Draft_Auctions extends AppCompatActivity {
                     String finalDate = contactDate.toString();
 
                     MyBidsCard singleBidVals = new MyBidsCard();
-                    singleBidVals.setDraftAuctionsValues(Title , Duration , endDate , Startingbid , ADid , Type);
+                    singleBidVals.setDraftAuctionsValues(Title , Duration , endDate , Startingbid , ADid , Type , ADStatus , img);
                     oneDraft.add(singleBidVals);
 
+                }
+
+                if(oneDraft != null){
+                    oneDraftCard = new DraftAdapter(getApplicationContext() , R.layout.draft_auction_card , oneDraft);
+                    draftsList.setAdapter(oneDraftCard);
                 }
 
             }
@@ -141,10 +147,7 @@ public class Draft_Auctions extends AppCompatActivity {
 
             }
         });
-        Log.i("ErrorTAg" , "adpter called");
-        oneDraftCard = new DraftAdapter(getApplicationContext() , R.layout.draft_auction_card , oneDraft);
-        Log.i("ErrorTAg" , "adpter called2");
-        draftsList.setAdapter(oneDraftCard);
+
 
         draftsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

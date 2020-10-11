@@ -170,39 +170,6 @@
 
                 </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp"
-                        android:text="@string/PostAuctionText"
-                        android:background="@color/MDBsuccessDark"
-                        android:layout_weight="1"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"/>
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp"
-                        android:text="@string/EditAuctionText"
-                        android:background="@color/BootstrapPrimary"
-                        android:layout_weight="1"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"/>
-
-                </LinearLayout>
-
-
-
-
-
             </LinearLayout>
 
 

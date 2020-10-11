@@ -3,6 +3,7 @@ package com.example.online_bidding_system;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -46,8 +47,8 @@ public class LogIn_Page extends AppCompatActivity {
         fAuth       =   FirebaseAuth.getInstance();
         uslogin     =   findViewById(R.id.signin);
 
-        sharedPreferences   =    getSharedPreferences(sharedPrefName,MODE_PRIVATE);
-        String name = sharedPreferences.getString(keyName,null);
+        sharedPreferences   =    getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        //String name = sharedPreferences.getString(keyName,null);
 
 
         uslogin.setOnClickListener(new View.OnClickListener() {
@@ -94,8 +95,9 @@ public class LogIn_Page extends AppCompatActivity {
 
 
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString(keyName,txtEmail.getText().toString());
-                            editor.apply();
+                            editor.putString("UserEmail",txtEmail.getText().toString());
+                            editor.commit();
+                            //editor.apply();
 
 
                             //Temporarily this has been set to Home page page
