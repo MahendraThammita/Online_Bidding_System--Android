@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -40,8 +41,6 @@ import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCar
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -86,13 +85,15 @@ public class HomePage extends AppCompatActivity {
     private String userid;
     private StorageReference AdStorageRef;
 
-    SharedPreferences sp;
-    private static final String spn = "mypref";
-    private static final String kn = "name";
-    private static final String ke = "name";
 
-    FirebaseAuth fAuth;
-    FirebaseUser firebaseUser;
+    SharedPreferences sp;
+    private String uID;
+//    private static final String spn = "mypref";
+//    private static final String kn = "name";
+//    private static final String ke = "name";
+
+    SharedPreferences shareP;
+
 
     public HomePage() {
     }
@@ -185,13 +186,25 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        sp  =   getSharedPreferences(spn,MODE_PRIVATE);
-        final String name = sp.getString(kn,null);
-        fAuth = FirebaseAuth.getInstance();
-        firebaseUser = fAuth.getCurrentUser();
+
+        shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        uID = shareP.getString("USER_ID" , null);
+        Log.i("Loged" , "Loged By : " + logEmail);
+        Toast.makeText(getApplicationContext() , "Logged as" + logEmail , Toast.LENGTH_SHORT).show();
+        if(uID == null){
+            Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
+            startActivity(toLogin);
+        }
+
+
+//
+//        sp  =   getSharedPreferences(spn,MODE_PRIVATE);
+//        final String name = sp.getString(kn,null);
 
 
        AdStorageRef = FirebaseStorage.getInstance().getReference("AntiqueImages");
+
 
 
 
@@ -230,9 +243,8 @@ public class HomePage extends AppCompatActivity {
         addNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                userid = name;
+                
+              userid = uID;
                 if (userid == null){
 
                     Intent redirectIntent = new Intent(getApplicationContext(), RegistrationPage.class);
@@ -382,7 +394,7 @@ public class HomePage extends AppCompatActivity {
                         startActivity(in1);
                         break;
                     case R.id.Drawable_ViewAuctions:
-                        Intent in2 = new Intent(HomePage.this ,MyAuctions.class);
+                        Intent in2 = new Intent(HomePage.this ,Edit_User.class);
                         startActivity(in2);
                         break;
                     case R.id.Drawable_myAuctions:

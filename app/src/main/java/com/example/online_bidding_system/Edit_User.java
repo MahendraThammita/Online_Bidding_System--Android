@@ -16,6 +16,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -61,6 +63,11 @@ public class Edit_User extends AppCompatActivity {
     private String userId;
     private StorageReference downStorageRef;
 
+    private TextInputEditText editUserName;
+    private TextInputEditText editUserEmail;
+    private TextInputEditText editUserAddress;
+    private TextInputEditText editUserPhone;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +76,11 @@ public class Edit_User extends AppCompatActivity {
 
         retriveDbRef = FirebaseDatabase.getInstance().getReference().child("User").child("CUS1");
         storageRef = FirebaseStorage.getInstance().getReference("userImages");
+
+        editUserName = findViewById(R.id.editUserName);
+        editUserEmail = findViewById(R.id.editUserEmail);
+        editUserAddress = findViewById(R.id.editUserAddress);
+        editUserPhone = findViewById(R.id.editUserPhone);
 
         roundedProfilePic = findViewById(R.id.UserEditUserImage);
         
@@ -145,6 +157,35 @@ public class Edit_User extends AppCompatActivity {
                 Bitmap bitmap = ((BitmapDrawable)roundedProfilePic.getDrawable()).getBitmap();
                 progressBar = findViewById(R.id.progressBarEditUser);
 
+                try{
+                    if(TextUtils.isEmpty(editUserName.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "User name cannot be empty" , Toast.LENGTH_SHORT);
+                    }
+                    if(TextUtils.isEmpty(editUserEmail.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "User Email cannot be empty" , Toast.LENGTH_SHORT);
+                    }
+                    if(TextUtils.isEmpty(editUserAddress.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "User Address cannot be empty" , Toast.LENGTH_SHORT);
+                    }
+                    if(TextUtils.isEmpty(editUserPhone.getText().toString())){
+                        Toast.makeText(getApplicationContext() , "User Phone cannot be empty" , Toast.LENGTH_SHORT);
+                    }else {
+                        String uName = editUserName.getText().toString();
+                        String uEmail = editUserEmail.getText().toString();
+                        String uAddress = editUserAddress.getText().toString();
+                        String uPhone = editUserPhone.getText().toString();
+                        retriveDbRef.child("fullName").setValue(uName);
+                        retriveDbRef.child("email").setValue(uEmail);
+                        retriveDbRef.child("address").setValue(uAddress);
+                        retriveDbRef.child("phone").setValue(uPhone);
+                        Toast.makeText(getApplicationContext() , "Data Saved Successfully" , Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (NumberFormatException | NullPointerException ex){
+                    Toast.makeText(getApplicationContext() , "please Input values in correct format" , Toast.LENGTH_SHORT);
+                    Log.i("Edit User Exception" , "Exception : " + ex);
+                }
+
                 if(profPicUri != null){
                     final String imageName = userId + "." + getFileExt(profPicUri);
                     StorageReference fileref = storageRef.child(imageName);
@@ -164,7 +205,7 @@ public class Edit_User extends AppCompatActivity {
                                         }
                                     }, 500);
 
-                                    Toast.makeText(getApplicationContext() , "Data Saved Successfully" , Toast.LENGTH_SHORT).show();
+
                                     retriveDbRef.child("ProfilePic").setValue(imageName);
                                     finish();
                                     startActivity(getIntent());
@@ -191,7 +232,6 @@ public class Edit_User extends AppCompatActivity {
                 else{
 
                 }
-
             }
         });
 

@@ -87,13 +87,15 @@ public class MyBidsCard {
         this.img = img;
     }
 
-    public void setDraftAuctionsValues(String Title , String duration, String endDate, int maxBid, String ADid, String Type){
+    public void setDraftAuctionsValues(String Title , String duration, String endDate, int maxBid, String ADid, String Type , String status , String img){
         this.Title = Title;
         this.Duration = duration;
         this.endDate = endDate;
         this.MaxBid = maxBid;
         this.auctionId = ADid;
         this.Type = Type;
+        this.status = status;
+        this.img = img;
     }
 
     //Getters

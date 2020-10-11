@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.online_bidding_system.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -43,6 +45,7 @@ public class DraftAdapter extends ArrayAdapter<MyBidsCard> {
         TextView draftStart = Draftcard.findViewById(R.id.DraftAuctionCardAuctionStBid);
         TextView draftEnds = Draftcard.findViewById(R.id.auctionhignbidEndsAtVal);
         TextView draftStatus = Draftcard.findViewById(R.id.auctionStatudVal);
+        ImageView AuctioCrdImg = Draftcard.findViewById(R.id.AuctioCrdImg);
 
 
         MyBidsCard DraftBid = myDrafts.get(position);
@@ -52,6 +55,8 @@ public class DraftAdapter extends ArrayAdapter<MyBidsCard> {
         draftCategory.setText(DraftBid.getType());
         draftStart.setText(DraftBid.getStart_Price() + " Rs");
         draftStatus.setText(DraftBid.getStatus());
+        Picasso.get().load(DraftBid.getImg()).into(AuctioCrdImg);
+        draftEnds.setText(DraftBid.getEndDate() +" - "+ DraftBid.getDuration());
 
 
         return Draftcard;

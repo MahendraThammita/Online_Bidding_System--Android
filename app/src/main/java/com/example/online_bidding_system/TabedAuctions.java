@@ -11,8 +11,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,9 +39,21 @@ public class TabedAuctions extends AppCompatActivity {
     private fragmentMyWins myWinsFrag;
     private  MyBidsFragment myBidsFrag;
     private fragmentMyAuctions myAuctFrag;
+    private SharedPreferences shareP;
+    private String loged_UID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        loged_UID = shareP.getString("USER_ID" , null);
+        if(loged_UID == null){
+            Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
+            startActivity(toLogin);
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabed_auctions);
 
@@ -80,10 +95,12 @@ public class TabedAuctions extends AppCompatActivity {
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+                Intent in3 = new Intent(getApplicationContext() , TabedAuctions.class);
                 switch (item.getItemId()){
                     case R.id.Drawable_myBids:
-                        Toast.makeText(getApplicationContext() , "You are in My Bids page" , Toast.LENGTH_SHORT).show();
+                        Intent in10 = new Intent(getApplicationContext() , HomePage.class);
+                        stopService(in3);
+                        startActivity(in10);
                         break;
                     case R.id.Drawable_myWins:
                         Intent in1 = new Intent(getApplicationContext() , MyWins.class);
@@ -94,7 +111,7 @@ public class TabedAuctions extends AppCompatActivity {
                         startActivity(in2);
                         break;
                     case R.id.Drawable_myAuctions:
-                        Intent in3 = new Intent(getApplicationContext() , TabedAuctions.class);
+
                         startActivity(in3);
                         break;
                     default:

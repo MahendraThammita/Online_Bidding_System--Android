@@ -55,8 +55,8 @@ public class MyAdapter extends ArrayAdapter<MyBidsCard> {
             String remTime = timeCalculations.calcFinalDateTime();
 
             bidTitle.setText(bid.getTitle());
-            cardMaxBid.setText(bid.getMaxBid() + " Rs");
-            cardMyBid.setText(bid.getMybid() + " Rs");
+            cardMaxBid.setText(bid.getMaxBid() + ".00 Rs");
+            cardMyBid.setText(bid.getMybid() + ".00 Rs");
             //cardImg.setImageResource(imgs[position]);
             Picasso.get().load(bid.getImg()).into(cardImg);
             cardTime.setText(remTime);

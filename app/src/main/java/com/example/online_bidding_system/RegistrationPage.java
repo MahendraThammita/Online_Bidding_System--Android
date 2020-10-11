@@ -140,6 +140,8 @@ public class RegistrationPage extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Successfully Registered", Toast.LENGTH_SHORT).show();
                             clearControl();
 
+                            Intent i = new Intent(getApplicationContext(),LogIn_Page.class);
+                            startActivity(i);
 
 
                         }

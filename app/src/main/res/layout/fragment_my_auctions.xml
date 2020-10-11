@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:divider="@null"
-            android:paddingBottom="250dp">
+            android:layout_marginBottom="140dp">
 
         </ListView>
 

@@ -1,10 +1,14 @@
 package com.example.online_bidding_system;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.util.LocaleData;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
@@ -21,6 +25,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
@@ -29,6 +35,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +48,8 @@ public class fragmentMyWins extends Fragment {
     DatabaseReference DbRefWins;
     List<MyBidsCard> myWinCards;
     MyWinAdapter singleWinCard;
+    private SharedPreferences shareP;
+    private String loged_UID;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,28 +96,42 @@ public class fragmentMyWins extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        shareP = this.getActivity().getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        loged_UID = shareP.getString("USER_ID" , null);
+        if(loged_UID == null){
+            Intent toLogin = new Intent(getActivity() , LogIn_Page.class);
+            startActivity(toLogin);
+        }
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_wins, container, false);
 
-        DbRefWins = FirebaseDatabase.getInstance().getReference().child("User_Bids").child("CUS1");
+        DbRefWins = FirebaseDatabase.getInstance().getReference().child("User_Bids").child(loged_UID);
         //MyBidsCard winOb = new MyBidsCard();
         myWinCards = new ArrayList<>();
         list = view.findViewById(R.id.myWinsList);
 
 
-        DbRefWins.addValueEventListener(new ValueEventListener() {
+        DbRefWins.addListenerForSingleValueEvent(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String Duration = ds.child("duration").getValue().toString();
-                    String endDate = ds.child("date").getValue().toString();
-                    String seller_id = ds.child("seller_ID").getValue().toString();
-                    String ContactNo = ds.child("contact").getValue().toString();
-                    String Title = ds.child("title").getValue().toString();
-                    String img = ds.child("img").getValue().toString();
-                    int MaxBid = Integer.valueOf(ds.child("maxBid").getValue().toString());
-                    int Mybid = Integer.valueOf(ds.child("mybid").getValue().toString());
+                    String Duration = Objects.requireNonNull(ds.child("duration").getValue()).toString();
+                    String endDate = Objects.requireNonNull(ds.child("date").getValue()).toString();
+                    String seller_id = Objects.requireNonNull(ds.child("seller_ID").getValue()).toString();
+                    String ContactNo = Objects.requireNonNull(ds.child("contact").getValue()).toString();
+                    String Title = Objects.requireNonNull(ds.child("title").getValue()).toString();
+                    String img = Objects.requireNonNull(ds.child("img").getValue()).toString();
+                    int MaxBid = Integer.parseInt(Objects.requireNonNull(ds.child("maxBid").getValue()).toString());
+                    int Mybid = 0;
+                    if(ds.child("mybid").getValue() != null){
+                        Mybid = Integer.parseInt(Objects.requireNonNull(ds.child("mybid").getValue()).toString());
+                    }
+
+                    Log.i("Fragment My wins" , "Auction ID : " + Title);
 
 //                    LocaleDataTime datePart = LocaleData.parse(endDate);
                     LocalDate datPart = LocalDate.parse(endDate);
@@ -137,7 +160,7 @@ public class fragmentMyWins extends Fragment {
                 if (myWinCards != null) {
                     singleWinCard = new MyWinAdapter(getActivity(), R.layout.my_wins_card, myWinCards);
                     list.setAdapter(singleWinCard);
-                    singleWinCard.notifyDataSetChanged();
+                    //singleWinCard.notifyDataSetChanged();
                 }
             }
 
@@ -146,6 +169,7 @@ public class fragmentMyWins extends Fragment {
 
             }
         });
+
 
 
         return view;

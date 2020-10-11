@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,17 +38,28 @@ import java.util.List;
 
 public class Draft_Auctions extends AppCompatActivity {
 
-    ListView draftsList;
-    DrawerLayout drawer;
-    NavigationView navi;
-    Toolbar primTool;
+    private ListView draftsList;
+    private DrawerLayout drawer;
+    private NavigationView navi;
+    private Toolbar primTool;
 
-    DatabaseReference dbRef;
-    List<MyBidsCard> oneDraft;
-    DraftAdapter oneDraftCard;
+    private DatabaseReference dbRef;
+    private List<MyBidsCard> oneDraft;
+    private DraftAdapter oneDraftCard;
+    private SharedPreferences shareP;
+    private String loged_UID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        loged_UID = shareP.getString("USER_ID" , null);
+        if(loged_UID == null){
+            Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
+            startActivity(toLogin);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draft__auctions);
 
@@ -119,19 +132,28 @@ public class Draft_Auctions extends AppCompatActivity {
                     String Title = ds.child("title").getValue().toString();
                     String ADid = ds.getKey().toString();
                     String ADStatus = ds.child("status").getValue().toString();
+                    String sellerID = ds.child("seller_ID").getValue().toString();
                     int Startingbid = Integer.parseInt(ds.child("price").getValue().toString());
-
-
+                    String img = ds.child("Img").child("0").getValue().toString();
 
                     LocalDate datPart = LocalDate.parse(endDate);
                     LocalTime timePart = LocalTime.parse(Duration);
                     LocalDateTime contactDate = LocalDateTime.of(datPart , timePart);
                     String finalDate = contactDate.toString();
 
-                    MyBidsCard singleBidVals = new MyBidsCard();
-                    singleBidVals.setDraftAuctionsValues(Title , Duration , endDate , Startingbid , ADid , Type);
-                    oneDraft.add(singleBidVals);
+                    if(sellerID.equals(loged_UID)){
 
+                        MyBidsCard singleBidVals = new MyBidsCard();
+                        singleBidVals.setDraftAuctionsValues(Title , Duration , endDate , Startingbid , ADid , Type , ADStatus , img);
+                        oneDraft.add(singleBidVals);
+
+                    }
+
+                }
+
+                if(oneDraft != null){
+                    oneDraftCard = new DraftAdapter(getApplicationContext() , R.layout.draft_auction_card , oneDraft);
+                    draftsList.setAdapter(oneDraftCard);
                 }
 
             }
@@ -141,10 +163,7 @@ public class Draft_Auctions extends AppCompatActivity {
 
             }
         });
-        Log.i("ErrorTAg" , "adpter called");
-        oneDraftCard = new DraftAdapter(getApplicationContext() , R.layout.draft_auction_card , oneDraft);
-        Log.i("ErrorTAg" , "adpter called2");
-        draftsList.setAdapter(oneDraftCard);
+
 
         draftsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
