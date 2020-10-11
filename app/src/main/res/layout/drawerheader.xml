@@ -21,6 +21,7 @@
             app:cardCornerRadius="43dp">
 
             <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/DrawableUserImage"
                 app:shapeAppearanceOverlay="@style/roundedImages"
                 android:layout_width="86dp"
                 android:layout_height="86dp"
@@ -32,6 +33,7 @@
 
 
             <TextView
+                android:id="@+id/DrawableUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/amita"
@@ -46,6 +48,7 @@
             </TextView>
 
             <TextView
+                android:id="@+id/DrawableUseEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/EmailDemo"

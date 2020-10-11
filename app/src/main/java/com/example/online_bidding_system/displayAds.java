@@ -9,7 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.BidSwiperAdapter;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.BidSwiperClass;
@@ -42,32 +45,44 @@ public class displayAds extends AppCompatActivity {
 //BidId
 
 
-    RecyclerView imgeRecycle;
-    RecyclerView.Adapter rcAdapter;
-    TextView nametext;
-    LinearLayout dveLenier;
+    private RecyclerView imgeRecycle;
+    private RecyclerView.Adapter rcAdapter;
+    private TextView nametext;
+    private LinearLayout dveLenier;
     private DrawerLayout drawer;
     private NavigationView navi;
     private Toolbar primTool;
     private DatabaseReference dbRef;
     private StorageReference storeRef;
 
-    LinearLayout antiqueLayout, booksLayout, dvdLayout, fdLayout, electronicsLayout, hmLayout, hobbyLayout, homeGardenLayout, additionalInfoLayout;
+    private LinearLayout antiqueLayout, booksLayout, dvdLayout, fdLayout, electronicsLayout, hmLayout, hobbyLayout, homeGardenLayout, additionalInfoLayout;
 
-    TextView itemName;
-    TextView itemDes;
-    TextView itemSeller;
-    TextView EndingTime;
-    TextView itemMaxBid;
-    TextView itemCurrentBid;
-    TextView additionalInfoCap;
-    Button toBidButton;
+    private TextView itemName;
+    private TextView itemDes;
+    private TextView itemSeller;
+    private TextView EndingTime;
+    private TextView itemMaxBid;
+    private TextView itemCurrentBid;
+    private TextView additionalInfoCap;
+    private Button toBidButton;
 
     private ArrayList<BidSwiperClass> bidsimgAdapter;
+    private SharedPreferences shareP;
+    private String loged_UID;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        loged_UID = shareP.getString("USER_ID" , null);
+        if(loged_UID == null){
+            Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
+            Toast.makeText(getApplicationContext() , "Please Login First" , Toast.LENGTH_SHORT);
+            startActivity(toLogin);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_ads);
         Intent retriveIntent = getIntent();

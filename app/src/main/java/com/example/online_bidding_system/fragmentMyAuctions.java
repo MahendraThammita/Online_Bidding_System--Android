@@ -93,8 +93,8 @@ public class fragmentMyAuctions extends Fragment {
 
         shareP = this.getActivity().getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
         String logEmail = shareP.getString("UserEmail" , null);
-        loged_UID = shareP.getString("USER_ID" , null);
-        if(loged_UID == null){
+        loged_UID = shareP.getString("USER_ID" , "");
+        if(loged_UID.equals("")){
             Intent toLogin = new Intent(getActivity() , LogIn_Page.class);
             startActivity(toLogin);
         }

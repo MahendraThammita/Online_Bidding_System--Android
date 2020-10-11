@@ -9,7 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -67,14 +69,26 @@ public class Edit_User extends AppCompatActivity {
     private TextInputEditText editUserEmail;
     private TextInputEditText editUserAddress;
     private TextInputEditText editUserPhone;
+    private SharedPreferences shareP;
+    private String loged_UID;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        loged_UID = shareP.getString("USER_ID" , null);
+        if(loged_UID == null){
+            Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
+            Toast.makeText(getApplicationContext() , "Please Login First" , Toast.LENGTH_SHORT);
+            startActivity(toLogin);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__user);
 
-        retriveDbRef = FirebaseDatabase.getInstance().getReference().child("User").child("CUS1");
+        retriveDbRef = FirebaseDatabase.getInstance().getReference().child("User").child(loged_UID);
         storageRef = FirebaseStorage.getInstance().getReference("userImages");
 
         editUserName = findViewById(R.id.editUserName);
@@ -91,7 +105,12 @@ public class Edit_User extends AppCompatActivity {
                     userId = dataSnapshot.getKey().toString();
                     String userName =  dataSnapshot.child("fullName").getValue().toString();
                     String userEmail =  dataSnapshot.child("email").getValue().toString();
-                    //String userContact =  dataSnapshot.child("").getValue().toString();
+                    Object userContact =  dataSnapshot.child("phone").getValue();
+                    String userContactStr = "N/A";
+                    if(userContact != null){
+                        userContactStr = userContact.toString();
+                    }
+
                     String userAddress =  dataSnapshot.child("address").getValue().toString();
                     String userImage = dataSnapshot.child("ProfilePic").getValue().toString();
 
@@ -116,7 +135,7 @@ public class Edit_User extends AppCompatActivity {
                     });
 
                     
-                    currentUser = new User(userId , userName , userEmail , userAddress , "07525815");
+                    currentUser = new User(userId , userName , userEmail , userAddress , userContactStr);
                     setToViewHints(currentUser);
                     
                 }
@@ -170,10 +189,10 @@ public class Edit_User extends AppCompatActivity {
                     if(TextUtils.isEmpty(editUserPhone.getText().toString())){
                         Toast.makeText(getApplicationContext() , "User Phone cannot be empty" , Toast.LENGTH_SHORT);
                     }else {
-                        String uName = editUserName.getText().toString();
-                        String uEmail = editUserEmail.getText().toString();
-                        String uAddress = editUserAddress.getText().toString();
-                        String uPhone = editUserPhone.getText().toString();
+                        String uName = editUserName.getText().toString().trim();
+                        String uEmail = editUserEmail.getText().toString().trim();
+                        String uAddress = editUserAddress.getText().toString().trim();
+                        String uPhone = editUserPhone.getText().toString().trim();
                         retriveDbRef.child("fullName").setValue(uName);
                         retriveDbRef.child("email").setValue(uEmail);
                         retriveDbRef.child("address").setValue(uAddress);
@@ -285,12 +304,6 @@ public class Edit_User extends AppCompatActivity {
 
     }
 
-//    private void getUserImage(String userImage) {
-//
-//        downStorageRef = FirebaseStorage.getInstance().getReference("userImages");
-//        //roundedProfilePic
-//        Glide.with(this).using(new Fire)
-//    }
 
     private void setToViewHints(User currentUser) {
 

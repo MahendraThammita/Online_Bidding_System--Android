@@ -9,7 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -39,19 +41,31 @@ import java.util.Objects;
 
 public class EditBid extends AppCompatActivity {
 
-    RecyclerView imgeRecycle;
-    RecyclerView.Adapter adapter;
-    DrawerLayout drawer;
-    NavigationView navi;
-    Toolbar primTool;
-    DatabaseReference recieverRef;
-    TextView bidName , bidID , myBidVal , bidMaxBid , bidEndsAt ,bidDes;
-    Button btnConfermBid , btnDeleteBid;
-    EditText bidGetter;
+    private RecyclerView imgeRecycle;
+    private RecyclerView.Adapter adapter;
+    private DrawerLayout drawer;
+    private NavigationView navi;
+    private Toolbar primTool;
+    private DatabaseReference recieverRef;
+    private TextView bidName , bidID , myBidVal , bidMaxBid , bidEndsAt ,bidDes;
+    private Button btnConfermBid , btnDeleteBid;
+    private EditText bidGetter;
     private ArrayList<BidSwiperClass> bidsimgAdapter;
+    private SharedPreferences shareP;
+    private String loged_UID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        loged_UID = shareP.getString("USER_ID" , null);
+        if(loged_UID == null){
+            Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
+            Toast.makeText(getApplicationContext() , "Please Login First" , Toast.LENGTH_SHORT);
+            startActivity(toLogin);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_bid);
 
@@ -141,7 +155,7 @@ public class EditBid extends AppCompatActivity {
                             MyBidsCard myBidsCard = new MyBidsCard(ADid , contact , des , Duration , Title , Type , endDate , sellerId , status , MaxBid , StartPrice);
 
                             try{
-                                int newBid = Integer.parseInt(bidGetter.getText().toString());
+                                int newBid = Integer.parseInt(bidGetter.getText().toString().trim());
                                 int oldMax = myBidsCard.getMaxBid();
 
                                 if(TextUtils.isEmpty(bidGetter.getText().toString())){
@@ -175,7 +189,7 @@ public class EditBid extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                recieverRef = FirebaseDatabase.getInstance().getReference("User_Bids").child("CUS1").child(auction_Id);
+                recieverRef = FirebaseDatabase.getInstance().getReference("User_Bids").child(loged_UID).child(auction_Id);
                 recieverRef.addValueEventListener(new ValueEventListener() {
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
@@ -267,7 +281,7 @@ public class EditBid extends AppCompatActivity {
     }
 
     private void updateUserBidchild(final MyBidsCard myBidsCard, final int newBid) {
-        final DatabaseReference refToUserBids = FirebaseDatabase.getInstance().getReference("User_Bids").child("CUS1").child(myBidsCard.getAuctionId());
+        final DatabaseReference refToUserBids = FirebaseDatabase.getInstance().getReference("User_Bids").child(loged_UID).child(myBidsCard.getAuctionId());
         refToUserBids.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -289,7 +303,7 @@ public class EditBid extends AppCompatActivity {
     }
 
     private void getUserBidValues(MyBidsCard myBidsCard) {
-        DatabaseReference useBidReference = FirebaseDatabase.getInstance().getReference("User_Bids").child("CUS1").child(myBidsCard.getAuctionId());
+        DatabaseReference useBidReference = FirebaseDatabase.getInstance().getReference("User_Bids").child(loged_UID).child(myBidsCard.getAuctionId());
 
         useBidReference.addValueEventListener(new ValueEventListener() {
             @Override
