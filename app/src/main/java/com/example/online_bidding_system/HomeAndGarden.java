@@ -174,12 +174,18 @@ public class HomeAndGarden extends AppCompatActivity {
                         adverticement.setType("HomeAndGarden");
                         adverticement.setSeller_ID("CUS1");
                         adverticement.setMaxBid("0");
-                        //set timepicker value
-                        String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
+
+                        SimpleDateFormat fm = new SimpleDateFormat("HH:mm:ss");
+                        String hour = String.valueOf(tp.getHour());
+                        String min = String.valueOf(tp.getMinute());
+                        if(tp.getHour() < 10){
+                            hour = "0" + hour;
+                        }
+                        if(tp.getMinute() < 10){
+                            min = "0" + min;
+                        }
+                        String strTime = hour + ":" + min + ":" + "00";
                         adverticement.setDuration(strTime);
-                        //set datapicker value
-                        // String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
-                        //adverticement.setDate(strDate);
 
 
                         int year = dp.getYear();
