@@ -26,7 +26,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class RegistrationPage extends AppCompatActivity {
 
-    EditText txtFullName,txtNIC,txtEmail,txtAddress,txtPwd;
+    EditText txtFullName,txtNIC,txtEmail,txtAddress,txtPwd,txtEmail2;
     Button butSave;
     DatabaseReference DbRef;
     FirebaseAuth firebaseAuth;
@@ -45,6 +45,7 @@ public class RegistrationPage extends AppCompatActivity {
         txtAddress =  findViewById(R.id.address);
         txtNIC =  findViewById(R.id.NIC);
         butSave = findViewById(R.id.savebtn);
+        txtEmail2 = findViewById(R.id.email);
 
         user = new User();
 
@@ -65,7 +66,7 @@ public class RegistrationPage extends AppCompatActivity {
 
 
                 //Sending info to Firebase Authentication
-                String email = txtEmail.getText().toString().trim();
+                String email = txtEmail2.getText().toString().trim();
                 String password = txtPwd.getText().toString().trim();
 
 
@@ -131,7 +132,7 @@ public class RegistrationPage extends AppCompatActivity {
                                 return;
                             }
                             user.setNIC(txtNIC.getText().toString().trim());
-                            //user.setEmail(txtEmail.getText().toString().trim());
+                            user.setEmail(txtEmail.getText().toString().trim());
                             //user.setPwd(txtPwd.getText().toString().trim());
                             user.setAddress(txtAddress.getText().toString().trim());
                             // DbRef.child("user").setValue(user);

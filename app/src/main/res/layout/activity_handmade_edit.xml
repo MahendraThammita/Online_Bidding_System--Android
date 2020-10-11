@@ -116,14 +116,23 @@
                 android:id="@+id/setDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"></EditText>
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Date"
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/setTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp">
-            </EditText>
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="Time"
+                android:inputType="text" />
+
+
             <!--EditText -->
             <EditText
                 android:id="@+id/setContact"

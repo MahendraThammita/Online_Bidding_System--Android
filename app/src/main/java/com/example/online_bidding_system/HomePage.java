@@ -91,10 +91,6 @@ public class HomePage extends AppCompatActivity {
 
     SharedPreferences sp;
     private String uID;
-//    private static final String spn = "mypref";
-//    private static final String kn = "name";
-//    private static final String ke = "name";
-
     SharedPreferences shareP;
 
 
@@ -119,7 +115,7 @@ public class HomePage extends AppCompatActivity {
                     String AucID = ds.getKey().toString();
                     String Duration = ds.child("duration").getValue().toString();
                     String endDate = ds.child("date").getValue().toString();
-                    String AdImage = ds.child("Img").getValue().toString();
+                //    String AdImage = ds.child("Img").getValue().toString();
 
 
                     LocalDate datPart = LocalDate.parse(endDate);
@@ -158,7 +154,7 @@ public class HomePage extends AppCompatActivity {
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
-                    HomeCard ad = new HomeCard(AucID, Title, MaxBid,duration,AdImage);
+                    HomeCard ad = new HomeCard(AucID, Title, MaxBid,duration);
 
                     if(EndMin > 0) {
                         HomeCards.add(ad);
