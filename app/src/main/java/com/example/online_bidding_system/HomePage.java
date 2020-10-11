@@ -40,6 +40,8 @@ import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCar
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -89,6 +91,8 @@ public class HomePage extends AppCompatActivity {
     private static final String kn = "name";
     private static final String ke = "name";
 
+    FirebaseAuth fAuth;
+    FirebaseUser firebaseUser;
 
     public HomePage() {
     }
@@ -183,6 +187,8 @@ public class HomePage extends AppCompatActivity {
 
         sp  =   getSharedPreferences(spn,MODE_PRIVATE);
         final String name = sp.getString(kn,null);
+        fAuth = FirebaseAuth.getInstance();
+        firebaseUser = fAuth.getCurrentUser();
 
 
        AdStorageRef = FirebaseStorage.getInstance().getReference("AntiqueImages");
@@ -224,8 +230,9 @@ public class HomePage extends AppCompatActivity {
         addNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
-              userid = name;
+
+
+                userid = name;
                 if (userid == null){
 
                     Intent redirectIntent = new Intent(getApplicationContext(), RegistrationPage.class);
