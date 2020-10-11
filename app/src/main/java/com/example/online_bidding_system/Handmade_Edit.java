@@ -89,6 +89,8 @@ public class Handmade_Edit extends AppCompatActivity {
                     txtContact.setText(dataSnapshot.child("contact").getValue().toString());
                     txtPrice.setText(dataSnapshot.child("price").getValue().toString());
                     txtDescription.setText(dataSnapshot.child("description").getValue().toString());
+                    txtDate.setText(dataSnapshot.child("date").getValue().toString());
+                    txtTime.setText(dataSnapshot.child("duration").getValue().toString());
 
 
                 }
@@ -109,7 +111,7 @@ public class Handmade_Edit extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChildren()){
 
-                    txtMaterials.setText(dataSnapshot.child("type").getValue().toString());
+                    txtMaterials.setText(dataSnapshot.child("materials").getValue().toString());
 
                 }
                 else
@@ -156,8 +158,8 @@ public class Handmade_Edit extends AppCompatActivity {
                 DbRef.child("Adverticement").child(AuctName).child("price").setValue(txtPrice.getText().toString().trim());
                 DbRef.child("Adverticement").child(AuctName).child("description").setValue(txtDescription.getText().toString().trim());
                 DbRef.child("Adverticement").child(AuctName).child("date").setValue(txtDate.getText().toString().trim());
-                DbRef.child("Adverticement").child(AuctName).child("duration").setValue(txtDuration.getText().toString().trim());
-                DbRef1.child("HandMades").child(AuctName).child("type").setValue(txtMaterials.getText().toString());
+                DbRef.child("Adverticement").child(AuctName).child("duration").setValue(txtTime.getText().toString().trim());
+                DbRef1.child("HandMades").child(AuctName).child("materials").setValue(txtMaterials.getText().toString());
                 Toast.makeText(getApplicationContext() , "Successfully Updated" , Toast.LENGTH_SHORT).show();
                 Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
                 startActivity(displayIntent);

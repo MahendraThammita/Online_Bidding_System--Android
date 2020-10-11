@@ -88,10 +88,6 @@ public class HomePage extends AppCompatActivity {
 
     SharedPreferences sp;
     private String uID;
-//    private static final String spn = "mypref";
-//    private static final String kn = "name";
-//    private static final String ke = "name";
-
     SharedPreferences shareP;
 
 
@@ -288,7 +284,7 @@ public class HomePage extends AppCompatActivity {
                     String AucID = ds.getKey().toString();
                     String Duration = ds.child("duration").getValue().toString();
                     String endDate = ds.child("date").getValue().toString();
-//                    String AdImage = ds.child("Img").getValue().toString();
+                    String AdImage = ds.child("Img").child("0").getValue().toString();
 
 
            /*         AdStorageRef.child(AdImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -342,7 +338,7 @@ public class HomePage extends AppCompatActivity {
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
-                    HomeCard ad = new HomeCard(AucID, Title, MaxBid, duration);
+                    HomeCard ad = new HomeCard(AucID, Title, MaxBid, duration,AdImage);
                     HomeCards.add(ad);
                 }
                 if (HomeCards != null) {
@@ -398,11 +394,11 @@ public class HomePage extends AppCompatActivity {
                         startActivity(in2);
                         break;
                     case R.id.Drawable_myAuctions:
-                        Intent in3 = new Intent(getApplicationContext() , HomePage.class);
+                        Intent in3 = new Intent(getApplicationContext() , Draft_Auctions.class);
                         startActivity(in3);
                         break;
                     case R.id.Drawable_logout:
-                        Intent in4 = new Intent(getApplicationContext() , Draft_Auctions.class);
+                        Intent in4 = new Intent(getApplicationContext() , HomePage.class);
                         startActivity(in4);
                         break;
                     default:

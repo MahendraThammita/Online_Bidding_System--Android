@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -79,10 +80,18 @@ public class Antiques_Category extends AppCompatActivity {
     TimePicker tp;
     DatePicker dp;
 
+    SharedPreferences sp;
+    private String uID;
+    SharedPreferences shareP;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_antiques__category);
+
+        shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        uID = shareP.getString("USER_ID" , null);
 
         SharedPreferences preferences = getSharedPreferences("myPref", MODE_PRIVATE);
         String display = preferences.getString("display","");
@@ -183,7 +192,7 @@ public class Antiques_Category extends AppCompatActivity {
                             min = "0" + min;
                         }
                         String strTime = hour + ":" + min + ":" + "00";
-                        adverticement.setDuration(strTime);
+
 
                         int year = dp.getYear();
                         int month = dp.getMonth();
@@ -202,6 +211,7 @@ public class Antiques_Category extends AppCompatActivity {
                             clearControl();
                             Toast.makeText(getApplicationContext(), "Please Enter a valid date", Toast.LENGTH_LONG).show();
                         } else {
+                            adverticement.setDuration(strTime);
                             adverticement.setDate(strDate);
                             adverticement.setTitle(txtTitle.getText().toString().trim());
                             adverticement.setPrice(txtPrice.getText().toString().trim());
@@ -210,7 +220,7 @@ public class Antiques_Category extends AppCompatActivity {
                             adverticement.setMaxBid("0");
                             adverticement.setStatus("active");
                             adverticement.setType("Antiques");
-                            adverticement.setSeller_ID("CUS1");
+                            adverticement.setSeller_ID(uID);
                             add.setTime_period(period.getSelectedItem().toString());
                             final String strNumber = idPrefix + String.valueOf(maxid + 1);
                             DbRef.child(String.valueOf(strNumber)).setValue(add);
@@ -347,7 +357,7 @@ public class Antiques_Category extends AppCompatActivity {
                             adverticement.setMaxBid("0");
                             adverticement.setStatus("inactive");
                             adverticement.setType("Antiques");
-                            adverticement.setSeller_ID("CUS1");
+                            adverticement.setSeller_ID(uID);
                             add.setTime_period(period.getSelectedItem().toString());
                             final String strNumber = idPrefix + String.valueOf(maxid + 1);
                             DbRef.child(String.valueOf(strNumber)).setValue(add);
