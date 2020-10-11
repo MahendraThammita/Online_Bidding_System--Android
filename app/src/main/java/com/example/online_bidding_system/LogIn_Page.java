@@ -145,14 +145,19 @@ public class LogIn_Page extends AppCompatActivity {
         final String[] uID = new String[1];
         final String[] uName = new String[1];
 
-        dbRef = FirebaseDatabase.getInstance().getReference("User").orderByChild("email").equalTo(email);
+        dbRef = FirebaseDatabase.getInstance().getReference("User");
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    uID[0] = dataSnapshot.getKey();
-                    Log.i("KEy" , "KEY IS :" + uID[0]);
-                    uName[0] = dataSnapshot.child("fullName").getValue().toString();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String tempMail = ds.child("email").getValue().toString();
+                    Log.i("UEmail" , "Email IS :" + uID[0]);
+                    if(tempMail.equals(email)){
+                        uID[0] = ds.getKey();
+                        Log.i("KEy" , "KEY IS :" + uID[0]);
+                        uName[0] = ds.child("fullName").getValue().toString();
+                        break;
+                    }
                 }
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("UserEmail", txtEmail.getText().toString());
