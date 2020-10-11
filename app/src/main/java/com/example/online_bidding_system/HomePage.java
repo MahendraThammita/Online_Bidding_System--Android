@@ -288,7 +288,7 @@ public class HomePage extends AppCompatActivity {
                     String AucID = ds.getKey().toString();
                     String Duration = ds.child("duration").getValue().toString();
                     String endDate = ds.child("date").getValue().toString();
-                    String AdImage = ds.child("Img").getValue().toString();
+                  //  String AdImage = ds.child("Img").getValue().toString();
 
 
            /*         AdStorageRef.child(AdImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -342,7 +342,7 @@ public class HomePage extends AppCompatActivity {
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
-                    HomeCard ad = new HomeCard(AucID, Title, MaxBid, duration, AdImage);
+                    HomeCard ad = new HomeCard(AucID, Title, MaxBid, duration);
                     HomeCards.add(ad);
                 }
                 if (HomeCards != null) {
@@ -406,7 +406,7 @@ public class HomePage extends AppCompatActivity {
                         startActivity(in4);
                         break;
                     default:
-                        Intent in6 = new Intent(getApplicationContext() , MyAuctions.class);
+                        Intent in6 = new Intent(getApplicationContext() , Draft_Auctions.class);
                         startActivity(in6);
                 }
                 return true;

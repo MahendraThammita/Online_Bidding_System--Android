@@ -114,6 +114,7 @@
         android:layout_height="53dp"
         android:hint="@string/pwd"
         android:gravity="center"
+        android:inputType="textPassword"
         android:layout_marginBottom="25dp"
         android:background="@drawable/textview_border"
         android:textColor="@color/white"
