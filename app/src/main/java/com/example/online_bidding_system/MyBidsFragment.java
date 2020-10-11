@@ -2,6 +2,7 @@ package com.example.online_bidding_system;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -46,6 +47,8 @@ public class MyBidsFragment extends Fragment {
     DatabaseReference dbRef;
     List<MyBidsCard> myBidsCards;
     MyAdapter singleCard;
+    private SharedPreferences shareP;
+    private String loged_UID;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -96,11 +99,21 @@ public class MyBidsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        shareP = this.getActivity().getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        loged_UID = shareP.getString("USER_ID" , null);
+        if(loged_UID == null){
+            Intent toLogin = new Intent(getActivity() , LogIn_Page.class);
+            startActivity(toLogin);
+        }
+
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_bids, container, false);
 
         bidList = view.findViewById(R.id.myBidsList);
-        dbRef = FirebaseDatabase.getInstance().getReference().child("User_Bids").child("CUS1");
+        dbRef = FirebaseDatabase.getInstance().getReference().child("User_Bids").child(loged_UID);
         //MyBidsCard my_Bid = new MyBidsCard();
         myBidsCards = new ArrayList<>();
 

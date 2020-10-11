@@ -11,8 +11,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,9 +39,21 @@ public class TabedAuctions extends AppCompatActivity {
     private fragmentMyWins myWinsFrag;
     private  MyBidsFragment myBidsFrag;
     private fragmentMyAuctions myAuctFrag;
+    private SharedPreferences shareP;
+    private String loged_UID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        loged_UID = shareP.getString("USER_ID" , null);
+        if(loged_UID == null){
+            Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
+            startActivity(toLogin);
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabed_auctions);
 

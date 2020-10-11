@@ -1,5 +1,8 @@
 package com.example.online_bidding_system;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.util.LocaleData;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,6 +48,8 @@ public class fragmentMyWins extends Fragment {
     DatabaseReference DbRefWins;
     List<MyBidsCard> myWinCards;
     MyWinAdapter singleWinCard;
+    private SharedPreferences shareP;
+    private String loged_UID;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -91,10 +96,19 @@ public class fragmentMyWins extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        shareP = this.getActivity().getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        loged_UID = shareP.getString("USER_ID" , null);
+        if(loged_UID == null){
+            Intent toLogin = new Intent(getActivity() , LogIn_Page.class);
+            startActivity(toLogin);
+        }
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_wins, container, false);
 
-        DbRefWins = FirebaseDatabase.getInstance().getReference().child("User_Bids").child("CUS1");
+        DbRefWins = FirebaseDatabase.getInstance().getReference().child("User_Bids").child(loged_UID);
         //MyBidsCard winOb = new MyBidsCard();
         myWinCards = new ArrayList<>();
         list = view.findViewById(R.id.myWinsList);

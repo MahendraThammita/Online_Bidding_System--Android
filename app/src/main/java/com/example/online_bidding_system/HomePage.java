@@ -85,10 +85,12 @@ public class HomePage extends AppCompatActivity {
     private String userid;
     private StorageReference AdStorageRef;
 
+
     SharedPreferences sp;
-    private static final String spn = "mypref";
-    private static final String kn = "name";
-    private static final String ke = "name";
+    private String uID;
+//    private static final String spn = "mypref";
+//    private static final String kn = "name";
+//    private static final String ke = "name";
 
     SharedPreferences shareP;
 
@@ -186,14 +188,19 @@ public class HomePage extends AppCompatActivity {
 
 
         shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
-        String logEmail = shareP.getString("UserEmail" , "Not Recieved");
+        String logEmail = shareP.getString("UserEmail" , null);
+        uID = shareP.getString("USER_ID" , null);
         Log.i("Loged" , "Loged By : " + logEmail);
         Toast.makeText(getApplicationContext() , "Logged as" + logEmail , Toast.LENGTH_SHORT).show();
+        if(uID == null){
+            Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
+            startActivity(toLogin);
+        }
 
 
-
-        sp  =   getSharedPreferences(spn,MODE_PRIVATE);
-        final String name = sp.getString(kn,null);
+//
+//        sp  =   getSharedPreferences(spn,MODE_PRIVATE);
+//        final String name = sp.getString(kn,null);
 
 
        AdStorageRef = FirebaseStorage.getInstance().getReference("AntiqueImages");
@@ -237,7 +244,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 
-              userid = "kavi";
+              userid = uID;
                 if (userid == null){
 
                     Intent redirectIntent = new Intent(getApplicationContext(), RegistrationPage.class);
