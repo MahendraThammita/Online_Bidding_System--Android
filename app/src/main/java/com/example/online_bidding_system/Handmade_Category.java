@@ -95,6 +95,15 @@ public class Handmade_Category extends AppCompatActivity {
         add = new auction();
         adverticement=new  Adverticement();
 
+        imageIs = findViewById(R.id.imageIs);
+        preBtn = findViewById(R.id.preButton);
+        nxBtn = findViewById(R.id.nextButton);
+        pickImgbtn = findViewById(R.id.pickImg);
+        imageUris = new ArrayList<>();
+        filenameList = new ArrayList<>();
+        hashMap = new HashMap<>();
+
+
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
         mFirebaseDatabase1 = mFirebaseInstance.getReference("HandMades");
@@ -148,6 +157,17 @@ public class Handmade_Category extends AppCompatActivity {
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_LONG).show();
                     else {
+
+                        SimpleDateFormat fm = new SimpleDateFormat("HH:mm:ss");
+                        String hour = String.valueOf(tp.getHour());
+                        String min = String.valueOf(tp.getMinute());
+                        if(tp.getHour() < 10){
+                            hour = "0" + hour;
+                        }
+                        if(tp.getMinute() < 10){
+                            min = "0" + min;
+                        }
+
                         adverticement.setTitle(txtTitle.getText().toString().trim());
                         adverticement.setPrice(txtPrice.getText().toString().trim());
                         String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";

@@ -288,7 +288,7 @@ public class HomePage extends AppCompatActivity {
                     String AucID = ds.getKey().toString();
                     String Duration = ds.child("duration").getValue().toString();
                     String endDate = ds.child("date").getValue().toString();
-                    String AdImage = ds.child("Img").getValue().toString();
+//                    String AdImage = ds.child("Img").getValue().toString();
 
 
            /*         AdStorageRef.child(AdImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -342,7 +342,7 @@ public class HomePage extends AppCompatActivity {
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
-                    HomeCard ad = new HomeCard(AucID, Title, MaxBid, duration, AdImage);
+                    HomeCard ad = new HomeCard(AucID, Title, MaxBid, duration);
                     HomeCards.add(ad);
                 }
                 if (HomeCards != null) {
@@ -386,23 +386,23 @@ public class HomePage extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.Drawable_myBids:
-                        Intent in0 = new Intent(HomePage.this , TabedAuctions.class);
+                        Intent in0 = new Intent(HomePage.this , myBids.class);
                         startActivity(in0);
                         break;
                     case R.id.Drawable_myWins:
-                        Intent in1 = new Intent(HomePage.this , LogIn_Page.class);
+                        Intent in1 = new Intent(HomePage.this ,  MyWins.class);
                         startActivity(in1);
                         break;
                     case R.id.Drawable_ViewAuctions:
-                        Intent in2 = new Intent(HomePage.this ,Edit_User.class);
+                        Intent in2 = new Intent(HomePage.this ,MyAuctions.class);
                         startActivity(in2);
                         break;
                     case R.id.Drawable_myAuctions:
-                        Intent in3 = new Intent(getApplicationContext() , Draft_Auctions.class);
+                        Intent in3 = new Intent(getApplicationContext() , HomePage.class);
                         startActivity(in3);
                         break;
                     case R.id.Drawable_logout:
-                        Intent in4 = new Intent(getApplicationContext() , Antiques_Category.class);
+                        Intent in4 = new Intent(getApplicationContext() , Draft_Auctions.class);
                         startActivity(in4);
                         break;
                     default:

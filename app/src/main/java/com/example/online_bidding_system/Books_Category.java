@@ -92,6 +92,14 @@ public class Books_Category extends AppCompatActivity {
         book = new auction();
         adverticement=new  Adverticement();
 
+        imageIs = findViewById(R.id.imageIs);
+        preBtn = findViewById(R.id.preButton);
+        nxBtn = findViewById(R.id.nextButton);
+        pickImgbtn = findViewById(R.id.pickImg);
+        imageUris = new ArrayList<>();
+        filenameList = new ArrayList<>();
+        hashMap = new HashMap<>();
+
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
         mFirebaseDatabase1 = mFirebaseInstance.getReference("Books");
