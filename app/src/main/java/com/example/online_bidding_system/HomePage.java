@@ -226,7 +226,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 
-              userid = name;
+              userid = "kavi";
                 if (userid == null){
 
                     Intent redirectIntent = new Intent(getApplicationContext(), RegistrationPage.class);
