@@ -6,7 +6,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -67,13 +69,20 @@ public class Handmade_Category extends AppCompatActivity {
     StorageReference fbStorageRef;
 
     TimePicker tp;
-
     DatePicker dp;
+
+    SharedPreferences sp;
+    private String uID;
+    SharedPreferences shareP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_handmade_category);
+
+        shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        uID = shareP.getString("USER_ID" , null);
 
 
         txtTitle = findViewById(R.id.setTitle);
@@ -94,6 +103,15 @@ public class Handmade_Category extends AppCompatActivity {
 
         add = new auction();
         adverticement=new  Adverticement();
+
+        imageIs = findViewById(R.id.imageIs);
+        preBtn = findViewById(R.id.preButton);
+        nxBtn = findViewById(R.id.nextButton);
+        pickImgbtn = findViewById(R.id.pickImg);
+        imageUris = new ArrayList<>();
+        filenameList = new ArrayList<>();
+        hashMap = new HashMap<>();
+
 
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
@@ -148,10 +166,20 @@ public class Handmade_Category extends AppCompatActivity {
                     else if (TextUtils.isEmpty(txtContact.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_LONG).show();
                     else {
-                        adverticement.setTitle(txtTitle.getText().toString().trim());
-                        adverticement.setPrice(txtPrice.getText().toString().trim());
-                        String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
+
+                        SimpleDateFormat fm = new SimpleDateFormat("HH:mm:ss");
+                        String hour = String.valueOf(tp.getHour());
+                        String min = String.valueOf(tp.getMinute());
+                        if(tp.getHour() < 10){
+                            hour = "0" + hour;
+                        }
+                        if(tp.getMinute() < 10){
+                            min = "0" + min;
+                        }
+                        String strTime = hour + ":" + min + ":" + "00";
                         adverticement.setDuration(strTime);
+
+
                         int year = dp.getYear();
                         int month = dp.getMonth();
                         int day = dp.getDayOfMonth();
@@ -168,7 +196,9 @@ public class Handmade_Category extends AppCompatActivity {
                             clearControl();
                             Toast.makeText(getApplicationContext(), "Please Enter a valid date", Toast.LENGTH_LONG).show();
                         } else {
-                            adverticement.setDate(strDate);
+                            adverticement.setTitle(txtTitle.getText().toString().trim());
+                            adverticement.setPrice(txtPrice.getText().toString().trim());
+                            adverticement.setDuration(strTime);
                             adverticement.setDate(strDate);
                             adverticement.setContact(txtContact.getText().toString().trim());
                             add.setMaterials(txtMaterials.getText().toString().trim());
@@ -176,7 +206,7 @@ public class Handmade_Category extends AppCompatActivity {
                             adverticement.setMaxBid("0");
                             adverticement.setStatus("active");
                             adverticement.setType("HandMades");
-                            adverticement.setSeller_ID("CUS1");
+                            adverticement.setSeller_ID(uID);
                             final String strNumber = idPrefix + String.valueOf(maxid + 1);
                             DbRef.child(String.valueOf(strNumber)).setValue(add);
                             DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
@@ -247,8 +277,8 @@ public class Handmade_Category extends AppCompatActivity {
                 DbRef1 = FirebaseDatabase.getInstance().getReference().child("Adverticement");
                 userId = mFirebaseDatabase1.push().getKey();
                 mFirebaseDatabase.child(userId).setValue(adverticement);
-
                 mFirebaseDatabase1.child(userId).setValue(add);
+
                 DbRef.addValueEventListener(new ValueEventListener() {
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
@@ -278,7 +308,6 @@ public class Handmade_Category extends AppCompatActivity {
                         SimpleDateFormat fm = new SimpleDateFormat("HH:mm:ss");
                         String hour = String.valueOf(tp.getHour());
                         String min = String.valueOf(tp.getMinute());
-
                         if(tp.getHour() < 10){
                             hour = "0" + hour;
                         }
@@ -286,7 +315,9 @@ public class Handmade_Category extends AppCompatActivity {
                             min = "0" + min;
                         }
 
-                        String strTime = tp.getHour() + ":" + tp.getMinute() + ":" + "00";
+                        String strTime = hour + ":" + min + ":" + "00";
+
+
                         int year = dp.getYear();
                         int month = dp.getMonth();
                         int day = dp.getDayOfMonth();
@@ -305,15 +336,15 @@ public class Handmade_Category extends AppCompatActivity {
                         } else {
                             adverticement.setTitle(txtTitle.getText().toString().trim());
                             adverticement.setPrice(txtPrice.getText().toString().trim());
-                            adverticement.setDuration(strTime);
                             adverticement.setDate(strDate);
+                            adverticement.setDuration(strTime);
                             adverticement.setContact(txtContact.getText().toString().trim());
                             add.setMaterials(txtMaterials.getText().toString().trim());
                             adverticement.setDescription(txtDescription.getText().toString().trim());
                             adverticement.setMaxBid("0");
                             adverticement.setStatus("inactive");
                             adverticement.setType("HandMades");
-                            adverticement.setSeller_ID("CUS1");
+                            adverticement.setSeller_ID(uID);
                             final String strNumber = idPrefix + String.valueOf(maxid + 1);
                             DbRef.child(String.valueOf(strNumber)).setValue(add);
                             DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
