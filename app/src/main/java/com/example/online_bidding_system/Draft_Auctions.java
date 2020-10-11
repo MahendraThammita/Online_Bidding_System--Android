@@ -19,6 +19,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.DraftAdapter;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
@@ -57,6 +58,7 @@ public class Draft_Auctions extends AppCompatActivity {
         loged_UID = shareP.getString("USER_ID" , null);
         if(loged_UID == null){
             Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
+            Toast.makeText(getApplicationContext() , "Please Login First" , Toast.LENGTH_SHORT);
             startActivity(toLogin);
         }
 

@@ -47,8 +47,8 @@ public class TabedAuctions extends AppCompatActivity {
 
         shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
         String logEmail = shareP.getString("UserEmail" , null);
-        loged_UID = shareP.getString("USER_ID" , null);
-        if(loged_UID == null){
+        loged_UID = shareP.getString("USER_ID" , "");
+        if(loged_UID.equals("")){
             Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
             startActivity(toLogin);
         }
@@ -98,8 +98,8 @@ public class TabedAuctions extends AppCompatActivity {
                 Intent in3 = new Intent(getApplicationContext() , TabedAuctions.class);
                 switch (item.getItemId()){
                     case R.id.Drawable_myBids:
+
                         Intent in10 = new Intent(getApplicationContext() , HomePage.class);
-                        stopService(in3);
                         startActivity(in10);
                         break;
                     case R.id.Drawable_myWins:

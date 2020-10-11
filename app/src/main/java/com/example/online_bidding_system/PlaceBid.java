@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,19 +33,31 @@ import com.squareup.picasso.Picasso;
 
 public class PlaceBid extends AppCompatActivity {
 
-    DrawerLayout drawer;
-    NavigationView navi;
-    Toolbar primTool;
-    DatabaseReference getDetailssDbRef;
+    private DrawerLayout drawer;
+    private NavigationView navi;
+    private Toolbar primTool;
+    private DatabaseReference getDetailssDbRef;
 
-    TextView bidName , bidID , bidStartPrice , bidMaxBid , bidEndsAt;
-    Button btnConfermBid;
-    TextInputEditText bidGetter;
+    private TextView bidName , bidID , bidStartPrice , bidMaxBid , bidEndsAt;
+    private Button btnConfermBid;
+    private TextInputEditText bidGetter;
     ImageView placeBidImg;
+    private SharedPreferences shareP;
+    private String loged_UID;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        loged_UID = shareP.getString("USER_ID" , null);
+        if(loged_UID == null){
+            Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
+            Toast.makeText(getApplicationContext() , "Please Login First" , Toast.LENGTH_SHORT);
+            startActivity(toLogin);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_bid);
 
@@ -182,7 +196,7 @@ public class PlaceBid extends AppCompatActivity {
 
             private void setUserAuction(Adverticement editedAd, int newBid) {
                 Log.i("Values recieved" , "Recived tio subChilds change");
-                DatabaseReference userBidRef = FirebaseDatabase.getInstance().getReference("User_Bids").child("CUS1").child(auctionId);
+                DatabaseReference userBidRef = FirebaseDatabase.getInstance().getReference("User_Bids").child(loged_UID).child(auctionId);
                 userBidRef.setValue(editedAd);
                 userBidRef.child("previous_Bid").setValue(editedAd.getMaxBid());
                 userBidRef.child("mybid").setValue(String.valueOf(newBid)).addOnFailureListener(new OnFailureListener() {

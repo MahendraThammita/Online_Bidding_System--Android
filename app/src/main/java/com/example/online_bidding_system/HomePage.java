@@ -38,8 +38,10 @@ import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeAdapt
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.HomeCard;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyAdapter;
 import com.example.online_bidding_system.HelperClasser.BiddingAdapters.MyBidsCard;
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.RegisteredUser;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -284,7 +286,7 @@ public class HomePage extends AppCompatActivity {
                     String AucID = ds.getKey().toString();
                     String Duration = ds.child("duration").getValue().toString();
                     String endDate = ds.child("date").getValue().toString();
-                 //   String AdImage = ds.child("Img").getValue().toString();
+                    String AdImage = ds.child("Img").getValue().toString();
 
 
            /*         AdStorageRef.child(AdImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -338,7 +340,7 @@ public class HomePage extends AppCompatActivity {
 
                     String duration = (strCalculatedStrhOUR +" hr " + strCalculatedStrhMin + " min" );
 
-                    HomeCard ad = new HomeCard(AucID, Title, MaxBid, duration);
+                    HomeCard ad = new HomeCard(AucID, Title, MaxBid, duration, AdImage);
                     HomeCards.add(ad);
                 }
                 if (HomeCards != null) {

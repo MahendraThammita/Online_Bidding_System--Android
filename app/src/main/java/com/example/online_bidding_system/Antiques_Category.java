@@ -70,7 +70,7 @@ public class Antiques_Category extends AppCompatActivity {
     private Button preBtn, nxBtn, pickImgbtn;
     private ArrayList<Uri> imageUris;
     private ArrayList<String> filenameList;
-    private HashMap<String , String> hashMap;
+    private HashMap<String, String> hashMap;
     private String AdId;
     private static final int PICK_IMAGES_CODE = 3;
     int position = 0;
@@ -94,7 +94,7 @@ public class Antiques_Category extends AppCompatActivity {
         uID = shareP.getString("USER_ID" , null);
 
         SharedPreferences preferences = getSharedPreferences("myPref", MODE_PRIVATE);
-        String display = preferences.getString("display","");
+        String display = preferences.getString("display", "");
         TextView displayName = (TextView) findViewById(R.id.setTitle);
         displayName.setText(display);
 
@@ -185,10 +185,10 @@ public class Antiques_Category extends AppCompatActivity {
                         SimpleDateFormat fm = new SimpleDateFormat("HH:mm:ss");
                         String hour = String.valueOf(tp.getHour());
                         String min = String.valueOf(tp.getMinute());
-                        if(tp.getHour() < 10){
+                        if (tp.getHour() < 10) {
                             hour = "0" + hour;
                         }
-                        if(tp.getMinute() < 10){
+                        if (tp.getMinute() < 10) {
                             min = "0" + min;
                         }
                         String strTime = hour + ":" + min + ":" + "00";
@@ -227,7 +227,7 @@ public class Antiques_Category extends AppCompatActivity {
                             DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
 
 
-                            for(int  i = 0 ; i < imageUris.size() ; i ++){
+                            for (int i = 0; i < imageUris.size(); i++) {
                                 final StorageReference imageSrorageRef = fbStorageRef.child(String.valueOf(strNumber) + "." + String.valueOf(i));
                                 imageSrorageRef.putFile(imageUris.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
@@ -237,7 +237,7 @@ public class Antiques_Category extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(Uri uri) {
                                                 String url = String.valueOf(uri);
-                                                setDownLink(url , strNumber);
+                                                setDownLink(url, strNumber);
                                                 String num = String.valueOf(noOfImages);
                                                 noOfImages++;
                                                 DbRef1.child(strNumber).child("Img").child(num).setValue(url);
@@ -249,7 +249,7 @@ public class Antiques_Category extends AppCompatActivity {
                                 });
 
                             }
-                            Toast.makeText(getApplicationContext() , "Images Uploaded" , Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), "Images Uploaded", Toast.LENGTH_SHORT);
 
                             //adverticement.setImageMap(hashMap);
                             //DbRef1.child(String.valueOf(strNumber)).push().setValue(hashMap);
@@ -274,7 +274,7 @@ public class Antiques_Category extends AppCompatActivity {
             private void setDownLink(String url, String strNumber) {
 
                 String key = String.valueOf(hashMap.size());
-                hashMap.put(key , url);
+                hashMap.put(key, url);
 
             }
 
@@ -364,7 +364,7 @@ public class Antiques_Category extends AppCompatActivity {
                             DbRef1.child(String.valueOf(strNumber)).setValue(adverticement);
 
 
-                            for(int  i = 0 ; i < imageUris.size() ; i ++){
+                            for (int i = 0; i < imageUris.size(); i++) {
                                 final StorageReference imageSrorageRef = fbStorageRef.child(String.valueOf(strNumber) + "." + String.valueOf(i));
                                 imageSrorageRef.putFile(imageUris.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
@@ -374,8 +374,8 @@ public class Antiques_Category extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(Uri uri) {
                                                 String url = String.valueOf(uri);
-                                                setDownLink(url , strNumber);
-                                                Log.i("URL" , "Url Id : " + url);
+                                                setDownLink(url, strNumber);
+                                                Log.i("URL", "Url Id : " + url);
                                                 String num = String.valueOf(noOfImages);
                                                 noOfImages++;
                                                 DbRef1.child(strNumber).child("Img").child(num).setValue(url);
@@ -387,7 +387,7 @@ public class Antiques_Category extends AppCompatActivity {
                                 });
 
                             }
-                            Toast.makeText(getApplicationContext() , "Images Uploaded" , Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), "Images Uploaded", Toast.LENGTH_SHORT);
 
                             //adverticement.setImageMap(hashMap);
                             //DbRef1.child(String.valueOf(strNumber)).push().setValue(hashMap);
@@ -412,7 +412,7 @@ public class Antiques_Category extends AppCompatActivity {
             private void setDownLink(String url, String strNumber) {
 
                 String key = String.valueOf(hashMap.size());
-                hashMap.put(key , url);
+                hashMap.put(key, url);
 
             }
 
@@ -426,9 +426,6 @@ public class Antiques_Category extends AppCompatActivity {
 
 
         });
-
-
-
 
 
         imageIs.setFactory(new ViewSwitcher.ViewFactory() {
@@ -455,11 +452,10 @@ public class Antiques_Category extends AppCompatActivity {
                 if (position > 0) {
                     position--;
                     imageIs.setImageURI(imageUris.get(position));
-                } else if(position == 0){
-                    position = imageUris.size() -1 ;
+                } else if (position == 0) {
+                    position = imageUris.size() - 1;
                     imageIs.setImageURI(imageUris.get(position));
-                }
-                else {
+                } else {
                     Toast.makeText(Antiques_Category.this, "Empty", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -472,12 +468,10 @@ public class Antiques_Category extends AppCompatActivity {
                 if (position < imageUris.size() - 1) {
                     position++;
                     imageIs.setImageURI(imageUris.get(position));
-                }
-                else if(position == (imageUris.size() - 1)){
+                } else if (position == (imageUris.size() - 1)) {
                     position = 0;
                     imageIs.setImageURI(imageUris.get(position));
-                }
-                else {
+                } else {
 
                     Toast.makeText(Antiques_Category.this, "empty", Toast.LENGTH_SHORT).show();
                 }
@@ -510,11 +504,11 @@ public class Antiques_Category extends AppCompatActivity {
                 if (data.getClipData() != null) {
 
                     int noOfItems = data.getClipData().getItemCount();
-                    for(int i = 0 ; i < noOfItems ; i++){
+                    for (int i = 0; i < noOfItems; i++) {
                         Uri imageUri = data.getClipData().getItemAt(i).getUri();
                         imageUris.add(imageUri);
                         String FileNAme = getFileNameByURI(imageUri);
-                        Log.i("Image Recieved" , "File name is : " + FileNAme);
+                        Log.i("Image Recieved", "File name is : " + FileNAme);
                         filenameList.add(FileNAme);
 
                     }
@@ -550,24 +544,24 @@ public class Antiques_Category extends AppCompatActivity {
         }
     }
 
-    public  String getFileNameByURI(Uri uri){
+    public String getFileNameByURI(Uri uri) {
         String filename = null;
 
-        if(uri.getScheme().equals("content")){
-            Cursor cursor = getContentResolver().query(uri , null , null , null , null);
-            try{
-                if(cursor != null && cursor.moveToFirst()){
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
                     filename = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
                 }
-            }finally {
+            } finally {
                 cursor.close();
             }
         }
-        if(filename == null){
+        if (filename == null) {
             filename = uri.getPath();
             int rem = filename.lastIndexOf('/');
-            if(rem != -1){
-                filename = filename.substring(rem +1);
+            if (rem != -1) {
+                filename = filename.substring(rem + 1);
             }
         }
 
