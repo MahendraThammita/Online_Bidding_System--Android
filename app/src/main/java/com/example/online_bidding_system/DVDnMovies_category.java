@@ -148,7 +148,7 @@ public class DVDnMovies_category extends AppCompatActivity {
         publishNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fAuth = FirebaseDatabase.getInstance().getReference().child("FashionAndDesign");
+                fAuth = FirebaseDatabase.getInstance().getReference().child("DVDandMovies");
                 fAuth1 = FirebaseDatabase.getInstance().getReference().child("Adverticement");
                 userId = mFirebaseDatabase1.push().getKey();
                 mFirebaseDatabase.child(userId).setValue(adverticement);
