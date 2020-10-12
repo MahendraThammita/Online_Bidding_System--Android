@@ -85,7 +85,6 @@ public class HomePage extends AppCompatActivity {
     private NavigationView navi;
     private Toolbar primTool;
     private String userid;
-    private String uName;
     private StorageReference AdStorageRef;
 
 
@@ -189,15 +188,12 @@ public class HomePage extends AppCompatActivity {
         shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
         String logEmail = shareP.getString("UserEmail" , null);
         uID = shareP.getString("USER_ID" , null);
-        uName = shareP.getString("USER_NAME" , null);
         Log.i("Loged" , "Loged By : " + logEmail);
-        Log.i("Loged" , "Loged By : " + uID);
-        Log.i("Loged" , "Loged By : " + uName);
         Toast.makeText(getApplicationContext() , "Logged as" + logEmail , Toast.LENGTH_SHORT).show();
-//        if(uID == null){
-//            Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
-//            startActivity(toLogin);
-//        }
+        if(uID == null){
+            Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
+            startActivity(toLogin);
+        }
 
 
 //
@@ -290,7 +286,7 @@ public class HomePage extends AppCompatActivity {
                     String AucID = ds.getKey().toString();
                     String Duration = ds.child("duration").getValue().toString();
                     String endDate = ds.child("date").getValue().toString();
-                    String AdImage = ds.child("Img").child("0").getValue().toString();
+                    String AdImage = ds.child("Img").getValue().toString();
 
 
            /*         AdStorageRef.child(AdImage).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -369,57 +365,34 @@ public class HomePage extends AppCompatActivity {
         drawer = findViewById(R.id.DrwerLay);
         navi = (NavigationView) findViewById(R.id.nav_view);
         primTool = findViewById(R.id.profActionbar);
-        View nhView = navi.getHeaderView(0);
+
         setSupportActionBar(primTool);
+
 
         navi.bringToFront();
         ActionBarDrawerToggle toggle1 = new ActionBarDrawerToggle(this , drawer , primTool , R.string.OpenDrawerDes , R.string.CloseDrawerDes);
         drawer.addDrawerListener(toggle1);
         toggle1.syncState();
 
-        TextView drawableUseEmail = nhView.findViewById(R.id.DrawableUseEmail);
-        TextView drawableUserName = nhView.findViewById(R.id.DrawableUserName);
-        ShapeableImageView drawableUserImage = nhView.findViewById(R.id.DrawableUserImage);
 
-          final RegisteredUser sampleUser = new RegisteredUser();
-//        RegisteredUser registeredUser = sampleUser.getUserByUID(uID);
-//
-//        if(registeredUser != null){
-//            Log.i("Drawer" , "Value Recieved : " + registeredUser.getEmail());
-//            //        Log.i("Drawer" , "Value Recieved : " + registeredUser.getEmail());
-//        Log.i("Drawer" , "Value Not Recieved : ");
-//
-//        drawableUseEmail.setText(logEmail);
-//        drawableUserName.setText(registeredUser.getFullName());
-//        Picasso.get().load(registeredUser.getProfilePic()).into(drawableUserImage);
-//
-//        }
-
-
-
+//        navi.setNavigationItemSelectedListener(this);
 
 
         navi.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Intent toLogin = new Intent(getApplicationContext() , LogIn_Page.class);
 
                 switch (item.getItemId()){
                     case R.id.Drawable_myBids:
-                        if(uID == null){
-                            startActivity(toLogin);
-                        }
-                        else {
-                            Intent in0 = new Intent(getApplicationContext() , TabedAuctions.class);
-                            startActivity(in0);
-                        }
+                        Intent in0 = new Intent(HomePage.this , TabedAuctions.class);
+                        startActivity(in0);
                         break;
                     case R.id.Drawable_myWins:
-                        Intent in1 = new Intent(getApplicationContext() , LogIn_Page.class);
+                        Intent in1 = new Intent(HomePage.this , LogIn_Page.class);
                         startActivity(in1);
                         break;
                     case R.id.Drawable_ViewAuctions:
-                        Intent in2 = new Intent(getApplicationContext() , Edit_User.class);
+                        Intent in2 = new Intent(HomePage.this ,Edit_User.class);
                         startActivity(in2);
                         break;
                     case R.id.Drawable_myAuctions:
