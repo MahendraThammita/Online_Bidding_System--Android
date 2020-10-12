@@ -2,16 +2,22 @@ package com.example.online_bidding_system;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -24,15 +30,23 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.example.online_bidding_system.HelperClasser.BiddingAdapters.TimeCalculations;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class DVDnMovies_category extends AppCompatActivity {
@@ -49,11 +63,16 @@ public class DVDnMovies_category extends AppCompatActivity {
     private String userId;
 
     private ImageSwitcher imageIs;
-    private  ArrayList<Uri> imageUris;
-    private static final int PICK_IMAGES_CODE = 1;
+    private Button preBtn, nxBtn, pickImgbtn;
+    private ArrayList<Uri> imageUris;
+    private ArrayList<String> filenameList;
+    private HashMap<String, String> hashMap;
+    private String AdId;
+    private static final int PICK_IMAGES_CODE = 3;
     int position = 0;
+    int noOfImages = 0;
 
-    private Button preBtn,nxBtn, pickImgbtn;
+
     private DatabaseReference mFirebaseDatabase;
     private DatabaseReference mFirebaseDatabase1;
     private FirebaseDatabase mFirebaseInstance;
@@ -66,6 +85,12 @@ public class DVDnMovies_category extends AppCompatActivity {
 
 
 
+    SharedPreferences sp;
+    private String uID;
+    SharedPreferences shareP;
+
+    StorageReference fbStorageRef;
+
 
 
     @Override
@@ -73,7 +98,9 @@ public class DVDnMovies_category extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_d_v_dn_movies_category);
 
-
+        shareP = getSharedPreferences("sharedPrefName", Context.MODE_PRIVATE);
+        String logEmail = shareP.getString("UserEmail" , null);
+        uID = shareP.getString("USER_ID" , null);
 
         Condition    =      findViewById(R.id.setCondition);
         ContactNo    =      findViewById(R.id.setContact);
@@ -81,6 +108,10 @@ public class DVDnMovies_category extends AppCompatActivity {
         Title        =      findViewById(R.id.setTitle);
         Start_Price  =      findViewById(R.id.setPrice);
         Genere        =      findViewById(R.id.setGenere);
+
+        publishNow   =      findViewById(R.id.publish_now);
+        publishLater =      findViewById(R.id.publish_later);
+        pickImgbtn =        findViewById(R.id.pickImg);
 
 
         //DatePicker Value
@@ -98,29 +129,38 @@ public class DVDnMovies_category extends AppCompatActivity {
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
         mFirebaseDatabase1 = mFirebaseInstance.getReference("DVDandMovies");
 
+        fbStorageRef = FirebaseStorage.getInstance().getReference().child("AntiqueImages");
 
-        publishNow   =      findViewById(R.id.publish_now);
+
+        //Setting image picker intents
+        pickImgbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent imgsIntent = new Intent();
+                imgsIntent.setType("image/*");
+                imgsIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                imgsIntent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(imgsIntent, "Select Multiple Images"), PICK_IMAGES_CODE);
+            }
+        });
 
 
         publishNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                fAuth = FirebaseDatabase.getInstance().getReference().child("DVDandMovies");
+                fAuth = FirebaseDatabase.getInstance().getReference().child("FashionAndDesign");
                 fAuth1 = FirebaseDatabase.getInstance().getReference().child("Adverticement");
-
                 userId = mFirebaseDatabase1.push().getKey();
-
                 mFirebaseDatabase.child(userId).setValue(adverticement);
-
                 mFirebaseDatabase1.child(userId).setValue(fCat);
 
-
                 fAuth.addValueEventListener(new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists())
-                            maxid=(dataSnapshot.getChildrenCount());
+                        if (dataSnapshot.exists())
+                            maxid = (dataSnapshot.getChildrenCount());
+                        savedata();
                     }
 
                     @Override
@@ -128,87 +168,272 @@ public class DVDnMovies_category extends AppCompatActivity {
 
                     }
                 });
-
-
-
+            }
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            public void savedata(){
                 try {
-
-                    if(TextUtils.isEmpty(Condition.getText().toString())){
-                        Toast.makeText(getApplicationContext() , "Condition Field Is Empty" , Toast.LENGTH_SHORT).show();
-                    }
-
-                    else if(TextUtils.isEmpty(ContactNo.getText().toString())){
-                        Toast.makeText(getApplicationContext() , "Contact Number Field Is Empty" , Toast.LENGTH_SHORT).show();
-                    }
-                    else if(TextUtils.isEmpty(Description.getText().toString())){
-                        Toast.makeText(getApplicationContext() , "Description Field Is Empty" , Toast.LENGTH_SHORT).show();
-                    }
-
-                    else if(TextUtils.isEmpty(Title.getText().toString())){
-                        Toast.makeText(getApplicationContext() , "Title Field Is Empty" , Toast.LENGTH_SHORT).show();
-                    }
-                    else if(TextUtils.isEmpty(Genere.getText().toString())){
-                        Toast.makeText(getApplicationContext() , "Genre Field Is Empty" , Toast.LENGTH_SHORT).show();
-                    }
-
-                    else if(TextUtils.isEmpty(Start_Price.getText().toString())){
-                        Toast.makeText(getApplicationContext() , "Start Price Field Is Empty" , Toast.LENGTH_SHORT).show();
-                    }
-
-
+                    if (TextUtils.isEmpty(Title.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(Start_Price.getText().toString()))
+                        Toast.makeText(getApplicationContext(), " Price Is Required!", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(ContactNo.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(Genere.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Brand is Required!", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(Condition.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Condition is Required!", Toast.LENGTH_LONG).show();
                     else {
 
-                        fCat.setCondition(Condition.getText().toString().trim());
-                        fCat.setGenre(Genere.getText().toString().trim());
-                        adverticement.setContact(ContactNo.getText().toString().trim());
-                        adverticement.setDescription(Description.getText().toString().trim());
-                        adverticement.setTitle(Title.getText().toString().trim());
-                        adverticement.setPrice(Start_Price.getText().toString().trim());
-
-                        //set timepicker value
-                        String strTime = tp.getHour() + ":" + tp.getMinute();
+                        SimpleDateFormat fm = new SimpleDateFormat("HH:mm:ss");
+                        String hour = String.valueOf(tp.getHour());
+                        String min = String.valueOf(tp.getMinute());
+                        if(tp.getHour() < 10){
+                            hour = "0" + hour;
+                        }
+                        if(tp.getMinute() < 10){
+                            min = "0" + min;
+                        }
+                        String strTime = hour + ":" + min + ":" + "00";
                         adverticement.setDuration(strTime);
-                        //set datapicker value
-                        String strDate =  dp.getYear() + "-" + (dp.getMonth() + 1) + "-" + dp.getDayOfMonth();
-                        adverticement.setDate(strDate);
-
-                        adverticement.setMaxBid("0");
-                        adverticement.setStatus("inactive");
-                        adverticement.setType("DVDandMovies");
 
 
-                        String strNumber= idPrefix+String.valueOf(maxid+1);
-                        fAuth.child(String.valueOf(strNumber)).setValue(fCat);
-                        fAuth1.child(String.valueOf(strNumber)).setValue(adverticement);
+                        int year = dp.getYear();
+                        int month = dp.getMonth();
+                        int day = dp.getDayOfMonth();
 
-                        Toast.makeText(getApplicationContext() , "Data Inserted Successfully" , Toast.LENGTH_SHORT).show();
-                        clearControl();
+                        Calendar myCal = Calendar.getInstance();
+                        myCal.set(year, month, day);
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+                        String strDate = dateFormat.format(myCal.getTime());
+
+                        TimeCalculations timeCalculations = new TimeCalculations(strTime, strDate);
+                        boolean flag = timeCalculations.isExpired();
+                        if (flag == true) {
+                            clearControl();
+                            Toast.makeText(getApplicationContext(), "Please Enter a valid date", Toast.LENGTH_LONG).show();
+                        } else {
+                            adverticement.setTitle(Title.getText().toString().trim());
+                            adverticement.setPrice(Start_Price.getText().toString().trim());
+                            adverticement.setDuration(strTime);
+                            adverticement.setDate(strDate);
+                            adverticement.setContact(ContactNo.getText().toString().trim());
+                            fCat.setGenre(Genere.getText().toString().trim());
+                            fCat.setCondition(Condition.getText().toString().trim());
+                            adverticement.setDescription(Description.getText().toString().trim());
+                            adverticement.setMaxBid("0");
+                            adverticement.setStatus("active");
+                            adverticement.setType("DVDandMovies");
+                            adverticement.setSeller_ID(uID);
+                            final String strNumber = idPrefix + String.valueOf(maxid + 1);
+                            fAuth.child(String.valueOf(strNumber)).setValue(fCat);
+                            fAuth1.child(String.valueOf(strNumber)).setValue(adverticement);
+
+                            for(int  i = 0 ; i < imageUris.size() ; i ++){
+                                final StorageReference imageSrorageRef = fbStorageRef.child(String.valueOf(strNumber) + "." + String.valueOf(i));
+                                imageSrorageRef.putFile(imageUris.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                        imageSrorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                String url = String.valueOf(uri);
+                                                setDownLink(url , strNumber);
+                                                Log.i("URL" , "Url Id : " + url);
+                                                String num = String.valueOf(noOfImages);
+                                                noOfImages++;
+                                                fAuth1.child(strNumber).child("Img").child(num).setValue(url);
+                                            }
+                                        });
+
+                                    }
+
+                                });
+
+                            }
+                            Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
+                            clearControl();
+                            Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                            startActivity(displayIntent);
+
+                        }
 
                     }
+                } catch (NumberFormatException e) {
+
+                    Toast.makeText(getApplicationContext(), "Something went Wrong", Toast.LENGTH_SHORT).show();
+
+
                 }
-                catch (NumberFormatException err){
-                    Toast.makeText(getApplicationContext(), "Invalid Contact No" , Toast.LENGTH_SHORT).show();
+            }
 
-                }
+            private void setDownLink(String url, String strNumber) {
 
-
+                String key = String.valueOf(hashMap.size());
+                hashMap.put(key , url);
 
             }
 
-            public void clearControl() {
 
-                Condition.setText("");
-                ContactNo.setText("");
-                Description.setText("");
+            public void clearControl() {
                 Title.setText("");
                 Start_Price.setText("");
+                ContactNo.setText("");
                 Genere.setText("");
+                Description.setText("");
+                Condition.setText("");
+
+            }
+
+
+        });
+
+
+        publishLater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fAuth = FirebaseDatabase.getInstance().getReference().child("DVDandMovies");
+                fAuth1 = FirebaseDatabase.getInstance().getReference().child("Adverticement");
+                userId = mFirebaseDatabase1.push().getKey();
+                mFirebaseDatabase.child(userId).setValue(adverticement);
+                mFirebaseDatabase1.child(userId).setValue(fCat);
+
+                fAuth.addValueEventListener(new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists())
+                            maxid = (dataSnapshot.getChildrenCount());
+                        savedata();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            public void savedata(){
+                try {
+                    if (TextUtils.isEmpty(Title.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Title is Required!", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(Start_Price.getText().toString()))
+                        Toast.makeText(getApplicationContext(), " Price Is Required!", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(ContactNo.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Contact Number is Required!", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(Genere.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Brand is Required!", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(Condition.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Condition is Required!", Toast.LENGTH_LONG).show();
+                    else {
+
+                        SimpleDateFormat fm = new SimpleDateFormat("HH:mm:ss");
+                        String hour = String.valueOf(tp.getHour());
+                        String min = String.valueOf(tp.getMinute());
+                        if(tp.getHour() < 10){
+                            hour = "0" + hour;
+                        }
+                        if(tp.getMinute() < 10){
+                            min = "0" + min;
+                        }
+
+                        String strTime = hour + ":" + min + ":" + "00";
+
+
+                        int year = dp.getYear();
+                        int month = dp.getMonth();
+                        int day = dp.getDayOfMonth();
+
+                        Calendar myCal = Calendar.getInstance();
+                        myCal.set(year, month, day);
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+                        String strDate = dateFormat.format(myCal.getTime());
+
+                        TimeCalculations timeCalculations = new TimeCalculations(strTime, strDate);
+                        boolean flag = timeCalculations.isExpired();
+                        if (flag == true) {
+                            clearControl();
+                            Toast.makeText(getApplicationContext(), "Please Enter a valid date", Toast.LENGTH_LONG).show();
+                        } else {
+                            adverticement.setTitle(Title.getText().toString().trim());
+                            adverticement.setPrice(Start_Price.getText().toString().trim());
+                            adverticement.setDate(strDate);
+                            adverticement.setDuration(strTime);
+                            adverticement.setContact(ContactNo.getText().toString().trim());
+                            adverticement.setDescription(Description.getText().toString().trim());
+                            fCat.setMaterial(Genere.getText().toString().trim());
+                            fCat.setCondition(Condition.getText().toString().trim());
+                            adverticement.setMaxBid("0");
+                            adverticement.setStatus("inactive");
+                            adverticement.setType("DVDandMovies");
+                            adverticement.setSeller_ID(uID);
+                            final String strNumber = idPrefix + String.valueOf(maxid + 1);
+                            fAuth.child(String.valueOf(strNumber)).setValue(fCat);
+                            fAuth1.child(String.valueOf(strNumber)).setValue(adverticement);
+
+                            for(int  i = 0 ; i < imageUris.size() ; i ++){
+                                final StorageReference imageSrorageRef = fbStorageRef.child(String.valueOf(strNumber) + "." + String.valueOf(i));
+                                imageSrorageRef.putFile(imageUris.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                        imageSrorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                String url = String.valueOf(uri);
+                                                setDownLink(url , strNumber);
+                                                Log.i("URL" , "Url Id : " + url);
+                                                String num = String.valueOf(noOfImages);
+                                                noOfImages++;
+                                                fAuth1.child(strNumber).child("Img").child(num).setValue(url);
+                                            }
+                                        });
+
+                                    }
+
+                                });
+
+                            }
+                            Toast.makeText(getApplicationContext(), "Successfully saved", Toast.LENGTH_SHORT).show();
+                            clearControl();
+                            Intent displayIntent = new Intent(getApplicationContext(), TabedAuctions.class);
+                            startActivity(displayIntent);
+
+                        }
+
+                    }
+                } catch (NumberFormatException e) {
+
+                    Toast.makeText(getApplicationContext(), "Something went Wrong", Toast.LENGTH_SHORT).show();
+
+
+                }
+            }
+
+            private void setDownLink(String url, String strNumber) {
+
+                String key = String.valueOf(hashMap.size());
+                hashMap.put(key , url);
+
+            }
+
+
+            public void clearControl() {
+                Title.setText("");
+                Start_Price.setText("");
+                ContactNo.setText("");
+                Genere.setText("");
+                Description.setText("");
+                Condition.setText("");
+
             }
 
 
 
         });
-
 
 
 
@@ -282,34 +507,62 @@ public class DVDnMovies_category extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGES_CODE){
+        if (requestCode == PICK_IMAGES_CODE) {
 
-            if(resultCode == Activity.RESULT_OK){
-                if(data.getClipData() != null){
+            if (resultCode == Activity.RESULT_OK) {
 
-                    int cout  = data.getClipData().getItemCount();
-                    for(int i=0; i<cout; i++){
+                if (data.getClipData() != null) {
+
+                    int noOfItems = data.getClipData().getItemCount();
+                    for(int i = 0 ; i < noOfItems ; i++){
                         Uri imageUri = data.getClipData().getItemAt(i).getUri();
                         imageUris.add(imageUri);
+                        String FileNAme = getFileNameByURI(imageUri);
+                        filenameList.add(FileNAme);
+
                     }
 
-                    imageIs.setImageURI(imageUris.get(0));
-                    position = 0;
+
+                    imageIs.setImageURI(imageUris.get(1));
+                    Toast.makeText(getApplicationContext(), "Multiple Items Selected", Toast.LENGTH_SHORT).show();
+
+                } else if (data.getData() != null) {
+                    Toast.makeText(getApplicationContext(), "Single Item Selected", Toast.LENGTH_SHORT).show();
                 }
 
-                else{
-                    Uri imageUri = data.getData();
-                    imageUris.add(imageUri);
-                    imageIs.setImageURI(imageUris.get(0));
-                    position = 0;
+
+
+            }
+        }
+    }
+
+
+    public  String getFileNameByURI(Uri uri){
+        String filename = null;
+
+        if(uri.getScheme().equals("content")){
+            Cursor cursor = getContentResolver().query(uri , null , null , null , null);
+            try{
+                if(cursor != null && cursor.moveToFirst()){
+                    filename = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
                 }
+            }finally {
+                cursor.close();
+            }
+        }
+        if(filename == null){
+            filename = uri.getPath();
+            int rem = filename.lastIndexOf('/');
+            if(rem != -1){
+                filename = filename.substring(rem +1);
             }
         }
 
-
+        return filename;
     }
 
 }
