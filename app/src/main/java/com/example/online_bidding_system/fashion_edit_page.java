@@ -5,7 +5,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
@@ -26,6 +29,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -54,6 +59,7 @@ public class fashion_edit_page extends AppCompatActivity {
     private static final int PICK_IMAGES_CODE = 1;
     int position = 0;
 
+
     TimePicker tp;
     DatePicker dp;
 
@@ -61,6 +67,10 @@ public class fashion_edit_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_antiques_edit);
+
+
+
+
 
         Spinner spinner = findViewById(R.id.setPeriod);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.TimePeriod, android.R.layout.simple_spinner_dropdown_item);
@@ -91,6 +101,9 @@ public class fashion_edit_page extends AppCompatActivity {
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("Adverticement");
         mFirebaseDatabase1 = mFirebaseInstance.getReference("FashionAndDesign");
+
+
+
 
         fAuth = FirebaseDatabase.getInstance().getReference().child("Adverticement").child(AuctName);
         fAuth1 = FirebaseDatabase.getInstance().getReference().child("FashionAndDesign").child(AuctName);
